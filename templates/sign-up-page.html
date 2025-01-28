@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aanmelden</title>
+    <link rel="stylesheet" href="sign-up-page-style.css">
+</head>
+<body>
+<h1>Aanmelden</h1>
+    <form>
+        <label for="first-name-input">Voornaam:</label>
+        <input id="first-name-input" name="first-name-input" type="text">
+        <label for="last-name-input">Achternaam:</label>
+        <input id="last-name-input" name="last-name-input" type="text">
+        <label for="zip-code-input">Postcode:</label>
+        <input id="zip-code-input" name="zip-code-input" type="text">
+        <label for="gender-input">Geslacht:</label>
+        <input id="gender-input" name="gender-input" type="text">
+        <label for="email-input">E-mailadres:</label>
+        <input id="email-input" name="email-input" type="email">
+        <label for="phone-number-input">Telefoonnummer:</label>
+        <input id="phone-number-input" name="phone-number-input" type="tel">
+        <label for="date-of-birth-input">Geboortedatum:</label>
+        <input id="date-of-birth-input" name="date-of-birth-input" type="date">
+        <label for="disability-type-input">Type beperking:</label>
+        <select id="disability-type-input" name="disability-type-input">
+
+            <optgroup label="Auditieve beperkingen">
+                <option value="deaf">Doof</option>
+                <option value="hard-of-hearing">Slechthorend</option>
+                <option value="deafblind">Doofblind</option>
+            </optgroup>
+            <optgroup label="Visuele beperkingen">
+                <option value="blind">Blind</option>
+                <option value="partially-sighted">Slechtziend</option>
+                <option value="color-blind">Kleurenblind</option>
+                <option value="deafblind">Doofblind</option>
+            </optgroup>
+            <optgroup label="Motorische/lichamelijke beperkingen">
+                <option value="amputation-deformity">Amputatie en mismaaktheid</option>
+                <option value="arthritis">Artritus</option>
+                <option value="fibromyalgia">Fibromyalgie</option>
+                <option value="rheumatism">Reuma</option>
+                <option value="reduced-manual-dexterity">Verminderde handvaardigheid</option>
+                <option value="muscular-dystrophy">Spierdystrofie</option>
+                <option value="RSI">RSI</option>
+                <option value="tremor-and-spasms">Tremor en spasmen</option>
+                <option value="Quadriplegia-or-tetraplegia">Quadriplegie of tetraplegie</option>
+            </optgroup>
+            <optgroup label="Cognitieve/neurologische beperkingen">
+                <option value="ADHD">ADHD</option>
+                <option value="autism">Autisme</option>
+                <option value="dyslexia">Dyslexie</option>
+                <option value="dyscalculia">Dyscalculie</option>
+                <option value="learning-disability">Leerstoornis</option>
+                <option value="memory-disorder">Geheugen beperking</option>
+                <option value="multiple-sclerosis">Multiple sclerose</option>
+                <option value="epilepsy">Epilepsie</option>
+                <option value="migraine">Migraine</option>
+            </optgroup>
+        </select>
+        <label for="used-resources-input">Gebruikte hulpmiddelen</label>
+        <input id="used-resources-input" name="used-resources-input" type="text">
+        <label for="short-introduction-input">Korte introductie:</label>
+        <textarea id="short-introduction-input" name="short-introduction-input" type=""></textarea>
+
+<!--Optional-->
+        <label for="details-input">Bijzonderheden:</label>
+        <textarea id="details-input" name="details-input" placeholder="Eventuele extra informatie over uw beperking/beperkingen"></textarea>
+        <label for="agree-terms-and-conditions-input">Akkoord met voorwaarden:</label>
+        <input id="agree-terms-and-conditions-input" name="agree-terms-and-conditions-input" type="checkbox">
+        <label for="supervisor-input">Toezichthouder/voogd:</label>
+        <input id="supervisor-input" name="supervisor-input" type="checkbox">
+        <label class="supervisor-info" for="supervisor-name-input">Naam van voogd of toezichthouder:</label>
+        <input class="supervisor-info" id="supervisor-name-input" name="supervisor-name-input">
+        <label class="supervisor-info" for="supervisor-email-input">E-mailadres van voogd of toezichthouder:</label>
+        <input class="supervisor-info" id="supervisor-email-input" name="supervisor-email-input" type="email">
+        <label class="supervisor-info" for="supervisor-phone-number-input">Telefoonnummer van voogd of toezichthouder</label>
+        <input class="supervisor-info" id="supervisor-phone-number-input" name="supervisor-phone-number-input" type="tel">
+
+        <label for="preference-approach-input">Voorkeur benadering</label>
+        <select id="preference-approach-input">
+            <option value="email">Email</option>
+            <option value="telephone">Telefonisch</option>
+        </select>
+        <label for="type-research-input">Type onderzoek:</label>
+        <select id="type-research-input">
+            <option value="telephone">Telefonisch</option>
+            <option value="internet">Internet</option>
+            <option value="location">Op locatie</option>
+        </select>
+        <label for="details-availability-input">Bijzonderheden beschikbaarheid:</label>
+        <textarea id="details-availability-input" name="details-availability-input"></textarea>
+    </form>
+    <script>
+
+
+    </script>
+</body>
+</html>
