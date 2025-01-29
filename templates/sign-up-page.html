@@ -3,26 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Aanmelden</title>
-    <link rel="stylesheet" href="sign-up-page-style.css">
+    <link rel="stylesheet" href="../static/css/sign-up-page-style.css">
 </head>
 <body>
 <h1>Aanmelden</h1>
     <form>
-        <label for="first-name-input">Voornaam:</label>
-        <input id="first-name-input" name="first-name-input" type="text">
-        <label for="last-name-input">Achternaam:</label>
-        <input id="last-name-input" name="last-name-input" type="text">
-        <label for="zip-code-input">Postcode:</label>
-        <input id="zip-code-input" name="zip-code-input" type="text">
-        <label for="gender-input">Geslacht:</label>
-        <input id="gender-input" name="gender-input" type="text">
-        <label for="email-input">E-mailadres:</label>
-        <input id="email-input" name="email-input" type="email">
-        <label for="phone-number-input">Telefoonnummer:</label>
-        <input id="phone-number-input" name="phone-number-input" type="tel">
-        <label for="date-of-birth-input">Geboortedatum:</label>
-        <input id="date-of-birth-input" name="date-of-birth-input" type="date">
-        <label for="disability-type-input">Type beperking:</label>
+        <label class="form-label" for="first-name-input">Voornaam:</label>
+        <input class="form-input" id="first-name-input" name="first-name-input" type="text">
+        <label class="form-label" for="last-name-input">Achternaam:</label>
+        <input class="form-input" id="last-name-input" name="last-name-input" type="text">
+        <label class="form-label" for="zip-code-input">Postcode:</label>
+        <input class="form-input" id="zip-code-input" name="zip-code-input" type="text">
+        <label class="form-label" for="gender-input">Geslacht:</label>
+        <input class="form-input" id="gender-input" name="gender-input" type="text">
+        <label class="form-label" for="email-input">E-mailadres:</label>
+        <input class="form-input" id="email-input" name="email-input" type="email">
+        <label class="form-label" for="phone-number-input">Telefoonnummer:</label>
+        <input class="form-input" id="phone-number-input" name="phone-number-input" type="tel">
+        <label class="form-label" for="date-of-birth-input">Geboortedatum:</label>
+        <input class="form-input" id="date-of-birth-input" name="date-of-birth-input" type="date">
+        <label class="form-label" for="disability-type-input">Type beperking:</label>
         <select id="disability-type-input" name="disability-type-input">
 
             <optgroup label="Auditieve beperkingen">
@@ -60,13 +60,13 @@
             </optgroup>
         </select>
         <label for="used-resources-input">Gebruikte hulpmiddelen</label>
-        <input id="used-resources-input" name="used-resources-input" type="text">
+        <input class="form-input" id="used-resources-input" name="used-resources-input" type="text">
         <label for="short-introduction-input">Korte introductie:</label>
         <textarea id="short-introduction-input" name="short-introduction-input" type=""></textarea>
 
 <!--Optional-->
         <label for="details-input">Bijzonderheden:</label>
-        <textarea id="details-input" name="details-input" placeholder="Eventuele extra informatie over uw beperking/beperkingen"></textarea>
+        <textarea id="details-input" name="details-input" placeholder="Eventuele extra informatie over uw beperking/beperkingen">+-</textarea>
         <label for="agree-terms-and-conditions-input">Akkoord met voorwaarden:</label>
         <input id="agree-terms-and-conditions-input" name="agree-terms-and-conditions-input" type="checkbox">
         <label for="supervisor-input">Toezichthouder/voogd:</label>
@@ -92,9 +92,7 @@
         <label for="details-availability-input">Bijzonderheden beschikbaarheid:</label>
         <textarea id="details-availability-input" name="details-availability-input"></textarea>
     </form>
-    <script>
-
-
+    <script src="">
     </script>
 </body>
 </html>

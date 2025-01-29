@@ -1,0 +1,23 @@
+body {
+    font-family: Arial;
+}
+h1 {
+    text-align: center;
+}
+form {
+    text-align: left;
+    margin-top: 50px;
+    margin-left: 500px;
+    display: grid;
+    width: 500px;
+}
+
+form input {
+    height: 26px;
+}
+
+form label {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
