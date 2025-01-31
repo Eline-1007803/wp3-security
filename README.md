@@ -3,3 +3,4 @@ Template voor WP3 opdracht "Accessibility Hub". Vul dit document aan zoals besch
 
 Bronnenlijst:
 https://www.youtube.com/watch?v=EerdGm-ehJQ&t=27729s
+checkbox event: https://www.youtube.com/watch?v=fzNl52bEGIQ
