@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/onderzoek_aanvraag_organisaite.css">
+    <title>Onderzoek Aanvraag</title>
+</head>
+<body>
+    
+    <h1>Onderzoek Aanvraag</h1>
+    <form action="tobeadded" method="post">
+        <label for="typeonderzoek">Type onderzoek:</label>
+        <input type="text" name="typeonderzoek" id="typeonderzoek" required>
+        <label for="disability-type-input">Beperking:</label>
+        <select id="disability-type-input" name="disability-type-input">
+
+            <optgroup label="Auditieve beperkingen">
+                <option value="deaf">Doof</option>
+                <option value="hard-of-hearing">Slechthorend</option>
+                <option value="deafblind">Doofblind</option>
+            </optgroup>
+            <optgroup label="Visuele beperkingen">
+                <option value="blind">Blind</option>
+                <option value="partially-sighted">Slechtziend</option>
+                <option value="color-blind">Kleurenblind</option>
+                <option value="deafblind">Doofblind</option>
+            </optgroup>
+            <optgroup label="Motorische/lichamelijke beperkingen">
+                <option value="amputation-deformity">Amputatie en mismaaktheid</option>
+                <option value="arthritis">Artritus</option>
+                <option value="fibromyalgia">Fibromyalgie</option>
+                <option value="rheumatism">Reuma</option>
+                <option value="reduced-manual-dexterity">Verminderde handvaardigheid</option>
+                <option value="muscular-dystrophy">Spierdystrofie</option>
+                <option value="RSI">RSI</option>
+                <option value="tremor-and-spasms">Tremor en spasmen</option>
+                <option value="Quadriplegia-or-tetraplegia">Quadriplegie of tetraplegie</option>
+            </optgroup>
+            <optgroup label="Cognitieve/neurologische beperkingen">
+                <option value="ADHD">ADHD</option>
+                <option value="autism">Autisme</option>
+                <option value="dyslexia">Dyslexie</option>
+                <option value="dyscalculia">Dyscalculie</option>
+                <option value="learning-disability">Leerstoornis</option>
+                <option value="memory-disorder">Geheugen beperking</option>
+                <option value="multiple-sclerosis">Multiple sclerose</option>
+                <option value="epilepsy">Epilepsie</option>
+                <option value="migraine">Migraine</option>
+            </optgroup>
+        </select>
+        <label for="leeftijdsgroep">Leeftijdsgroep:</label>
+        <select name="leeftijdsgroep" id="leeftijdsgroep">
+            <option>Leeftijdsgroep</option>
+            <option value="volwassen">Volwassen (18-70)</option>
+            <option value="ouder">Ouder (>70)</option>
+        </select>
+        <input type="submit" value="Aanvragen">
+    </form>
+</body>
+</html>
