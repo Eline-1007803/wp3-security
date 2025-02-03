@@ -9,13 +9,45 @@ h1 {
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
+    border-radius: 20px;
     width: 1000px;
-    margin-left: 230px;
-    height: 40px;
+    margin: auto;
+    height: 50px;
     background-color: white;
     text-align: center;
+    font-size: 17px;
 }
 
+.action-button {
+    vertical-align: middle;
+    margin-left: 19px;
+    text-align: center;
+    width: 120px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    background-color: blue;
+    color: white;
+    font-size: 17px;
+}
+
+.edit-button {
+    background-color: #FFB343;
+    color: black;
+}
+
+.delete-button {
+    background-color: #FF0000;
+}
+.action-img {
+    height: 22px;
+    width: 22px;
+    vertical-align: middle;
+    margin-left: 20px;
+}
+.eye-img {
+    width: 36px;
+}
 .administrator-details {
     position: absolute;
     width: 800px ;
@@ -27,23 +59,5 @@ table, th, td {
     box-shadow: 5px 5px 5px 5px;
 }
 
-.edit-button {
-    margin-left: 50px;
-    text-align: center;
-    width: 120px;
-    height: 35px;
-    border-radius: 20px;
-    background-color: darkblue;
-    color: white;
 
-}
 
-.delete-button {
-    margin-left: 50px;
-    text-align: center;
-    width: 120px;
-    height: 35px;
-    border-radius: 20px;
-    background-color: darkblue;
-    color: white;
-}
