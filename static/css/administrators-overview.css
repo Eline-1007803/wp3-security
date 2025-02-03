@@ -8,10 +8,42 @@ h1 {
 
 table, th, td {
     border: 1px solid black;
-    background-color: pink;
     border-collapse: collapse;
     width: 1000px;
     margin-left: 230px;
     height: 40px;
+    background-color: white;
+    text-align: center;
+}
 
+.administrator-details {
+    position: absolute;
+    width: 800px ;
+    height: 400px;
+    margin-top: 300px;
+    margin-left: 400px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px 5px;
+}
+
+.edit-button {
+    margin-left: 50px;
+    text-align: center;
+    width: 120px;
+    height: 35px;
+    border-radius: 20px;
+    background-color: darkblue;
+    color: white;
+
+}
+
+.delete-button {
+    margin-left: 50px;
+    text-align: center;
+    width: 120px;
+    height: 35px;
+    border-radius: 20px;
+    background-color: darkblue;
+    color: white;
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <title>Overzicht beheerders</title>
@@ -8,16 +8,23 @@
 <body>
     <h1> Beheerders overzicht</h1>
     <table class="administrator-table">
+        <thead class="table-th">
         <tr>
             <th>Naam</th>
             <th>Details</th>
             <th>Bewerken</th>
         </tr>
+        </thead>
+        <tbody class="table-td">
         <tr>
             <td>Michael van gerwen</td>
-            <td><button>Details</button></td>
-            <td><button>Edit</button><button>Delete</button></td>
+            <td><button class="details-button">Details</button></td>
+            <td><button class="edit-button">Edit</button><button class="delete-button">Delete</button></td>
+            <div class="administrator-details">
+                <p> diva</p>
+            </div>
         </tr>
+        </tbody>
     </table>
     <script></script>
 </body>
