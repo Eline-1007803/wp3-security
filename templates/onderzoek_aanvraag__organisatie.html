@@ -26,9 +26,9 @@
             <option value="online">Online</option>
         </select>
         <label for="metbeloning">Met beloning?</label>
-        <input type="checkbox" name="metbeloning" id="metbeloning">
-        <label for="beloning">Beloning:</label>
-        <input type="text" name="beloning" id="beloning">
+        <input type="checkbox" name="metbeloning" id="metbeloning" onclick="CheckIn()">
+        <label for="beloning" id="beloninglabel" style="display:none">Beloning:</label>
+        <input type="text" name="beloning" style="display:none;" id="beloning">
         <label for="disability-type-input">Beperking:</label>
         <select id="disability-type-input" name="disability-type-input">
 
@@ -73,4 +73,5 @@
         <input type="submit" value="Aanvragen">
     </form>
 </body>
+<script src="/static/javascript/onderzoek_aanvraag_organisatie.js"></script>
 </html>
