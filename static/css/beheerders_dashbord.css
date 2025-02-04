@@ -71,15 +71,15 @@ section {
   transition: all 0.25s ease-out;
 }
 
-.table-clickable tbody tr:not(:first-child) td a {
+.table-clickable tbody tr:not(:first-child) td {
   border-top: 1px solid var(--darkblue);
 }
 
-.table-clickable tbody tr:last-child td a {
+.table-clickable tbody tr:last-child td {
   border-bottom: 1px solid var(--darkblue);
 }
 
-.table-clickable tbody tr:hover a {
+.table-clickable tbody tr:hover {
   color: var(--white);
   background: var(--blue);
 }
