@@ -13,7 +13,7 @@
         <label for="titel">Titel:</label>
         <input type="text" name="titel" id="titel" required>
         <label for="beschrijving">Beschrijving:</label>
-        <input type="text" name="beschrijving" id="beschrijving" required>
+        <textarea name="beschrijving" id="beschrijving" placeholder="Beschrijving.." required></textarea>
         <label for="datumvanaf">Datum Vanaf:</label>
         <input type="date" name="datumvanaf" id="datumvanaf" required>
         <label for="datumtot">Datum Tot:</label>
@@ -31,7 +31,7 @@
         <input type="text" name="beloning" style="display:none;" id="beloning">
         <label for="disability-type-input">Beperking:</label>
         <select id="disability-type-input" name="disability-type-input">
-
+            <option>Kies beperking:</option>
             <optgroup label="Auditieve beperkingen">
                 <option value="deaf">Doof</option>
                 <option value="hard-of-hearing">Slechthorend</option>
@@ -66,10 +66,12 @@
                 <option value="migraine">Migraine</option>
             </optgroup>
         </select>
-        <label for="leeftijdsgroepvan">Leeftijdsgroep van:</label>
-        <input type="number" name="leeftijdsgroepvan" id="leeftijdsgroepvan">
-        <label for="leeftijdsgroeptot">Leeftijdsgroep tot:</label>
-        <input type="number" name="leeftijdsgroeptot" id="leeftijdsgroeptot">
+        <div class="leeftijd">
+            <label for="leeftijdsgroepvan">Leeftijdsgroep van:</label>
+            <input type="number" name="leeftijdsgroepvan" id="leeftijdsgroepvan">
+            <label for="leeftijdsgroeptot">Leeftijdsgroep tot:</label>
+            <input type="number" name="leeftijdsgroeptot" id="leeftijdsgroeptot">
+        </div>
         <input type="submit" value="Aanvragen">
     </form>
 </body>
