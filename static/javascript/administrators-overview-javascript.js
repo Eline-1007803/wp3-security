@@ -1,13 +1,22 @@
 
 // Function for pop up to show up when you click the button
 
+// Add
+document.querySelector(".add-administrator-button")
+
+function addPopUp () {
+        console.log('yaas');
+        document.querySelector(".js-add").classList.remove("hide");
+
+}
+document.querySelector(".add-administrator-button").addEventListener("click", addPopUp);
+
 // Details
 details = document.querySelector(".details-button")
 
 function detailsPopUp () {
         console.log('yaas');
         document.querySelector(".js-details").classList.remove("hide");
-
 }
 
 document.querySelector(".details-button").addEventListener("click", detailsPopUp);
@@ -16,7 +25,6 @@ document.querySelector(".details-button").addEventListener("click", detailsPopUp
 function editPopUp () {
         console.log('yaas');
         document.querySelector(".js-edit").classList.remove("hide");
-
 }
 
 document.querySelector(".edit-button").addEventListener("click", editPopUp);

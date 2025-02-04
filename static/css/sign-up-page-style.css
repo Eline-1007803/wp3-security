@@ -3,25 +3,63 @@ body {
 }
 h1 {
     text-align: center;
+    margin-bottom: 70px;
 }
+
 form {
-    text-align: left;
-    margin-top: 50px;
-    margin-left: 500px;
-    display: grid;
-    width: 500px;
+    display:grid;
+    grid-template-columns:150px 200px;
+    row-gap: 10px;
+    width: 50%;
+    margin:auto;
+
 }
 
 form input {
-    height: 26px;
+    height: 30px;
+    width: 500px;
 }
 
 form label {
     margin-bottom: 10px;
     margin-top: 10px;
+    font-size: 18px;
+}
+
+textarea {
+    width: 500px;
+    height:150px;
+}
+
+.supervisor-info {
+    display:grid;
+    font-size: 18px;
+    row-gap: 10px;
+    margin-left: 20px;
+    margin-right: 10px;
+    grid-template-columns:150px 200px;
+    margin-bottom: 40px;
+
 }
 
 .hide {
     display: none;
 }
 
+.submit-button {
+    border-radius: 20px;
+    background-color: darkmagenta;
+    color: white;
+    border: none;
+    width: 150px;
+    height: 40px;
+    margin-left: 190px;
+    margin-top: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: magenta;
+
+}

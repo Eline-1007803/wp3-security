@@ -7,6 +7,7 @@
 </head>
 <body>
     <h1> Beheerders overzicht</h1>
+    <button class="add-administrator-button">Beheerder toevoegen</button>
     <table class="administrator-table">
         <thead class="table-th">
         <tr>
@@ -28,6 +29,18 @@
         </tr>
         </tbody>
     </table>
+
+    <div class="js-add administrator-add hide">
+        <a href="administrators-overview.html">
+        <img class="cross-image" src="../docs/images/cross.svg">
+        </a>
+        <h1>Toevoegen</h1>
+        <label>Naam:</label>
+        <input>
+        <label>E-mailadres</label>
+        <input>
+
+    </div>
 
     <div class="administrator-details js-details hide">
         <a href="administrators-overview.html">
@@ -54,6 +67,8 @@
         <h1>Verwijderen</h1>
         <p>Naam: Michael van Gerwen</p>
         <p>E-mailadres:</p>
+         <button class="delete-button">Verwijderen</button>
+
     </div>
 
 

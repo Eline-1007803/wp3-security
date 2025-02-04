@@ -9,7 +9,7 @@
 <h1>Aanmelden</h1>
     <form>
         <label for="first-name-input">Voornaam:</label>
-        <input id="first-name-input" name="first-name-input" type="text">
+        <input id="first-name-input" name="first-name-input" type="text" required>
         <label for="last-name-input">Achternaam:</label>
         <input id="last-name-input" name="last-name-input" type="text">
         <label for="zip-code-input">Postcode:</label>
@@ -59,7 +59,7 @@
                 <option value="migraine">Migraine</option>
             </optgroup>
         </select>
-        <label for="used-resources-input">Gebruikte hulpmiddelen</label>
+        <label for="used-resources-input">Gebruikte hulpmiddelen:</label>
         <input class="form-input" id="used-resources-input" name="used-resources-input" type="text">
         <label for="short-introduction-input">Korte introductie:</label>
         <textarea id="short-introduction-input" name="short-introduction-input" type=""></textarea>
@@ -79,7 +79,7 @@
             <input id="supervisor-name-input" name="supervisor-name-input">
             <label for="supervisor-email-input">E-mailadres van voogd of toezichthouder:</label>
             <input id="supervisor-email-input" name="supervisor-email-input" type="email">
-            <label for="supervisor-phone-number-input">Telefoonnummer van voogd of toezichthouder</label>
+            <label for="supervisor-phone-number-input">Telefoonnummer van voogd of toezichthouder:</label>
             <input id="supervisor-phone-number-input" name="supervisor-phone-number-input" type="tel">
         </div>
 
@@ -97,8 +97,10 @@
         </select>
         <label for="details-availability-input">Bijzonderheden beschikbaarheid:</label>
         <textarea id="details-availability-input" name="details-availability-input"></textarea>
+        <button class="submit-button" type="submit">Indienen</button>
     </form>
 
     <script src="/static/javascript/sign-up-page-javascript.js"></script>
+
 </body>
 </html>
