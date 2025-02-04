@@ -7,3 +7,4 @@ checkbox event: https://www.youtube.com/watch?v=fzNl52bEGIQ
 afbeelding: https://pixabay.com/images/search/bin%20icon/
             https://pixabay.com/illustrations/icon-symbol-design-direction-web-2429830/
             https://pixabay.com/vectors/eye-see-viewing-icon-1103592/
+            https://github.com/apancik/public-domain-icons/blob/master/dist/symbol%20cross%20delete%20remove%20multiply.svg
