@@ -1,0 +1,85 @@
+:root {
+  --white: #fff;
+  --darkblue: #1b4965;
+  --blue: #3b91c3;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+
+}
+body
+{
+  background: #f5f5f5;
+
+}
+
+.column {
+  float: left;
+  width: 32%;
+  padding: 10px;
+  margin: 5px;
+}
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  padding-top: 150px;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 400px;
+  position: relative;
+}
+
+/* TABLE STYLES
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.table-clickable {
+  text-align: left;
+  border-collapse: collapse;
+  border-left: 1px solid var(--darkblue);
+  border-right: 1px solid var(--darkblue);
+  margin: 20px auto;
+}
+
+.table-clickable th,
+.table-clickable tbody a {
+  padding: 20px 10px;
+}
+
+.table-clickable th {
+  color: var(--white);
+  background: var(--darkblue);
+}
+
+.table-clickable tbody a {
+  display: block;
+  text-decoration: none;
+  transition: all 0.25s ease-out;
+}
+
+.table-clickable tbody tr:not(:first-child) td a {
+  border-top: 1px solid var(--darkblue);
+}
+
+.table-clickable tbody tr:last-child td a {
+  border-bottom: 1px solid var(--darkblue);
+}
+
+.table-clickable tbody tr:hover a {
+  color: var(--white);
+  background: var(--blue);
+}
