@@ -19,7 +19,7 @@ body {
 h1
 {
     position: absolute;
-    top: 100px;
+    top: 50px;
     text-align: center;
     width: 100%;
     font-family: "Montserrat", serif;
@@ -59,10 +59,9 @@ form textarea
     border-radius: 4px;
     font-size: 16px;
 }
-.leeftijd
+.leeftijd,.datum
 {
-    display: flex;
+    display: grid;
     justify-content: space-between;
     font-size: 15px;
-    
 }

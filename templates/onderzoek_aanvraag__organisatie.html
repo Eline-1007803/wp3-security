@@ -14,13 +14,15 @@
         <input type="text" name="titel" id="titel" required>
         <label for="beschrijving">Beschrijving:</label>
         <textarea name="beschrijving" id="beschrijving" placeholder="Beschrijving.." required></textarea>
-        <label for="datumvanaf">Datum Vanaf:</label>
-        <input type="date" name="datumvanaf" id="datumvanaf" required>
-        <label for="datumtot">Datum Tot:</label>
-        <input type="date" name="datumtot" id="datumtot" required>
+        <div class="datum">
+            <label for="datumvanaf">Datum vanaf:</label>
+            <input type="date" name="datumvanaf" id="datumvanaf" required>
+            <label for="datumtot">Datum tot:</label><br>
+            <input type="date" name="datumtot" id="datumtot" required>
+        </div>
         <label for="typeonderzoek">Type onderzoek:</label>
-        <select name="typeonderzoek" id="typeonderzoek">
-            <option>Kies type onderzoek:</option>
+        <select name="typeonderzoek" id="typeonderzoek" required>
+            <option value="">Kies type onderzoek:</option>
             <option value="locatie">Locatie</option>
             <option value="telefonish">Telefonish</option>
             <option value="online">Online</option>
@@ -30,8 +32,8 @@
         <label for="beloning" id="beloninglabel" style="display:none">Beloning:</label>
         <input type="text" name="beloning" style="display:none;" id="beloning">
         <label for="disability-type-input">Beperking:</label>
-        <select id="disability-type-input" name="disability-type-input">
-            <option>Kies beperking:</option>
+        <select id="disability-type-input" name="disability-type-input" required>
+            <option value="">Kies beperking:</option>
             <optgroup label="Auditieve beperkingen">
                 <option value="deaf">Doof</option>
                 <option value="hard-of-hearing">Slechthorend</option>
@@ -67,10 +69,10 @@
             </optgroup>
         </select>
         <div class="leeftijd">
-            <label for="leeftijdsgroepvan">Leeftijdsgroep van:</label>
-            <input type="number" name="leeftijdsgroepvan" id="leeftijdsgroepvan">
-            <label for="leeftijdsgroeptot">Leeftijdsgroep tot:</label>
-            <input type="number" name="leeftijdsgroeptot" id="leeftijdsgroeptot">
+            <label for="leeftijdvan">Leeftijd van</label>
+            <input type="number" name="leeftijdvan" id="leeftijdvan" required>
+            <label for="leeftijdtot">Leeftijd tot</label>
+            <input type="number" name="leeftijdtot" id="leeftijdtot"required>
         </div>
         <input type="submit" value="Aanvragen">
     </form>
