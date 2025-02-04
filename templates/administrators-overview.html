@@ -11,19 +11,33 @@
         <thead class="table-th">
         <tr>
             <th>Naam</th>
+            <th>E-mail</th>
             <th>Bewerken</th>
+
         </tr>
         </thead>
         <tbody class="table-td">
         <tr>
             <td>Michael van gerwen</td>
+            <td>Michael_Gerwen@outlook.com</td>
             <td><button class="action-button details-button">Details<img class="action-img eye-img" src="../docs/images/eye-icon.png"></button><button class="action-button edit-button">Edit<img class="action-img" src="../docs/images/edit-icon-2.png"></button><button class="action-button delete-button">Delete<img class="action-img" src="../docs/images/bin-icon.png"></button></td>
-            <div class="administrator-details">
-                <p> diva</p>
-            </div>
+        </tr>
+        <tr>
+            <td>Anne Fleur</td>
+            <td>anne_fleur@outlook.com</td>
         </tr>
         </tbody>
     </table>
-    <script></script>
+
+    <div class="administrator-details js-details hide">
+        <a href="administrators-overview.html">
+        <img class="cross-image" src="../docs/images/cross.svg">
+        </a>
+        <h1 class="details-header">Details</h1>
+        <p>Naam: Michael van Gerwen</p>
+        <p>E-mailadres:</p>
+    </div>
+
+    <script src="/static/javascript/administrators-overview-javascript.js"></script>
 </body>
 </html>
