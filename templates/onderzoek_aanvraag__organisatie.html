@@ -11,27 +11,31 @@
     <h1>Onderzoek Aanvraag</h1>
     <form action="tobeadded" method="post">
         <label for="titel">Titel:</label>
-        <input type="text" name="titel" id="titel" required>
+        <input type="text" name="titel" id="titel" placeholder="Titel.." required>
         <label for="beschrijving">Beschrijving:</label>
-        <input type="text" name="beschrijving" id="beschrijving" required>
-        <label for="datumvanaf">Datum Vanaf:</label>
-        <input type="date" name="datumvanaf" id="datumvanaf" required>
-        <label for="datumtot">Datum Tot:</label>
-        <input type="date" name="datumtot" id="datumtot" required>
+        <textarea name="beschrijving" id="beschrijving" placeholder="Beschrijving.." required></textarea>
+        <div class="datumvanaf">
+            <label for="datumvanaf">Datum vanaf:</label><br>
+            <input type="date" name="datumvanaf" id="datumvanaf" required>
+        </div>
+        <div class="datumtot">
+            <label for="datumtot">Datum tot:</label><br>
+            <input type="date" name="datumtot" id="datumtot" required>
+        </div>
         <label for="typeonderzoek">Type onderzoek:</label>
-        <select name="typeonderzoek" id="typeonderzoek">
-            <option>Kies type onderzoek:</option>
+        <select name="typeonderzoek" id="typeonderzoek" required>
+            <option value="">Kies type onderzoek:</option>
             <option value="locatie">Locatie</option>
             <option value="telefonish">Telefonish</option>
             <option value="online">Online</option>
         </select>
-        <label for="metbeloning">Met beloning?</label>
+        <label for="metbeloning">Vergoeding?</label>
         <input type="checkbox" name="metbeloning" id="metbeloning" onclick="CheckIn()">
-        <label for="beloning" id="beloninglabel" style="display:none">Beloning:</label>
+        <label for="beloning" id="beloninglabel" style="display:none">Vergoeding:</label>
         <input type="text" name="beloning" style="display:none;" id="beloning">
         <label for="disability-type-input">Beperking:</label>
-        <select id="disability-type-input" name="disability-type-input">
-
+        <select id="disability-type-input" name="disability-type-input" required>
+            <option value="">Kies beperking:</option>
             <optgroup label="Auditieve beperkingen">
                 <option value="deaf">Doof</option>
                 <option value="hard-of-hearing">Slechthorend</option>
@@ -66,10 +70,14 @@
                 <option value="migraine">Migraine</option>
             </optgroup>
         </select>
-        <label for="leeftijdsgroepvan">Leeftijdsgroep van:</label>
-        <input type="number" name="leeftijdsgroepvan" id="leeftijdsgroepvan">
-        <label for="leeftijdsgroeptot">Leeftijdsgroep tot:</label>
-        <input type="number" name="leeftijdsgroeptot" id="leeftijdsgroeptot">
+        <div class="leeftijdvan">
+            <label for="leeftijdvan">Leeftijd van</label><br>
+            <input type="number" name="leeftijdvan" id="leeftijdvan" required>
+        </div>
+        <div class="leeftijdtot">
+            <label for="leeftijdtot">Leeftijd tot</label><br>
+            <input type="number" name="leeftijdtot" id="leeftijdtot"required>
+        </div>
         <input type="submit" value="Aanvragen">
     </form>
 </body>

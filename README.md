@@ -5,3 +5,5 @@ Bronnenlijst:
 https://www.youtube.com/watch?v=EerdGm-ehJQ&t=27729s
 checkbox event: https://www.youtube.com/watch?v=fzNl52bEGIQ
 checkbox: https://www.w3schools.com/howto/howto_js_display_checkbox_text.asp
+text side by side: https://www.quora.com/How-do-you-align-text-side-by-side-in-HTML
+box shadow 21: https://getcssscan.com/css-box-shadow-examples
