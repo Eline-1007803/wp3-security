@@ -11,9 +11,9 @@
     <h1>Onderzoek Aanvraag</h1>
     <form action="tobeadded" method="post">
         <label for="titel">Titel:</label>
-        <input type="text" name="titel" id="titel" placeholder="Titel.." required>
+        <input type="text" name="titel" id="titel" placeholder="Titel.." aria-label="Voer het titel in" required>
         <label for="beschrijving">Beschrijving:</label>
-        <textarea name="beschrijving" id="beschrijving" placeholder="Beschrijving.." required></textarea>
+        <textarea name="beschrijving" id="beschrijving" placeholder="Beschrijving.." aria-label="Voer het beschrijving in" required></textarea>
         <div class="datumvanaf">
             <label for="datumvanaf">Datum vanaf:</label><br>
             <input type="date" name="datumvanaf" id="datumvanaf" required>
@@ -23,19 +23,19 @@
             <input type="date" name="datumtot" id="datumtot" required>
         </div>
         <label for="typeonderzoek">Type onderzoek:</label>
-        <select name="typeonderzoek" id="typeonderzoek" required>
+        <select name="typeonderzoek" id="typeonderzoek" aria-label="Kies het type onderzoek" required>
             <option value="">Kies type onderzoek:</option>
             <option value="locatie">Locatie</option>
             <option value="telefonish">Telefonish</option>
             <option value="online">Online</option>
         </select>
         <label for="metbeloning">Vergoeding?</label>
-        <input type="checkbox" name="metbeloning" id="metbeloning" onclick="CheckIn()">
+        <input type="checkbox" name="metbeloning" id="metbeloning" aria-label="Vink checkbox als vergoeding" onclick="CheckIn()">
         <label for="beloning" id="beloninglabel" style="display:none">Vergoeding:</label>
-        <input type="text" name="beloning" style="display:none;" id="beloning">
+        <input type="text" name="beloning" style="display:none;" aria-label="Voer hier uw vergoeding in" id="beloning">
         <label for="disability-type-input">Beperking:</label>
-        <select id="disability-type-input" name="disability-type-input" required>
-            <option value="">Kies beperking:</option>
+        <select class="custom_select" id="disability-type-input" name="disability-type-input" multiple required size="6">
+            <option value="" disabled>Kies beperking hier:</option>
             <optgroup label="Auditieve beperkingen">
                 <option value="deaf">Doof</option>
                 <option value="hard-of-hearing">Slechthorend</option>
@@ -78,7 +78,7 @@
             <label for="leeftijdtot">Leeftijd tot</label><br>
             <input type="number" name="leeftijdtot" id="leeftijdtot"required>
         </div>
-        <input type="submit" value="Aanvragen">
+        <input aria-label="onderzoek aanvragen" type="submit" value="Aanvragen">
     </form>
 </body>
 <script src="/static/javascript/onderzoek_aanvraag_organisatie.js"></script>

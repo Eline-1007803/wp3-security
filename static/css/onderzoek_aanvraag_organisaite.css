@@ -86,3 +86,19 @@ form textarea
     top: -44px;
     left: 100px;
 }
+.custom_select
+{
+
+    border-radius: 3px;
+    border: 2px solid black;
+    padding:2px;
+    margin-bottom: 5px;
+}
+.custom_select optgroup
+{
+    color: #0000FF;
+}
+.custom_select option
+{
+    color: black;
+}
