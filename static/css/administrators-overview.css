@@ -2,12 +2,23 @@ body {
     font-family: Arial;
 }
 
+.background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    top: 0;
+    left: 0;
+}
+
 h1 {
     text-align: center;
     margin-bottom: 50px;
 }
+
 .add-administrator-button {
-    width: 200px;
+    width: 220px;
     height: 44px;
     margin-left: 350px;
     margin-bottom: 20px;
@@ -37,9 +48,7 @@ table, th, td {
 
 th, td {
     padding: 8px;
-
 }
-
 
 .action-button {
     vertical-align: middle;
@@ -71,9 +80,39 @@ th, td {
     background-color: #FF0000;
     width: 145px;
 }
-.delete-button:hover{
+
+.div-add-button {
+    background-color: mediumseagreen;
+    width: 220px;
+    height: 44px;
+    border-radius: 20px;
+    color: white;
+    border: none;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.div-add-button:hover {
+    background-color: darkgreen;
+}
+
+.div-edit-button {
+    background-color: #FFB343;
+    color: black;
+}
+
+.div-edit-button:hover {
+    background-color: #FFD700;
+}
+
+.div-delete-button {
+    background-color: #FF0000;
+    width: 145px;
+}
+.div-delete-button:hover{
     background-color: #850101;
 }
+
 .action-img {
     height: 22px;
     width: 22px;
@@ -84,20 +123,20 @@ th, td {
     width: 36px;
 }
 
-.administrator-details {
-    position: relative;
-    width: 600px ;
-    height: 600px;
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 5px 5px 5px 5px;
-    margin-left: 660px;
-    margin-top: 20px;
+add-img{
+    width: 3px;
+    height: 15px;
 }
 
-.details-header {
-    margin-left: 30px;
-    height: 100vh;
+.administrator-details {
+    position: fixed;
+    background-color: white;
+    box-shadow: 10px 10px 10px 10px;
+    width: 600px ;
+    height: 600px;
+    margin-left: 600px;
+    margin-top: 100px;
+    text-align: center;
 }
 
 .cross-image {
@@ -117,24 +156,29 @@ th, td {
     box-shadow: 10px 10px 10px 10px;
     width: 600px ;
     height: 600px;
+    margin-left: 600px;
+    margin-top: 100px;
+    text-align: center;
 }
 
 .administrator-delete {
+    position: fixed;
+    background-color: white;
     box-shadow: 10px 10px 10px 10px;
-    width: 600px;
+    width: 600px ;
     height: 600px;
-    margin: auto ;
-    top:
+    margin-left: 600px;
+    margin-top: 100px;
+    text-align: center;
 }
 
 .administrator-add {
+    position: fixed;
+    background-color: white;
     box-shadow: 10px 10px 10px 10px;
     width: 600px;
     height: 600px;
-    margin: auto;
-}
-
-.div-delete-button {
-    background-color: darkred;
-    justify-content: center;
+    margin-left: 600px;
+    margin-top: 100px;
+    text-align: center;
 }

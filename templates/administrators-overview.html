@@ -5,7 +5,30 @@
     <title>Overzicht beheerders</title>
     <link rel="stylesheet" href="../static/css/administrators-overview.css">
 </head>
+
 <body>
+    <div class="background hide"></div>
+
+      <div class="js-add administrator-add hide">
+        <a href="administrators-overview.html">
+        <img class="cross-image" src="../docs/images/cross.svg">
+        </a>
+        <h1>Toevoegen</h1>
+        <label>Naam:</label>
+        <input>
+        <label>E-mailadres</label>
+        <input>
+        <button class="div-add-button action-button" type="submit">Toevoegen<img class="action-img add-img" src="../docs/images/add-icon.svg"></button>
+    </div>
+
+    <div class="administrator-details js-details hide">
+        <a href="administrators-overview.html">
+        <img class="cross-image" src="../docs/images/cross.svg">
+        </a>
+        <h1 class="details-header">Details</h1>
+        <p>Naam: Michael van Gerwen</p>
+        <p>E-mailadres:</p>
+    </div>
 
      <div class="js-edit administrator-edit hide">
         <a href="administrators-overview.html">
@@ -14,10 +37,21 @@
         <h1>Bewerken</h1>
         <p>Naam: Michael van Gerwen</p>
         <p>E-mailadres:</p>
+         <button class="div-edit-button action-button" type="submit">Bewerken<img class="action-img" src="../docs/images/edit-icon-2.png"></button>
+    </div>
+
+    <div class="js-delete administrator-delete hide">
+        <a href="administrators-overview.html">
+        <img class="cross-image" src="../docs/images/cross.svg">
+        </a>
+        <h1>Verwijderen</h1>
+        <p>Naam: Michael van Gerwen</p>
+        <p>E-mailadres:</p>
+        <button class="div-delete-button action-button" type="submit">Verwijderen<img class="action-img" src="../docs/images/bin-icon.png"></button>
     </div>
 
     <h1> Beheerders overzicht</h1>
-    <button class="add-administrator-button">Beheerder toevoegen</button>
+    <button class="add-administrator-button">Beheerder toevoegen<img class="action-img add-img" src="../docs/images/add-icon.svg"></button>
     <table class="administrator-table">
         <thead class="table-th">
         <tr>
@@ -39,42 +73,6 @@
         </tr>
         </tbody>
     </table>
-
-    <div class="js-add administrator-add hide">
-        <a href="administrators-overview.html">
-        <img class="cross-image" src="../docs/images/cross.svg">
-        </a>
-        <h1>Toevoegen</h1>
-        <label>Naam:</label>
-        <input>
-        <label>E-mailadres</label>
-        <input>
-
-    </div>
-
-    <div class="administrator-details js-details hide">
-        <a href="administrators-overview.html">
-        <img class="cross-image" src="../docs/images/cross.svg">
-        </a>
-        <h1 class="details-header">Details</h1>
-        <p>Naam: Michael van Gerwen</p>
-        <p>E-mailadres:</p>
-    </div>
-
-
-
-     <div class="js-delete administrator-delete hide">
-        <a href="administrators-overview.html">
-        <img class="cross-image" src="../docs/images/cross.svg">
-        </a>
-        <h1>Verwijderen</h1>
-        <p>Naam: Michael van Gerwen</p>
-        <p>E-mailadres:</p>
-         <button class="delete-button">Verwijderen</button>
-
-    </div>
-
-
 
     <script src="/static/javascript/administrators-overview-javascript.js"></script>
 </body>
