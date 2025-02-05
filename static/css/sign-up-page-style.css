@@ -8,12 +8,11 @@ h1 {
 }
 
 form {
-    display:grid;
+    display: grid;
     grid-template-columns:150px 200px;
     row-gap: 10px;
     width: 50%;
     margin:auto;
-
 }
 
 form input {
@@ -29,18 +28,16 @@ form label {
 
 textarea {
     width: 500px;
-    height:150px;
+    height: 150px;
 }
 
 .supervisor-info {
-    display:grid;
+    display: grid;
     font-size: 18px;
     row-gap: 10px;
     margin-left: 20px;
     margin-right: 10px;
-    grid-template-columns:150px 200px;
-    margin-bottom: 40px;
-
+    grid-template-columns: 200px 300px;
 }
 
 .hide {
@@ -48,13 +45,13 @@ textarea {
 }
 
 .submit-button {
-    border-radius: 20px;
+    border-radius: 25px;
     background-color: #8b008b;
     color: white;
     border: none;
-    width: 150px;
-    height: 40px;
-    margin-left: 190px;
+    width: 300px;
+    height: 50px;
+    margin-left: 160px;
     margin-top: 20px;
     text-align: center;
     cursor: pointer;
@@ -62,5 +59,4 @@ textarea {
 
 .submit-button:hover {
     background-color: #d100d1 ;
-
 }
