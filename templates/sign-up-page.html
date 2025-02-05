@@ -23,7 +23,7 @@
         <label for="date-of-birth-input">Geboortedatum:</label>
         <input id="date-of-birth-input" name="date-of-birth-input" type="date">
         <label for="disability-type-input">Type beperking:</label>
-        <select id="disability-type-input" name="disability-type-input">
+        <select id="disability-type-input" name="disability-type-input" multiple>
 
             <optgroup label="Auditieve beperkingen">
                 <option value="deaf">Doof</option>
@@ -81,9 +81,10 @@
             <input id="supervisor-email-input" name="supervisor-email-input" type="email">
             <label for="supervisor-phone-number-input">Telefoonnummer van voogd of toezichthouder:</label>
             <input id="supervisor-phone-number-input" name="supervisor-phone-number-input" type="tel">
+            <br>
         </div>
 
-        <label for="preference-approach-input">Voorkeur benadering</label>
+        <label for="preference-approach-input">Voorkeur benadering:</label>
         <select id="preference-approach-input">
             <option value="email">Email</option>
             <option value="telephone">Telefonisch</option>
