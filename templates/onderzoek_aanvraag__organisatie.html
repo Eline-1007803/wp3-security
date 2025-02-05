@@ -11,12 +11,14 @@
     <h1>Onderzoek Aanvraag</h1>
     <form action="tobeadded" method="post">
         <label for="titel">Titel:</label>
-        <input type="text" name="titel" id="titel" required>
+        <input type="text" name="titel" id="titel" placeholder="Titel.." required>
         <label for="beschrijving">Beschrijving:</label>
         <textarea name="beschrijving" id="beschrijving" placeholder="Beschrijving.." required></textarea>
-        <div class="datum">
-            <label for="datumvanaf">Datum vanaf:</label>
+        <div class="datumvanaf">
+            <label for="datumvanaf">Datum vanaf:</label><br>
             <input type="date" name="datumvanaf" id="datumvanaf" required>
+        </div>
+        <div class="datumtot">
             <label for="datumtot">Datum tot:</label><br>
             <input type="date" name="datumtot" id="datumtot" required>
         </div>
@@ -27,9 +29,9 @@
             <option value="telefonish">Telefonish</option>
             <option value="online">Online</option>
         </select>
-        <label for="metbeloning">Met beloning?</label>
+        <label for="metbeloning">Vergoeding?</label>
         <input type="checkbox" name="metbeloning" id="metbeloning" onclick="CheckIn()">
-        <label for="beloning" id="beloninglabel" style="display:none">Beloning:</label>
+        <label for="beloning" id="beloninglabel" style="display:none">Vergoeding:</label>
         <input type="text" name="beloning" style="display:none;" id="beloning">
         <label for="disability-type-input">Beperking:</label>
         <select id="disability-type-input" name="disability-type-input" required>
@@ -68,10 +70,12 @@
                 <option value="migraine">Migraine</option>
             </optgroup>
         </select>
-        <div class="leeftijd">
-            <label for="leeftijdvan">Leeftijd van</label>
+        <div class="leeftijdvan">
+            <label for="leeftijdvan">Leeftijd van</label><br>
             <input type="number" name="leeftijdvan" id="leeftijdvan" required>
-            <label for="leeftijdtot">Leeftijd tot</label>
+        </div>
+        <div class="leeftijdtot">
+            <label for="leeftijdtot">Leeftijd tot</label><br>
             <input type="number" name="leeftijdtot" id="leeftijdtot"required>
         </div>
         <input type="submit" value="Aanvragen">
