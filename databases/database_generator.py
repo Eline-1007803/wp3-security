@@ -19,7 +19,7 @@ class WP3DatabaseGenerator:
         self.create_table_onderzoeken()
         self.create_table_organisaties()
         if self.create_initial_data:
-            self.insert_admin_user()
+            self.insert_beheerders()
     def create_table_geregistreerde_beperkingen(self):
         create_statement = """
         CREATE TABLE IF NOT EXISTS "geregistreerde_beperkingen" (
@@ -32,7 +32,6 @@ class WP3DatabaseGenerator:
         """
         self.__execute_transaction_statement(create_statement)
         print("✅ Geregistreerde_beperkingen table created")
-
     def create_table_inschrijvingen(self):
         create_statement = """
         CREATE TABLE IF NOT EXISTS "inschrijvingen" (
@@ -48,7 +47,6 @@ class WP3DatabaseGenerator:
         """
         self.__execute_transaction_statement(create_statement)
         print("✅ inschrijvingen table created")
-
     def create_table_onderzoeken(self):
         create_statement = """
         CREATE TABLE IF NOT EXISTS "onderzoeken" (
@@ -74,7 +72,6 @@ class WP3DatabaseGenerator:
         """
         self.__execute_transaction_statement(create_statement)
         print("✅ onderzoeken table created")
-
     def create_table_organisaties(self):
         create_statement = """
         CREATE TABLE IF NOT EXISTS "organisaties" (
@@ -94,7 +91,6 @@ class WP3DatabaseGenerator:
         """
         self.__execute_transaction_statement(create_statement)
         print("✅ Users table created")
-
     def create_table_ervaringsdeskundigen(self):
         create_statement = """
         CREATE TABLE IF NOT EXISTS "ervaringsdeskundigen" (
@@ -108,7 +104,6 @@ class WP3DatabaseGenerator:
             "emailadres"	TEXT NOT NULL,
             "telefoonnummer"	TEXT NOT NULL,
             "geboorrtedatum"	DATETIME NOT NULL,
-            "beperking_id"	INTEGER NOT NULL,
             "hulpmiddelen"	TEXT,
             "introductie"	TEXT NOT NULL,
             "bijzonderheden"	TEXT,
@@ -122,12 +117,10 @@ class WP3DatabaseGenerator:
             "status"	TEXT NOT NULL DEFAULT 'nieuw',
             "kleur_voorgrond"	TEXT NOT NULL DEFAULT 'zwart',
             "kleur_achtergrond"	TEXT NOT NULL DEFAULT 'wit',
-            PRIMARY KEY("ervaringsdeskundige_id" AUTOINCREMENT),
-            CONSTRAINT "beperking_id_foreign_key" FOREIGN KEY("beperking_id") REFERENCES "ervaringsdeskundigen");
+            PRIMARY KEY("ervaringsdeskundige_id" AUTOINCREMENT));
         """
         self.__execute_transaction_statement(create_statement)
         print("✅ Users table created")
-
     def create_table_beheerders(self):
         create_statement = """
         CREATE TABLE IF NOT EXISTS "beheerders" (
@@ -188,27 +181,27 @@ class WP3DatabaseGenerator:
     def insert_beheerders(self):
         users = [
             ( "Kevin", "van", "Dam", "abc", "kevinvandam@gmail.com", "0643396274"),
-            ( "vried@hr.nl", "geheimer", "Diederik de Vries", 0),
+            ( "Peter", None, "Selie", "123", "peterselie@gmail.com", "0603587210"),
         ]
-        insert_statement = "INSERT INTO beheerders (voornaam, tussenvoegsel, achternaam, wachtwoord, email, telefoonnummer) VALUES (?, ?, ?, ?);"
+        insert_statement = "INSERT INTO beheerders (voornaam, tussenvoegsel, achternaam, wachtwoord, email, telefoonnummer) VALUES (?, ?, ?, ?, ?, ?);"
         self.__execute_many_transaction_statement(insert_statement, users)
-        print("✅ Default teachers / users created")
-    def insert_admin_user(self):
+        print("✅ Default beheerders created")
+    def insert_ervaringsdeskundigen(self):
         users = [
-            ( "krugw@hr.nl", "geheim", "Gerard van Kruining", 1),
-            ( "vried@hr.nl", "geheimer", "Diederik de Vries", 0),
+            ("Erik", None, "Boom", "wachtwoord", "2945KL", "man", "erikboom@gmail.com", "0654925693", "19-01-1987", "blindengeleidehond", "ik ben Erik, ik ben 38 jaar oud en ik ben blind. Mijn hobby is muziek maken", None, True, False, None, None, "email", "op locatie", "nieuw", "zwart", "wit"),
+            ("Beau", "ter", "Ham", "MetJam", "3068HG", "vrouw", "beauterham@gmail.com", "0676935683", "29-05-1966", None, "introductie", None, True, True, "Truus van Boven", "truusvanboven@gmail.com", "telefonisch", "telefonisch", "goedgekeurd", "zwart", "wit"),
         ]
-        insert_statement = "INSERT INTO users (login, password, display_name, is_admin) VALUES (?, ?, ?, ?);"
+        insert_statement = "INSERT INTO ervaringsdeskundigen (voornaam, tussenvoegsel, achternaam, wachtwoord, postcode, geslacht, emailadres, telefoonnummer, geboortedatum, hulpmiddelen, introductie, bijzonderheden, akkoord_met_voorwaarde, toezichthouder, naam_voogd, email_voogd, voorkeur_benadering, type_onderzoek, status, kleur_voorgrond, kleur_achtergrond) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
         self.__execute_many_transaction_statement(insert_statement, users)
-        print("✅ Default teachers / users created")
-    def insert_admin_user(self):
+        print("✅ Default ervaringsdeskundigen created")
+    def insert_geregistreerde_beperkingen(self):
         users = [
-            ( "krugw@hr.nl", "geheim", "Gerard van Kruining", 1),
-            ( "vried@hr.nl", "geheimer", "Diederik de Vries", 0),
+            (1, 4),
+            (2, 13),
         ]
-        insert_statement = "INSERT INTO users (login, password, display_name, is_admin) VALUES (?, ?, ?, ?);"
+        insert_statement = "INSERT INTO geregistreerde_beperkingen (ervaringsdeskundige_id, beperking_id) VALUES (?, ?);"
         self.__execute_many_transaction_statement(insert_statement, users)
-        print("✅ Default teachers / users created")
+        print("✅ Default geregistreerde beperkingen created")
     def insert_admin_user(self):
         users = [
             ( "krugw@hr.nl", "geheim", "Gerard van Kruining", 1),
@@ -278,7 +271,7 @@ if __name__ == "__main__":
     # Deze slashes komen uit de "Path" module. Dit is een module die je kan gebruiken
     # om paden te maken. Dit is handig omdat je dan niet zelf hoeft te kijken of je
     # een / (mac) of een \ (windows) moet gebruiken.
-    database_path = project_root / "databases" / "database.db"
+    database_path = project_root / "wp3-2025-rest-1b4-insertteamnamehere" / "databases" / "database.db"
     database_generator = WP3DatabaseGenerator(
         database_path, overwrite=True, initial_data=True
     )
