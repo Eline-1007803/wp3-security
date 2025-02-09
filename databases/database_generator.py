@@ -19,16 +19,22 @@ class WP3DatabaseGenerator:
         self.create_table_onderzoeken()
         self.create_table_organisaties()
         if self.create_initial_data:
+            self.insert_beperkingen()
             self.insert_beheerders()
+            self.insert_ervaringsdeskundigen()
+            self.insert_geregistreerde_beperkingen()
+            self.insert_inschrijvingen()
+            self.insert_onderzoeken()
+            self.insert_organisaties()
     def create_table_geregistreerde_beperkingen(self):
         create_statement = """
         CREATE TABLE IF NOT EXISTS "geregistreerde_beperkingen" (
             "gb_id"	INTEGER,
-            "ervaringsdeskindige_id"	INTEGER NOT NULL,
+            "ervaringsdeskundige_id"	INTEGER NOT NULL,
             "beperking_id"	INTEGER NOT NULL,
             PRIMARY KEY("gb_id" AUTOINCREMENT),
             CONSTRAINT "beperking_id_foreign_key" FOREIGN KEY("beperking_id") REFERENCES "alle_beperkingen"("beperking_id"),
-            CONSTRAINT "ervaringsdeskundige_id_foreign_key" FOREIGN KEY("ervaringsdeskindige_id") REFERENCES "ervaringsdeskundigen"("ervaringsdeskundige_id"));
+            CONSTRAINT "ervaringsdeskundige_id_foreign_key" FOREIGN KEY("ervaringsdeskundige_id") REFERENCES "ervaringsdeskundigen"("ervaringsdeskundige_id"));
         """
         self.__execute_transaction_statement(create_statement)
         print("✅ Geregistreerde_beperkingen table created")
@@ -84,7 +90,7 @@ class WP3DatabaseGenerator:
             "contactpersoon"	TEXT NOT NULL,
             "email"	TEXT NOT NULL,
             "telefoonnummer"	TEXT NOT NULL,
-            "overige details"	TEXT,
+            "overige_details"	TEXT,
             "status"	TEXT NOT NULL DEFAULT 'nieuw',
             "api_key"	TEXT NOT NULL,
             PRIMARY KEY("oraganisatie_id" AUTOINCREMENT));
@@ -103,7 +109,7 @@ class WP3DatabaseGenerator:
             "geslacht"	TEXT NOT NULL,
             "emailadres"	TEXT NOT NULL,
             "telefoonnummer"	TEXT NOT NULL,
-            "geboorrtedatum"	DATETIME NOT NULL,
+            "geboortedatum"	DATETIME NOT NULL,
             "hulpmiddelen"	TEXT,
             "introductie"	TEXT NOT NULL,
             "bijzonderheden"	TEXT,
@@ -202,30 +208,29 @@ class WP3DatabaseGenerator:
         insert_statement = "INSERT INTO geregistreerde_beperkingen (ervaringsdeskundige_id, beperking_id) VALUES (?, ?);"
         self.__execute_many_transaction_statement(insert_statement, users)
         print("✅ Default geregistreerde beperkingen created")
-    def insert_admin_user(self):
+    def insert_inschrijvingen(self):
         users = [
-            ( "krugw@hr.nl", "geheim", "Gerard van Kruining", 1),
-            ( "vried@hr.nl", "geheimer", "Diederik de Vries", 0),
+            ( 1, 1, "nieuw", 0),
         ]
-        insert_statement = "INSERT INTO users (login, password, display_name, is_admin) VALUES (?, ?, ?, ?);"
+        insert_statement = "INSERT INTO inschrijvingen (ervaringsdeskundige_id, onderzoek_id, status, afgerond) VALUES (?, ?, ?, ?);"
         self.__execute_many_transaction_statement(insert_statement, users)
-        print("✅ Default teachers / users created")
-    def insert_admin_user(self):
+        print("✅ Default inschrijvingen created")
+    def insert_onderzoeken(self):
         users = [
-            ( "krugw@hr.nl", "geheim", "Gerard van Kruining", 1),
-            ( "vried@hr.nl", "geheimer", "Diederik de Vries", 0),
+            ("website voor blinden", "goedgekeurd", 1, "blinden mensen moeten testen of de website die gemaakt is goed accessible is voor hun", "09-02-2025", "19-02-2027", "op locatie", "hogeschool rotterdam", 1, "5 euro", 10, 60, 4, 1, "10-02-2025"),
+            ("onderzoek 2", "nieuw", 0, "beschrijving van onderzoek 2", "02-01-2024", "13-11-2025", "telefonische", None, 0, None, 0, 99, 6, None, None),
         ]
-        insert_statement = "INSERT INTO users (login, password, display_name, is_admin) VALUES (?, ?, ?, ?);"
+        insert_statement = "INSERT INTO onderzoeken (titel, status, beschikbaar, beschrijving, datum_vanaf, datum_tot, type, locatie, met_beloning, beloning, leeftijd_van, leeftijd_tot, beperking_id, beheerder_id, datum_goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
         self.__execute_many_transaction_statement(insert_statement, users)
-        print("✅ Default teachers / users created")
-    def insert_admin_user(self):
+        print("✅ Default onderzoeken created")
+    def insert_organisaties(self):
         users = [
-            ( "krugw@hr.nl", "geheim", "Gerard van Kruining", 1),
-            ( "vried@hr.nl", "geheimer", "Diederik de Vries", 0),
+            ("gfx", None, "non-profit", "https://www.gfx.com", "organisatie", "Angela Koe", "gfx@info.com", "0654826582", "leeg", "goedgekeurd", "A1B2"),
+            ("plams", None, "commercieel", "https://www.plams.nl", "ook een organisatie", "Lenn van Dam", "plams@info.com", "0665835683", "het is een organisatie", "nieuw", "C3D4"),
         ]
-        insert_statement = "INSERT INTO users (login, password, display_name, is_admin) VALUES (?, ?, ?, ?);"
+        insert_statement = "INSERT INTO organisaties (naam, wachtwoord, type, website, beschrijving, contactpersoon, email, telefoonnummer, overige_details, status, api_key) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
         self.__execute_many_transaction_statement(insert_statement, users)
-        print("✅ Default teachers / users created")
+        print("✅ Default organisaties created")
 
     # Transacties zijn duur, dat wil zeggen, ze kosten veel tijd en CPU kracht. Als je veel insert doet
     # bundel je ze in één transactie, of je gebruikt de SQLite executemany methode.
