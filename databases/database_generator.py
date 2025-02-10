@@ -73,7 +73,7 @@ class WP3DatabaseGenerator:
             "beheerder_id"	INTEGER,
             "datum_goedgekeurd"	DATETIME,
             PRIMARY KEY("onderzoek_id" AUTOINCREMENT),
-            CONSTRAINT "beheerder_id_foreign_key" FOREIGN KEY("beheerder_id") REFERENCES "",
+            CONSTRAINT "beheerder_id_foreign_key" FOREIGN KEY("beheerder_id") REFERENCES "beheerders"("beheerder_id"),
             CONSTRAINT "beperking_id_foreign_key" FOREIGN KEY("beperking_id") REFERENCES "alle_beperkingen"("beperking_id"));
         """
         self.__execute_transaction_statement(create_statement)
