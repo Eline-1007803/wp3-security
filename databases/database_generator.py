@@ -194,8 +194,8 @@ class WP3DatabaseGenerator:
         print("✅ Default beheerders created")
     def insert_ervaringsdeskundigen(self):
         users = [
-            ("Erik", None, "Boom", "wachtwoord", "2945KL", "man", "erikboom@gmail.com", "0654925693", "19-01-1987", "blindengeleidehond", "ik ben Erik, ik ben 38 jaar oud en ik ben blind. Mijn hobby is muziek maken", None, True, False, None, None, "email", "op locatie", "nieuw", "zwart", "wit"),
-            ("Beau", "ter", "Ham", "MetJam", "3068HG", "vrouw", "beauterham@gmail.com", "0676935683", "29-05-1966", None, "introductie", None, True, True, "Truus van Boven", "truusvanboven@gmail.com", "telefonisch", "telefonisch", "goedgekeurd", "zwart", "wit"),
+            ("Erik", None, "Boom", "wachtwoord", "2945KL", "man", "erikboom@gmail.com", "0654925693", "1987-01-19", "blindengeleidehond", "ik ben Erik, ik ben 38 jaar oud en ik ben blind. Mijn hobby is muziek maken", None, True, False, None, None, "email", "op locatie", "nieuw", "zwart", "wit"),
+            ("Beau", "ter", "Ham", "MetJam", "3068HG", "vrouw", "beauterham@gmail.com", "0676935683", "1966-05-29", None, "introductie", None, True, True, "Truus van Boven", "truusvanboven@gmail.com", "telefonisch", "telefonisch", "goedgekeurd", "zwart", "wit"),
         ]
         insert_statement = "INSERT INTO ervaringsdeskundigen (voornaam, tussenvoegsel, achternaam, wachtwoord, postcode, geslacht, emailadres, telefoonnummer, geboortedatum, hulpmiddelen, introductie, bijzonderheden, akkoord_met_voorwaarde, toezichthouder, naam_voogd, email_voogd, voorkeur_benadering, type_onderzoek, status, kleur_voorgrond, kleur_achtergrond) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
         self.__execute_many_transaction_statement(insert_statement, users)
@@ -217,8 +217,8 @@ class WP3DatabaseGenerator:
         print("✅ Default inschrijvingen created")
     def insert_onderzoeken(self):
         users = [
-            ("website voor blinden", "goedgekeurd", 1, "blinden mensen moeten testen of de website die gemaakt is goed accessible is voor hun", "09-02-2025", "19-02-2027", "op locatie", "hogeschool rotterdam", 1, "5 euro", 10, 60, 4, 1, "10-02-2025"),
-            ("onderzoek 2", "nieuw", 0, "beschrijving van onderzoek 2", "02-01-2024", "13-11-2025", "telefonische", None, 0, None, 0, 99, 6, None, None),
+            ("website voor blinden", "goedgekeurd", 1, "blinden mensen moeten testen of de website die gemaakt is goed accessible is voor hun", "2025-02-09", "2027-02-19", "op locatie", "hogeschool rotterdam", 1, "5 euro", 10, 60, 4, 1, "2025-02-10"),
+            ("onderzoek 2", "nieuw", 0, "beschrijving van onderzoek 2", "2024-01-02", "2025-11-13", "telefonische", None, 0, None, 0, 99, 6, None, None),
         ]
         insert_statement = "INSERT INTO onderzoeken (titel, status, beschikbaar, beschrijving, datum_vanaf, datum_tot, type, locatie, met_beloning, beloning, leeftijd_van, leeftijd_tot, beperking_id, beheerder_id, datum_goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
         self.__execute_many_transaction_statement(insert_statement, users)
