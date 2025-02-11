@@ -48,3 +48,35 @@ document.querySelectorAll(".js-cross-image")
     .forEach(element => {
             element.addEventListener("click", closePopUp);
     });
+
+
+const name = document.querySelector('.js-name-input').value
+
+fetch('/api/administrators', {
+        method: 'GET',
+        headers: {
+                'Accept': 'application/json'
+        }
+})
+.then(response => response.json())
+.then(data => {
+        console.log(data)
+})
+
+
+
+fetch('/api/administrator', {
+        method: 'POST',
+        headers: {
+                'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({name: name, id: 45})
+})
+.then(response => response.json())
+.then(data => {
+        console.log(data)
+})
+
+const admins = [{ name: "name", id: 45, age: "twenty"
+
+}]
