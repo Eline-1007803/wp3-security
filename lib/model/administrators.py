@@ -27,11 +27,11 @@ class Administrator():
         return administrators
 
     def get_administrator_by_id(self, administrator_id):
-        result = self.cursor.execute('''SELECT beheerder_id, voornaam, tussenvoegsel, achternaam, email FROM beheerders WHERE beheerder_id = ?''',(administrator_id)).fetchone()
-        if result["beheerder_id"] == administrator_id:
+        result = self.cursor.execute('''SELECT beheerder_id, voornaam, tussenvoegsel, achternaam, email FROM beheerders WHERE beheerder_id = ?''', (administrator_id,)).fetchone()
+        if result:
             return dict(result)
 
-    def add_administrator(self, administrator):
+
 
 
 
