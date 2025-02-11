@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    color: #222;
+    margin: 0;
+    padding: 20px;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+}
+
+.column {
+    max-width: 800px;
+    width: 100%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table-clickable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-clickable th, 
+.table-clickable td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.table-clickable thead {
+    background-color: #004080;
+    color: white;
+}
+
+.table-clickable thead tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table-clickable thead th {
+    width: 100%;
+    text-align: left;
+}
+
+.table-clickable tbody {
+    display: block;
+    width: 100%;
+}
+
+.table-clickable tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table-clickable tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table-clickable tbody tr:hover {
+    background-color: #d9ebff;
+}
+
+*:focus {
+    outline: 3px solid #005fcc;
+    outline-offset: 2px;
+}
+
+th {
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    .row {
+        flex-direction: column;
+    }
+    
+    .table-clickable th, 
+    .table-clickable td {
+        padding: 10px;
+    }
+}
