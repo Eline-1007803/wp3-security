@@ -14,7 +14,7 @@ def onderzoek_aanvragen_organisatie():
         datum_vanaf = request.form.get("datumvanaf")
         datum_tot = request.form.get("datumtot")
         type_onderzoek = request.form.get("typeonderzoek")
-        met_beloning = request.form.get("metbeloning")
+        met_beloning = request.form.get("metbeloning",0)
         hoeveel_beloning = request.form.get("beloning")
         type_disability = request.form.get("disability-type-input")
         leeftijd_van = request.form.get("leeftijdvan")
@@ -23,7 +23,7 @@ def onderzoek_aanvragen_organisatie():
             met_beloning = 1
         else:
             met_beloning = 0
-        onderzoek = organisatie.insert_onderzoek(title,beschrijving,datum_vanaf,datum_tot,type_onderzoek,met_beloning,hoeveel_beloning,type_disability,leeftijd_van,leeftijd_tot)
+        onderzoek = organisatie.insert_onderzoek(title,beschrijving,datum_vanaf,datum_tot,type_onderzoek,met_beloning,hoeveel_beloning,leeftijd_van,leeftijd_tot,type_disability)
         return redirect(url_for("onderzoek_aanvragen_organisatie",onderzoek=onderzoek))
     return render_template("onderzoek_aanvraag__organisatie.html")
 
