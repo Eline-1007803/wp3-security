@@ -21,6 +21,8 @@ def onderzoek_aanvragen_organisatie():
         leeftijd_tot = request.form.get("leeftijdtot")
         if met_beloning == "on":
             met_beloning = 1
+        else:
+            met_beloning = 0
         onderzoek = organisatie.insert_onderzoek(title,beschrijving,datum_vanaf,datum_tot,type_onderzoek,met_beloning,hoeveel_beloning,type_disability,leeftijd_van,leeftijd_tot)
         return redirect(url_for("onderzoek_aanvragen_organisatie",onderzoek=onderzoek))
     return render_template("onderzoek_aanvraag__organisatie.html")
