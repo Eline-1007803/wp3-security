@@ -4,9 +4,9 @@ from models.organisatie_model import Organisatie
 
 @app.route('/')
 def homepage():
-    pass
+    return "hello"
 
-@app.route("/onderzoekaanvragen",methods="POST")
+@app.route("/onderzoekaanvragen",methods=["GET","POST"])
 def onderzoek_aanvragen_organisatie():
     if request.method == "POST":
         title = request.form.get("titel")
@@ -21,10 +21,9 @@ def onderzoek_aanvragen_organisatie():
         leeftijd_tot = request.form.get("leeftijdtot")
         if met_beloning == "on":
             met_beloning = 1
-        onderzoek = organisatie.tobeadded(title,beschrijving,datum_vanaf,datum_tot,type_onderzoek,met_beloning,hoeveel_beloning,type_disability,leeftijd_van,leeftijd_tot)
-        return redirect(url_for("onderzoek_aanvragen_organisatie"))
-    else:
-        return render_template("onderzoek_aanvraag__organisatie.html")
+        onderzoek = organisatie.insert_onderzoek(title,beschrijving,datum_vanaf,datum_tot,type_onderzoek,met_beloning,hoeveel_beloning,type_disability,leeftijd_van,leeftijd_tot)
+        return redirect(url_for("onderzoek_aanvragen_organisatie",onderzoek=onderzoek))
+    return render_template("onderzoek_aanvraag__organisatie.html")
 
 if __name__ == '__main__':
     organisatie = Organisatie()
