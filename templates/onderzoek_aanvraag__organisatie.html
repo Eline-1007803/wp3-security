@@ -8,8 +8,8 @@
 </head>
 <body>
     
-    <h1>Onderzoek Aanvraag</h1>
     <form method="post">
+        <h1>Onderzoek Aanvraag</h1>
         <label for="titel">Titel:</label>
         <input type="text" name="titel" id="titel" placeholder="Titel.." aria-label="Voer het titel in" required>
         <label for="beschrijving">Beschrijving:</label>
@@ -29,6 +29,8 @@
             <option value="telefonish">Telefonish</option>
             <option value="online">Online</option>
         </select>
+        <label for="locatie">Locatie:</label>
+        <input type="text" name="locatie" id="locatie">
         <label for="metbeloning">Vergoeding?</label>
         <input type="checkbox" name="metbeloning" id="metbeloning" aria-label="Vink checkbox als vergoeding" onclick="CheckIn()">
         <label for="beloning" id="beloninglabel" style="display:none">Vergoeding:</label>
