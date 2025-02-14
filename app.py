@@ -6,7 +6,7 @@ from models.organisatie_model import Organisatie
 def homepage():
     return "hello"
 
-@app.route("/onderzoekaanvragen",methods=["GET","POST"])
+@app.route("/api/onderzoekaanvragen",methods=["GET","POST"])
 def onderzoek_aanvragen_organisatie():
     if request.method == "POST":
         title = request.form.get("titel")

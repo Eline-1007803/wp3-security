@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
             <input type="date" name="datumtot" id="datumtot" required>
         </div>
         <label for="typeonderzoek">Type onderzoek:</label>
-        <select name="typeonderzoek" id="typeonderzoek" aria-label="Kies het type onderzoek" required>
+        <select name="typeonderzoek" id="typeonderzoek" onclick="CheckLocatie()" aria-label="Kies het type onderzoek" required>
             <option value="">Kies type onderzoek:</option>
             <option value="locatie">Locatie</option>
             <option value="telefonish">Telefonish</option>
             <option value="online">Online</option>
         </select>
-        <label for="locatie">Locatie:</label>
-        <input type="text" name="locatie" id="locatie">
+        <label for="locatie_text" id="locatie_label" style="display:none;">Locatie:</label>
+        <input type="text" name="locatie" id="locatie_text" aria-label="Voer locatie in" placeholder="Locatie.." style="display:none;">
         <label for="metbeloning">Vergoeding?</label>
         <input type="checkbox" name="metbeloning" id="metbeloning" aria-label="Vink checkbox als vergoeding" onclick="CheckIn()">
         <label for="beloning" id="beloninglabel" style="display:none">Vergoeding:</label>
