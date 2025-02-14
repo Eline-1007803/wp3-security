@@ -6,27 +6,27 @@ from models.organisatie_model import Organisatie
 def homepage():
     return "hello"
 
-@app.route("/api/onderzoekaanvragen",methods=["GET","POST"])
+@app.route("/api/onderzoekaanvragen",methods=["POST"])
 def onderzoek_aanvragen_organisatie():
     if request.method == "POST":
-        title = request.form.get("titel")
-        beschrijving = request.form.get("beschrijving")
-        datum_vanaf = request.form.get("datumvanaf")
-        datum_tot = request.form.get("datumtot")
-        type_onderzoek = request.form.get("typeonderzoek")
-        locatie = request.form.get("locatie_text")
-        met_beloning = request.form.get("metbeloning",0)
-        hoeveel_beloning = request.form.get("beloning")
-        type_disability = request.form.get("disability-type-input")
-        leeftijd_van = request.form.get("leeftijdvan")
-        leeftijd_tot = request.form.get("leeftijdtot")
+        title = request.json["titel"]
+        beschrijving = request.json["beschrijving"]
+        datum_vanaf = request.json["datumvanaf"]
+        datum_tot = request.json["datumtot"]
+        type_onderzoek = request.json["typeonderzoek"]
+        locatie = request.json["locatie_text"]
+        met_beloning = request.json["metbeloning"]
+        hoeveel_beloning = request.json["beloning"]
+        type_disability = request.json["disability-type-input"]
+        leeftijd_van = request.json["leeftijdvan"]
+        leeftijd_tot = request.json["leeftijdtot"]
         if met_beloning == "on":
             met_beloning = 1
         else:
             met_beloning = 0
         onderzoek = organisatie.insert_onderzoek(title,beschrijving,datum_vanaf,datum_tot,type_onderzoek,locatie,met_beloning,hoeveel_beloning,leeftijd_van,leeftijd_tot,type_disability)
-        return redirect(url_for("onderzoek_aanvragen_organisatie",onderzoek=onderzoek))
-    return render_template("onderzoek_aanvraag__organisatie.html")
+        return onderzoek, 201
+
 
 if __name__ == '__main__':
     organisatie = Organisatie()
