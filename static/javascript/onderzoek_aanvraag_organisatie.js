@@ -27,10 +27,13 @@ function CheckLocatie()
     {
         label.style.display = "block";
         text.style.display = "block";
+        document.getElementById("locatie_text").required = true;
     }
     else
     {
         label.style.display = "none";
         text.style.display = "none";
+        document.getElementById("locatie_text").required = false;
+
     }
 }
