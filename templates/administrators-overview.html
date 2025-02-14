@@ -12,11 +12,15 @@
       <div class="js-add administrator-add hide">
         <img class="js-cross-image cross-image" src="../static/images/cross.svg">
         <h1>Toevoegen</h1>
-        <label>Naam:</label>
-        <input class="js-name-input">
-        <label>E-mailadres</label>
-        <input>
-        <button class="div-add-button action-button" type="submit">Toevoegen<img class="action-img add-img" src="../static/images/add-icon.svg"></button>
+        <div>
+            <label for="fname-input">Voornaam:</label>
+            <input class="js-fname-input" id="fname-input">
+            <label for="lname-input">Achternaam:</label>
+            <input class="js-lname-input" id="lname-input">
+            <label for="email-input">E-mailadres:</label>
+            <input class="js-email-input" id="email-input">
+            <button class="div-add-button action-button js-add-button" type="submit">Toevoegen<img class="action-img add-img" src="../static/images/add-icon.svg"></button>
+        </div>
     </div>
 
     <div class="administrator-details js-details hide">

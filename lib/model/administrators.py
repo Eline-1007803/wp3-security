@@ -31,7 +31,11 @@ class Administrator():
         if result:
             return dict(result)
 
-
+    def add_administrator(self, fname, lname, email):
+        result = self.cursor.execute('''INSERT INTO beheerders (voornaam, achternaam, email) VALUES (?, ?, ?)''', (fname, lname, email))
+        self.con.commit()
+        print(result)
+        return dict(result)
 
 
 

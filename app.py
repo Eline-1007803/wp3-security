@@ -21,14 +21,20 @@ def get_administrator_by_id(administrator_id):
     administrator = administrator_model.get_administrator_by_id(administrator_id)
     return administrator
 
-@app.route("/api/new-administrator/", methods=["POST"])
+@app.route("/api/new-administrator", methods=["POST"])
 def add_administrator():
+    fname = request.json["fname"]
+    lname = request.json["lname"]
+    email = request.json["email"]
+    print(request.json)
     administrator_model = Administrator()
-    new_administrator = request.json
+    new_administrator = administrator_model.add_administrator(fname, lname, email)
+    return new_administrator, 201
 
 @app.route("/administrator-overview", methods=["GET"])
 def administrator_page():
     return render_template("administrators-overview.html")
+
 
 def aueia():
     admin = request.json

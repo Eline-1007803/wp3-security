@@ -50,7 +50,6 @@ document.querySelectorAll(".js-cross-image")
     });
 
 
-const name = document.querySelector('.js-name-input').value
 
 fetch('/api/administrators', {
         method: 'GET',
@@ -64,19 +63,26 @@ fetch('/api/administrators', {
 })
 
 
+document.querySelector(".js-add-button").addEventListener("click", addAdministrator)
 
-fetch('/api/administrator', {
-        method: 'POST',
-        headers: {
-                'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({name: name, id: 45})
-})
-.then(response => response.json())
-.then(data => {
-        console.log(data)
-})
+function addAdministrator () {
+        const fname = document.querySelector('.js-fname-input').value
+        const lname = document.querySelector('.js-lname-input').value
+        const email = document.querySelector('.js-email-input').value
 
-const admins = [{ name: "name", id: 45, age: "twenty"
 
-}]
+        console.log(fname, lname, email)
+
+        fetch('/api/new-administrator', {
+                method: 'POST',
+                headers: {
+                        'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({fname: fname, lname: lname, email: email})
+        })
+            .then(response => response.json())
+            .then(data => {
+                    console.log(data)
+            })
+}
+
