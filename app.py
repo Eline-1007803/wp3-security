@@ -43,7 +43,9 @@ def ey_administrator(administrator_id):
 
 @app.route("/administrator-overview", methods=["GET"])
 def administrator_page():
-    return render_template("administrators-overview.html")
+    administrator_model = Administrator()
+    administrators = administrator_model.get_all_administrators()
+    return render_template("administrators-overview.html", administrators=administrators)
 
 
 def aueia():

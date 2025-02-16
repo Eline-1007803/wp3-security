@@ -7,6 +7,7 @@
 </head>
 
 <body>
+ <!-- pop up after clicking button to add administrators-->
     <div class="js-background background hide"></div>
 
       <div class="js-add administrator-add hide">
@@ -23,6 +24,7 @@
         </div>
     </div>
 
+<!-- pop up to show details-->
     <div class="administrator-details js-details hide">
         <img class="js-cross-image cross-image" src="../static/images/cross.svg">
         <h1 class="details-header">Details</h1>
@@ -30,6 +32,7 @@
         <p>E-mailadres:</p>
     </div>
 
+ <!-- pop up to edit administrator info -->
      <div class="js-edit administrator-edit hide">
         <img class="js-cross-image cross-image" src="../static/images/cross.svg">
         <h1>Bewerken</h1>
@@ -42,6 +45,7 @@
          <button class="div-edit-button action-button js-edit-button" type="submit">Bewerken<img class="action-img" src="../static/images/edit-icon-2.png"></button>
     </div>
 
+    <!-- pop up to delete administrator -->
     <div class="js-delete administrator-delete hide">
         <img class="js-cross-image cross-image" src="../static/images/cross.svg">
         <h1>Verwijderen</h1>
@@ -50,8 +54,10 @@
         <button class="div-delete-button action-button" type="submit">Verwijderen<img class="action-img" src="../static/images/bin-icon.png"></button>
     </div>
 
+ <!-- administrator overview -->
     <h1> Beheerders overzicht</h1>
     <button class="add-administrator-button">Beheerder toevoegen<img class="action-img add-img" src="../static/images/add-icon.svg"></button>
+
     <table class="administrator-table">
         <thead class="table-th">
         <tr>
@@ -62,16 +68,21 @@
         </tr>
         </thead>
         <tbody class="table-td">
+        {% for administrator in administrators%}
+
         <tr>
-            <td>Michael van gerwen</td>
-            <td>Michael_Gerwen@outlook.com</td>
+            {% if administrator.tussenvoegsel is none %}
+            <td>{{administrator.voornaam}} {{administrator.achternaam}}</td>
+            {% else %}
+            <td>{{ administrator.voornaam }} {{administrator.tussenvoegsel}} {{administrator.achternaam}}</td>
+            {% endif %}
+            <td>{{ administrator.email }}</td>
             <td><button class="action-button details-button">Details<img class="action-img eye-img" src="../static/images/eye-icon.png"></button><button class="action-button edit-button">Bewerken<img class="action-img" src="../static/images/edit-icon-2.png"></button><button class="action-button delete-button">Verwijderen<img class="action-img" src="../static/images/bin-icon.png"></button></td>
+        {% endfor %}
         </tr>
-        <tr>
-            <td>Anne Fleur</td>
-            <td>anne_fleur@outlook.com</td>
-        </tr>
+
         </tbody>
+
     </table>
 
     <script src="/static/javascript/administrators-overview-javascript.js"></script>
