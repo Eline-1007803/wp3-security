@@ -37,6 +37,12 @@ class Administrator():
         print(result)
         return dict(result)
 
+    def update_administrator(self, voornaam, achternaam, administrator_id):
+        result = self.cursor.execute('''UPDATE beheerders SET voornaam = ?, achternaam = ? WHERE beheerder_id = ? ''', (voornaam, achternaam, administrator_id))
+        self.con.commit()
+        print(voornaam, achternaam)
+        print(result)
+        return dict(result)
 
 
 

@@ -31,6 +31,16 @@ def add_administrator():
     new_administrator = administrator_model.add_administrator(fname, lname, email)
     return new_administrator, 201
 
+@app.route("/api/administrator/<administrator_id>", methods=["PATCH"])
+def ey_administrator(administrator_id):
+    voornaam = request.json["voornaam"]
+    achternaam = request.json["achternaam"]
+    administrator_model = Administrator()
+    updated_administrator = administrator_model.update_administrator(voornaam, achternaam, administrator_id)
+    print(updated_administrator)
+    return updated_administrator
+
+
 @app.route("/administrator-overview", methods=["GET"])
 def administrator_page():
     return render_template("administrators-overview.html")

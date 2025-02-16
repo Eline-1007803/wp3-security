@@ -50,7 +50,7 @@ document.querySelectorAll(".js-cross-image")
     });
 
 
-
+//to get all administrators
 fetch('/api/administrators', {
         method: 'GET',
         headers: {
@@ -62,13 +62,13 @@ fetch('/api/administrators', {
         console.log(data)
 })
 
-
+// to add an administrator when you click on add administrator button
 document.querySelector(".js-add-button").addEventListener("click", addAdministrator)
 
 function addAdministrator () {
-        const fname = document.querySelector('.js-fname-input').value
-        const lname = document.querySelector('.js-lname-input').value
-        const email = document.querySelector('.js-email-input').value
+        let fname = document.querySelector('.js-fname-input').value
+        let lname = document.querySelector('.js-lname-input').value
+        let email = document.querySelector('.js-email-input').value
 
 
         console.log(fname, lname, email)
@@ -85,4 +85,26 @@ function addAdministrator () {
                     console.log(data)
             })
 }
+// to update administrator data when you click on edit administrator button
+document.querySelector(".js-edit-button").addEventListener("click", editAdministrator)
+function editAdministrator () {
+        let voornaam = document.querySelector(".js-fname-update").value
+        let achternaam = document.querySelector(".js-lname-update").value
 
+        fetch('/api/administrator/<administrator_id>', {
+                method: 'PATCH',
+                headers: {
+                        'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                        voornaam: voornaam,
+                        achternaam: achternaam,
+
+                })
+
+        })
+            .then(response => response.json())
+            .then(data => {
+                    console.log(data)
+            })
+}
