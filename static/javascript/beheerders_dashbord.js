@@ -9,8 +9,8 @@ function refresh_deskundigen(data) {
   for (let i = 0; i < deskundigen.length; i++) {
       let deskundigenElement = deskundigen[i];
       deskundigen_html += `
-                <tr class="deskundige_btn" data-index="${i}">
-                    <td >${deskundigenElement.voornaam}</td>
+                <tr class="deskundige_btn">
+                    <td >${deskundigenElement.volle_naam}</td>
                     <td >${deskundigenElement.leeftijd}</td>
                     <td >${deskundigenElement.naam}</td>
                 </tr>
@@ -36,7 +36,7 @@ function refresh_modals_deskundigen(data) {
                       <button class="close" id="close${i}" >&times;</button>
                       <main class="row">
                           <section class="column">
-                              <h2>${deskundigenElement.voornaam}</h2>
+                              <h2>${deskundigenElement.volle_naam}</h2>
                           </section>
                       </main>
                   </div>

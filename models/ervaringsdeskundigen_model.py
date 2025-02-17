@@ -7,7 +7,7 @@ class Ervaringsdeskundigen:
 
     def get_all_pending(self):
         result = self.cursor.execute(
-            """ SELECT ervaringsdeskundigen.*, alle_beperkingen.naam, 
+            """ SELECT ervaringsdeskundigen.*, alle_beperkingen.naam, ervaringsdeskundigen.voornaam || ' ' || coalesce(ervaringsdeskundigen.tussenvoegsel || ' ' || ervaringsdeskundigen.achternaam, ervaringsdeskundigen.achternaam) as volle_naam,
                 (strftime('%Y', 'now') - strftime('%Y', ervaringsdeskundigen.geboortedatum) - (strftime('%m-%d', 'now') < strftime('%m-%d', ervaringsdeskundigen.geboortedatum))) AS leeftijd
                 FROM ervaringsdeskundigen 
                 full join geregistreerde_beperkingen on (ervaringsdeskundigen.ervaringsdeskundige_id=geregistreerde_beperkingen.ervaringsdeskundige_id)
