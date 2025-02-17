@@ -2,26 +2,77 @@ function refresh_deskundigen(data) {
   let deskundigen_collection = document.getElementById('deskundigen');
   deskundigen_collection.innerHTML = '';
 
-  // Ik doe de aanname dat de data een lijst is van onderzoeksaanvragen
+  // Assuming 'data.deskundigen' is a list of experts
   let deskundigen = data.deskundigen;
   let deskundigen_html = '';
+
   for (let i = 0; i < deskundigen.length; i++) {
       let deskundigenElement = deskundigen[i];
-
-      // Javascript kent Python-achtige "f" strings, waarin je variabelen kan vervangen
-      // Die lappen HTML plak ik achter elkaar in de nu lege deskundigen_html
       deskundigen_html += `
-                <tr>
-                    <td>${deskundigenElement.voornaam}</td>
-                    <td>${deskundigenElement.leeftijd}</td>
-                    <td>${deskundigenElement.naam}</td>
+                <tr class="deskundige_btn" data-index="${i}">
+                    <td >${deskundigenElement.voornaam}</td>
+                    <td >${deskundigenElement.leeftijd}</td>
+                    <td >${deskundigenElement.naam}</td>
                 </tr>
       `;
-      // En uiteindelijk plak ik de hele HTML string in het element met id 'deskundigen'
-      deskundigen_collection.innerHTML = deskundigen_html;
   }
+
+  deskundigen_collection.innerHTML = deskundigen_html;
+  refresh_modals_deskundigen(data);
 }
 
+function refresh_modals_deskundigen(data) {
+  let deskundigen_modals = document.getElementById('deskundigen_modal');
+  deskundigen_modals.innerHTML = '';
+
+  let deskundigen = data.deskundigen;
+  let deskundigen_modal_html = '';
+
+  for (let i = 0; i < deskundigen.length; i++) {
+      let deskundigenElement = deskundigen[i];
+      deskundigen_modal_html += `
+                <div id="myModal${i}" class="modal">
+                  <div class="modal-content">
+                      <button class="close" id="close${i}" >&times;</button>
+                      <main class="row">
+                          <section class="column">
+                              <h2>${deskundigenElement.voornaam}</h2>
+                          </section>
+                      </main>
+                  </div>
+                </div>
+      `;
+  }
+
+  deskundigen_modals.innerHTML = deskundigen_modal_html;
+
+  // Attach event listeners for modals
+  const modals = document.querySelectorAll('.modal');
+  const btns = document.querySelectorAll('.deskundige_btn');
+  const spans = document.querySelectorAll('.close');
+
+  btns.forEach((btn, index) => {
+      btn.addEventListener('click', () => {
+          modals[index].style.display = 'block';
+          kill_interval()
+      });
+  });
+
+  spans.forEach((span, index) => {
+      span.addEventListener('click', () => {
+          modals[index].style.display = 'none';
+          revive_interval()
+      });
+  });
+
+  window.addEventListener('click', (event) => {
+      modals.forEach((modal, index) => {
+          if (event.target === modal[index]) {
+              modal.style.display = 'none';
+          }
+      });
+  });
+}
 
 function get_deskundigen() {
     fetch('/api/deskundigen')
@@ -31,35 +82,13 @@ function get_deskundigen() {
 
 get_deskundigen();
 
-setInterval(get_deskundigen, 3000)
+interval = setInterval(get_deskundigen, 3000);
 
 
+function kill_interval() {
+    clearInterval(interval)
+}
 
-
-// var modal = document.getElementById("myModal");
-// var btn = document.getElementById("myBtn");
-// var btn2 = document.getElementById("myBtn2");
-// var btn3 = document.getElementById("myBtn3");
-// var span = document.getElementsByClassName("close")[0];
-//
-// btn.onclick = function() {
-//   modal.style.display = "block";
-// }
-//
-// btn2.onclick = function() {
-//   modal.style.display = "block";
-// }
-//
-// btn3.onclick = function() {
-//   modal.style.display = "block";
-// }
-//
-// span.onclick = function() {
-//   modal.style.display = "none";
-// }
-//
-// window.onclick = function(event) {
-//   if (event.target == modal) {
-//     modal.style.display = "none";
-//   }
-// }
+function revive_interval() {
+    interval = setInterval(get_deskundigen, 3000);
+}
