@@ -35,8 +35,39 @@ function refresh_modals_deskundigen(data) {
                   <div class="modal-content">
                       <button class="close" id="close${i}" >&times;</button>
                       <main class="row">
+                          <h2>${deskundigenElement.volle_naam}</h2>
                           <section class="column">
-                              <h2>${deskundigenElement.volle_naam}</h2>
+                              <h3>Persoonlijke informatie</h3>
+                              <h4>Geslacht:</h4>
+                              <p>${deskundigenElement.geslacht}</p>
+                              <h4>Geboortedatum:</h4>
+                              <p>${deskundigenElement.geboortedatum}</p>
+                              <h4>Introductie:</h4>
+                              <p>${deskundigenElement.introductie}</p>
+                              <h4>Beperking(en):</h4>
+                              <p>${deskundigenElement.naam}</p>
+                              <label>Bijzonderheden:</label>
+                              <p>${deskundigenElement.bijzonderheden}</p>
+                              <label>Hulpmiddelen:</label>
+                              <p>${deskundigenElement.hulpmiddelen}</p>
+                          </section>
+                          <section>
+                              <h3>Contactgegevens</h3>
+                              <h4>Email:</h4>
+                              <p>${deskundigenElement.emailadres}</p>
+                              <h4>Telefoonnummer:</h4>
+                              <p>${deskundigenElement.telefoonnummer}</p>
+                              <h4>postcode:</h4>
+                              <p>${deskundigenElement.postcode}</p>
+                          </section>
+                          <section class="column">
+                              <h3>Voogds informatie</h3>
+                              <h4>Naam:</h4>
+                              <p>${deskundigenElement.naam_voogd}</p>
+                              <h4>Email:</h4>
+                              <p>${deskundigenElement.email_voogd}</p>
+                              <h4>Telefoonnummer:</h4>
+                              <p>0612345678</p>
                           </section>
                       </main>
                   </div>
