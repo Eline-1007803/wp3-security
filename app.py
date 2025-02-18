@@ -1,5 +1,5 @@
 from flask import *
-from models import ervaringsdeskundigen_model, inschrijvingen_model
+from models import ervaringsdeskundigen_model, inschrijvingen_model, onderzoeken_model
 
 app = Flask(__name__)
 app.secret_key = "wp3"
@@ -21,6 +21,15 @@ def get_deskundigen():
 def get_inschrijvingen():
     ism = inschrijvingen_model.Inschrijvingen()
     result = ism.get_all_pending()
+    dictresult = []
+    for row in result:
+        dictresult.append(dict(row))
+    return {"inschrijvingen": dictresult}
+
+@app.route('/api/onderzoeken', methods=['GET'])
+def get_onderzoeken():
+    ozm = onderzoeken_model.Onderzoeken()
+    result = ozm.get_all_pending()
     dictresult = []
     for row in result:
         dictresult.append(dict(row))
