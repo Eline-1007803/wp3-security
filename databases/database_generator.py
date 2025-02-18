@@ -95,7 +95,10 @@ class WP3DatabaseGenerator:
             "overige_details"	TEXT,
             "status"	TEXT NOT NULL DEFAULT 'nieuw',
             "api_key"	TEXT NOT NULL,
-            PRIMARY KEY("organisatie_id" AUTOINCREMENT));
+            "beheerder_id"	INTEGER,
+            "datum_goedgekeurd"	DATETIME,
+            PRIMARY KEY("organisatie_id" AUTOINCREMENT),
+            CONSTRAINT "beheerder_id_foreign_key" FOREIGN KEY("beheerder_id") REFERENCES "beheerders"("beheerder_id"));
         """
         self.__execute_transaction_statement(create_statement)
         print("✅ Users table created")
@@ -125,7 +128,10 @@ class WP3DatabaseGenerator:
             "status"	TEXT NOT NULL DEFAULT 'nieuw',
             "kleur_voorgrond"	TEXT NOT NULL DEFAULT 'zwart',
             "kleur_achtergrond"	TEXT NOT NULL DEFAULT 'wit',
-            PRIMARY KEY("ervaringsdeskundige_id" AUTOINCREMENT));
+            "beheerder_id"	INTEGER,
+            "datum_goedgekeurd"	DATETIME,
+            PRIMARY KEY("ervaringsdeskundige_id" AUTOINCREMENT),
+            CONSTRAINT "beheerder_id_foreign_key" FOREIGN KEY("beheerder_id") REFERENCES "beheerders"("beheerder_id"));
         """
         self.__execute_transaction_statement(create_statement)
         print("✅ Users table created")
@@ -196,10 +202,10 @@ class WP3DatabaseGenerator:
         print("✅ Default beheerders created")
     def insert_ervaringsdeskundigen(self):
         users = [
-            ("Erik", None, "Boom", "wachtwoord", "2945KL", "man", "erikboom@gmail.com", "0654925693", "1987-01-19", "blindengeleidehond", "ik ben Erik, ik ben 38 jaar oud en ik ben blind. Mijn hobby is muziek maken", None, True, False, None, None, "email", "op locatie", "nieuw", "zwart", "wit"),
-            ("Beau", "ter", "Ham", "MetJam", "3068HG", "vrouw", "beauterham@gmail.com", "0676935683", "1966-05-29", None, "introductie", None, True, True, "Truus van Boven", "truusvanboven@gmail.com", "telefonisch", "telefonisch", "goedgekeurd", "zwart", "wit"),
+            ("Erik", None, "Boom", "wachtwoord", "2945KL", "man", "erikboom@gmail.com", "0654925693", "1987-01-19", "blindengeleidehond", "ik ben Erik, ik ben 38 jaar oud en ik ben blind. Mijn hobby is muziek maken", None, True, False, None, None, "email", "op locatie", "nieuw", "zwart", "wit", None, None),
+            ("Beau", "ter", "Ham", "MetJam", "3068HG", "vrouw", "beauterham@gmail.com", "0676935683", "1966-05-29", None, "introductie", None, True, True, "Truus van Boven", "truusvanboven@gmail.com", "telefonisch", "telefonisch", "goedgekeurd", "zwart", "wit", 1, "2025-02-17"),
         ]
-        insert_statement = "INSERT INTO ervaringsdeskundigen (voornaam, tussenvoegsel, achternaam, wachtwoord, postcode, geslacht, emailadres, telefoonnummer, geboortedatum, hulpmiddelen, introductie, bijzonderheden, akkoord_met_voorwaarde, toezichthouder, naam_voogd, email_voogd, voorkeur_benadering, type_onderzoek, status, kleur_voorgrond, kleur_achtergrond) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+        insert_statement = "INSERT INTO ervaringsdeskundigen (voornaam, tussenvoegsel, achternaam, wachtwoord, postcode, geslacht, emailadres, telefoonnummer, geboortedatum, hulpmiddelen, introductie, bijzonderheden, akkoord_met_voorwaarde, toezichthouder, naam_voogd, email_voogd, voorkeur_benadering, type_onderzoek, status, kleur_voorgrond, kleur_achtergrond, beheerder_id, datum_goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
         self.__execute_many_transaction_statement(insert_statement, users)
         print("✅ Default ervaringsdeskundigen created")
     def insert_geregistreerde_beperkingen(self):
@@ -227,10 +233,10 @@ class WP3DatabaseGenerator:
         print("✅ Default onderzoeken created")
     def insert_organisaties(self):
         users = [
-            ("gfx", None, "non-profit", "https://www.gfx.com", "organisatie", "Angela Koe", "gfx@info.com", "0654826582", "leeg", "goedgekeurd", "A1B2"),
-            ("plams", None, "commercieel", "https://www.plams.nl", "ook een organisatie", "Lenn van Dam", "plams@info.com", "0665835683", "het is een organisatie", "nieuw", "C3D4"),
+            ("gfx", None, "non-profit", "https://www.gfx.com", "organisatie", "Angela Koe", "gfx@info.com", "0654826582", "leeg", "goedgekeurd", "A1B2", 2, "2025-02-03"),
+            ("plams", None, "commercieel", "https://www.plams.nl", "ook een organisatie", "Lenn van Dam", "plams@info.com", "0665835683", "het is een organisatie", "nieuw", "C3D4", None, None),
         ]
-        insert_statement = "INSERT INTO organisaties (naam, wachtwoord, type, website, beschrijving, contactpersoon, email, telefoonnummer, overige_details, status, api_key) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+        insert_statement = "INSERT INTO organisaties (naam, wachtwoord, type, website, beschrijving, contactpersoon, email, telefoonnummer, overige_details, status, api_key, beheerder_id, datum_goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
         self.__execute_many_transaction_statement(insert_statement, users)
         print("✅ Default organisaties created")
 
