@@ -121,6 +121,7 @@ class WP3DatabaseGenerator:
             "akkoord_met_voorwaarde"	BOOLEAN NOT NULL DEFAULT 0,
             "toezichthouder"	BOOLEAN DEFAULT 0,
             "naam_voogd"	TEXT,
+            "telefoonnummer_voogd"	TEXT,
             "email_voogd"	TEXT,
             "voorkeur_benadering"	TEXT NOT NULL,
             "type_onderzoek"	TEXT NOT NULL,
@@ -202,10 +203,10 @@ class WP3DatabaseGenerator:
         print("✅ Default beheerders created")
     def insert_ervaringsdeskundigen(self):
         users = [
-            ("Erik", None, "Boom", "wachtwoord", "2945KL", "man", "erikboom@gmail.com", "0654925693", "1987-01-19", "blindengeleidehond", "ik ben Erik, ik ben 38 jaar oud en ik ben blind. Mijn hobby is muziek maken", None, True, False, None, None, "email", "op locatie", "nieuw", "zwart", "wit", None, None),
-            ("Beau", "ter", "Ham", "MetJam", "3068HG", "vrouw", "beauterham@gmail.com", "0676935683", "1966-05-29", None, "introductie", None, True, True, "Truus van Boven", "truusvanboven@gmail.com", "telefonisch", "telefonisch", "goedgekeurd", "zwart", "wit", 1, "2025-02-17"),
+            ("Erik", None, "Boom", "wachtwoord", "2945KL", "man", "erikboom@gmail.com", "0654925693", "1987-01-19", "blindengeleidehond", "ik ben Erik, ik ben 38 jaar oud en ik ben blind. Mijn hobby is muziek maken", None, True, False, None, None, None, "email", "op locatie", "nieuw", "zwart", "wit", None, None),
+            ("Beau", "ter", "Ham", "MetJam", "3068HG", "vrouw", "beauterham@gmail.com", "0676935683", "1966-05-29", None, "introductie", None, True, True, "Truus van Boven", "0636748623", "truusvanboven@gmail.com", "telefonisch", "telefonisch", "goedgekeurd", "zwart", "wit", 1, "2025-02-17"),
         ]
-        insert_statement = "INSERT INTO ervaringsdeskundigen (voornaam, tussenvoegsel, achternaam, wachtwoord, postcode, geslacht, emailadres, telefoonnummer, geboortedatum, hulpmiddelen, introductie, bijzonderheden, akkoord_met_voorwaarde, toezichthouder, naam_voogd, email_voogd, voorkeur_benadering, type_onderzoek, status, kleur_voorgrond, kleur_achtergrond, beheerder_id, datum_goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+        insert_statement = "INSERT INTO ervaringsdeskundigen (voornaam, tussenvoegsel, achternaam, wachtwoord, postcode, geslacht, emailadres, telefoonnummer, geboortedatum, hulpmiddelen, introductie, bijzonderheden, akkoord_met_voorwaarde, toezichthouder, naam_voogd, telefoonnummer_voogd, email_voogd, voorkeur_benadering, type_onderzoek, status, kleur_voorgrond, kleur_achtergrond, beheerder_id, datum_goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
         self.__execute_many_transaction_statement(insert_statement, users)
         print("✅ Default ervaringsdeskundigen created")
     def insert_geregistreerde_beperkingen(self):
