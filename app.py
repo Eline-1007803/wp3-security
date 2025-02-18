@@ -24,7 +24,7 @@ def get_inschrijvingen():
     dictresult = []
     for row in result:
         dictresult.append(dict(row))
-    return {"deskundigen": dictresult}
+    return {"inschrijvingen": dictresult}
 
 
 if __name__ == '__main__':
