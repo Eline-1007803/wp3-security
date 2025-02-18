@@ -70,10 +70,12 @@ class WP3DatabaseGenerator:
             "leeftijd_van"	INTEGER,
             "leeftijd_tot"	INTEGER,
             "beperking_id"	INTEGER NOT NULL,
+            "organisatie_id"    INTEGER NOT NULL,
             "beheerder_id"	INTEGER,
             "datum_goedgekeurd"	DATETIME,
             PRIMARY KEY("onderzoek_id" AUTOINCREMENT),
             CONSTRAINT "beheerder_id_foreign_key" FOREIGN KEY("beheerder_id") REFERENCES "beheerders"("beheerder_id"),
+            CONSTRAINT "organisatie_id_foreign_key" FOREIGN KEY("organisatie_id") REFERENCES "organisaties"("organisatie_id"),
             CONSTRAINT "beperking_id_foreign_key" FOREIGN KEY("beperking_id") REFERENCES "alle_beperkingen"("beperking_id"));
         """
         self.__execute_transaction_statement(create_statement)
@@ -81,7 +83,7 @@ class WP3DatabaseGenerator:
     def create_table_organisaties(self):
         create_statement = """
         CREATE TABLE IF NOT EXISTS "organisaties" (
-            "oraganisatie_id"	INTEGER,
+            "organisatie_id"	INTEGER,
             "naam"	TEXT NOT NULL,
             "wachtwoord"	TEXT,
             "type"	TEXT NOT NULL,
@@ -93,7 +95,7 @@ class WP3DatabaseGenerator:
             "overige_details"	TEXT,
             "status"	TEXT NOT NULL DEFAULT 'nieuw',
             "api_key"	TEXT NOT NULL,
-            PRIMARY KEY("oraganisatie_id" AUTOINCREMENT));
+            PRIMARY KEY("organisatie_id" AUTOINCREMENT));
         """
         self.__execute_transaction_statement(create_statement)
         print("✅ Users table created")
@@ -217,10 +219,10 @@ class WP3DatabaseGenerator:
         print("✅ Default inschrijvingen created")
     def insert_onderzoeken(self):
         users = [
-            ("website voor blinden", "goedgekeurd", 1, "blinden mensen moeten testen of de website die gemaakt is goed accessible is voor hun", "2025-02-09", "2027-02-19", "op locatie", "hogeschool rotterdam", 1, "5 euro", 10, 60, 4, 1, "2025-02-10"),
-            ("onderzoek 2", "nieuw", 0, "beschrijving van onderzoek 2", "2024-01-02", "2025-11-13", "telefonische", None, 0, None, 0, 99, 6, None, None),
+            ("website voor blinden", "goedgekeurd", 1, "blinden mensen moeten testen of de website die gemaakt is goed accessible is voor hun", "2025-02-09", "2027-02-19", "op locatie", "hogeschool rotterdam", 1, "5 euro", 10, 60, 4, 2, 1, "2025-02-10"),
+            ("onderzoek 2", "nieuw", 0, "beschrijving van onderzoek 2", "2024-01-02", "2025-11-13", "telefonische", None, 0, None, 0, 99, 6, 1, None, None),
         ]
-        insert_statement = "INSERT INTO onderzoeken (titel, status, beschikbaar, beschrijving, datum_vanaf, datum_tot, type, locatie, met_beloning, beloning, leeftijd_van, leeftijd_tot, beperking_id, beheerder_id, datum_goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+        insert_statement = "INSERT INTO onderzoeken (titel, status, beschikbaar, beschrijving, datum_vanaf, datum_tot, type, locatie, met_beloning, beloning, leeftijd_van, leeftijd_tot, beperking_id, organisatie_id, beheerder_id, datum_goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
         self.__execute_many_transaction_statement(insert_statement, users)
         print("✅ Default onderzoeken created")
     def insert_organisaties(self):
