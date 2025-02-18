@@ -65,7 +65,7 @@ function refresh_modals_deskundigen(data) {
                               <h4>Email:</h4>
                               <p>${deskundigenElement.email_voogd}</p>
                               <h4>Telefoonnummer:</h4>
-                              <p>0612345678</p>
+                              <p>${deskundigenElement.telefoonnummer_voogd}</p>
                           </section>
                       </main>
                   </div>
@@ -148,7 +148,7 @@ function refresh_modals_inschrijvingen(data) {
                               <h4>Introductie:</h4>
                               <p>${inschrijvingenElement.introductie}</p>
                               <h4>Beperking(en):</h4>
-                              <p>${inschrijvingenElement.volle_naam}</p>
+                              <p>${inschrijvingenElement.ev_bep_naam}</p>
                               <label>Bijzonderheden:</label>
                               <p>${inschrijvingenElement.bijzonderheden}</p>
                               <label>Hulpmiddelen:</label>
@@ -156,6 +156,8 @@ function refresh_modals_inschrijvingen(data) {
                           </section>
                           <section>
                               <h3>Informatie onderzoek</h3>
+                              <h4>Organisatie:</h4>
+                              <p>${inschrijvingenElement.orga_naam}</p>
                               <h4>Titel:</h4>
                               <p>${inschrijvingenElement.titel}</p>
                               <h4>Beschrijving:</h4>
@@ -169,7 +171,7 @@ function refresh_modals_inschrijvingen(data) {
                               <h4>Beloning:</h4>
                               <p>${inschrijvingenElement.beloning}</p>
                               <h4>Beperking:</h4>
-                              <p>${inschrijvingenElement.beperking_id}</p>
+                              <p>${inschrijvingenElement.on_bep_naam}</p>
                               <h4>Leeftijd range:</h4>
                               <p>${inschrijvingenElement.leeftijd_van} - ${inschrijvingenElement.leeftijd_tot}</p>
                           </section>
@@ -222,7 +224,7 @@ function refresh_onderzoeken(data) {
                 <tr class="onderzoeken_btn">
                     <td >${onderzoekenElement.titel}</td>
                     <td >${onderzoekenElement.beschrijving}</td>
-                    <td >${onderzoekenElement.naam}</td>
+                    <td >${onderzoekenElement.orga_naam}</td>
                 </tr>
       `;
   }
@@ -256,14 +258,14 @@ function refresh_modals_onderzoeken(data) {
                               <h4>Beloning:</h4>
                               <p>${onderzoekenElement.beloning}</p>
                               <h4>Organisatie:</h4>
-                              <p>${onderzoekenElement.naam}</p>
+                              <p>${onderzoekenElement.orga_naam}</p>
                           </section>
                           <section>
                               <h3>Restricties onderzoek</h3>
                               <h4>Periode:</h4>
                               <p>${onderzoekenElement.datum_vanaf} tot ${onderzoekenElement.datum_tot}</p>
                               <h4>Beperking:</h4>
-                              <p>${onderzoekenElement.beperking_id}</p>
+                              <p>${onderzoekenElement.bep_naam}</p>
                               <h4>Leeftijd range:</h4>
                               <p>${onderzoekenElement.leeftijd_van} - ${onderzoekenElement.leeftijd_tot}</p>
                           </section>
