@@ -18,6 +18,7 @@ class WP3DatabaseGenerator:
         self.create_table_inschrijvingen()
         self.create_table_onderzoeken()
         self.create_table_organisaties()
+        self.create_table_onderzoek_beperkingen()
         if self.create_initial_data:
             self.insert_beperkingen()
             self.insert_beheerders()
@@ -26,6 +27,7 @@ class WP3DatabaseGenerator:
             self.insert_inschrijvingen()
             self.insert_onderzoeken()
             self.insert_organisaties()
+            self.insert_onderzoek_beperkingen()
     def create_table_geregistreerde_beperkingen(self):
         create_statement = """
         CREATE TABLE IF NOT EXISTS "geregistreerde_beperkingen" (
@@ -69,14 +71,12 @@ class WP3DatabaseGenerator:
             "beloning"	TEXT,
             "leeftijd_van"	INTEGER,
             "leeftijd_tot"	INTEGER,
-            "beperking_id"	INTEGER NOT NULL,
             "organisatie_id"    INTEGER NOT NULL,
             "beheerder_id"	INTEGER,
             "datum_goedgekeurd"	DATETIME,
             PRIMARY KEY("onderzoek_id" AUTOINCREMENT),
             CONSTRAINT "beheerder_id_foreign_key" FOREIGN KEY("beheerder_id") REFERENCES "beheerders"("beheerder_id"),
-            CONSTRAINT "organisatie_id_foreign_key" FOREIGN KEY("organisatie_id") REFERENCES "organisaties"("organisatie_id"),
-            CONSTRAINT "beperking_id_foreign_key" FOREIGN KEY("beperking_id") REFERENCES "alle_beperkingen"("beperking_id"));
+            CONSTRAINT "organisatie_id_foreign_key" FOREIGN KEY("organisatie_id") REFERENCES "organisaties"("organisatie_id"));
         """
         self.__execute_transaction_statement(create_statement)
         print("✅ onderzoeken table created")
@@ -161,6 +161,18 @@ class WP3DatabaseGenerator:
         """
         self.__execute_transaction_statement(create_statement)
         print("✅ Questions table created")
+    def create_table_onderzoek_beperkingen(self):
+        create_statement = """
+        CREATE TABLE IF NOT EXISTS "onderzoek_beperkingen" (
+            "ob_id"	INTEGER,
+            "onderzoek_id"	INTEGER NOT NULL,
+            "beperking_id"	INTEGER NOT NULL,
+            PRIMARY KEY("ob_id" AUTOINCREMENT),
+            CONSTRAINT "beperking_id_foreign_key" FOREIGN KEY("beperking_id") REFERENCES "alle_beperkingen"("beperking_id"),
+            CONSTRAINT "onderzoek_id_foreign_key" FOREIGN KEY("onderzoek_id") REFERENCES "onderzoeken"("onderzoek_id"));
+        """
+        self.__execute_transaction_statement(create_statement)
+        print("✅ Onderzoek_beperkingen table created")
 
     def insert_beperkingen(self):
         users = [
@@ -226,10 +238,10 @@ class WP3DatabaseGenerator:
         print("✅ Default inschrijvingen created")
     def insert_onderzoeken(self):
         users = [
-            ("website voor blinden", "goedgekeurd", 1, "blinden mensen moeten testen of de website die gemaakt is goed accessible is voor hun", "2025-02-09", "2027-02-19", "op locatie", "hogeschool rotterdam", 1, "5 euro", 10, 60, 4, 2, 1, "2025-02-10"),
-            ("onderzoek 2", "nieuw", 0, "beschrijving van onderzoek 2", "2024-01-02", "2025-11-13", "telefonische", None, 0, None, 0, 99, 6, 1, None, None),
+            ("website voor blinden", "goedgekeurd", 1, "blinden mensen moeten testen of de website die gemaakt is goed accessible is voor hun", "2025-02-09", "2027-02-19", "op locatie", "hogeschool rotterdam", 1, "5 euro", 10, 60, 2, 1, "2025-02-10"),
+            ("onderzoek 2", "nieuw", 0, "beschrijving van onderzoek 2", "2024-01-02", "2025-11-13", "telefonische", None, 0, None, 0, 99, 1, None, None),
         ]
-        insert_statement = "INSERT INTO onderzoeken (titel, status, beschikbaar, beschrijving, datum_vanaf, datum_tot, type, locatie, met_beloning, beloning, leeftijd_van, leeftijd_tot, beperking_id, organisatie_id, beheerder_id, datum_goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+        insert_statement = "INSERT INTO onderzoeken (titel, status, beschikbaar, beschrijving, datum_vanaf, datum_tot, type, locatie, met_beloning, beloning, leeftijd_van, leeftijd_tot, organisatie_id, beheerder_id, datum_goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
         self.__execute_many_transaction_statement(insert_statement, users)
         print("✅ Default onderzoeken created")
     def insert_organisaties(self):
@@ -240,9 +252,15 @@ class WP3DatabaseGenerator:
         insert_statement = "INSERT INTO organisaties (naam, wachtwoord, type, website, beschrijving, contactpersoon, email, telefoonnummer, overige_details, status, api_key, beheerder_id, datum_goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
         self.__execute_many_transaction_statement(insert_statement, users)
         print("✅ Default organisaties created")
+    def insert_onderzoek_beperkingen(self):
+        users = [
+            (1, 4),
+            (2, 6),
+        ]
+        insert_statement = "INSERT INTO onderzoek_beperkingen (onderzoek_id, beperking_id) VALUES (?, ?);"
+        self.__execute_many_transaction_statement(insert_statement, users)
+        print("✅ Default onderzoek beperkingen created")
 
-    # Transacties zijn duur, dat wil zeggen, ze kosten veel tijd en CPU kracht. Als je veel insert doet
-    # bundel je ze in één transactie, of je gebruikt de SQLite executemany methode.
     def __execute_many_transaction_statement(
         self, create_statement, list_of_parameters=()
     ):
@@ -282,9 +300,6 @@ class WP3DatabaseGenerator:
 if __name__ == "__main__":
     my_path = Path(__file__).parent.resolve()
     project_root = my_path.parent.parent
-    # Deze slashes komen uit de "Path" module. Dit is een module die je kan gebruiken
-    # om paden te maken. Dit is handig omdat je dan niet zelf hoeft te kijken of je
-    # een / (mac) of een \ (windows) moet gebruiken.
     database_path = project_root / "wp3-2025-rest-1b4-insertteamnamehere" / "databases" / "database.db"
     database_generator = WP3DatabaseGenerator(
         database_path, overwrite=True, initial_data=True
