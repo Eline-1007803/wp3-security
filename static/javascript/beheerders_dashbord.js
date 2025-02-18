@@ -97,7 +97,7 @@ function refresh_modals_deskundigen(data) {
   window.addEventListener('click', (event) => {
       modals.forEach((modal, index) => {
           if (event.target === modal[index]) {
-              modals.style.display = 'none';
+              modal[index].style.display = 'none';
           }
       });
   });
@@ -203,7 +203,101 @@ function refresh_modals_inschrijvingen(data) {
   window.addEventListener('click', (event) => {
       inschrijving_modals.forEach((modal, index) => {
           if (event.target === modal[index]) {
-              inschrijvingen_modals.style.display = 'none';
+              modal[index].style.display = 'none';
+          }
+      });
+  });
+}
+
+function refresh_onderzoeken(data) {
+  let onderzoeken_collection = document.getElementById('onderzoeken');
+  onderzoeken_collection.innerHTML = '';
+
+  let onderzoeken = data.onderzoeken;
+  let onderzoeken_html = '';
+
+  for (let i = 0; i < onderzoeken.length; i++) {
+      let onderzoekenElement = onderzoeken[i];
+      onderzoeken_html += `
+                <tr class="onderzoeken_btn">
+                    <td >${onderzoekenElement.titel}</td>
+                    <td >${onderzoekenElement.beschrijving}</td>
+                    <td >${onderzoekenElement.naam}</td>
+                </tr>
+      `;
+  }
+
+  onderzoeken_collection.innerHTML = onderzoeken_html;
+  refresh_modals_onderzoeken(data);
+}
+function refresh_modals_onderzoeken(data) {
+  let onderzoeken_modals = document.getElementById('onderzoeken_modal');
+  onderzoeken_modals.innerHTML = '';
+
+  let onderzoeken = data.onderzoeken;
+  let onderzoeken_modal_html = '';
+
+  for (let i = 0; i < onderzoeken.length; i++) {
+      let onderzoekenElement = onderzoeken[i];
+      onderzoeken_modal_html += `
+                <div id="myModal${i}" class="modal">
+                  <div class="modal-content">
+                      <button class="close" id="close${i}" >&times;</button>
+                      <main class="row">
+                          <h2>${onderzoekenElement.titel}</h2>
+                          <section class="column">
+                              <h3>Informatie onderzoek</h3>
+                              <h4>Beschrijving:</h4>
+                              <p>${onderzoekenElement.beschrijving}</p>
+                              <h4>Type:</h4>
+                              <p>${onderzoekenElement.type}</p>
+                              <label>Locatie:</label>
+                              <p>${onderzoekenElement.locatie}</p>
+                              <h4>Beloning:</h4>
+                              <p>${onderzoekenElement.beloning}</p>
+                              <h4>Organisatie:</h4>
+                              <p>${onderzoekenElement.naam}</p>
+                          </section>
+                          <section>
+                              <h3>Restricties onderzoek</h3>
+                              <h4>Periode:</h4>
+                              <p>${onderzoekenElement.datum_vanaf} tot ${onderzoekenElement.datum_tot}</p>
+                              <h4>Beperking:</h4>
+                              <p>${onderzoekenElement.beperking_id}</p>
+                              <h4>Leeftijd range:</h4>
+                              <p>${onderzoekenElement.leeftijd_van} - ${onderzoekenElement.leeftijd_tot}</p>
+                          </section>
+                      </main>
+                  </div>
+                </div>
+      `;
+  }
+
+  onderzoeken_modals.innerHTML = onderzoeken_modal_html;
+
+  // Attach event listeners for modals
+  const onderzoek_modals = onderzoeken_modals.querySelectorAll('.modal');
+  const onderzoeken_btns = document.querySelectorAll('.onderzoeken_btn');
+  const onderzoeken_spans = onderzoeken_modals.querySelectorAll('.close');
+
+  onderzoeken_btns.forEach((btn, index) => {
+      btn.addEventListener('click', () => {
+          onderzoek_modals[index].style.display = 'block';
+          kill_interval()
+      });
+  });
+
+  onderzoeken_spans.forEach((span, index) => {
+      span.addEventListener('click', () => {
+          onderzoek_modals[index].style.display = 'none';
+          revive_interval()
+      });
+  });
+
+  window.addEventListener('click', (event) => {
+      onderzoeken_modals.forEach((modal, index) => {
+          if (event.target === modal[index]) {
+              modal[index].style.display = 'none';
           }
       });
   });
@@ -216,6 +310,9 @@ function get_all() {
     fetch('/api/inschrijvingen')
         .then(response => response.json())
         .then(refresh_inschrijvingen);
+    fetch('/api/onderzoeken')
+        .then(response => response.json())
+        .then(refresh_onderzoeken);
 }
 
 get_all();

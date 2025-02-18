@@ -33,7 +33,7 @@ def get_onderzoeken():
     dictresult = []
     for row in result:
         dictresult.append(dict(row))
-    return {"inschrijvingen": dictresult}
+    return {"onderzoeken": dictresult}
 
 
 if __name__ == '__main__':
