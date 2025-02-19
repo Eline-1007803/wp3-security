@@ -7,7 +7,7 @@ def homepage():
     return "hello"
 
 
-@app.route("/api/onderzoekaanvragen",methods=["GET"])
+@app.route("/onderzoekaanvragen",methods=["GET"])
 def onderzoek_pagina():
     return render_template("onderzoek_aanvraag__organisatie.html")
 
@@ -29,7 +29,7 @@ def onderzoek_aanvragen_organisatie():
     else:
         met_beloning = 0
     onderzoek = organisatie.insert_onderzoek(title,beschrijving,datum_vanaf,datum_tot,type_onderzoek,locatie,met_beloning,hoeveel_beloning,leeftijd_van,leeftijd_tot,type_disability)
-    return onderzoek, 201
+    return jsonify(onderzoek), 201
 
 
 if __name__ == '__main__':
