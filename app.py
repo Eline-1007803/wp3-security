@@ -14,16 +14,40 @@ def onderzoek_pagina():
 @app.route("/api/onderzoekaanvragen",methods=["POST"])
 def onderzoek_aanvragen_organisatie():
     title = request.json["titel"]
+    if title == "":
+        return jsonify("Titel can't be empty!"),400
+    
     beschrijving = request.json["beschrijving"]
+    if beschrijving == "":
+        return jsonify("Beschhijving can't be empty!"),400
+    
     datum_vanaf = request.json["datumvanaf"]
+    if datum_vanaf == "":
+        return jsonify("Datum vanaf cant be empty!"),400
+    
     datum_tot = request.json["datumtot"]
+    if datum_tot == "":
+        return jsonify("Datum tot cant be empty!"),400
+    
     type_onderzoek = request.json["typeonderzoek"]
+    if type_onderzoek == "":
+        return jsonify("Kies type onderzoek!"),400
+    
     locatie = request.json["locatie_text"]
     met_beloning = request.json["metbeloning"]
     hoeveel_beloning = request.json["beloning"]
     type_disability = request.json["disability-type-input"]
+    if type_disability == "":
+        return jsonify("Kies beperking!"),400
+    
     leeftijd_van = request.json["leeftijdvan"]
+    if leeftijd_van == "":
+        return jsonify("Kies leeftijd van!"),400
+    
     leeftijd_tot = request.json["leeftijdtot"]
+    if leeftijd_tot == "":
+        return jsonify("Kies leeftijd tot!"),400
+    
     if met_beloning == "on": 
         met_beloning = 1
     else:

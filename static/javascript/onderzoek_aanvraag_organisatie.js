@@ -63,6 +63,7 @@ function add_onderzoek () {
     })
         .then(response => response.json())
         .then(data => {
+                alert(data)
                 console.log(data)
         })
 }
