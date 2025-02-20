@@ -36,6 +36,7 @@ function deletePopUp () {
 
 document.querySelector(".delete-button").addEventListener("click", deletePopUp);
 
+//closing pop up when you click on cross img
 function closePopUp () {
         document.querySelector(".js-background").classList.add("hide");
         document.querySelector(".js-add").classList.add("hide");
@@ -51,6 +52,8 @@ document.querySelectorAll(".js-cross-image")
 
 
 //to get all administrators
+array = ['anna', 'jan', 'janna@outlook.com']
+
 fetch('/api/administrators', {
         method: 'GET',
         headers: {
@@ -58,9 +61,39 @@ fetch('/api/administrators', {
         }
 })
 .then(response => response.json())
-.then(data => {
-        console.log(data)
+.then(administrators => showAdministrator(administrators))
+        console.log(array)
+
+
+function showAdministrator (administrators) {
+        administrators.forEach((administrator) => {
+                console.log(administrator)
+
+               let row =
+                `
+                <tr>
+                    <td>${administrator.voornaam} ${administrator.tussenvoegsel} ${administrator.achternaam}</td>
+                    <td>${administrator.email}</td>
+                    <td><button class="action-button details-button">Details<img class="action-img eye-img" src="../static/images/eye-icon.png"></button><button class="action-button edit-button">Bewerken<img class="action-img" src="../static/images/edit-icon-2.png"></button><button class="action-button delete-button">Verwijderen<img class="action-img" src="../static/images/bin-icon.png"></button></td>
+                </tr>
+                `
+        document.querySelector(".js-administrator-table").innerHTML += row;
+
+        })
+    }
+
+
+// to get single administrator
+fetch('/api/administrator/<administrator_id>', {
+        method: 'GET',
+        headers: {
+                'Accept': 'application/json'
+        }
 })
+    .then(response => response.json())
+    .then (data =>
+    console.log(data))
+
 
 // to add an administrator when you click on add administrator button
 document.querySelector(".js-add-button").addEventListener("click", addAdministrator)
@@ -71,7 +104,7 @@ function addAdministrator () {
         let email = document.querySelector('.js-email-input').value
 
 
-        console.log(fname, lname, email)
+        console.log(fname, lname, email);
 
         fetch('/api/new-administrator', {
                 method: 'POST',
@@ -105,6 +138,7 @@ function editAdministrator () {
         })
             .then(response => response.json())
             .then(data => {
-                    console.log(data)
+                    console.log(data);
             })
 }
+
