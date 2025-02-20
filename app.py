@@ -13,13 +13,14 @@ def test():
 def get_all_administrators():
     administrator_model = Administrator()
     administrators = administrator_model.get_all_administrators()
-    return administrators
+    return jsonify(administrators)
 
 @app.route("/api/administrator/<administrator_id>", methods=["GET"])
 def get_administrator_by_id(administrator_id):
     administrator_model = Administrator()
     administrator = administrator_model.get_administrator_by_id(administrator_id)
-    return administrator
+    print(administrator)
+    return jsonify(administrator)
 
 @app.route("/api/new-administrator", methods=["POST"])
 def add_administrator():
@@ -32,7 +33,7 @@ def add_administrator():
     return new_administrator, 201
 
 @app.route("/api/administrator/<administrator_id>", methods=["PATCH"])
-def ey_administrator(administrator_id):
+def update_administrator(administrator_id):
     voornaam = request.json["voornaam"]
     achternaam = request.json["achternaam"]
     administrator_model = Administrator()
@@ -48,8 +49,9 @@ def administrator_page():
     return render_template("administrators-overview.html", administrators=administrators)
 
 
-def aueia():
-    admin = request.json
+@app.route("/expert-sign-up")
+def expert_sign_up():
+    return render_template("sign-up-page.html")
 
 
 if __name__ == '__main__':
