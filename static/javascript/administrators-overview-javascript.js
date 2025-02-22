@@ -1,30 +1,70 @@
 
 // Function for pop up to show up when you click the button
+fetch('/api/administrators', {
+        method: 'GET',
+        headers: {
+                'Accept': 'application/json'
+        }
+})
+.then(response => response.json())
+.then(administrators => showAdministrator(administrators))
+        console.log(array)
 
-// Add
-document.querySelector(".add-administrator-button").addEventListener("click", ()=> {
-        console.log('yaas');
-        document.querySelector(".js-background").classList.remove("hide");
-        document.querySelector(".js-add").classList.remove("hide");
-});
 
-// Details
-function detailsPopUp () {
-        console.log('yaas');
-        document.querySelector(".js-background").classList.remove("hide");
-        document.querySelector(".js-details").classList.remove("hide");
+function showAdministrator (administrators) {
+        administrators.forEach((administrator) => {
+                console.log(administrator)
+
+               let row =
+                `
+                <tr>
+                    <td>${administrator.voornaam} ${administrator.tussenvoegsel} ${administrator.achternaam}</td>
+                    <td>${administrator.email}</td>
+                    <td>
+                        <button class="action-button details-button">Details
+                            <img class="action-img eye-img" src="../static/images/eye-icon.png">
+                        </button>
+                        <button class="action-button edit-button">Bewerken
+                            <img class="action-img" src="../static/images/edit-icon-2.png">
+                        </button>
+                        <button class="action-button delete-button">Verwijderen
+                            <img class="action-img" src="../static/images/bin-icon.png">
+                        </button>
+                    </td>
+                </tr>
+                `
+        document.querySelector(".js-administrator-table").innerHTML += row;
+        });
+
+        // Add
+        document.querySelectorAll(".add-administrator-button")
+            .forEach(addButton => {
+                addButton.addEventListener("click", ()=> {
+                        console.log('yaas');
+                        document.querySelector(".js-background").classList.remove("hide");
+                        document.querySelector(".js-add").classList.remove("hide");
+                });
+            })
+
+        // Details
+        document.querySelectorAll(".details-button").forEach(detailsButton => {
+                detailsButton.addEventListener("click", () => {
+                        console.log('yaas');
+                        document.querySelector(".js-background").classList.remove("hide");
+                        document.querySelector(".js-details").classList.remove("hide");
+                });
+        })
+
+        document.querySelectorAll(".edit-button").forEach(editButton => {
+                editButton.addEventListener("click", () => {
+                        console.log('yaas');
+                        document.querySelector(".js-background").classList.remove("hide");
+                        document.querySelector(".js-edit").classList.remove("hide");
+                })
+
+        })
 }
 
-document.querySelector(".details-button").addEventListener("click", detailsPopUp);
-
-// Edit
-function editPopUp () {
-        console.log('yaas');
-        document.querySelector(".js-background").classList.remove("hide");
-        document.querySelector(".js-edit").classList.remove("hide");
-}
-
-document.querySelector(".edit-button").addEventListener("click", editPopUp);
 
 
 // Delete
@@ -54,33 +94,7 @@ document.querySelectorAll(".js-cross-image")
 //to get all administrators
 array = ['anna', 'jan', 'janna@outlook.com']
 
-fetch('/api/administrators', {
-        method: 'GET',
-        headers: {
-                'Accept': 'application/json'
-        }
-})
-.then(response => response.json())
-.then(administrators => showAdministrator(administrators))
-        console.log(array)
 
-
-function showAdministrator (administrators) {
-        administrators.forEach((administrator) => {
-                console.log(administrator)
-
-               let row =
-                `
-                <tr>
-                    <td>${administrator.voornaam} ${administrator.tussenvoegsel} ${administrator.achternaam}</td>
-                    <td>${administrator.email}</td>
-                    <td><button class="action-button details-button">Details<img class="action-img eye-img" src="../static/images/eye-icon.png"></button><button class="action-button edit-button">Bewerken<img class="action-img" src="../static/images/edit-icon-2.png"></button><button class="action-button delete-button">Verwijderen<img class="action-img" src="../static/images/bin-icon.png"></button></td>
-                </tr>
-                `
-        document.querySelector(".js-administrator-table").innerHTML += row;
-
-        })
-    }
 
 
 // to get single administrator
