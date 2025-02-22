@@ -82,9 +82,12 @@ def onderzoek_aanvragen_organisatie():
         met_beloning = 1
     else:
         met_beloning = 0
-    onderzoek = organisatie.insert_onderzoek(title,beschrijving,datum_vanaf,datum_tot,type_onderzoek,locatie,met_beloning,hoeveel_beloning,leeftijd_van,leeftijd_tot)
-    onderzoek_id = organisatie.get_last_onderzoek_id()
-    print(onderzoek_id)
+    organisatie_id = 1 #for now
+    onderzoek = organisatie.insert_onderzoek(title,beschrijving,datum_vanaf,datum_tot,type_onderzoek,locatie,met_beloning,hoeveel_beloning,leeftijd_van,leeftijd_tot,organisatie_id)
+    onderzoek_id_opvragen = organisatie.get_last_onderzoek_id()
+    onderzoek_id = int(onderzoek_id_opvragen[0])
+    for disability in type_disability:
+        organisatie.insert_onderzoek_disability(onderzoek_id, disability)
     return jsonify(onderzoek), 201
 
 
