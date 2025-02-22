@@ -49,7 +49,12 @@ function add_onderzoek () {
     let locatie = document.getElementById('locatie_text').value
     let met_beloning = document.getElementById('metbeloning').value
     let beloning = document.getElementById('beloning').value
-    let disability = document.getElementById('disability-type-input').value
+    console.log(document.getElementById('disability-type-input'))
+    let selected_options = Array.from(document.getElementById('disability-type-input').selectedOptions)
+    let disabilities = []
+    selected_options.forEach(function (element) {
+        disabilities.push(element.value)
+    });
     let leeftijd_van = document.getElementById('leeftijdvan').value
     let leeftijd_tot = document.getElementById('leeftijdtot').value
     console.log(datum_vanaf)
@@ -59,7 +64,7 @@ function add_onderzoek () {
                     'Content-Type': 'application/json'
             },
             body: JSON.stringify({"titel":titel,"beschrijving":beschrijving,"datumvanaf":datum_vanaf,"datumtot":datum_tot,"typeonderzoek":type_onderzoek,"locatie_text":locatie,
-                "metbeloning":met_beloning,"beloning":beloning,"disability-type-input":disability,"leeftijdvan":leeftijd_van,"leeftijdtot":leeftijd_tot})
+                "metbeloning":met_beloning,"beloning":beloning,"disability-type-input":disabilities,"leeftijdvan":leeftijd_van,"leeftijdtot":leeftijd_tot})
     })
         .then(response => response.json())
         .then(data => {

@@ -1,7 +1,6 @@
 from flask import *
 app = Flask(__name__)
-from models.organisatie_model import Organisatie
-from models import ervaringsdeskundigen_model, inschrijvingen_model, onderzoeken_model
+from models import ervaringsdeskundigen_model, inschrijvingen_model, onderzoeken_model,organisatie_model
 
 app = Flask(__name__)
 app.secret_key = "wp3"
@@ -36,11 +35,6 @@ def get_onderzoeken():
     for row in result:
         dictresult.append(dict(row))
     return {"onderzoeken": dictresult}
-from models.organisatie_model import Organisatie
-
-@app.route('/')
-def homepage():
-    return "hello"
 
 
 @app.route("/onderzoekaanvragen",methods=["GET"])
@@ -88,10 +82,13 @@ def onderzoek_aanvragen_organisatie():
         met_beloning = 1
     else:
         met_beloning = 0
-    onderzoek = organisatie.insert_onderzoek(title,beschrijving,datum_vanaf,datum_tot,type_onderzoek,locatie,met_beloning,hoeveel_beloning,leeftijd_van,leeftijd_tot,type_disability)
+    onderzoek = organisatie.insert_onderzoek(title,beschrijving,datum_vanaf,datum_tot,type_onderzoek,locatie,met_beloning,hoeveel_beloning,leeftijd_van,leeftijd_tot)
+    onderzoek_id = organisatie.get_last_onderzoek_id()
+    print(onderzoek_id)
     return jsonify(onderzoek), 201
 
 
+
 if __name__ == '__main__':
-    organisatie = Organisatie()
+    organisatie = organisatie_model.Organisatie()
     app.run(debug=True)
