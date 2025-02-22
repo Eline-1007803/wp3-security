@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/overzicht.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>Overzicht - Accessibility Hub</title>
+</head>
+<body>
+    <h1>Overzicht</h1>
+    <table>
+        <tr>
+            <th>Ervaringdeskundige</th>
+            <th>Contact</th>
+            <th style="width: 20%;">Acties</th>
+        </tr>
+        <tr>
+            <td>Sertzan</td>
+            <td>xd</td>
+            <td><select name="actie" id="actie" aria-label="Selecteer een van onder (keuze optie)">
+                <option value="">Kies..</option>
+                <option value="goedkeuren">Goedkeuren</option>
+                <option value="sluiten">Sluiten</option>
+                <button class="button"><i class="fa-solid fa-gear" aria-label="Wijzigen optie"></i></button>
+            </select>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
