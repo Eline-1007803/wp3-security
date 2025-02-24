@@ -22,3 +22,10 @@ class Organisatie:
         )
         self.con.commit()
         return True
+    def update_onderzoek(self,title,beschrijving,datumvanaf,datumtot,onderzoek_id):
+        self.cursor.execute(
+            "INSERT INTO x (title, beschrijving,datumvanaf,datumtot,onderzoek_id) VALUES (?,?,? ?,?)",
+            (title, beschrijving,datumvanaf,datumtot,onderzoek_id)
+        )
+        self.con.commit()
+        return True

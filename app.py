@@ -37,6 +37,28 @@ def get_onderzoeken():
     return {"onderzoeken": dictresult}
 
 
+@app.route("/api/overzicht_onderzoeken/<onderzoek_id>",methods=["PATCH"])
+def update_onderzoek_gegevens(onderzoek_id):
+    title = request.json["titel"]
+    if title == "":
+        return jsonify("Titel can't be empty!"),400
+    
+    beschrijving = request.json["beschrijving"]
+    if beschrijving == "":
+        return jsonify("Beschhijving can't be empty!"),400
+    
+    datum_vanaf = request.json["datumvanaf"]
+    if datum_vanaf == "":
+        return jsonify("Datum vanaf cant be empty!"),400
+    
+    datum_tot = request.json["datumtot"]
+    if datum_tot == "":
+        return jsonify("Datum tot cant be empty!"),400
+    
+    updated_onderzoek_gegevens = organisatie.update_onderzoek(title,beschrijving,datum_vanaf,datum_tot,onderzoek_id)
+    return jsonify(updated_onderzoek_gegevens),200
+
+
 @app.route("/onderzoekaanvragen",methods=["GET"])
 def onderzoek_pagina():
     return render_template("onderzoek_aanvraag__organisatie.html")
