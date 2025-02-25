@@ -8,7 +8,7 @@ fetch('/api/administrators', {
 })
 .then(response => response.json())
 .then(administrators => showAdministrator(administrators))
-        console.log(array)
+
 
 
 function showAdministrator (administrators) {
@@ -55,6 +55,7 @@ function showAdministrator (administrators) {
                 });
         })
 
+        // Edit
         document.querySelectorAll(".edit-button").forEach(editButton => {
                 editButton.addEventListener("click", () => {
                         console.log('yaas');
@@ -63,18 +64,23 @@ function showAdministrator (administrators) {
                 })
 
         })
+
+        // Delete
+        document.querySelectorAll(".delete-button").forEach(deleteButton => {
+                deleteButton.addEventListener("click", () => {
+                        console.log('yaas');
+                        document.querySelector(".js-background").classList.remove("hide");
+                        document.querySelector(".js-delete").classList.remove("hide");
+                })
+        })
+
+        // closing pop up
+        document.querySelectorAll(".js-cross-image").forEach(crossImage => {
+                crossImage.addEventListener("click", closePopUp)
+                        console.log("yuh");
+                })
+
 }
-
-
-
-// Delete
-function deletePopUp () {
-        console.log('yaas');
-        document.querySelector(".js-background").classList.remove("hide");
-        document.querySelector(".js-delete").classList.remove("hide");
-}
-
-document.querySelector(".delete-button").addEventListener("click", deletePopUp);
 
 //closing pop up when you click on cross img
 function closePopUp () {
@@ -84,17 +90,6 @@ function closePopUp () {
         document.querySelector(".js-edit").classList.add("hide");
         document.querySelector(".js-delete").classList.add("hide");
 }
-
-document.querySelectorAll(".js-cross-image")
-    .forEach(element => {
-            element.addEventListener("click", closePopUp);
-    });
-
-
-//to get all administrators
-array = ['anna', 'jan', 'janna@outlook.com']
-
-
 
 
 // to get single administrator
