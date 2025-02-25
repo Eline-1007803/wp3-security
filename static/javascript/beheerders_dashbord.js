@@ -1,27 +1,331 @@
-var modal = document.getElementById("myModal");
-var btn = document.getElementById("myBtn");
-var btn2 = document.getElementById("myBtn2");
-var btn3 = document.getElementById("myBtn3");
-var span = document.getElementsByClassName("close")[0];
+function refresh_deskundigen(data) {
+  let deskundigen_collection = document.getElementById('deskundigen');
+  deskundigen_collection.innerHTML = '';
 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
+  let deskundigen = data.deskundigen;
+  let deskundigen_html = '';
 
-btn2.onclick = function() {
-  modal.style.display = "block";
-}
-
-btn3.onclick = function() {
-  modal.style.display = "block";
-}
-
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
+  for (let i = 0; i < deskundigen.length; i++) {
+      let deskundigenElement = deskundigen[i];
+      deskundigen_html += `
+                <tr class="deskundige_btn">
+                    <td >${deskundigenElement.volle_naam}</td>
+                    <td >${deskundigenElement.leeftijd}</td>
+                    <td >${deskundigenElement.naam}</td>
+                </tr>
+      `;
   }
+
+  deskundigen_collection.innerHTML = deskundigen_html;
+  refresh_modals_deskundigen(data);
+}
+function refresh_modals_deskundigen(data) {
+  let deskundigen_modals = document.getElementById('deskundigen_modal');
+  deskundigen_modals.innerHTML = '';
+
+  let deskundigen = data.deskundigen;
+  let deskundigen_modal_html = '';
+
+  for (let i = 0; i < deskundigen.length; i++) {
+      let deskundigenElement = deskundigen[i];
+      deskundigen_modal_html += `
+                <div id="myModal${i}" class="modal">
+                  <div class="modal-content">
+                      <button class="close" id="close${i}" >&times;</button>
+                      <main class="row">
+                          <h2>${deskundigenElement.volle_naam}</h2>
+                          <section class="column">
+                              <h3>Persoonlijke informatie</h3>
+                              <h4>Geslacht:</h4>
+                              <p>${deskundigenElement.geslacht}</p>
+                              <h4>Geboortedatum:</h4>
+                              <p>${deskundigenElement.geboortedatum}</p>
+                              <h4>Introductie:</h4>
+                              <p>${deskundigenElement.introductie}</p>
+                              <h4>Beperking(en):</h4>
+                              <p>${deskundigenElement.naam}</p>
+                              <label>Bijzonderheden:</label>
+                              <p>${deskundigenElement.bijzonderheden}</p>
+                              <label>Hulpmiddelen:</label>
+                              <p>${deskundigenElement.hulpmiddelen}</p>
+                          </section>
+                          <section>
+                              <h3>Contactgegevens</h3>
+                              <h4>Email:</h4>
+                              <p>${deskundigenElement.emailadres}</p>
+                              <h4>Telefoonnummer:</h4>
+                              <p>${deskundigenElement.telefoonnummer}</p>
+                              <h4>postcode:</h4>
+                              <p>${deskundigenElement.postcode}</p>
+                          </section>
+                          <section class="column">
+                              <h3>Voogds informatie</h3>
+                              <h4>Naam:</h4>
+                              <p>${deskundigenElement.naam_voogd}</p>
+                              <h4>Email:</h4>
+                              <p>${deskundigenElement.email_voogd}</p>
+                              <h4>Telefoonnummer:</h4>
+                              <p>${deskundigenElement.telefoonnummer_voogd}</p>
+                          </section>
+                      </main>
+                  </div>
+                </div>
+      `;
+  }
+
+  deskundigen_modals.innerHTML = deskundigen_modal_html;
+
+  // Attach event listeners for modals
+  const modals = deskundigen_modals.querySelectorAll('.modal');
+  const btns = document.querySelectorAll('.deskundige_btn');
+  const spans = deskundigen_modals.querySelectorAll('.close');
+
+  btns.forEach((btn, index) => {
+      btn.addEventListener('click', () => {
+          modals[index].style.display = 'block';
+          kill_interval()
+      });
+  });
+
+  spans.forEach((span, index) => {
+      span.addEventListener('click', () => {
+          modals[index].style.display = 'none';
+          revive_interval()
+      });
+  });
+
+  window.addEventListener('click', (event) => {
+      modals.forEach((modal, index) => {
+          if (event.target === modal[index]) {
+              modal[index].style.display = 'none';
+          }
+      });
+  });
+}
+
+function refresh_inschrijvingen(data) {
+  let inschrijvingen_collection = document.getElementById('inschrijvingen');
+  inschrijvingen_collection.innerHTML = '';
+
+  let inschrijvingen = data.inschrijvingen;
+  let inschrijvingen_html = '';
+
+  for (let i = 0; i < inschrijvingen.length; i++) {
+      let inschrijvingenElement = inschrijvingen[i];
+      inschrijvingen_html += `
+                <tr class="inschrijvingen_btn">
+                    <td >${inschrijvingenElement.titel}</td>
+                    <td >${inschrijvingenElement.beschrijving}</td>
+                    <td >${inschrijvingenElement.volle_naam}</td>
+                </tr>
+      `;
+  }
+
+  inschrijvingen_collection.innerHTML = inschrijvingen_html;
+  refresh_modals_inschrijvingen(data);
+}
+function refresh_modals_inschrijvingen(data) {
+  let inschrijvingen_modals = document.getElementById('inschrijvingen_modal');
+  inschrijvingen_modals.innerHTML = '';
+
+  let inschrijvingen = data.inschrijvingen;
+  let inschrijvingen_modal_html = '';
+
+  for (let i = 0; i < inschrijvingen.length; i++) {
+      let inschrijvingenElement = inschrijvingen[i];
+      inschrijvingen_modal_html += `
+                <div id="myModal${i}" class="modal">
+                  <div class="modal-content">
+                      <button class="close" id="close${i}" >&times;</button>
+                      <main class="row">
+                          <h2>${inschrijvingenElement.volle_naam} wil zich inschrijven voor '${inschrijvingenElement.titel}'</h2>
+                          <section class="column">
+                              <h3>Informatie deskundige</h3>
+                              <h4>Geslacht:</h4>
+                              <p>${inschrijvingenElement.geslacht}</p>
+                              <h4>Geboortedatum:</h4>
+                              <p>${inschrijvingenElement.geboortedatum}</p>
+                              <h4>Introductie:</h4>
+                              <p>${inschrijvingenElement.introductie}</p>
+                              <h4>Beperking(en):</h4>
+                              <p>${inschrijvingenElement.ev_bep_naam}</p>
+                              <label>Bijzonderheden:</label>
+                              <p>${inschrijvingenElement.bijzonderheden}</p>
+                              <label>Hulpmiddelen:</label>
+                              <p>${inschrijvingenElement.hulpmiddelen}</p>
+                          </section>
+                          <section>
+                              <h3>Informatie onderzoek</h3>
+                              <h4>Organisatie:</h4>
+                              <p>${inschrijvingenElement.orga_naam}</p>
+                              <h4>Titel:</h4>
+                              <p>${inschrijvingenElement.titel}</p>
+                              <h4>Beschrijving:</h4>
+                              <p>${inschrijvingenElement.beschrijving}</p>
+                              <h4>Periode:</h4>
+                              <p>${inschrijvingenElement.datum_vanaf} tot ${inschrijvingenElement.datum_tot}</p>
+                              <h4>Type:</h4>
+                              <p>${inschrijvingenElement.type}</p>
+                              <h4>Locatie:</h4>
+                              <p>${inschrijvingenElement.locatie}</p>
+                              <h4>Beloning:</h4>
+                              <p>${inschrijvingenElement.beloning}</p>
+                              <h4>Beperking:</h4>
+                              <p>${inschrijvingenElement.on_bep_naam}</p>
+                              <h4>Leeftijd range:</h4>
+                              <p>${inschrijvingenElement.leeftijd_van} - ${inschrijvingenElement.leeftijd_tot}</p>
+                          </section>
+                      </main>
+                  </div>
+                </div>
+      `;
+  }
+
+  inschrijvingen_modals.innerHTML = inschrijvingen_modal_html;
+
+  // Attach event listeners for modals
+  const inschrijving_modals = inschrijvingen_modals.querySelectorAll('.modal');
+  const inschrijvingen_btns = document.querySelectorAll('.inschrijvingen_btn');
+  const inschrijvingen_spans = inschrijvingen_modals.querySelectorAll('.close');
+
+  inschrijvingen_btns.forEach((btn, index) => {
+      btn.addEventListener('click', () => {
+          inschrijving_modals[index].style.display = 'block';
+          kill_interval()
+      });
+  });
+
+  inschrijvingen_spans.forEach((span, index) => {
+      span.addEventListener('click', () => {
+          inschrijving_modals[index].style.display = 'none';
+          revive_interval()
+      });
+  });
+
+  window.addEventListener('click', (event) => {
+      inschrijving_modals.forEach((modal, index) => {
+          if (event.target === modal[index]) {
+              modal[index].style.display = 'none';
+          }
+      });
+  });
+}
+
+function refresh_onderzoeken(data) {
+  let onderzoeken_collection = document.getElementById('onderzoeken');
+  onderzoeken_collection.innerHTML = '';
+
+  let onderzoeken = data.onderzoeken;
+  let onderzoeken_html = '';
+
+  for (let i = 0; i < onderzoeken.length; i++) {
+      let onderzoekenElement = onderzoeken[i];
+      onderzoeken_html += `
+                <tr class="onderzoeken_btn">
+                    <td >${onderzoekenElement.titel}</td>
+                    <td >${onderzoekenElement.beschrijving}</td>
+                    <td >${onderzoekenElement.orga_naam}</td>
+                </tr>
+      `;
+  }
+
+  onderzoeken_collection.innerHTML = onderzoeken_html;
+  refresh_modals_onderzoeken(data);
+}
+function refresh_modals_onderzoeken(data) {
+  let onderzoeken_modals = document.getElementById('onderzoeken_modal');
+  onderzoeken_modals.innerHTML = '';
+
+  let onderzoeken = data.onderzoeken;
+  let onderzoeken_modal_html = '';
+
+  for (let i = 0; i < onderzoeken.length; i++) {
+      let onderzoekenElement = onderzoeken[i];
+      onderzoeken_modal_html += `
+                <div id="myModal${i}" class="modal">
+                  <div class="modal-content">
+                      <button class="close" id="close${i}" >&times;</button>
+                      <main class="row">
+                          <h2>${onderzoekenElement.titel}</h2>
+                          <section class="column">
+                              <h3>Informatie onderzoek</h3>
+                              <h4>Beschrijving:</h4>
+                              <p>${onderzoekenElement.beschrijving}</p>
+                              <h4>Type:</h4>
+                              <p>${onderzoekenElement.type}</p>
+                              <label>Locatie:</label>
+                              <p>${onderzoekenElement.locatie}</p>
+                              <h4>Beloning:</h4>
+                              <p>${onderzoekenElement.beloning}</p>
+                              <h4>Organisatie:</h4>
+                              <p>${onderzoekenElement.orga_naam}</p>
+                          </section>
+                          <section>
+                              <h3>Restricties onderzoek</h3>
+                              <h4>Periode:</h4>
+                              <p>${onderzoekenElement.datum_vanaf} tot ${onderzoekenElement.datum_tot}</p>
+                              <h4>Beperking:</h4>
+                              <p>${onderzoekenElement.bep_naam}</p>
+                              <h4>Leeftijd range:</h4>
+                              <p>${onderzoekenElement.leeftijd_van} - ${onderzoekenElement.leeftijd_tot}</p>
+                          </section>
+                      </main>
+                  </div>
+                </div>
+      `;
+  }
+
+  onderzoeken_modals.innerHTML = onderzoeken_modal_html;
+
+  // Attach event listeners for modals
+  const onderzoek_modals = onderzoeken_modals.querySelectorAll('.modal');
+  const onderzoeken_btns = document.querySelectorAll('.onderzoeken_btn');
+  const onderzoeken_spans = onderzoeken_modals.querySelectorAll('.close');
+
+  onderzoeken_btns.forEach((btn, index) => {
+      btn.addEventListener('click', () => {
+          onderzoek_modals[index].style.display = 'block';
+          kill_interval()
+      });
+  });
+
+  onderzoeken_spans.forEach((span, index) => {
+      span.addEventListener('click', () => {
+          onderzoek_modals[index].style.display = 'none';
+          revive_interval()
+      });
+  });
+
+  window.addEventListener('click', (event) => {
+      onderzoeken_modals.forEach((modal, index) => {
+          if (event.target === modal[index]) {
+              modal[index].style.display = 'none';
+          }
+      });
+  });
+}
+
+function get_all() {
+    fetch('/api/deskundigen')
+        .then(response => response.json())
+        .then(refresh_deskundigen);
+    fetch('/api/inschrijvingen')
+        .then(response => response.json())
+        .then(refresh_inschrijvingen);
+    fetch('/api/onderzoeken')
+        .then(response => response.json())
+        .then(refresh_onderzoeken);
+}
+
+get_all();
+
+interval = setInterval(get_all, 3000);
+
+
+function kill_interval() {
+    clearInterval(interval)
+}
+
+function revive_interval() {
+    interval = setInterval(get_all, 3000);
 }

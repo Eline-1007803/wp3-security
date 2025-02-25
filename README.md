@@ -8,6 +8,8 @@ checkbox: https://www.w3schools.com/howto/howto_js_display_checkbox_text.asp
 text side by side: https://www.quora.com/How-do-you-align-text-side-by-side-in-HTML
 box shadow 21: https://getcssscan.com/css-box-shadow-examples
 styling optgroup en option: https://stackoverflow.com/questions/6415747/styling-option-group-label
+*select* display locatie: https://stackoverflow.com/questions/18303740/run-javascript-function-if-option-selected
+*required for locatie if selected: https://stackoverflow.com/questions/18770369/how-to-set-html5-required-attribute-in-javascript
 afbeelding: https://pixabay.com/images/search/bin%20icon/
             https://pixabay.com/illustrations/icon-symbol-design-direction-web-2429830/
             https://pixabay.com/vectors/eye-see-viewing-icon-1103592/
