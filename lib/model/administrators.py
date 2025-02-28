@@ -20,7 +20,7 @@ class Administrator():
         self.cursor, self.con = database.connect_db()
 
     def get_all_administrators(self):
-        result = self.cursor.execute('''SELECT voornaam, tussenvoegsel, achternaam, email FROM beheerders''').fetchall()
+        result = self.cursor.execute('''SELECT beheerder_id, voornaam, tussenvoegsel, achternaam, email FROM beheerders''').fetchall()
         administrators = []
         for row in result:
             administrators.append(dict(row))
@@ -29,7 +29,6 @@ class Administrator():
     def get_administrator_by_id(self, administrator_id):
         result = self.cursor.execute('''SELECT beheerder_id, voornaam, tussenvoegsel, achternaam, email FROM beheerders WHERE beheerder_id = ?''', (administrator_id,)).fetchone()
         if result:
-            print(result)
             return dict(result)
 
     def add_administrator(self, fname, lname, email):

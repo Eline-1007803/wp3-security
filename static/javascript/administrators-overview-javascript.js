@@ -1,5 +1,5 @@
 
-// Function for pop up to show up when you click the button
+// get all administrators
 fetch('/api/administrators', {
         method: 'GET',
         headers: {
@@ -10,7 +10,7 @@ fetch('/api/administrators', {
 .then(administrators => showAdministrator(administrators))
 
 
-
+// showing each administrator on page
 function showAdministrator (administrators) {
         administrators.forEach((administrator) => {
                 console.log(administrator)
@@ -21,7 +21,7 @@ function showAdministrator (administrators) {
                     <td>${administrator.voornaam} ${administrator.tussenvoegsel} ${administrator.achternaam}</td>
                     <td>${administrator.email}</td>
                     <td>
-                        <button class="action-button details-button">Details
+                        <button data-admin-id="${administrator['beheerder_id']}" class="action-button details-button">Details
                             <img class="action-img eye-img" src="../static/images/eye-icon.png">
                         </button>
                         <button class="action-button edit-button">Bewerken
@@ -36,7 +36,7 @@ function showAdministrator (administrators) {
         document.querySelector(".js-administrator-table").innerHTML += row;
         });
 
-        // Add
+        // Add button pop up
         document.querySelectorAll(".add-administrator-button")
             .forEach(addButton => {
                 addButton.addEventListener("click", ()=> {
@@ -46,16 +46,21 @@ function showAdministrator (administrators) {
                 });
             })
 
-        // Details
+        // Details button pop up
         document.querySelectorAll(".details-button").forEach(detailsButton => {
+                const adminId = detailsButton.dataset.adminId;
+
                 detailsButton.addEventListener("click", () => {
-                        console.log('yaas');
                         document.querySelector(".js-background").classList.remove("hide");
                         document.querySelector(".js-details").classList.remove("hide");
+
+                        showAdminPopup(adminId);
                 });
         })
 
-        // Edit
+
+
+        // Edit button pop up
         document.querySelectorAll(".edit-button").forEach(editButton => {
                 editButton.addEventListener("click", () => {
                         console.log('yaas');
@@ -65,14 +70,48 @@ function showAdministrator (administrators) {
 
         })
 
-        // Delete
+        // Delete button pop up
         document.querySelectorAll(".delete-button").forEach(deleteButton => {
                 deleteButton.addEventListener("click", () => {
-                        console.log('yaas');
                         document.querySelector(".js-background").classList.remove("hide");
                         document.querySelector(".js-delete").classList.remove("hide");
                 })
         })
+
+
+}
+
+
+
+
+// to get single administrator
+function showAdminPopup(administratorId) {
+        fetch(`/api/administrator/${administratorId}`, {
+                method: 'GET',
+                headers: {
+                        'Accept': 'application/json'
+                }
+        })
+            .then(response => response.json())
+            .then(administrator => showSingleAdministrator(administrator))
+}
+
+function showSingleAdministrator(administrator) {
+        const administratorDetails = document.querySelector(".js-details");
+        console.log(administratorDetails)
+
+        administratorDetails.innerHTML =
+        `
+                <img class="js-cross-image cross-image" src="../static/images/cross.svg">
+                <h1 class="details-header">Details</h1>
+                    
+                <d1>
+                        <dt>Naam:</dt>
+                        <dd>${administrator.voornaam}</dd>
+                        <dt>Email:</dt>
+                        <dd>${administrator.email}</dd>
+                </d1>
+        `;
 
         // closing pop up
         document.querySelectorAll(".js-cross-image").forEach(crossImage => {
@@ -80,28 +119,15 @@ function showAdministrator (administrators) {
                         console.log("yuh");
                 })
 
+        function closePopUp () {
+                document.querySelector(".js-background").classList.add("hide");
+                document.querySelector(".js-add").classList.add("hide");
+                document.querySelector(".js-details").classList.add("hide");
+                document.querySelector(".js-edit").classList.add("hide");
+                document.querySelector(".js-delete").classList.add("hide");
+}
 }
 
-//closing pop up when you click on cross img
-function closePopUp () {
-        document.querySelector(".js-background").classList.add("hide");
-        document.querySelector(".js-add").classList.add("hide");
-        document.querySelector(".js-details").classList.add("hide");
-        document.querySelector(".js-edit").classList.add("hide");
-        document.querySelector(".js-delete").classList.add("hide");
-}
-
-
-// to get single administrator
-fetch('/api/administrator/<administrator_id>', {
-        method: 'GET',
-        headers: {
-                'Accept': 'application/json'
-        }
-})
-    .then(response => response.json())
-    .then (data =>
-    console.log(data))
 
 
 // to add an administrator when you click on add administrator button
