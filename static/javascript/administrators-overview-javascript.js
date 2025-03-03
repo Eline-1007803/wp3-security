@@ -24,7 +24,7 @@ function showAdministrator (administrators) {
                         <button data-admin-id="${administrator['beheerder_id']}" class="action-button details-button">Details
                             <img class="action-img eye-img" src="../static/images/eye-icon.png">
                         </button>
-                        <button class="action-button edit-button">Bewerken
+                        <button data-admin-id="${administrator['beheerder_id']}" class="action-button edit-button">Bewerken
                             <img class="action-img" src="../static/images/edit-icon-2.png">
                         </button>
                         <button class="action-button delete-button">Verwijderen
@@ -62,10 +62,13 @@ function showAdministrator (administrators) {
 
         // Edit button pop up
         document.querySelectorAll(".edit-button").forEach(editButton => {
+                const adminId = editButton.dataset.adminId;
                 editButton.addEventListener("click", () => {
                         console.log('yaas');
                         document.querySelector(".js-background").classList.remove("hide");
                         document.querySelector(".js-edit").classList.remove("hide");
+
+                        getAdmin(adminId);
                 })
 
         })
@@ -82,8 +85,6 @@ function showAdministrator (administrators) {
 }
 
 
-
-
 // to get single administrator
 function showAdminPopup(administratorId) {
         fetch(`/api/administrator/${administratorId}`, {
@@ -98,7 +99,7 @@ function showAdminPopup(administratorId) {
 
 function showSingleAdministrator(administrator) {
         const administratorDetails = document.querySelector(".js-details");
-        console.log(administratorDetails)
+        console.log(administratorDetails);
 
         administratorDetails.innerHTML =
         `
@@ -131,7 +132,7 @@ function showSingleAdministrator(administrator) {
 
 
 // to add an administrator when you click on add administrator button
-document.querySelector(".js-add-button").addEventListener("click", addAdministrator)
+document.querySelector(".js-add-button").addEventListener("click", addAdministrator);
 
 function addAdministrator () {
         let fname = document.querySelector('.js-fname-input').value
@@ -153,13 +154,17 @@ function addAdministrator () {
                     console.log(data)
             })
 }
+
 // to update administrator data when you click on edit administrator button
-document.querySelector(".js-edit-button").addEventListener("click", editAdministrator)
-function editAdministrator () {
+
+
+function editAdministrator(administratorId) {
         let voornaam = document.querySelector(".js-fname-update").value
         let achternaam = document.querySelector(".js-lname-update").value
+        let email = document.querySelector(".js-email-update").value
+        console.log(voornaam, achternaam, email)
 
-        fetch('/api/administrator/<administrator_id>', {
+        fetch(`/api/administrator/${administratorId}`, {
                 method: 'PATCH',
                 headers: {
                         'Content-Type': 'application/json'
@@ -167,7 +172,7 @@ function editAdministrator () {
                 body: JSON.stringify({
                         voornaam: voornaam,
                         achternaam: achternaam,
-
+                        email: email
                 })
 
         })
@@ -176,4 +181,39 @@ function editAdministrator () {
                     console.log(data);
             })
 }
+
+document.querySelector(".js-popup-edit-button").addEventListener("click", () =>
+{
+        const popupEditButton = document.querySelector(".js-popup-edit-button")
+        const adminId = popupEditButton.dataset.adminId
+        editAdministrator(adminId);
+})
+
+
+
+function getAdmin(administratorId) {
+        fetch(`/api/administrator/${administratorId}`, {
+                method: 'GET',
+                headers: {
+                        'Accept': 'application/json'
+                }
+        })
+            .then(response => response.json())
+            .then(administrator => showAdminEditPopup(administrator))
+}
+
+function showAdminEditPopup(administrator) {
+        console.log(administrator)
+        const editAdministratorPopup = document.querySelector(".js-edit");
+        editAdministratorPopup.innerHTML =
+                    `
+         <label for="fname-update">Voornaam:</label>
+         <input class="js-fname-update" id="fname-update" type="text" value=${administrator.voornaam}>
+         <label for="lname-update">Achternaam:</label>
+         <input class="js-lname-update" type="text" value=${administrator.achternaam} id="lname-update">
+         <label for="email-update">Email:</label>
+         <input class="js-email-update" type="text" value=${administrator.email} id="email-update">
+         <button data-admin-id="${administrator['beheerder_id']}"class="div-edit-button action-button js-popup-edit-button" type="submit">Bewerken<img class="action-img" src="../static/images/edit-icon-2.png"></button>
+            `;
+        }
 

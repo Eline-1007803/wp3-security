@@ -39,8 +39,9 @@ def add_administrator():
 def update_administrator(administrator_id):
     voornaam = request.json["voornaam"]
     achternaam = request.json["achternaam"]
+    email = request.json["email"]
     administrator_model = Administrator()
-    updated_administrator = administrator_model.update_administrator(voornaam, achternaam, administrator_id)
+    updated_administrator = administrator_model.update_administrator(voornaam, achternaam, email, administrator_id)
     print(updated_administrator)
     return updated_administrator
 
@@ -50,7 +51,6 @@ def administrator_page():
     administrator_model = Administrator()
     administrators = administrator_model.get_all_administrators()
     return render_template("administrators-overview.html", administrators=administrators)
-
 
 @app.route("/expert-sign-up")
 def expert_sign_up():
