@@ -182,12 +182,7 @@ function editAdministrator(administratorId) {
             })
 }
 
-document.querySelector(".js-popup-edit-button").addEventListener("click", () =>
-{
-        const popupEditButton = document.querySelector(".js-popup-edit-button")
-        const adminId = popupEditButton.dataset.adminId
-        editAdministrator(adminId);
-})
+
 
 
 
@@ -215,5 +210,12 @@ function showAdminEditPopup(administrator) {
          <input class="js-email-update" type="text" value=${administrator.email} id="email-update">
          <button data-admin-id="${administrator['beheerder_id']}"class="div-edit-button action-button js-popup-edit-button" type="submit">Bewerken<img class="action-img" src="../static/images/edit-icon-2.png"></button>
             `;
+
+        document.querySelector(".js-popup-edit-button").addEventListener("click", () =>
+{
+        const popupEditButton = document.querySelector(".js-popup-edit-button")
+        const adminId = popupEditButton.dataset.adminId
+        editAdministrator(adminId);
+})
         }
 
