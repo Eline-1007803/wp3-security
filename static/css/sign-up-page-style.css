@@ -7,7 +7,7 @@ h1 {
     margin-bottom: 70px;
 }
 
-form {
+div {
     display: grid;
     grid-template-columns:150px 200px;
     row-gap: 10px;

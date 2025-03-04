@@ -15,3 +15,28 @@ function showSupervisorForm () {
 
 checkbox.addEventListener("change", showSupervisorForm);
 
+
+document.querySelector(".js-submit-button").addEventListener("click", saveSignup);
+
+function saveSignup () {
+    let fname = document.querySelector('.js-first-name-input').value
+    let lname = document.querySelector('.js-last-name-input').value
+
+    fetch('/api/save-signup', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+            fname: fname,
+            lname: lname
+
+        })
+    })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            })
+}
+
+
