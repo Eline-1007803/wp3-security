@@ -48,9 +48,9 @@ def update_administrator(administrator_id):
 @app.route("/api/administrator/<administrator_id>", methods=["DELETE"])
 def delete_administrator(administrator_id):
     administrator_model = Administrator()
-    deleted_administrator = administrator_model.get_administrator_by_id(administrator_id)
+    deleted_administrator = administrator_model.delete_administrator(administrator_id)
     print(deleted_administrator)
-    return deleted_administrator
+    return jsonify("hallo")
 
 @app.route("/administrator-overview", methods=["GET"])
 def administrator_page():
