@@ -7,21 +7,21 @@
 </head>
 <body>
 <h1>Aanmelden</h1>
-    <form>
+    <div>
         <label for="first-name-input">Voornaam:</label>
-        <input id="first-name-input" name="first-name-input" type="text" required>
+        <input class="js-first-name-input" id="first-name-input" name="first-name-input" type="text" required>
         <label for="last-name-input">Achternaam:</label>
-        <input id="last-name-input" name="last-name-input" type="text">
+        <input class="js-last-name-input" id="last-name-input" name="last-name-input" type="text">
         <label for="zip-code-input">Postcode:</label>
-        <input id="zip-code-input" name="zip-code-input" type="text">
+        <input class="js-zip-code-input" id="zip-code-input" name="zip-code-input" type="text">
         <label for="gender-input">Geslacht:</label>
-        <input id="gender-input" name="gender-input" type="text">
+        <input class="js-gender-input" id="gender-input" name="gender-input" type="text">
         <label for="email-input">E-mailadres:</label>
-        <input id="email-input" name="email-input" type="email">
+        <input class="js-email-input" id="email-input" name="email-input" type="email">
         <label for="phone-number-input">Telefoonnummer:</label>
-        <input id="phone-number-input" name="phone-number-input" type="tel">
+        <input class="js-phone-number-input" id="phone-number-input" name="phone-number-input" type="tel">
         <label for="date-of-birth-input">Geboortedatum:</label>
-        <input id="date-of-birth-input" name="date-of-birth-input" type="date">
+        <input class="js-birthdate-input" id="date-of-birth-input" name="date-of-birth-input" type="date">
         <label for="disability-type-input">Type beperking:</label>
         <select id="disability-type-input" name="disability-type-input" multiple>
 
@@ -100,8 +100,8 @@
         </select>
         <label for="details-availability-input">Bijzonderheden beschikbaarheid:</label>
         <textarea id="details-availability-input" name="details-availability-input"></textarea>
-        <button class="submit-button" type="submit">Indienen</button>
-    </form>
+        <button class="js-submit-button submit-button" type="submit">Indienen</button>
+    </div>
 
     <script src="/static/javascript/sign-up-page-javascript.js"></script>
 </body>

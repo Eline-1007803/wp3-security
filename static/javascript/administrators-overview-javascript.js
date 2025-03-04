@@ -199,7 +199,9 @@ function showAdminEditPopup(administrator) {
         console.log(administrator)
         const editAdministratorPopup = document.querySelector(".js-edit");
         editAdministratorPopup.innerHTML =
-                    `
+            `
+         <img class="js-cross-image cross-image" src="../static/images/cross.svg">
+         <h1>Bewerken</h1>
          <label for="fname-update">Voornaam:</label>
          <input class="js-fname-update" id="fname-update" type="text" value=${administrator.voornaam}>
          <label for="lname-update">Achternaam:</label>
@@ -215,6 +217,19 @@ function showAdminEditPopup(administrator) {
         const adminId = popupEditButton.dataset.adminId
         editAdministrator(adminId);
 })
+         // closing pop up
+        document.querySelectorAll(".js-cross-image").forEach(crossImage => {
+                crossImage.addEventListener("click", closePopUp)
+                        console.log("yuh");
+                })
+
+        function closePopUp () {
+                document.querySelector(".js-background").classList.add("hide");
+                document.querySelector(".js-add").classList.add("hide");
+                document.querySelector(".js-details").classList.add("hide");
+                document.querySelector(".js-edit").classList.add("hide");
+                document.querySelector(".js-delete").classList.add("hide");
+        }
         }
 
 // delete administrator
@@ -247,6 +262,7 @@ function showAdminDeletePopup (administrator) {
         const deleteAdministratorPopup = document.querySelector(".js-delete")
         deleteAdministratorPopup.innerHTML =
             `
+        <img class="js-cross-image cross-image" src="../static/images/cross.svg"> 
         <h1>Verwijderen</h1>
         <p>Naam: ${administrator.voornaam}</p>
         <p>E-mailadres: ${administrator.email}</p>
@@ -259,5 +275,19 @@ function showAdminDeletePopup (administrator) {
                 const adminId = popupDeleteButton.dataset.adminId
                 deleteAdministrator(adminId)
         })
+
+         // closing pop up
+        document.querySelectorAll(".js-cross-image").forEach(crossImage => {
+                crossImage.addEventListener("click", closePopUp)
+                        console.log("yuh");
+                })
+
+         function closePopUp () {
+                document.querySelector(".js-background").classList.add("hide");
+                document.querySelector(".js-add").classList.add("hide");
+                document.querySelector(".js-details").classList.add("hide");
+                document.querySelector(".js-edit").classList.add("hide");
+                document.querySelector(".js-delete").classList.add("hide");
+        }
 }
 

@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify, render_template
 
 from lib.model.administrators import Administrator
+from lib.model.sign_up import SignUp
+
 app = Flask(__name__)
 from models import ervaringsdeskundigen_model, inschrijvingen_model, onderzoeken_model,organisatie_model
 
@@ -61,6 +63,14 @@ def administrator_page():
 @app.route("/expert-sign-up")
 def expert_sign_up():
     return render_template("sign-up-page.html")
+
+@app.route("/api/save-signup", methods=["POST"])
+def save_sign_up():
+    fname = request.json["fname"]
+    lname = request.json["lname"]
+    signup_model = SignUp()
+    save_sign_up = signup_model.save_signup(fname, lname)
+    return save_sign_up
 
 @app.route('/dashboard')
 def dashboard():
