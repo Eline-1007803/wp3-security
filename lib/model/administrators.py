@@ -44,7 +44,8 @@ class Administrator():
         print(result)
         return dict(result)
 
-
-
+    def delete_administrator(self, administrator_id):
+        result =self.cursor.execute('''DELETE FROM beheerders WHERE beheerder_id = ? ''', (administrator_id,)).fetchone()
+        return dict(result)
 
 

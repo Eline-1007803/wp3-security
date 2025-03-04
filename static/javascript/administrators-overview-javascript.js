@@ -27,7 +27,7 @@ function showAdministrator (administrators) {
                         <button data-admin-id="${administrator['beheerder_id']}" class="action-button edit-button">Bewerken
                             <img class="action-img" src="../static/images/edit-icon-2.png">
                         </button>
-                        <button class="action-button delete-button">Verwijderen
+                        <button data-admin-id="${administrator['beheerder_id']}" class="action-button delete-button">Verwijderen
                             <img class="action-img" src="../static/images/bin-icon.png">
                         </button>
                     </td>
@@ -76,8 +76,11 @@ function showAdministrator (administrators) {
         // Delete button pop up
         document.querySelectorAll(".delete-button").forEach(deleteButton => {
                 deleteButton.addEventListener("click", () => {
+                        const adminId = deleteButton.dataset.adminId;
                         document.querySelector(".js-background").classList.remove("hide");
                         document.querySelector(".js-delete").classList.remove("hide");
+
+                        getAdminForDelete(adminId)
                 })
         })
 
@@ -157,7 +160,6 @@ function addAdministrator () {
 
 // to update administrator data when you click on edit administrator button
 
-
 function editAdministrator(administratorId) {
         let voornaam = document.querySelector(".js-fname-update").value
         let achternaam = document.querySelector(".js-lname-update").value
@@ -181,10 +183,6 @@ function editAdministrator(administratorId) {
                     console.log(data);
             })
 }
-
-
-
-
 
 function getAdmin(administratorId) {
         fetch(`/api/administrator/${administratorId}`, {
@@ -218,4 +216,48 @@ function showAdminEditPopup(administrator) {
         editAdministrator(adminId);
 })
         }
+
+// delete administrator
+function deleteAdministrator(administratorId) {
+        fetch(`/api/administrator/${administratorId}`,{
+                method: 'DELETE',
+                headers: {
+                        'content-type':'application/json'
+                }
+        })
+            .then (response => response.json())
+            .then (data => console.log(data));
+
+
+
+}
+
+function getAdminForDelete (administratorId) {
+        fetch(`/api/administrator/${administratorId}`, {
+                method: 'GET',
+                headers: {
+                        'Accept': 'application/json'
+                }
+        })
+            .then(response => response.json())
+            .then(administrator => showAdminDeletePopup(administrator))
+}
+
+function showAdminDeletePopup (administrator) {
+        const deleteAdministratorPopup = document.querySelector(".js-delete")
+        deleteAdministratorPopup.innerHTML =
+            `
+        <h1>Verwijderen</h1>
+        <p>Naam: ${administrator.voornaam}</p>
+        <p>E-mailadres: ${administrator.email}</p>
+        <button data-admin-id="${administrator['beheerder_id']}" class="js-delete-button div-delete-button action-button" type="submit">Verwijderen<img class="action-img" src="../static/images/bin-icon.png"></button>
+            `;
+
+        document.querySelector(".js-delete-button").addEventListener("click", () =>
+        {
+                const popupDeleteButton = document.querySelector(".js-delete-button")
+                const adminId = popupDeleteButton.dataset.adminId
+                deleteAdministrator(adminId)
+        })
+}
 

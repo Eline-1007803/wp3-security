@@ -45,12 +45,18 @@ def update_administrator(administrator_id):
     print(updated_administrator)
     return updated_administrator
 
+@app.route("/api/administrator/<administrator_id>", methods=["DELETE"])
+def delete_administrator(administrator_id):
+    administrator_model = Administrator()
+    deleted_administrator = administrator_model.get_administrator_by_id(administrator_id)
+    print(deleted_administrator)
+    return deleted_administrator
 
 @app.route("/administrator-overview", methods=["GET"])
 def administrator_page():
     administrator_model = Administrator()
     administrators = administrator_model.get_all_administrators()
-    return render_template("administrators-overview.html", administrators=administrators)
+    return render_template("administrators-overview.html")
 
 @app.route("/expert-sign-up")
 def expert_sign_up():
