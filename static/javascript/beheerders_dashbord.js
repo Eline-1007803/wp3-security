@@ -32,8 +32,8 @@ function refresh_modals_deskundigen(data) {
                 <div id="myModal${i}" class="modal">
                   <div class="modal-content">
                       <button class="close" id="close${i}" >&times;</button>
+                      <h2>${deskundigenElement.volle_naam}</h2>
                       <main class="row">
-                          <h2>${deskundigenElement.volle_naam}</h2>
                           <section class="column">
                               <h3>Persoonlijke informatie</h3>
                               <h4>Geslacht:</h4>
@@ -68,6 +68,8 @@ function refresh_modals_deskundigen(data) {
                               <p>${deskundigenElement.telefoonnummer_voogd}</p>
                           </section>
                       </main>
+                      <button class="goedkeur_button"><strong>Goedkeuren</strong></button>
+                      <button class="afkeur_button"><strong>Afkeuren</strong></button>
                   </div>
                 </div>
       `;
@@ -137,8 +139,8 @@ function refresh_modals_inschrijvingen(data) {
                 <div id="myModal${i}" class="modal">
                   <div class="modal-content">
                       <button class="close" id="close${i}" >&times;</button>
+                      <h2>${inschrijvingenElement.volle_naam} wil zich inschrijven voor '${inschrijvingenElement.titel}'</h2>
                       <main class="row">
-                          <h2>${inschrijvingenElement.volle_naam} wil zich inschrijven voor '${inschrijvingenElement.titel}'</h2>
                           <section class="column">
                               <h3>Informatie deskundige</h3>
                               <h4>Geslacht:</h4>
@@ -176,6 +178,8 @@ function refresh_modals_inschrijvingen(data) {
                               <p>${inschrijvingenElement.leeftijd_van} - ${inschrijvingenElement.leeftijd_tot}</p>
                           </section>
                       </main>
+                      <button class="goedkeur_button"><strong>Goedkeuren</strong></button>
+                      <button class="afkeur_button"><strong>Afkeuren</strong></button>
                   </div>
                 </div>
       `;
@@ -245,8 +249,8 @@ function refresh_modals_onderzoeken(data) {
                 <div id="myModal${i}" class="modal">
                   <div class="modal-content">
                       <button class="close" id="close${i}" >&times;</button>
+                      <h2>${onderzoekenElement.titel}</h2>
                       <main class="row">
-                          <h2>${onderzoekenElement.titel}</h2>
                           <section class="column">
                               <h3>Informatie onderzoek</h3>
                               <h4>Beschrijving:</h4>
@@ -270,6 +274,8 @@ function refresh_modals_onderzoeken(data) {
                               <p>${onderzoekenElement.leeftijd_van} - ${onderzoekenElement.leeftijd_tot}</p>
                           </section>
                       </main>
+                      <button class="goedkeur_button"><strong>Goedkeuren</strong></button>
+                      <button class="afkeur_button"><strong>Afkeuren</strong></button>
                   </div>
                 </div>
       `;
@@ -281,11 +287,28 @@ function refresh_modals_onderzoeken(data) {
   const onderzoek_modals = onderzoeken_modals.querySelectorAll('.modal');
   const onderzoeken_btns = document.querySelectorAll('.onderzoeken_btn');
   const onderzoeken_spans = onderzoeken_modals.querySelectorAll('.close');
+  const onderzoeken_gb = onderzoeken_modals.querySelectorAll('.goedkeur_button');
+  const onderzoeken_ab = onderzoeken_modals.querySelectorAll('.afkeur_button');
+
 
   onderzoeken_btns.forEach((btn, index) => {
       btn.addEventListener('click', () => {
           onderzoek_modals[index].style.display = 'block';
           kill_interval()
+      });
+  });
+
+  onderzoeken_gb.forEach((gb, index) => {
+      gb.addEventListener('click', () => {
+          onderzoek_modals[index].style.display = 'none';
+          revive_interval()
+      });
+  });
+
+  onderzoeken_ab.forEach((ab, index) => {
+      ab.addEventListener('click', () => {
+          onderzoek_modals[index].style.display = 'none';
+          revive_interval()
       });
   });
 
