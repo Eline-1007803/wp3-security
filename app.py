@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import *
 app = Flask(__name__)
 from models import ervaringsdeskundigen_model, inschrijvingen_model, onderzoeken_model,organisatie_model
@@ -74,12 +75,14 @@ def onderzoek_aanvragen_organisatie():
         return jsonify("Beschhijving can't be empty!"),400
     
     datum_vanaf = request.json["datumvanaf"]
-    if datum_vanaf == "":
-        return jsonify("Datum vanaf cant be empty!"),400
+    date_vanaf = datetime.strptime(datum_vanaf,"%Y-%m-%d")
+    if datum_vanaf == "" or date_vanaf < datetime.now():
+        return jsonify("You have not chosen a date from or chosen a past date."),400
     
     datum_tot = request.json["datumtot"]
-    if datum_tot == "":
-        return jsonify("Datum tot cant be empty!"),400
+    date_tot = datetime.strptime(datum_tot,"%Y-%m-%d")
+    if datum_tot == "" or date_tot < date_vanaf:
+        return jsonify("You have not chosen a date till or chosen a date before date from"),400
     
     type_onderzoek = request.json["typeonderzoek"]
     if type_onderzoek == "":
@@ -94,7 +97,7 @@ def onderzoek_aanvragen_organisatie():
     
     leeftijd_van = request.json["leeftijdvan"]
     if leeftijd_van == "":
-        return jsonify("Kies leeftijd van!"),400
+        return jsonify("Je hebt geen leeftijd ingevoerd"),400
     
     leeftijd_tot = request.json["leeftijdtot"]
     if leeftijd_tot == "":
