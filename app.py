@@ -214,8 +214,8 @@ def onderzoek_aanvragen_organisatie():
         if hoeveel_beloning == "":
             return jsonify("U heeft geen beloning getypt."),400
     type_disability = request.json["disability-type-input"]
-    if type_disability == "":
-        return jsonify("Kies beperking!"), 400
+    if not isinstance(type_disability, list):
+        return jsonify("Voeg beperking(en) in een list!!"), 400
 
     leeftijd_van = request.json["leeftijdvan"]
     if leeftijd_van == "":
