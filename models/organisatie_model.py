@@ -41,7 +41,7 @@ class Organisatie:
 
     def get_all_onderzoeken(self, organisatie_id):
         result = self.cursor.execute(
-            "SELECT onderzoeken.titel,onderzoeken.status,onderzoeken.beschikbaar,onderzoeken.leeftijd_van,onderzoeken.leeftijd_tot,CONCAT(alle_beperkingen.naam,",") FROM onderzoeken JOIN onderzoek_beperkingen ON onderzoeken.onderzoek_id = onderzoek_beperkingen.onderzoek_id JOIN alle_beperkingen ON onderzoek_beperkingen.beperking_id = alle_beperkingen.beperking_id WHERE onderzoeken.organisatie_id = ?", str(organisatie_id)
+            "SELECT onderzoeken.titel,onderzoeken.status,onderzoeken.beschikbaar,onderzoeken.leeftijd_van,onderzoeken.leeftijd_tot,CONCAT(alle_beperkingen.naam,',') FROM onderzoeken JOIN onderzoek_beperkingen ON onderzoeken.onderzoek_id = onderzoek_beperkingen.onderzoek_id JOIN alle_beperkingen ON onderzoek_beperkingen.beperking_id = alle_beperkingen.beperking_id WHERE onderzoeken.organisatie_id = ?", str(organisatie_id)
         ).fetchall()
         return result
 
