@@ -39,11 +39,11 @@ def add_administrator():
 
 @app.route("/api/administrator/<administrator_id>", methods=["PATCH"])
 def update_administrator(administrator_id):
-    voornaam = request.json["voornaam"]
-    achternaam = request.json["achternaam"]
+    fname = request.json["voornaam"]
+    lname = request.json["achternaam"]
     email = request.json["email"]
     administrator_model = Administrator()
-    updated_administrator = administrator_model.update_administrator(voornaam, achternaam, email, administrator_id)
+    updated_administrator = administrator_model.update_administrator(fname, lname, email)
     print(updated_administrator)
     return updated_administrator
 
@@ -67,9 +67,32 @@ def expert_sign_up():
 @app.route("/api/save-signup", methods=["POST"])
 def save_sign_up():
     fname = request.json["fname"]
+    infix = request.json["infix"]
     lname = request.json["lname"]
+    password = request.json["password"]
+    zipcode = request.json["zipcode"]
+    gender = request.json["gender"]
+    email = request.json["email"]
+    phonenum = request.json["phonenum"]
+    birthdate = request.json["birthdate"]
+    tools = request.json["tools"]
+    introduction = request.json["introduction"]
+    details = request.json["details"]
+    agreement_terms = request.json["agreement_terms"]
+    supervisor = request.json["supervisor"]
+    name_supervisor = request.json["name_supervisor"]
+    phonenum_supervisor = request.json["phonenum_supervisor"]
+    email_supervisor= request.json["email_parent"]
+    preferred_approach = request.json["preferred_approach"]
+    research_type = request.json["research_type"]
+    availability = request.json["availability"]
+    status = request.json["status"]
+    color_foreground = request.json["color_foreground"]
+    color_background = request.json["color_background"]
+
+
     signup_model = SignUp()
-    save_sign_up = signup_model.save_signup(fname, lname)
+    save_sign_up = signup_model.save_signup(fname, infix, lname, password, zipcode, gender, email, phonenum, birthdate, tools, introduction, details, agreement_terms, supervisor, name_supervisor, phonenum_supervisor, email_supervisor, preferred_approach, research_type, availability, status, color_foreground, color_background )
     return save_sign_up
 
 @app.route('/dashboard')
