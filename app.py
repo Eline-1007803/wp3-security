@@ -210,6 +210,9 @@ def onderzoek_aanvragen_organisatie():
     locatie = request.json["locatie_text"]
     met_beloning = request.json["metbeloning"]
     hoeveel_beloning = request.json["beloning"]
+    if met_beloning == "1":
+        if hoeveel_beloning == "":
+            return jsonify("U heeft geen beloning getypt."),400
     type_disability = request.json["disability-type-input"]
     if type_disability == "":
         return jsonify("Kies beperking!"), 400
