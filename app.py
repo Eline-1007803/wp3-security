@@ -249,7 +249,7 @@ def onderzoek_aanvragen_organisatie():
             return jsonify("U heeft geen beloning getypt."),400
     type_disability = request.json["disability-type-input"]
     if not isinstance(type_disability, list):
-        return jsonify("Voeg beperking(en) in een list!!"), 400
+        return jsonify("Voeg beperking(en) in een list! \nTip: bij /api/alle_beperkingen kan je id's vinden van alle beperkingen"), 400
 
     leeftijd_van = request.json["leeftijdvan"]
     if leeftijd_van == "":
