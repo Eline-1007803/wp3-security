@@ -1,10 +1,78 @@
 from datetime import datetime
 from flask import *
+from flask import Flask, request, jsonify, render_template
+from lib.model.administrators import Administrator
+from lib.model.sign_up import SignUp
+
+
 app = Flask(__name__)
 from models import ervaringsdeskundigen_model, inschrijvingen_model, onderzoeken_model,organisatie_model
 
 app = Flask(__name__)
 app.secret_key = "wp3"
+
+@app.route("/", methods=["GET"])
+def test():
+    if request.method == "GET":
+        return jsonify({"response":"hallo"})
+
+@app.route("/api/administrators", methods=["GET"])
+def get_all_administrators():
+    administrator_model = Administrator()
+    administrators = administrator_model.get_all_administrators()
+    return jsonify(administrators)
+
+@app.route("/api/administrator/<administrator_id>", methods=["GET"])
+def get_administrator_by_id(administrator_id):
+    administrator_model = Administrator()
+    administrator = administrator_model.get_administrator_by_id(administrator_id)
+    print(administrator)
+    return jsonify(administrator)
+
+@app.route("/api/new-administrator", methods=["POST"])
+def add_administrator():
+    fname = request.json["fname"]
+    lname = request.json["lname"]
+    email = request.json["email"]
+    print(request.json)
+    administrator_model = Administrator()
+    new_administrator = administrator_model.add_administrator(fname, lname, email)
+    return new_administrator, 201
+
+@app.route("/api/administrator/<administrator_id>", methods=["PATCH"])
+def update_administrator(administrator_id):
+    voornaam = request.json["voornaam"]
+    achternaam = request.json["achternaam"]
+    email = request.json["email"]
+    administrator_model = Administrator()
+    updated_administrator = administrator_model.update_administrator(voornaam, achternaam, email, administrator_id)
+    print(updated_administrator)
+    return updated_administrator
+
+@app.route("/api/administrator/<administrator_id>", methods=["DELETE"])
+def delete_administrator(administrator_id):
+    administrator_model = Administrator()
+    deleted_administrator = administrator_model.delete_administrator(administrator_id)
+    print(deleted_administrator)
+    return jsonify("hallo")
+
+@app.route("/administrator-overview", methods=["GET"])
+def administrator_page():
+    administrator_model = Administrator()
+    administrators = administrator_model.get_all_administrators()
+    return render_template("administrators-overview.html")
+
+@app.route("/expert-sign-up")
+def expert_sign_up():
+    return render_template("sign-up-page.html")
+
+@app.route("/api/save-signup", methods=["POST"])
+def save_sign_up():
+    fname = request.json["fname"]
+    lname = request.json["lname"]
+    signup_model = SignUp()
+    save_sign_up = signup_model.save_signup(fname, lname)
+    return save_sign_up
 
 @app.route('/dashboard')
 def dashboard():
@@ -77,11 +145,11 @@ def onderzoek_aanvragen_organisatie():
     title = request.json["titel"]
     if title == "":
         return jsonify("Titel can't be empty!"),400
-    
+
     beschrijving = request.json["beschrijving"]
     if beschrijving == "":
         return jsonify("Beschhijving can't be empty!"),400
-    
+
     datum_vanaf = request.json["datumvanaf"]
     date_vanaf = datetime.strptime(datum_vanaf,"%Y-%m-%d")
     if datum_vanaf == "" or date_vanaf < datetime.now():
@@ -92,17 +160,24 @@ def onderzoek_aanvragen_organisatie():
     if datum_tot == "" or date_tot < date_vanaf:
         return jsonify("You have not chosen a date till or chosen a date before date from"),400
     
+    if datum_vanaf == "":
+        return jsonify("Datum vanaf cant be empty!"),400
+
+    datum_tot = request.json["datumtot"]
+    if datum_tot == "":
+        return jsonify("Datum tot cant be empty!"),400
+
     type_onderzoek = request.json["typeonderzoek"]
     if type_onderzoek == "":
         return jsonify("Kies type onderzoek!"),400
-    
+
     locatie = request.json["locatie_text"]
     met_beloning = request.json["metbeloning"]
     hoeveel_beloning = request.json["beloning"]
     type_disability = request.json["disability-type-input"]
     if type_disability == "":
         return jsonify("Kies beperking!"),400
-    
+
     leeftijd_van = request.json["leeftijdvan"]
     if leeftijd_van == "":
         return jsonify("Je hebt geen leeftijd ingevoerd"),400
@@ -110,8 +185,8 @@ def onderzoek_aanvragen_organisatie():
     leeftijd_tot = request.json["leeftijdtot"]
     if leeftijd_tot == "":
         return jsonify("Kies leeftijd tot!"),400
-    
-    if met_beloning == "on": 
+
+    if met_beloning == "on":
         met_beloning = 1
     else:
         met_beloning = 0
