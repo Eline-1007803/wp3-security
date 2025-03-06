@@ -151,6 +151,14 @@ def get_onderzoeken():
         dictresult.append(dict(row))
     return {"onderzoeken": dictresult}
 
+@app.route("/api/alle_beperkingen",methods=["GET"])
+def beperkingen():
+    result = organisatie.get_all_disabilities()
+    beperkingen = []
+    for row in result:
+        beperkingen.append(dict(row))
+    return jsonify(beperkingen)
+
 
 @app.route("/api/overzicht_onderzoeken", methods=["GET"])
 def overzicht_onderzoeken():
