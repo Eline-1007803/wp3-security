@@ -16,12 +16,34 @@ function showSupervisorForm () {
 checkbox.addEventListener("change", showSupervisorForm);
 
 
-document.querySelector(".js-submit-button").addEventListener("click", saveSignup);
+
 
 function saveSignup () {
     let fname = document.querySelector('.js-first-name-input').value
+    let infix = document.querySelector('.js-infix-input').value
     let lname = document.querySelector('.js-last-name-input').value
+    let password = document.querySelector('.js-password-input').value
+    let zipcode = document.querySelector('.js-zip-code-input').value
+    let gender = document.querySelector('.js-gender-input').value
+    let email = document.querySelector('.js-email-input').value
+    let phonenum = document.querySelector('.js-phonenum-input').value
+    let birthdate = document.querySelector('.js-birthdate-input').value
+    let tools = document.querySelector('.js-tools-input').value
+    let introduction = document.querySelector('.js-introduction-input').value
+    let details = document.querySelector('.js-details-input').value
+    let agreementTerms = document.querySelector('.js-agreement-terms-input').value
+    let supervisor = document.querySelector('.js-supervisor-input').value
+    let nameSupervisor = document.querySelector('.js-supervisor-name-input').value
+    let phonenumSupervisor = document.querySelector('.js-supervisor-phonenum-input').value
+    let emailParent = document.querySelector('.js-supervisor-email-input').value
+    let preferredApproach = document.querySelector('.js-preferred-approach-input').value
+    let researchType = document.querySelector('.js-researchtype-input').value
+    let availability = document.querySelector('.js-availability-input').value
+    let status = document.querySelector('.js-status-input').value
+    let colorForeground = document.querySelector('.js-color-foreground-input').value
+    let colorBackground = document.querySelector('.js-color-background-input').value
 
+    console.log(fname, lname, zipcode, nameSupervisor, researchType)
     fetch('/api/save-signup', {
         method: 'POST',
         headers: {
@@ -29,14 +51,35 @@ function saveSignup () {
         },
         body: JSON.stringify({
             fname: fname,
-            lname: lname
+            infix: infix,
+            lname: lname,
+            password: password,
+            zipcode: zipcode,
+            gender: gender,
+            email: email,
+            phonenum: phonenum,
+            birthdate: birthdate,
+            tools: tools,
+            introduction: introduction,
+            details: details,
+            agreement_terms: agreementTerms,
+            supervisor: supervisor,
+            name_supervisor: nameSupervisor,
+            phonenum_supervisor: phonenumSupervisor,
+            email_parent: emailParent,
+            preferred_approach: preferredApproach,
+            research_type: researchType,
+            availability: availability,
+            status: status,
+            color_foreground: colorForeground,
+            color_background: colorBackground})
 
         })
-    })
-            .then(response => response.json())
+            .then(response => response)
             .then(data => {
                 console.log(data)
             })
 }
 
 
+document.querySelector(".js-submit-button").addEventListener("click", saveSignup);
