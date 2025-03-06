@@ -37,6 +37,10 @@ def get_onderzoeken():
         dictresult.append(dict(row))
     return {"onderzoeken": dictresult}
 
+@app.route("api/overzicht_onderzoeken",methods=["GET"])
+def overzicht_onderzoeken(organisatie_id):
+    organisatie_id = 1 # for now
+    organisatie_onderzoeken = organisatie.get_all_onderzoeken(organisatie_id) 
 
 @app.route("/api/overzicht_onderzoeken/<onderzoek_id>",methods=["PATCH"])
 def update_onderzoek_gegevens(onderzoek_id):
@@ -55,8 +59,8 @@ def update_onderzoek_gegevens(onderzoek_id):
     datum_tot = request.json["datumtot"]
     if datum_tot == "":
         return jsonify("Datum tot cant be empty!"),400
-    
-    updated_onderzoek_gegevens = organisatie.update_onderzoek(title,beschrijving,datum_vanaf,datum_tot,onderzoek_id)
+    organisatie_id = 1
+    updated_onderzoek_gegevens = organisatie.update_onderzoek(title,beschrijving,datum_vanaf,datum_tot,onderzoek_id,organisatie_id)
     return jsonify(updated_onderzoek_gegevens),200
 
 

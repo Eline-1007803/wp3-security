@@ -39,6 +39,12 @@ class Organisatie:
         self.con.commit()
         return True
 
+    def get_all_onderzoeken(self, organisatie_id):
+        result = self.cursor.execute(
+            "SELECT * FROM onderzoeken WHERE organisatie_id = ?", str(organisatie_id)
+        ).fetchall()
+        return result
+
     def get_last_onderzoek_id(self):
         result = self.cursor.execute(
             "SELECT max(onderzoek_id) FROM onderzoeken"
@@ -53,10 +59,12 @@ class Organisatie:
         self.con.commit()
         return True
 
-    def update_onderzoek(self, title, beschrijving, datumvanaf, datumtot, onderzoek_id):
+    def update_onderzoek(
+        self, title, beschrijving, datumvanaf, datumtot, onderzoek_id, organisatie_id
+    ):
         self.cursor.execute(
-            "INSERT INTO x (title, beschrijving,datumvanaf,datumtot,onderzoek_id) VALUES (?,?,? ?,?)",
-            (title, beschrijving, datumvanaf, datumtot, onderzoek_id),
+            " UPDATE onderzoeken SET title = ?, beschrijving = ?, datumvanaf = ?,datumtot = ? WHERE organisatie_id = ?",
+            (title, beschrijving, datumvanaf, datumtot, onderzoek_id, organisatie_id),
         )
         self.con.commit()
         return True
