@@ -16,6 +16,7 @@
             <th>Beschikbaarheid</th>
             <th>Leeftijd van</th>
             <th>Leeftijd tot</th>
+            <th>Beperking(en)</th>
             <th style="width: 20%;">Acties</th>
         </tr>
         {%for onderzoek in onderzoeken%}
@@ -27,6 +28,7 @@
                 {%endif%}</td>
             <td>{{onderzoek.leeftijd_van}}</td>
             <td>{{onderzoek.leeftijd_tot}}</td>
+            <td>{{onderzoek.beperking}}</td>
             <td><select name="actie" id="actie" aria-label="Selecteer een van onder (keuze optie)">
                 <option value="">Kies..</option>
                 <option value="goedkeuren">Goedkeuren</option>
