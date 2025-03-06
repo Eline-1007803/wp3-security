@@ -63,7 +63,7 @@ class Organisatie:
         self, title, beschrijving, datumvanaf, datumtot, onderzoek_id, organisatie_id
     ):
         self.cursor.execute(
-            " UPDATE onderzoeken SET title = ?, beschrijving = ?, datumvanaf = ?,datumtot = ? WHERE organisatie_id = ?",
+            " UPDATE onderzoeken SET titel = ?, beschrijving = ?, datum_vanaf = ?,datum_tot = ? onderzoek_id = ? WHERE organisatie_id = ?",
             (title, beschrijving, datumvanaf, datumtot, onderzoek_id, organisatie_id),
         )
         self.con.commit()
