@@ -54,13 +54,16 @@ def update_onderzoek_gegevens(onderzoek_id):
         return jsonify("Beschhijving can't be empty!"),400
     
     datum_vanaf = request.json["datumvanaf"]
-    if datum_vanaf == "":
-        return jsonify("Datum vanaf cant be empty!"),400
+    date_vanaf = datetime.strptime(datum_vanaf,"%Y-%m-%d")
+    if datum_vanaf == "" or date_vanaf < datetime.now():
+        return jsonify("You have not chosen a date from or chosen a past date."),400
     
     datum_tot = request.json["datumtot"]
-    if datum_tot == "":
-        return jsonify("Datum tot cant be empty!"),400
-    organisatie_id = 1
+    date_tot = datetime.strptime(datum_tot,"%Y-%m-%d")
+    if datum_tot == "" or date_tot < date_vanaf:
+        return jsonify("You have not chosen a date till or chosen a date before date from"),400
+    
+    organisatie_id = 1 #for now
     updated_onderzoek_gegevens = organisatie.update_onderzoek(title,beschrijving,datum_vanaf,datum_tot,onderzoek_id,organisatie_id)
     return jsonify(updated_onderzoek_gegevens),200
 
