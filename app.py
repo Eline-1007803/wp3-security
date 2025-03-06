@@ -37,10 +37,11 @@ def get_onderzoeken():
         dictresult.append(dict(row))
     return {"onderzoeken": dictresult}
 
-@app.route("api/overzicht_onderzoeken",methods=["GET"])
-def overzicht_onderzoeken(organisatie_id):
+@app.route("/api/overzicht_onderzoeken",methods=["GET"])
+def overzicht_onderzoeken():
     organisatie_id = 1 # for now
-    organisatie_onderzoeken = organisatie.get_all_onderzoeken(organisatie_id) 
+    onderzoeken = organisatie.get_all_onderzoeken(organisatie_id)
+    return render_template("overzicht_onderzoeken.html",onderzoeken=onderzoeken)
 
 @app.route("/api/overzicht_onderzoeken/<onderzoek_id>",methods=["PATCH"])
 def update_onderzoek_gegevens(onderzoek_id):
