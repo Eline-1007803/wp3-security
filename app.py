@@ -203,9 +203,10 @@ def onderzoek_aanvragen_organisatie():
         return jsonify("Datum tot cant be empty!"), 400
 
     type_onderzoek = request.json["typeonderzoek"]
-    if type_onderzoek == "":
-        return jsonify("Kies type onderzoek!"), 400
-
+    if type_onderzoek == "locatie":
+            if locatie == "":
+                return jsonify("Typ hier de locatie!"),400
+            
     locatie = request.json["locatie_text"]
     met_beloning = request.json["metbeloning"]
     hoeveel_beloning = request.json["beloning"]
