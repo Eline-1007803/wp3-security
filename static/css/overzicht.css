@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    font-weight: 200;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+h1
+{
+    position: absolute;
+    top: 10px;
+    text-align: center;
+    width: 100%;
+    font-family: "Montserrat", serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: x-large;
+    color: #3b3b3b;
+    margin: 0 0 30px 0;
+}
+table
+{
+    width: 40%;
+    height: 17%;
+}
+table, th, td 
+{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid black;
+    border-radius: 10px;
+}
+td
+{
+    text-align: center;
+}
+tr:nth-child(even) 
+{
+    background-color: gray;
+}
+.button
+{
+    margin-left: 10px;
+    color: black;
+    font-size: large;
+}
