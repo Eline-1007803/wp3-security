@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Overzicht beheerders</title>
+    <link rel="stylesheet" href="../static/css/administrators-overview.css">
+</head>
+
+<body>
+ <!-- pop up after clicking button to add administrators-->
+    <div class="js-background background hide"></div>
+
+      <div class="js-add administrator-add hide">
+        <img class="js-cross-image cross-image" src="../static/images/cross.svg">
+        <h1>Toevoegen</h1>
+        <div>
+            <label for="fname-input">Voornaam:</label>
+            <input class="js-fname-input" id="fname-input">
+            <label for="lname-input">Achternaam:</label>
+            <input class="js-lname-input" id="lname-input">
+            <label for="email-input">E-mailadres:</label>
+            <input class="js-email-input" id="email-input">
+            <button class="div-add-button action-button js-add-button" type="submit">Toevoegen<img class="action-img add-img" src="../static/images/add-icon.svg"></button>
+        </div>
+    </div>
+
+<!-- pop up to show details-->
+<div class="administrator-details js-details hide">
+
+
+</div>
+
+ <!-- pop up to edit administrator info -->
+     <div class="js-edit administrator-edit hide">
+        <!-- <h1>Bewerken</h1>
+        <label for="fname-update">Voornaam:</label>
+         <input class="js-fname-update" id="fname-update" type="text" value="michael">
+         <label for="lname-update">Achternaam:</label>
+         <input class="js-lname-update" type="text" value="van gerwen" id="lname-update">
+         <label for="email-update">Email:</label>
+         <input class="js-email-update" type="text" value="michael@vangerwen.nl" id="email-update">
+         <button class="div-edit-button action-button js-popup-edit-button" type="submit">Bewerken<img class="action-img" src="../static/images/edit-icon-2.png"></button>
+    -->
+     </div>
+
+    <!-- pop up to delete administrator -->
+    <div class="js-delete administrator-delete hide">
+        <img class="js-cross-image cross-image" src="../static/images/cross.svg">
+        <!-- <h1>Verwijderen</h1>
+        <p>Naam: Michael van Gerwen</p>
+        <p>E-mailadres:</p>
+        <button class="div-delete-button action-button" type="submit">Verwijderen<img class="action-img" src="../static/images/bin-icon.png"></button>
+        -->
+    </div>
+
+ <!-- administrator overview -->
+    <h1> Beheerders overzicht</h1>
+    <button class="add-administrator-button">Beheerder toevoegen<img class="action-img add-img" src="../static/images/add-icon.svg"></button>
+
+    <table class="administrator-table">
+        <thead class="table-th">
+        <tr>
+            <th>Naam</th>
+            <th>E-mail</th>
+            <th>Bewerken</th>
+
+        </tr>
+        </thead>
+        <tbody class="js-administrator-table">
+
+<!--        <tr>-->
+<!--            <td></td>-->
+<!--            <td></td>-->
+<!--            <td><button class="action-button details-button">Details<img class="action-img eye-img" src="../static/images/eye-icon.png"></button><button class="action-button edit-button">Bewerken<img class="action-img" src="../static/images/edit-icon-2.png"></button><button class="action-button delete-button">Verwijderen<img class="action-img" src="../static/images/bin-icon.png"></button></td>-->
+<!--        </tr>-->
+
+        </tbody>
+
+    </table>
+
+    <script src="/static/javascript/administrators-overview-javascript.js"></script>
+</body>
+</html>

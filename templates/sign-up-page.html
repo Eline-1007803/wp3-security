@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <title>Aanmelden</title>
@@ -7,23 +7,28 @@
 </head>
 <body>
 <h1>Aanmelden</h1>
-    <form>
+    <div>
         <label for="first-name-input">Voornaam:</label>
-        <input id="first-name-input" name="first-name-input" type="text">
+        <input class="js-first-name-input" id="first-name-input" name="first-name-input" type="text" required>
+        <label for="infix-input">
+        <input class="js-infix-input" id="infix-input" type="text">
         <label for="last-name-input">Achternaam:</label>
-        <input id="last-name-input" name="last-name-input" type="text">
+        <input class="js-last-name-input" id="last-name-input" name="last-name-input" type="text">
+        <label for="password-input">
+        <input class="js-password-input" id="password-input" name="password-input" type="text">
         <label for="zip-code-input">Postcode:</label>
-        <input id="zip-code-input" name="zip-code-input" type="text">
+        <input class="js-zip-code-input" id="zip-code-input" name="zip-code-input" type="text">
         <label for="gender-input">Geslacht:</label>
-        <input id="gender-input" name="gender-input" type="text">
+        <input class="js-gender-input" id="gender-input" name="gender-input" type="text">
         <label for="email-input">E-mailadres:</label>
-        <input id="email-input" name="email-input" type="email">
+        <input class="js-email-input" id="email-input" name="email-input" type="email">
         <label for="phone-number-input">Telefoonnummer:</label>
-        <input id="phone-number-input" name="phone-number-input" type="tel">
+        <input class="js-phonenum-input" id="phone-number-input" name="phone-number-input" type="tel">
         <label for="date-of-birth-input">Geboortedatum:</label>
-        <input id="date-of-birth-input" name="date-of-birth-input" type="date">
+        <input class="js-birthdate-input" id="date-of-birth-input" name="date-of-birth-input" type="date">
+
         <label for="disability-type-input">Type beperking:</label>
-        <select id="disability-type-input" name="disability-type-input">
+        <select id="disability-type-input" name="disability-type-input" multiple>
 
             <optgroup label="Auditieve beperkingen">
                 <option value="deaf">Doof</option>
@@ -59,45 +64,56 @@
                 <option value="migraine">Migraine</option>
             </optgroup>
         </select>
-        <label for="used-resources-input">Gebruikte hulpmiddelen</label>
-        <input class="form-input" id="used-resources-input" name="used-resources-input" type="text">
-        <label for="short-introduction-input">Korte introductie:</label>
-        <textarea id="short-introduction-input" name="short-introduction-input" type=""></textarea>
+        <label for="tools-input">Gebruikte hulpmiddelen:</label>
+        <input class="js-tools-input" id="tools-input" name="tools-input" type="text">
+        <label for="introduction-input">Korte introductie:</label>
+        <textarea class="js-introduction-input" id="introduction-input" name="introduction-input" type="text"></textarea>
 
 <!--Optional-->
         <label for="details-input">Bijzonderheden:</label>
-        <textarea id="details-input" name="details-input" placeholder="Eventuele extra informatie over uw beperking/beperkingen">+-</textarea>
-        <label for="agree-terms-and-conditions-input">Akkoord met voorwaarden:</label>
-        <input id="agree-terms-and-conditions-input" name="agree-terms-and-conditions-input" type="checkbox">
-
+        <textarea class="js-details-input" id="details-input" name="details-input" placeholder="Eventuele extra informatie over uw beperking/beperkingen">+-</textarea>
+        <label for="agreement-terms-input">Akkoord met voorwaarden:</label>
+        <input class="js-agreement-terms-input" id="agreement-terms-input" name="agreement-terms-input" type="checkbox">
         <label for="supervisor-input">Toezichthouder/voogd:</label>
-        <input id="supervisor-input" name="supervisor-input" type="checkbox">
+        <input class="js-supervisor-input" id="supervisor-input" name="supervisor-input" type="checkbox">
 
         <div class="hide js-supervisor-info supervisor-info">
 <!--only show if supervisor checkbox is checked -->
             <label for="supervisor-name-input">Naam van voogd of toezichthouder:</label>
-            <input id="supervisor-name-input" name="supervisor-name-input">
+            <input class="js-supervisor-name-input" id="supervisor-name-input" name="supervisor-name-input">
             <label for="supervisor-email-input">E-mailadres van voogd of toezichthouder:</label>
-            <input id="supervisor-email-input" name="supervisor-email-input" type="email">
-            <label for="supervisor-phone-number-input">Telefoonnummer van voogd of toezichthouder</label>
-            <input id="supervisor-phone-number-input" name="supervisor-phone-number-input" type="tel">
+            <input class="js-supervisor-email-input" id="supervisor-email-input" name="supervisor-email-input" type="email">
+            <label for="supervisor-phone-number-input">Telefoonnummer van voogd of toezichthouder:</label>
+            <input class="js-supervisor-phonenum-input" id="supervisor-phone-number-input" name="supervisor-phone-number-input" type="tel">
+            <br>
         </div>
 
-        <label for="preference-approach-input">Voorkeur benadering</label>
-        <select id="preference-approach-input">
+        <span class="js-space hide"></span>
+
+        <label for="preference-approach-input">Voorkeur benadering:</label>
+        <select class="js-preferred-approach-input" id="preference-approach-input">
             <option value="email">Email</option>
             <option value="telephone">Telefonisch</option>
         </select>
 
         <label for="type-research-input">Type onderzoek:</label>
-        <select id="type-research-input">
+        <select class="js-researchtype-input" id="type-research-input">
             <option value="telephone">Telefonisch</option>
             <option value="internet">Internet</option>
             <option value="location">Op locatie</option>
         </select>
-        <label for="details-availability-input">Bijzonderheden beschikbaarheid:</label>
-        <textarea id="details-availability-input" name="details-availability-input"></textarea>
-    </form>
+        <label for="availability-input">Bijzonderheden beschikbaarheid:</label>
+        <textarea class="js-availability-input" id="availability-input" name="details-availability-input"></textarea>
+
+        <label>Status:</label>
+        <input class="js-status-input">
+        <label>Voorgrond kleur:</label>
+        <input class="js-color-foreground-input">
+        <label>Achtergrond kleur:</label>
+        <input class="js-color-background-input">
+
+        <button class="js-submit-button submit-button" type="submit">Indienen</button>
+    </div>
 
     <script src="/static/javascript/sign-up-page-javascript.js"></script>
 </body>

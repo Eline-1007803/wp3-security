@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +15,10 @@
         <label for="password">Password:</label>
         <input type="password" name="password" id="password" placeholder="Password" required>
         <input type="submit" value="Login" aria-label="Druk om in te loggen">
-        <p>Heeft u geen account?<a href="sign-up-page.html" aria-label="Druk op dit button om te registreren" > Sign up!</a></p>
+        <p>Heeft u geen account?<a href="{{ url_for('expert_sign_up') }}" aria-label="Druk op dit button om te registreren" > Sign up!</a></p>
     </form>
+
+<script src="/static/javascript/login.js"></script>
 </body>
+
 </html>
