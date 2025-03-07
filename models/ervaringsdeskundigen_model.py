@@ -14,3 +14,6 @@ class Ervaringsdeskundigen:
                 full join alle_beperkingen on (geregistreerde_beperkingen.beperking_id = alle_beperkingen.beperking_id)
                 WHERE status = 'nieuw'""").fetchall()
         return result
+    def update_status(self, deskundige_id, status):
+        self.cursor.execute("UPDATE ervaringsdeskundigen SET status = ? WHERE ervaringsdeskundige_id = ?", (status, deskundige_id))
+        self.con.commit()
