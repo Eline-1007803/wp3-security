@@ -7,7 +7,7 @@
     font-style: normal;
 }
 
-body {
+main {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
@@ -51,7 +51,7 @@ tr:nth-child(even)
 {
     background-color: gray;
 }
-.button
+.update,.users
 {
     margin-left: 10px;
     color: black;
