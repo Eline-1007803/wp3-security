@@ -20,7 +20,11 @@ def get_deskundigen():
 
 @app.route('/api/deskundigen', methods=['PUT'])
 def update_deskundigen():
-    pass
+    edm = ervaringsdeskundigen_model.Ervaringsdeskundigen()
+    status = request.json.get('status')
+    deskundige_id = request.json.get('id')
+    edm.update_status(deskundige_id, status)
+    return "200"
 
 @app.route('/api/inschrijvingen', methods=['GET'])
 def get_inschrijvingen():
