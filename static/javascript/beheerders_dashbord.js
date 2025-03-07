@@ -35,6 +35,7 @@ function refresh_modals_deskundigen(data) {
                       <h2>${deskundigenElement.volle_naam}</h2>
                       <main class="row">
                           <section class="column">
+                              <p class="id">${deskundigenElement.ervaringsdeskundige_id}</p>
                               <h3>Persoonlijke informatie</h3>
                               <h4>Geslacht:</h4>
                               <p>${deskundigenElement.geslacht}</p>
@@ -83,6 +84,11 @@ function refresh_modals_deskundigen(data) {
   const spans = deskundigen_modals.querySelectorAll('.close');
   const deskundigen_gb = deskundigen_modals.querySelectorAll('.goedkeur_button');
   const deskundigen_ab = deskundigen_modals.querySelectorAll('.afkeur_button');
+  const ids = deskundigen_modals.querySelectorAll('.id')
+
+  ids.forEach((id) => {
+      id.style.display = 'none';
+  });
 
   btns.forEach((btn, index) => {
       btn.addEventListener('click', () => {
@@ -94,6 +100,15 @@ function refresh_modals_deskundigen(data) {
   deskundigen_gb.forEach((gb, index) => {
       gb.addEventListener('click', () => {
           modals[index].style.display = 'none';
+          let id = modals[index].getElementsByClassName('id')[0].innerHTML
+          console.log(id)
+          fetch('/api/deskundigen', {
+              method: 'PUT',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({"status": "goedgekeurd", "id":id})
+          }).then(r => r.json())
           revive_interval()
       });
   });
@@ -101,6 +116,15 @@ function refresh_modals_deskundigen(data) {
   deskundigen_ab.forEach((ab, index) => {
       ab.addEventListener('click', () => {
           modals[index].style.display = 'none';
+          let id = modals[index].getElementsByClassName('id')[0].innerHTML
+          console.log(id)
+          fetch('/api/deskundigen', {
+              method: 'PUT',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({"status": "afgekeurd", "id":id})
+          }).then(r => r.json())
           revive_interval()
       });
   });
@@ -382,5 +406,6 @@ function kill_interval() {
 }
 
 function revive_interval() {
+    get_all()
     interval = setInterval(get_all, 3000);
 }
