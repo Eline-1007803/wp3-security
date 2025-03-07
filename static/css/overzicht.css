@@ -53,6 +53,8 @@ tr:nth-child(even)
 }
 .update,.users
 {
+    border: none;
+    background: transparent;
     margin-left: 10px;
     color: black;
     font-size: large;
