@@ -18,6 +18,10 @@ def get_deskundigen():
         dictresult.append(dict(row))
     return {"deskundigen": dictresult}
 
+@app.route('/api/deskundigen', methods=['PUT'])
+def update_deskundigen():
+    pass
+
 @app.route('/api/inschrijvingen', methods=['GET'])
 def get_inschrijvingen():
     ism = inschrijvingen_model.Inschrijvingen()
@@ -27,6 +31,10 @@ def get_inschrijvingen():
         dictresult.append(dict(row))
     return {"inschrijvingen": dictresult}
 
+@app.route('/api/inschrijvingen', methods=['PUT'])
+def update_inschrijvingen():
+    pass
+
 @app.route('/api/onderzoeken', methods=['GET'])
 def get_onderzoeken():
     ozm = onderzoeken_model.Onderzoeken()
@@ -35,6 +43,10 @@ def get_onderzoeken():
     for row in result:
         dictresult.append(dict(row))
     return {"onderzoeken": dictresult}
+
+@app.route('/api/onderzoeken', methods=['PUT'])
+def update_onderzoeken():
+    pass
 
 
 @app.route("/onderzoekaanvragen",methods=["GET"])
