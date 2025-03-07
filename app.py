@@ -243,11 +243,10 @@ def onderzoek_aanvragen_organisatie():
         return jsonify("Datum tot cant be empty!"), 400
 
     type_onderzoek = request.json["typeonderzoek"]
+    locatie = request.json["locatie_text"]
     if type_onderzoek == "locatie":
             if locatie == "":
                 return jsonify("Typ hier de locatie!"),400
-            
-    locatie = request.json["locatie_text"]
     met_beloning = request.json["metbeloning"]
     hoeveel_beloning = request.json["beloning"]
     if met_beloning == "1":
