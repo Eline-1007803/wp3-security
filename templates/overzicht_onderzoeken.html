@@ -35,12 +35,30 @@
                     <option value="goedkeuren">Goedkeuren</option>
                     <option value="sluiten">Sluiten</option>
                 </select>
-                <button class="update" id="myButton" aria-label="update onderzoek"><i class="fa-solid fa-gear"></i></button>
-                <button class="users" id="myButton" aria-label="gebruikers die ingeschreven zijn"><i class="fa-solid fa-user"></i></button>
+                <button class="update" id="update_button" aria-label="update onderzoek"><i class="fa-solid fa-gear"></i></button>
+                <button class="users" id="users_button" aria-label="gebruikers die ingeschreven zijn"><i class="fa-solid fa-user"></i></button>
                 </td>
             </tr>
             {%endfor%}
         </table>
+        <div class="modal" id="update_modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form method="post">
+                    <h2>Wijzig onderzoek gegevens</h2>
+                    <label for="title">Title:</label>
+                    <input type="text" name="title" id="title" required><br>
+                    <label for="beschrijving">Beschrijving</label>
+                    <textarea name="beschrijving" id="beschrijving" required></textarea><br>
+                    <label for="datevanaf">Datum vanaf:</label>
+                    <input type="date" name="datevanaf" id="datevanaf" required><br>
+                    <label for="datetot">Datum tot:</label>
+                    <input type="date" name="datetot" id="datetot" required><br>
+                    <input type="submit" value="Wijzig">
+                </form>
+            </div>
+        </div>
     </main>
+    <script src="/static/javascript/overzicht_onderzoeken.js"></script>
 </body>
 </html>
