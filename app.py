@@ -17,6 +17,12 @@ app = Flask(__name__)
 app.secret_key = "wp3"
 
 
+
+@app.route('/login')
+def login_page():
+    return render_template("login.html")
+
+
 @app.route("/", methods=["GET"])
 def test():
     if request.method == "GET":

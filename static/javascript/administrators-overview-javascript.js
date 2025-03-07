@@ -43,6 +43,7 @@ function showAdministrator (administrators) {
                         console.log('yaas');
                         document.querySelector(".js-background").classList.remove("hide");
                         document.querySelector(".js-add").classList.remove("hide");
+
                 });
             })
 
@@ -133,9 +134,17 @@ function showSingleAdministrator(administrator) {
 }
 
 
-
 // to add an administrator when you click on add administrator button
-document.querySelector(".js-add-button").addEventListener("click", addAdministrator);
+document.querySelector(".js-add-button").addEventListener("click", () => {
+        addAdministrator ()
+         document.querySelector(".js-background").classList.add("hide");
+        document.querySelector(".js-add").classList.add("hide");
+        document.querySelector(".js-details").classList.add("hide");
+        document.querySelector(".js-edit").classList.add("hide");
+        document.querySelector(".js-delete").classList.add("hide");
+
+});
+
 
 function addAdministrator () {
         let fname = document.querySelector('.js-fname-input').value
@@ -216,6 +225,7 @@ function showAdminEditPopup(administrator) {
         const popupEditButton = document.querySelector(".js-popup-edit-button")
         const adminId = popupEditButton.dataset.adminId
         editAdministrator(adminId);
+        closePopUp()
 })
          // closing pop up
         document.querySelectorAll(".js-cross-image").forEach(crossImage => {
@@ -274,6 +284,7 @@ function showAdminDeletePopup (administrator) {
                 const popupDeleteButton = document.querySelector(".js-delete-button")
                 const adminId = popupDeleteButton.dataset.adminId
                 deleteAdministrator(adminId)
+                closePopUp()
         })
 
          // closing pop up

@@ -15,6 +15,24 @@ function showSupervisorForm () {
 
 checkbox.addEventListener("change", showSupervisorForm);
 
+document.querySelector('.js-birthdate-input').addEventListener('change', () =>
+{
+    let birthdate = document.querySelector('.js-birthdate-input').value
+    let dateParse = Date.parse(birthdate);
+    let dateToday = Date.now();
+    let ageInMilliseconds = dateToday - dateParse;
+    console.log(ageInMilliseconds);
+
+    const minute = 1000 * 60;
+    const hour = minute * 60;
+    const day = hour * 24;
+    const year = day * 365;
+    let ageInYears = Math.round(ageInMilliseconds / year);
+    console.log(ageInYears);
+        if (ageInYears < 18) {
+            document.querySelector('.js-supervisor-info').classList.remove('hide');
+}
+})
 
 
 
@@ -77,9 +95,9 @@ function saveSignup () {
         })
             .then(response => response)
             .then(data => {
-                console.log(data)
-            })
+                console.log(data);
+            });
 }
 
-
 document.querySelector(".js-submit-button").addEventListener("click", saveSignup);
+
