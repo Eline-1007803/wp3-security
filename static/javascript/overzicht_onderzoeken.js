@@ -76,3 +76,27 @@ function showOnderzoeken (onderzoeken) {
   document.getElementById("onderzoeken_tabel").innerHTML += row;
   });
 }
+function update_onderzoek(onderzoek_id)
+{
+  let titel = document.getElementById("tiutel").value
+  let beschrijving = document.getElementById("beschrijving").value
+  let datumvanaf = document.getElementById("datumvanaf").value
+  let datumtot = document.getElementById("datumtot").value
+
+  fetch(`/api/overzicht_onderzoeken_organisatie/edit/${onderzoek_id}`, {
+    method: 'PATCH',
+    headers: {
+            'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      "titel":titel,
+      "beschrijving":beschrijving,
+      "datumvanaf":datumvanaf,
+      "datumtot":datumtot
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+  })
+}
