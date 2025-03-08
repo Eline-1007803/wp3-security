@@ -168,9 +168,17 @@ def beperkingen():
 
 @app.route("/api/overzicht_onderzoeken", methods=["GET"])
 def overzicht_onderzoeken():
+    return render_template("overzicht_onderzoeken.html")
+
+@app.route("/api/overzicht_onderzoeken_organisatie", methods=["GET"])
+def overzicht_onderzoeken_organisatie():
     organisatie_id = 1  # for now
-    onderzoeken = organisatie.get_all_onderzoeken(organisatie_id)
-    return render_template("overzicht_onderzoeken.html", onderzoeken=onderzoeken)
+    onderzoek = organisatie.get_all_onderzoeken(organisatie_id)
+    onderzoeken = []
+    for row in onderzoek:
+        onderzoeken.append(dict(row))
+    return jsonify(onderzoeken)
+
 
 
 @app.route("/api/overzicht_onderzoeken/<onderzoek_id>", methods=["PATCH"])
