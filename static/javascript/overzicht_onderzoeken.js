@@ -38,3 +38,41 @@ window.onclick = function(event) {
     user_modal.style.display = "none";
   }
 }
+
+
+fetch('/api/overzicht_onderzoeken_organisatie', {
+  method: 'GET',
+  headers: {
+          'Accept': 'application/json'
+  }
+})
+.then(response => response.json())
+.then(onderzoeken => showOnderzoeken(onderzoeken))
+
+
+function showOnderzoeken (onderzoeken) {
+  onderzoeken.forEach((onderzoek) => {
+          console.log(onderzoek)
+
+         let row =
+          `
+          <tr>
+                <td>${onderzoek.titel}</td>
+                <td>${onderzoek.status}</td>
+                <td>Ja</td>
+                <td>${onderzoek.leeftijd_van}</td>
+                <td>${onderzoek.leeftijd_tot}</td>
+                <td>${onderzoek.beperking}</td>
+                <td><select name="actie" id="actie" aria-label="Selecteer een van onder (keuze optie)">
+                    <option value="">Kies..</option>
+                    <option value="goedkeuren">Goedkeuren</option>
+                    <option value="sluiten">Sluiten</option>
+                </select>
+                <button class="update" id="update_button" aria-label="update onderzoek"><i class="fa-solid fa-gear"></i></button>
+                <button class="users" id="users_button" aria-label="gebruikers die ingeschreven zijn"><i class="fa-solid fa-user"></i></button>
+                </td>
+            </tr>
+          `
+  document.getElementById("onderzoeken_tabel").innerHTML += row;
+  });
+}

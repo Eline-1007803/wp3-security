@@ -10,7 +10,7 @@
 <body>
     <main>
         <h1>Overzicht Onderzoeken</h1>
-        <table>
+        <table id="onderzoeken_tabel">
             <tr>
                 <th>Title</th>
                 <th>Status</th>
@@ -20,16 +20,13 @@
                 <th>Beperking(en)</th>
                 <th style="width: 25%;">Acties</th>
             </tr>
-            {%for onderzoek in onderzoeken%}
             <tr>
-                <td>{{onderzoek.titel}}</td>
-                <td>{{onderzoek.status}}</td>
-                <td>{%if onderzoek.beschikbaar | int == 1 %} Ja 
-                    {%else%} Nee
-                    {%endif%}</td>
-                <td>{{onderzoek.leeftijd_van}}</td>
-                <td>{{onderzoek.leeftijd_tot}}</td>
-                <td>{{onderzoek.beperking}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td><select name="actie" id="actie" aria-label="Selecteer een van onder (keuze optie)">
                     <option value="">Kies..</option>
                     <option value="goedkeuren">Goedkeuren</option>
@@ -39,7 +36,6 @@
                 <button class="users" id="users_button" aria-label="gebruikers die ingeschreven zijn"><i class="fa-solid fa-user"></i></button>
                 </td>
             </tr>
-            {%endfor%}
         </table>
         <div class="modal" id="update_modal">
             <div class="modal-content">
