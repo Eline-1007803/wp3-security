@@ -73,3 +73,7 @@ class Organisatie:
     def get_all_disabilities(self):
         result = self.cursor.execute("SELECT * FROM alle_beperkingen").fetchall()
         return result
+    
+    def get_onderzoek(self, onderzoek_id):
+        result = self.cursor.execute("SELECT * FROM onderzoeken WHERE onderzoek_id = ?",(onderzoek_id,)).fetchone()
+        return result

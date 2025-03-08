@@ -179,9 +179,14 @@ def overzicht_onderzoeken_organisatie():
         onderzoeken.append(dict(row))
     return jsonify(onderzoeken)
 
+@app.route("/api/overzicht_onderzoeken_organisatie/<onderzoek_id>", methods=["GET"])
+def get_onderzoek(onderzoek_id):
+    onderzoek_id = organisatie.get_onderzoek(onderzoek_id)
+    onderzoek = dict(onderzoek_id)
+    return jsonify(onderzoek)
 
 
-@app.route("/api/overzicht_onderzoeken/<onderzoek_id>", methods=["PATCH"])
+@app.route("/api/overzicht_onderzoeken_organisatie/edit/<onderzoek_id>", methods=["PATCH"])
 def update_onderzoek_gegevens(onderzoek_id):
     title = request.json["titel"]
     if title == "":
