@@ -219,8 +219,11 @@ def update_onderzoek_gegevens(onderzoek_id):
 
 @app.route("/api/overzicht_onderzoeken_organisatie/<onderzoek_id>/users",methods=["GET"])
 def ingeschreven_users_onderzoekid(onderzoek_id):
-    onderzoek = organisatie
-    return jsonify(onderzoek)
+    onderzoek = organisatie.get_users_by_onderzoek(onderzoek_id)
+    onderzoeken = []
+    for row in onderzoek:
+        onderzoeken.append(dict(row))
+    return jsonify(onderzoeken)
 
 
 @app.route("/onderzoekaanvragen", methods=["GET"])
