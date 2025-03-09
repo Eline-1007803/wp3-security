@@ -180,7 +180,7 @@ function refresh_modals_inschrijvingen(data) {
                   <div class="modal-content">
                       <button class="close" id="close${i}" >&times;</button>
                       <h2>${inschrijvingenElement.volle_naam} wil zich inschrijven voor '${inschrijvingenElement.titel}'</h2>
-                      <p>${inschrijvingenElement.inschrijving_id}</p>
+                      <p class="id">${inschrijvingenElement.inschrijving_id}</p>
                       <main class="row">
                           <section class="column">
                               <h3>Informatie deskundige</h3>
@@ -234,11 +234,13 @@ function refresh_modals_inschrijvingen(data) {
   const inschrijvingen_spans = inschrijvingen_modals.querySelectorAll('.close');
   const inschrijvingen_gb = inschrijvingen_modals.querySelectorAll('.goedkeur_button');
   const inschrijvingen_ab = inschrijvingen_modals.querySelectorAll('.afkeur_button');
-  const inschrijvingen_ids = inschrijving_modals.querySelectorAll('.id')
+  const inschrijvingen_ids = inschrijvingen_modals.querySelectorAll('.id')
 
   inschrijvingen_ids.forEach((id) => {
     id.style.display = 'none';
   });
+
+
   inschrijvingen_btns.forEach((btn, index) => {
       btn.addEventListener('click', () => {
           inschrijving_modals[index].style.display = 'block';
@@ -329,6 +331,7 @@ function refresh_modals_onderzoeken(data) {
                   <div class="modal-content">
                       <button class="close" id="close${i}" >&times;</button>
                       <h2>${onderzoekenElement.titel}</h2>
+                      <p class="id">${onderzoekenElement.onderzoek_id}</p>
                       <main class="row">
                           <section class="column">
                               <h3>Informatie onderzoek</h3>
@@ -368,6 +371,11 @@ function refresh_modals_onderzoeken(data) {
   const onderzoeken_spans = onderzoeken_modals.querySelectorAll('.close');
   const onderzoeken_gb = onderzoeken_modals.querySelectorAll('.goedkeur_button');
   const onderzoeken_ab = onderzoeken_modals.querySelectorAll('.afkeur_button');
+  const onderzoeken_ids = onderzoeken_modals.querySelectorAll('.id')
+
+  onderzoeken_ids.forEach((id) => {
+    id.style.display = 'none';
+  });
 
 
   onderzoeken_btns.forEach((btn, index) => {
@@ -380,6 +388,15 @@ function refresh_modals_onderzoeken(data) {
   onderzoeken_gb.forEach((gb, index) => {
       gb.addEventListener('click', () => {
           onderzoek_modals[index].style.display = 'none';
+          let id = onderzoek_modals[index].getElementsByClassName('id')[0].innerHTML
+          console.log(id)
+          fetch('/api/onderzoeken', {
+              method: 'PUT',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({"status": "goedgekeurd", "id":id})
+          }).then(r => r.json())
           revive_interval()
       });
   });
@@ -387,6 +404,15 @@ function refresh_modals_onderzoeken(data) {
   onderzoeken_ab.forEach((ab, index) => {
       ab.addEventListener('click', () => {
           onderzoek_modals[index].style.display = 'none';
+          let id = onderzoek_modals[index].getElementsByClassName('id')[0].innerHTML
+          console.log(id)
+          fetch('/api/onderzoeken', {
+              method: 'PUT',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({"status": "afgekeurd", "id":id})
+          }).then(r => r.json())
           revive_interval()
       });
   });
