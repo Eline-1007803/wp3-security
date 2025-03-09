@@ -17,7 +17,7 @@ class Onderzoeken:
     
     def get_open_research(self):
         result = self.cursor.execute(
-            """ SELECT titel, status, datum_vanaf, datum_tot, type
+            """ SELECT onderzoeken.*
                 FROM onderzoeken
                 WHERE onderzoeken.status = 'goedgekeurd'""").fetchall()
         
