@@ -9,23 +9,27 @@
     <main class="row">
         <section aria-labelledby="table-heading1" class="column">
         <h1 id="table-heading1">Openstaande onderzoeken</h1>
+        <h3>Onderzoeken voor u, klik voor meer informatie op het onderzoek wat u wilt bekijken</h3>
         <table class="table-clickable">
             <thead>
                 <tr>
-                    <th>Onderzoeken voor u</th>
+                    <th>Naam onderzoek</th>
+                    <th>Status</th>
+                    <th>Datum vanaf</th>
+                    <th>Datum tot</th>
+                    <th>Type onderzoek</th>
                 </tr>
             </thead>
             <tbody>
+                {%for onderzoek in onderzoeken%}
                 <tr>
-                    <td>Onderzoek 1</td>
-                    <td>Status</td>
+                    <td>{{onderzoek.titel}}</td>
+                    <td>{{onderzoek.status}}</td>
                     <td>Datum van onderzoek</td>
+                    <td></td>
+                    <td></td>
                 </tr>
-                <tr>
-                    <td>Onderzoek 2</td>
-                    <td>Status</td>
-                    <td>Datum van onderzoek</td>
-                </tr>
+                {%endfor%}
             </tbody>
         </table>
             </section>

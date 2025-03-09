@@ -289,6 +289,11 @@ def onderzoek_aanvragen_organisatie():
         organisatie.insert_onderzoek_disability(onderzoek_id, disability)
     return jsonify(onderzoek), 201
 
+@app.route('/openstaande_onderzoeken', methods=['GET'])
+def 
+
+@app.route('/openstaande_onderzoeken', methods=['POST'])
+def 
 
 if __name__ == "__main__":
     organisatie = organisatie_model.Organisatie()
