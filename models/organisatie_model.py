@@ -73,13 +73,24 @@ class Organisatie:
     def get_all_disabilities(self):
         result = self.cursor.execute("SELECT * FROM alle_beperkingen").fetchall()
         return result
-    
+
     def get_onderzoek(self, onderzoek_id):
-        result = self.cursor.execute("SELECT * FROM onderzoeken WHERE onderzoek_id = ?",(onderzoek_id,)).fetchone()
+        result = self.cursor.execute(
+            "SELECT * FROM onderzoeken WHERE onderzoek_id = ?", (onderzoek_id,)
+        ).fetchone()
         return result
-    
+
     def get_users_by_onderzoek(self, onderzoek_id):
         result = self.cursor.execute(
-            "SELECT ervaringsdeskundigen.* FROM inschrijvingen JOIN ervaringsdeskundigen ON inschrijvingen.ervaringsdeskundige_id = ervaringsdeskundigen.ervaringsdeskundige_id WHERE inschrijvingen.onderzoek_id = ?", (onderzoek_id,)
+            "SELECT ervaringsdeskundigen.* FROM inschrijvingen JOIN ervaringsdeskundigen ON inschrijvingen.ervaringsdeskundige_id = ervaringsdeskundigen.ervaringsdeskundige_id WHERE inschrijvingen.onderzoek_id = ?",
+            (onderzoek_id,),
         ).fetchall()
         return result
+
+    def update_onderzoek_status(self, onderzoek_id, status):
+        self.cursor.execute(
+            "UPDATE onderzoeken SET status = ? WHERE onderzoek_id = ?",
+            (status, onderzoek_id),
+        )
+        self.con.commit()
+        return True
