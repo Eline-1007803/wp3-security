@@ -54,7 +54,11 @@ def get_onderzoeken():
 
 @app.route('/api/onderzoeken', methods=['PUT'])
 def update_onderzoeken():
-    pass
+    ozm = onderzoeken_model.Onderzoeken()
+    status = request.json.get('status')
+    onderzoek_id = request.json.get('id')
+    ozm.update_status(onderzoek_id, status)
+    return "200"
 
 
 @app.route("/onderzoekaanvragen",methods=["GET"])
