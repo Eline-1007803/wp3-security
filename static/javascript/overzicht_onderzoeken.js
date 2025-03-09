@@ -88,6 +88,7 @@ function get_onderzoek(onderzoek_id) {
       .then(onderzoek => showOnderzoek(onderzoek))
 }
 
+
 function showOnderzoek(onderzoek)
 {
   const onderzoekPOPUP = document.getElementById("update_modal");
@@ -112,7 +113,7 @@ function showOnderzoek(onderzoek)
 
 function update_onderzoek(onderzoek_id)
 {
-  let titel = document.getElementById("tiutel").value
+  let titel = document.getElementById("titel").value
   let beschrijving = document.getElementById("beschrijving").value
   let datumvanaf = document.getElementById("datumvanaf").value
   let datumtot = document.getElementById("datumtot").value
