@@ -181,8 +181,7 @@ def overzicht_onderzoeken_organisatie():
 
 @app.route("/api/overzicht_onderzoeken_organisatie/<onderzoek_id>", methods=["GET"])
 def get_onderzoek(onderzoek_id):
-    onderzoek_id = organisatie.get_onderzoek(onderzoek_id)
-    onderzoek = dict(onderzoek_id)
+    onderzoek = organisatie.get_onderzoek(onderzoek_id)
     return jsonify(onderzoek)
 
 

@@ -75,6 +75,18 @@ function showOnderzoeken (onderzoeken) {
           `
   document.getElementById("onderzoeken_tabel").innerHTML += row;
   });
+  document.querySelectorAll('.update').forEach(button => {
+    button.addEventListener('click', () => {
+      const onderzoek_id = button.dataset.onderzoekId;
+      get_onderzoek(onderzoek_id);
+    });
+  });
+  document.querySelectorAll('.users').forEach(button => {
+    button.addEventListener('click', () => {
+      const onderzoek_id = button.dataset.usersID;
+      users_registered_to_onderzoek(onderzoek_id);
+    });
+  });
 }
 
 function get_onderzoek(onderzoek_id) {
