@@ -295,7 +295,6 @@ def get_open_research():
     onderzoeken_model = Onderzoeken()
     open_onderzoeken = onderzoeken_model.get_open_research()
 
-    print("DEBUG: Door te geven aan template:", open_onderzoeken)
     return render_template('ervaringsdeskundige_onderzoeken.html', open_onderzoeken=open_onderzoeken)
 
 #@app.route('/openstaande_onderzoeken', methods=['POST'])
