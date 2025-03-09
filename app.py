@@ -37,7 +37,11 @@ def get_inschrijvingen():
 
 @app.route('/api/inschrijvingen', methods=['PUT'])
 def update_inschrijvingen():
-    pass
+    ism = inschrijvingen_model.Inschrijvingen()
+    status = request.json.get('status')
+    inschrijving_id = request.json.get('id')
+    ism.update_status(inschrijving_id, status)
+    return "200"
 
 @app.route('/api/onderzoeken', methods=['GET'])
 def get_onderzoeken():
