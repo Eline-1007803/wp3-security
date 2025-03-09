@@ -21,19 +21,22 @@
                 </tr>
             </thead>
             <tbody>
-                {%for onderzoek in onderzoeken%}
+                {% for onderzoek in onderzoeken %}
                 <tr>
-                    <td>{{onderzoek.titel}}</td>
-                    <td>{{onderzoek.status}}</td>
-                    <td>Datum van onderzoek</td>
-                    <td></td>
-                    <td></td>
+                    <td>{{ onderzoek.titel }}</td>
+                    <td>{{ onderzoek.status }}</td>
+                    <td>{{ onderzoek.datum_vanaf }}</td>
+                    <td>{{ onderzoek.datum_tot }}</td>
+                    <td>{{ onderzoek.type }}</td>
                 </tr>
-                {%endfor%}
+                {% else %}
+                <tr>
+                    <td colspan="5">Geen onderzoeken gevonden</td>
+                </tr>
+                {% endfor %}
             </tbody>
         </table>
-            </section>
+        </section>
     </main>
 </body>
-
 </html>
