@@ -21,16 +21,9 @@ class Onderzoeken:
                 FROM onderzoeken
                 WHERE onderzoeken.status = 'goedgekeurd'""").fetchall()
         
-        print("DEBUG: Ruwe data uit database:", result)  # Debugging
-
-    # Converteer sqlite3.Row objecten naar een lijst van dictionaries
-        onderzoeken = [dict(row) for row in result]  
-
-        print("DEBUG: Geformatteerde onderzoeken:", onderzoeken)
-
         #if not result:
             #return []
-        return onderzoeken
+        return result
     
     def get_research_details(self):
         result = self.cursor.execute(
