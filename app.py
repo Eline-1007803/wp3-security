@@ -3,6 +3,7 @@ from flask import *
 from flask import Flask, request, jsonify, render_template
 from lib.model.administrators import Administrator
 from lib.model.sign_up import SignUp
+from models.onderzoeken_model import Onderzoeken
 
 
 app = Flask(__name__)
@@ -16,7 +17,7 @@ from models import (
 app = Flask(__name__)
 app.secret_key = "wp3"
 
-
+app.jinja_env.autoescape = True
 
 @app.route('/login')
 def login_page():
@@ -290,10 +291,16 @@ def onderzoek_aanvragen_organisatie():
     return jsonify(onderzoek), 201
 
 @app.route('/openstaande_onderzoeken', methods=['GET'])
-def 
+def get_open_research():
+    onderzoeken_model = Onderzoeken()
+    open_onderzoeken = onderzoeken_model.get_open_research()
+    #open_onderzoeken = [{'titel': onderzoek.titel, 'status': onderzoek.status, 'datum_vanaf': onderzoek.datum_vanaf, 'datum_tot': onderzoek.datum_tot, 'type': onderzoek.type} for onderzoek in open_onderzoeken]
 
-@app.route('/openstaande_onderzoeken', methods=['POST'])
-def 
+    print("DEBUG: Door te geven aan template:", open_onderzoeken)
+    return render_template('ervaringsdeskundige_onderzoeken.html', open_onderzoeken=open_onderzoeken)
+
+#@app.route('/openstaande_onderzoeken', methods=['POST'])
+#def 
 
 if __name__ == "__main__":
     organisatie = organisatie_model.Organisatie()
