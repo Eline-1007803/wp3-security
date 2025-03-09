@@ -135,3 +135,44 @@ function update_onderzoek(onderzoek_id)
     console.log(data);
   })
 }
+
+function users_registered_to_onderzoek(onderzoek_id) {
+  fetch(`/api/overzicht_onderzoeken_organisatie/${onderzoek_id}/users`, {
+          method: 'GET',
+          headers: {
+                  'Accept': 'application/json'
+          }
+  })
+      .then(response => response.json())
+      .then(user => showUsers(user))
+}
+
+
+function showUsers(users)
+{
+  const usersPOPUP = document.getElementById("users_modal");
+  usersPOPUP.innerHTML =
+  `
+    <div class="modal-content">
+        <span class="close_usersmodal">&times;</span>
+        <h2>ingeschreven mensen</h2>
+        <table>
+            <tr>
+                <th>Naam</th>
+                <th>Postcode</th>
+                <th>Geslacht</th>
+                <th>Email</th>
+
+            </tr>
+            <tr>
+                <td>${users.voornam}</td>
+                <td>${users.postcode}</td>
+                <td>${users.geslacht}</td>
+                <td>${users.emailadres}</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+  `;
+}
