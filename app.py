@@ -294,7 +294,6 @@ def onderzoek_aanvragen_organisatie():
 def get_open_research():
     onderzoeken_model = Onderzoeken()
     open_onderzoeken = onderzoeken_model.get_open_research()
-    #open_onderzoeken = [{'titel': onderzoek.titel, 'status': onderzoek.status, 'datum_vanaf': onderzoek.datum_vanaf, 'datum_tot': onderzoek.datum_tot, 'type': onderzoek.type} for onderzoek in open_onderzoeken]
 
     print("DEBUG: Door te geven aan template:", open_onderzoeken)
     return render_template('ervaringsdeskundige_onderzoeken.html', open_onderzoeken=open_onderzoeken)
