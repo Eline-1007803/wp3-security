@@ -300,6 +300,13 @@ def get_open_research():
 #@app.route('/openstaande_onderzoeken', methods=['POST'])
 #def 
 
+@app.route('/ingeschreven_onderzoeken', methods=['GET'])
+def get_signedup_research():
+    onderzoeken_model = Onderzoeken()
+    ingeschreven_onderzoeken = onderzoeken_model.
+
+    return render_template('list_research.html', ingeschreven_onderzoeken=ingeschreven_onderzoeken)
+
 if __name__ == "__main__":
     organisatie = organisatie_model.Organisatie()
     app.run(debug=True)
