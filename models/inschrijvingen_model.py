@@ -19,3 +19,6 @@ class Inschrijvingen:
                 full join organisaties on (onderzoeken.organisatie_id = organisaties.organisatie_id)
                 WHERE inschrijvingen.status = 'nieuw'""").fetchall()
         return result
+    def update_status(self, inschrijving_id, status):
+        self.cursor.execute("UPDATE inschrijvingen SET status = ? WHERE inschrijving_id = ?", (status, inschrijving_id))
+        self.con.commit()
