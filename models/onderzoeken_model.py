@@ -21,8 +21,6 @@ class Onderzoeken:
                 FROM onderzoeken
                 WHERE onderzoeken.status = 'goedgekeurd'""").fetchall()
         
-        #if not result:
-            #return []
         return result
     
     def get_research_details(self):
@@ -31,3 +29,11 @@ class Onderzoeken:
         """
         ).fetchone()
         return result
+    
+    def get_signedup_research(self):
+        result = self.cursor.execute(
+            """ SELECT onderzoeken.*
+                FROM onderzoeken
+                
+"""
+        )
