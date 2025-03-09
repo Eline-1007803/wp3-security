@@ -12,20 +12,29 @@
         <table class="table-clickable">
             <thead>
                 <tr>
-                    <th>Ingeschreven onderzoeken</th>
+                    <th>ID nummer</th>
+                    <th>Naam onderzoek</th>
+                    <th>Status</th>
+                    <th>Datum vanaf</th>
+                    <th>Datum tot</th>
+                    <th>Type onderzoek</th>
                 </tr>
             </thead>
             <tbody>
+                {% for onderzoeken in open_onderzoeken %}
                 <tr>
-                    <td>Onderzoek 1</td>
-                    <td>Status</td>
-                    <td>Datum van onderzoek</td>
+                    <td>{{ onderzoeken.onderzoek_id }}</td>
+                    <td>{{ onderzoeken.titel }}</td>
+                    <td>{{ onderzoeken.status }}</td>
+                    <td>{{ onderzoeken.datum_vanaf }}</td>
+                    <td>{{ onderzoeken.datum_tot }}</td>
+                    <td>{{ onderzoeken.type }}</td>
                 </tr>
+                {% else %}
                 <tr>
-                    <td>Onderzoek 2</td>
-                    <td>Status</td>
-                    <td>Datum van onderzoek</td>
+                    <td colspan="5">U lijkt zich nog niet te hebben ingeschreven voor een onderzoek</td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
             </section>
