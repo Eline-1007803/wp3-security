@@ -17,10 +17,20 @@ class Onderzoeken:
     
     def get_open_research(self):
         result = self.cursor.execute(
-            """ SELECT onderzoeken.*
-            """
-        ).fetchall()
-        return result
+            """ SELECT titel, status, datum_vanaf, datum_tot, type
+                FROM onderzoeken
+                WHERE onderzoeken.status = 'goedgekeurd'""").fetchall()
+        
+        print("DEBUG: Ruwe data uit database:", result)  # Debugging
+
+    # Converteer sqlite3.Row objecten naar een lijst van dictionaries
+        onderzoeken = [dict(row) for row in result]  
+
+        print("DEBUG: Geformatteerde onderzoeken:", onderzoeken)
+
+        #if not result:
+            #return []
+        return onderzoeken
     
     def get_research_details(self):
         result = self.cursor.execute(
