@@ -38,24 +38,25 @@ document.addEventListener("DOMContentLoaded", function () {
     closePopup.addEventListener("click", function() {
         popup.setAttribute("aria-hidden", "true");
     });
-
-    window.onclick = function(event) {
-        if (!popup.querySelector(".popup-content").contains(event.target)) {
-            popup.setAttribute("aria-hidden", "true");
-        }
-    });
-
-    document.addEventListener("keydown", function(event) {
-        if (event.key === "Escape") {
-            popup.setAttribute("aria-hidden", "true");
-        }
-    });
 });
 
+    //window.onclick = function(event) {
+        //if (event.target === popup) {
+            
+            //popup.setAttribute("aria-hidden", "true");
+    //}};
+
+    //document.addEventListener("keydown", function(event) {
+       // if (event.key === "Escape") {
+         //   popup.setAttribute("aria-hidden", "true");
+       // }
+   // });
+//});
 
 
 
 
-function refreshPage() {
 
-}
+//function refreshPage() {
+
+//}
