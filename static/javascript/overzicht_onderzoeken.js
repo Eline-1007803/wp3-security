@@ -68,14 +68,48 @@ function showOnderzoeken (onderzoeken) {
                     <option value="goedkeuren">Goedkeuren</option>
                     <option value="sluiten">Sluiten</option>
                 </select>
-                <button class="update" id="update_button" aria-label="update onderzoek"><i class="fa-solid fa-gear"></i></button>
-                <button class="users" id="users_button" aria-label="gebruikers die ingeschreven zijn"><i class="fa-solid fa-user"></i></button>
+                <button data-onderzoek-id="${onderzoek["onderzoek_id"]}" class="update" id="update_button" aria-label="update onderzoek"><i class="fa-solid fa-gear"></i></button>
+                <button data-users-id="${onderzoek["onderzoek_id"]}" class="users" id="users_button" aria-label="gebruikers die ingeschreven zijn"><i class="fa-solid fa-user"></i></button>
                 </td>
             </tr>
           `
   document.getElementById("onderzoeken_tabel").innerHTML += row;
   });
 }
+
+function get_onderzoek(onderzoek_id) {
+  fetch(`/api/overzicht_onderzoeken_organisatie/${onderzoek_id}`, {
+          method: 'GET',
+          headers: {
+                  'Accept': 'application/json'
+          }
+  })
+      .then(response => response.json())
+      .then(onderzoek => showOnderzoek(onderzoek))
+}
+
+function showOnderzoek(onderzoek)
+{
+  const onderzoekPOPUP = document.getElementById("update_modal");
+  onderzoekPOPUP.innerHTML =
+  `
+    <div class="modal-content">
+      <span class="close_updatemodal">&times;</span>
+      <h2>Wijzig onderzoek gegevens</h2>
+      <label for="title">Title:</label>
+      <input type="text" name="title" id="title" value="${onderzoek.titel}" required><br>
+      <label for="beschrijving">Beschrijving</label>
+      <textarea name="beschrijving" id="beschrijving" value="${onderzoek.beschrijving}" required></textarea><br>
+      <label for="datevanaf">Datum vanaf:</label>
+      <input type="date" name="datevanaf" id="datevanaf" value="${onderzoek.datumvanaf}" required><br>
+      <label for="datetot">Datum tot:</label>
+      <input type="date" name="datetot" id="datetot" value="${onderzoek.datumtot}" required><br>
+      <input type="submit" value="Wijzig">
+    </div>
+  `;
+}
+
+
 function update_onderzoek(onderzoek_id)
 {
   let titel = document.getElementById("tiutel").value
@@ -83,7 +117,7 @@ function update_onderzoek(onderzoek_id)
   let datumvanaf = document.getElementById("datumvanaf").value
   let datumtot = document.getElementById("datumtot").value
 
-  fetch(`/api/overzicht_onderzoeken_organisatie/edit/${onderzoek_id}`, {
+  fetch(`/api/overzicht_onderzoeken_organisatie/${onderzoek_id}`, {
     method: 'PATCH',
     headers: {
             'Content-Type': 'application/json'
