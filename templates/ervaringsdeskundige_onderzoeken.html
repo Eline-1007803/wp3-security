@@ -21,13 +21,13 @@
                 </tr>
             </thead>
             <tbody>
-                {% for onderzoek in onderzoeken %}
+                {% for onderzoeken in open_onderzoeken %}
                 <tr>
-                    <td>{{ onderzoek.titel }}</td>
-                    <td>{{ onderzoek.status }}</td>
-                    <td>{{ onderzoek.datum_vanaf }}</td>
-                    <td>{{ onderzoek.datum_tot }}</td>
-                    <td>{{ onderzoek.type }}</td>
+                    <td>{{ onderzoeken.titel }}</td>
+                    <td>{{ onderzoeken.status }}</td>
+                    <td>{{ onderzoeken.datum_vanaf }}</td>
+                    <td>{{ onderzoeken.datum_tot }}</td>
+                    <td>{{ onderzoeken.type }}</td>
                 </tr>
                 {% else %}
                 <tr>
