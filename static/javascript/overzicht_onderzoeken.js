@@ -41,7 +41,7 @@ function showOnderzoeken (onderzoeken) {
   });
   document.querySelectorAll('.users').forEach(button => {
     button.addEventListener('click', () => {
-      const onderzoek_id = button.dataset.usersID;
+      const onderzoek_id = button.dataset.usersId;
       users_registered_to_onderzoek(onderzoek_id);
     });
   });
@@ -72,9 +72,9 @@ function showOnderzoek(onderzoek)
       <label for="beschrijving">Beschrijving</label>
       <textarea name="beschrijving" id="beschrijving" value="${onderzoek.beschrijving}" required></textarea><br>
       <label for="datevanaf">Datum vanaf:</label>
-      <input type="date" name="datevanaf" id="datevanaf" value="${onderzoek.datumvanaf}" required><br>
+      <input type="date" name="datevanaf" id="datevanaf" value="${onderzoek.datum_vanaf}" required><br>
       <label for="datetot">Datum tot:</label>
-      <input type="date" name="datetot" id="datetot" value="${onderzoek.datumtot}" required><br>
+      <input type="date" name="datetot" id="datetot" value="${onderzoek.datum_tot}" required><br>
       <input type="submit" value="Wijzig">
     </div>
   `;
