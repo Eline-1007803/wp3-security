@@ -24,20 +24,17 @@ class Onderzoeken:
         onderzoek_lijst = [dict(row) for row in result]
         return onderzoek_lijst
     
-    def get_research_details(self):
-        result = self.cursor.execute(
-            """ SELECT onderzoeken.*
-        """
-        ).fetchone()
-        return result
-    
     def get_signedup_research(self):
         result = self.cursor.execute(
             """ SELECT onderzoeken.*
                 FROM onderzoeken
 
         """
-        )
+        ).fetchall()
+        
+        onderzoek_lijst = [dict(row) for row in result]
+        return onderzoek_lijst
+
 
     def update_status(self, onderzoek_id, status):
         self.cursor.execute("UPDATE onderzoeken SET status = ? WHERE onderzoek_id = ?", (status, onderzoek_id))
