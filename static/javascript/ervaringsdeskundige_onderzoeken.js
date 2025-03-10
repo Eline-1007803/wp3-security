@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+/*document.addEventListener("DOMContentLoaded", function () {
     let onderzoekRijen = document.querySelectorAll(".onderzoek-row");
     let popup = document.getElementById("onderzoekPopup");
     let closePopup = document.querySelector(".close-popup");
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
         };
     });
 });
-
+*/ 
     //window.onclick = function(event) {
         //if (event.target === popup) {
             
@@ -70,3 +70,41 @@ document.addEventListener("DOMContentLoaded", function () {
 //function refreshPage() {
 
 //}
+
+fetch('/openstaande_onderzoeken', {
+    method: 'GET',
+    headers: {
+            'Accept': 'application/json'
+    }
+})
+.then(response => response.json())
+.then(onderzoeken => getOpenResearch(onderzoeken))
+
+                
+                
+function getOpenResearch() {
+console.log(onderzoeken); 
+let row = `
+        <tr class="onderzoek-row">
+                    data-titel=${onderzoeken.titel}
+                    data-status= ${onderzoeken.status}
+                    data-datum-vanaf=${onderzoeken.datum_vanaf}
+                    data-datum-tot="{{ onderzoeken.datum_tot }}"
+                    data-type="{{ onderzoeken.type }}"
+                    data-beschrijving="{{ onderzoeken.beschrijving }}"
+                    data-plaatsen="{{ onderzoeken.beschikbaar }}">
+                    <td>{{ onderzoeken.onderzoek_id }}</td>
+                    <td>{{ onderzoeken.titel }}</td>
+                    <td>{{ onderzoeken.status }}</td>
+                    <td>{{ onderzoeken.datum_vanaf }}</td>
+                    <td>{{ onderzoeken.datum_tot }}</td>
+                    <td>{{ onderzoeken.type }}</td>
+                </tr>
+                ` 
+        document.querySelector('.row').innerHTML += row
+                
+                    
+        
+
+}
+
