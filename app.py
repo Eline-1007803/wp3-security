@@ -322,7 +322,8 @@ def onderzoeken_pagina():
 @app.route('/api/ingeschreven_onderzoeken', methods=['GET'])
 def get_signedup_research():
     onderzoeken_model = Onderzoeken()
-    ingeschreven_onderzoeken = onderzoeken_model.get_signedup_research()
+    ervaringsdeskundige_id = 1 #moet nog worden veranderd
+    ingeschreven_onderzoeken = onderzoeken_model.get_signedup_research(ervaringsdeskundige_id)
 
     return jsonify(ingeschreven_onderzoeken)
     

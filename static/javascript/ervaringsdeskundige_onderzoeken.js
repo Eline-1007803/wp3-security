@@ -53,10 +53,6 @@ function set_modal() {
     });
 }
 
-
-//function refreshPage() {
-
-//}
 function getOnderzoeken() {
 fetch('/api/openstaande_onderzoeken', {  
     method: 'GET',

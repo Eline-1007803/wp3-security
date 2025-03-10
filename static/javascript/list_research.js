@@ -54,9 +54,6 @@ function set_modal() {
 }
 
 
-//function refreshPage() {
-
-//}
 function getOnderzoeken() {
 fetch('/api/ingeschreven_onderzoeken', {  
     method: 'GET',
