@@ -61,7 +61,7 @@ function get_onderzoek(onderzoek_id) {
 
 function showOnderzoek(onderzoek)
 {
-  const onderzoekPOPUP = document.getElementById("update_modal");
+  const onderzoekPOPUP = document.querySelector(".updatemodal");
   onderzoekPOPUP.innerHTML =
   `
     <div class="modal-content">
