@@ -10,7 +10,7 @@
 <body>
     <main>
         <h1>Overzicht Onderzoeken</h1>
-        <table id="onderzoeken_tabel">
+        <table class="js-onderzoektabel">
             <tr>
                 <th>Title</th>
                 <th>Status</th>
@@ -19,22 +19,6 @@
                 <th>Leeftijd tot</th>
                 <th>Beperking(en)</th>
                 <th style="width: 25%;">Acties</th>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><select name="actie" id="actie" aria-label="Selecteer een van onder (keuze optie)">
-                    <option value="">Kies..</option>
-                    <option value="goedkeuren">Goedkeuren</option>
-                    <option value="sluiten">Sluiten</option>
-                </select>
-                <button class="update" id="update_button" aria-label="update onderzoek"><i class="fa-solid fa-gear"></i></button>
-                <button class="users" id="users_button" aria-label="gebruikers die ingeschreven zijn"><i class="fa-solid fa-user"></i></button>
-                </td>
             </tr>
         </table>
         <div class="modal" id="update_modal">
