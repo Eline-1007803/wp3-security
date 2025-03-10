@@ -61,12 +61,7 @@ def update_administrator(administrator_id):
     lname = request.json["achternaam"]
     email = request.json["email"]
     administrator_model = Administrator()
-    updated_administrator = administrator_model.update_administrator(
-        voornaam, achternaam, email, administrator_id
-    )
-
-    updated_administrator = administrator_model.update_administrator(fname, lname, email)
-
+    updated_administrator = administrator_model.update_administrator(fname, lname, email, administrator_id)
     print(updated_administrator)
     return updated_administrator
 
