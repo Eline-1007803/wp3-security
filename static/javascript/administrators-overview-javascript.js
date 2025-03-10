@@ -14,11 +14,11 @@ fetch('/api/administrators', {
 function showAdministrator (administrators) {
         administrators.forEach((administrator) => {
                 console.log(administrator)
-
-               let row =
+                let fullName = administrator.tussenvoegsel ? `${administrator.voornaam} ${administrator.tussenvoegsel} ${administrator.achternaam}` : `${administrator.voornaam} ${administrator.achternaam}`;
+                let row =
                 `
                 <tr>
-                    <td>${administrator.voornaam} ${administrator.tussenvoegsel} ${administrator.achternaam}</td>
+                    <td>${fullName}</td>
                     <td>${administrator.email}</td>
                     <td>
                         <button data-admin-id="${administrator['beheerder_id']}" class="action-button details-button">Details
@@ -33,7 +33,9 @@ function showAdministrator (administrators) {
                     </td>
                 </tr>
                 `
-        document.querySelector(".js-administrator-table").innerHTML += row;
+                document.querySelector(".js-administrator-table").innerHTML += row;
+
+
         });
 
         // Add button pop up
