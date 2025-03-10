@@ -11,17 +11,12 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 h1
 {
-    position: absolute;
-    top: 0px;
     text-align: center;
-    width: 100%;
     font-family: "Montserrat", serif;
     font-weight: 700;
     font-style: normal;
@@ -29,15 +24,20 @@ h1
     color: #3b3b3b;
     margin: 0 0 30px 0;
 }
+
+.form-container {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 30px;
     width: 500px;
-    position: relative;
     border-radius: 5px;
-    margin: 5px;
     box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 }
 form input {

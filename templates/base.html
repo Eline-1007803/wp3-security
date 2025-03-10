@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="../static/css/nav-bar.css">
+
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    <header class="nav-bar">
+        <img class="logo-image" src="../static/images/logo.svg">
+    </header>
+    {% block main %}{% endblock %}
+    {% block scripts %}{% endblock %}
+</body>
+</html>

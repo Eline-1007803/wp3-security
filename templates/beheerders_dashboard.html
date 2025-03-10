@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="../static/css/beheerders_dashbord.css">
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %} Beheerders Dashboard {% endblock %}
+{% block styles %}<link rel="stylesheet" href="../static/css/beheerders_dashbord.css"> {% endblock %}
+
+{% block main %}
     <button class="js-admin-overview-button">Beheerdersoverzicht</button>
 <!--the three tables-->
     <main class="row">
@@ -86,7 +83,5 @@
     <div id="onderzoeken_modal">
         <p>test</p>
     </div>
-
-        <script src="static/javascript/beheerders_dashbord.js"></script>
-</body>
-</html>
+{% endblock %}
+{% block scripts %} <script src="static/javascript/beheerders_dashbord.js"></script> {% endblock %}

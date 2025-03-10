@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <title>Onderzoeken waarvoor u zich hebt ingeschreven</title>
-    <link rel="stylesheet" href="../static/css/list_research.css">
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}<title>Onderzoeken waarvoor u zich hebt ingeschreven</title> {% endblock %}
+{% block styles %}<link rel="stylesheet" href="../static/css/list_research.css"> {% endblock %}
+
+{% block main %}
     <main class="row">
         <section aria-labelledby="table-heading1" class="column">
         <h1 id="table-heading1">Overzicht van ingeschreven onderzoeken</h1>
@@ -30,6 +27,4 @@
         </table>
             </section>
     </main>
-
-</body>
-</html>
+{% endblock %}
