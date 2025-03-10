@@ -1,11 +1,9 @@
 from datetime import datetime
 from flask import *
-from flask import Flask, request, jsonify, render_template
 from lib.model.administrators import Administrator
 from lib.model.sign_up import SignUp
+from models.onderzoeken_model import Onderzoeken
 
-
-app = Flask(__name__)
 from models import (
     ervaringsdeskundigen_model,
     inschrijvingen_model,
@@ -16,7 +14,7 @@ from models import (
 app = Flask(__name__)
 app.secret_key = "wp3"
 
-
+app.jinja_env.autoescape = True
 
 @app.route('/login')
 def login_page():
@@ -132,6 +130,13 @@ def get_deskundigen():
         dictresult.append(dict(row))
     return {"deskundigen": dictresult}
 
+@app.route('/api/deskundigen', methods=['PUT'])
+def update_deskundigen():
+    edm = ervaringsdeskundigen_model.Ervaringsdeskundigen()
+    status = request.json.get('status')
+    deskundige_id = request.json.get('id')
+    edm.update_status(deskundige_id, status)
+    return "200"
 
 @app.route("/api/inschrijvingen", methods=["GET"])
 def get_inschrijvingen():
@@ -142,6 +147,13 @@ def get_inschrijvingen():
         dictresult.append(dict(row))
     return {"inschrijvingen": dictresult}
 
+@app.route('/api/inschrijvingen', methods=['PUT'])
+def update_inschrijvingen():
+    ism = inschrijvingen_model.Inschrijvingen()
+    status = request.json.get('status')
+    inschrijving_id = request.json.get('id')
+    ism.update_status(inschrijving_id, status)
+    return "200"
 
 @app.route("/api/onderzoeken", methods=["GET"])
 def get_onderzoeken():
@@ -217,6 +229,7 @@ def update_onderzoek_gegevens(onderzoek_id):
     )
     return jsonify(updated_onderzoek_gegevens), 200
 
+
 @app.route("/api/overzicht_onderzoeken_organisatie/<onderzoek_id>/users",methods=["GET"])
 def ingeschreven_users_onderzoekid(onderzoek_id):
     onderzoek = organisatie.get_users_by_onderzoek(onderzoek_id)
@@ -224,6 +237,15 @@ def ingeschreven_users_onderzoekid(onderzoek_id):
     for row in onderzoek:
         onderzoeken.append(dict(row))
     return jsonify(onderzoeken)
+
+@app.route('/api/onderzoeken', methods=['PUT'])
+def update_onderzoeken():
+    ozm = onderzoeken_model.Onderzoeken()
+    status = request.json.get('status')
+    onderzoek_id = request.json.get('id')
+    ozm.update_status(onderzoek_id, status)
+    return "200"
+
 
 
 @app.route("/onderzoekaanvragen", methods=["GET"])
@@ -268,6 +290,7 @@ def onderzoek_aanvragen_organisatie():
     if type_onderzoek == "locatie":
             if locatie == "":
                 return jsonify("Typ hier de locatie!"),400
+    locatie = request.json["locatie_text"]
     met_beloning = request.json["metbeloning"]
     hoeveel_beloning = request.json["beloning"]
     if met_beloning == "1":
@@ -309,6 +332,28 @@ def onderzoek_aanvragen_organisatie():
         organisatie.insert_onderzoek_disability(onderzoek_id, disability)
     return jsonify(onderzoek), 201
 
+@app.route('/api/openstaande_onderzoeken', methods=['GET'])
+def get_open_research():
+    onderzoeken_model = Onderzoeken()
+    open_onderzoeken = onderzoeken_model.get_open_research()
+
+    return jsonify(open_onderzoeken)
+#render_template('ervaringsdeskundige_onderzoeken.html', open_onderzoeken=open_onderzoeken)
+
+@app.route('/openstaande_onderzoeken')
+def onderzoeken_pagina():    
+    return render_template('ervaringsdeskundige_onderzoeken.html')
+
+
+#@app.route('/openstaande_onderzoeken', methods=['POST'])
+#def 
+
+@app.route('/ingeschreven_onderzoeken', methods=['GET'])
+def get_signedup_research():
+    onderzoeken_model = Onderzoeken()
+    ingeschreven_onderzoeken = onderzoeken_model.get_signedup_research()
+
+    return render_template('list_research.html', ingeschreven_onderzoeken=ingeschreven_onderzoeken)
 
 if __name__ == "__main__":
     organisatie = organisatie_model.Organisatie()

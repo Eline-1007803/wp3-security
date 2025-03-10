@@ -14,3 +14,31 @@ class Onderzoeken:
                 FULL JOIN alle_beperkingen on (onderzoek_beperkingen.beperking_id = alle_beperkingen.beperking_id)
                 WHERE onderzoeken.status = 'nieuw'""").fetchall()
         return result
+    
+    def get_open_research(self):
+        result = self.cursor.execute(
+            """ SELECT onderzoeken.*
+                FROM onderzoeken
+                WHERE onderzoeken.status = 'goedgekeurd'""").fetchall()
+        
+        onderzoek_lijst = [dict(row) for row in result]
+        return onderzoek_lijst
+    
+    def get_research_details(self):
+        result = self.cursor.execute(
+            """ SELECT onderzoeken.*
+        """
+        ).fetchone()
+        return result
+    
+    def get_signedup_research(self):
+        result = self.cursor.execute(
+            """ SELECT onderzoeken.*
+                FROM onderzoeken
+
+        """
+        )
+
+    def update_status(self, onderzoek_id, status):
+        self.cursor.execute("UPDATE onderzoeken SET status = ? WHERE onderzoek_id = ?", (status, onderzoek_id))
+        self.con.commit()
