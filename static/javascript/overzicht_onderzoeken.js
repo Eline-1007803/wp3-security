@@ -21,7 +21,7 @@ function showOnderzoeken (onderzoeken) {
                 <td>${onderzoek.leeftijd_van}</td>
                 <td>${onderzoek.leeftijd_tot}</td>
                 <td>${onderzoek.beperking}</td>
-                <td><select name="actie" id="actie" aria-label="Selecteer een van onder (keuze optie)">
+                <td><select name="actie" class="actie_update" data-actie-id="${onderzoek["onderzoek_id"]}" id="actie" aria-label="Selecteer een van onder (keuze optie)">
                     <option value="">Kies..</option>
                     <option value="goedkeuren">Goedkeuren</option>
                     <option value="sluiten">Sluiten</option>
@@ -43,6 +43,12 @@ function showOnderzoeken (onderzoeken) {
     button.addEventListener('click', () => {
       const onderzoek_id = button.dataset.usersId;
       users_registered_to_onderzoek(onderzoek_id);
+    });
+  });
+  document.querySelectorAll('.actie_update').forEach(select => {
+    select.addEventListener('change', () => {
+      const onderzoek_id = select.dataset.actieId;
+      change_status(onderzoek_id);
     });
   });
 }
@@ -145,4 +151,21 @@ function showUsers(users)
         </table>
     </div>
   `;
+}
+function change_status(onderzoek_id)
+{
+  let status = document.getElementById("actie").value
+  fetch(`/api/overzicht_onderzoeken_organisatie/${onderzoek_id}`, {
+    method: 'PATCH',
+    headers: {
+            'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      "status":status
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+  })
 }

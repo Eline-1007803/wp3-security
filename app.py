@@ -177,7 +177,12 @@ def overzicht_onderzoeken_organisatie():
 @app.route("/api/overzicht_onderzoeken_organisatie/<onderzoek_id>", methods=["GET"])
 def get_onderzoek(onderzoek_id):
     onderzoek = organisatie.get_onderzoek(onderzoek_id)
-    return jsonify(onderzoek)
+    return jsonify(onderzoek),200
+
+@app.route("/api/overzicht_onderzoeken_organisatie/<onderzoek_id>", methods=["PATCH"])
+def update_status(onderzoek_id,status):
+    onderzoek = organisatie.update_onderzoek_status(onderzoek_id,status)
+    return jsonify(onderzoek),200
 
 
 @app.route("/api/overzicht_onderzoeken_organisatie/<onderzoek_id>", methods=["PATCH"])
