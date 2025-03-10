@@ -1,4 +1,4 @@
-/*document.addEventListener("DOMContentLoaded", function () {
+function set_modal() {
     let onderzoekRijen = document.querySelectorAll(".onderzoek-row");
     let popup = document.getElementById("onderzoekPopup");
     let closePopup = document.querySelector(".close-popup");
@@ -19,6 +19,8 @@
 
     onderzoekRijen.forEach(row => {
         row.addEventListener("click", function() {
+            popup.style.display = "block";
+            popup.setAttribute("aria-hidden", "false");
             document.getElementById("popupTitel").innerText = this.getAttribute("data-titel");
             if (popupId) popupId.innerText = this.getAttribute("data-id");
             popupStatus.innerText = this.getAttribute("data-status");
@@ -32,8 +34,7 @@
             popupLeeftijdVan.innerText = this.getAttribute("data-leeftijd-van");
             popupLeeftijdTot.innerText = this.getAttribute("data-leeftijd-tot");
 
-            popup.style.display = "block";
-            popup.setAttribute("aria-hidden", "false");
+            
         });
     });
 
@@ -48,23 +49,7 @@
             popup.setAttribute("aria-hidden", "true");
         };
     });
-});
-*/ 
-    //window.onclick = function(event) {
-        //if (event.target === popup) {
-            
-            //popup.setAttribute("aria-hidden", "true");
-    //}};
-
-    //document.addEventListener("keydown", function(event) {
-       // if (event.key === "Escape") {
-         //   popup.setAttribute("aria-hidden", "true");
-       // }
-   // });
-//});
-
-
-
+}
 
 
 //function refreshPage() {
@@ -104,15 +89,18 @@ function getOpenResearch(onderzoeken) {
                 data-datum-tot="${onderzoek.datum_tot}"
                 data-type="${onderzoek.type}"
                 data-beschrijving="${onderzoek.beschrijving}"
-                data-plaatsen="${onderzoek.beschikbaar}">
+                data-plaatsen="${onderzoek.beschikbaar}"
+                data-locatie="${onderzoek.locatie}"
+                data-leeftijd-van="${onderzoek.leeftijd_van}"
+                data-leeftijd-tot="${onderzoek.leeftijd_tot}">
                 <td>${onderzoek.onderzoek_id}</td>
                 <td>${onderzoek.titel}</td>
-                <td>${onderzoek.status}</td>
                 <td>${onderzoek.datum_vanaf}</td>
                 <td>${onderzoek.datum_tot}</td>
                 <td>${onderzoek.type}</td>
             </tr>`;
         tableBody.innerHTML += row;
     });
+    set_modal()
 }
                 
