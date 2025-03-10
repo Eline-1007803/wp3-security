@@ -75,7 +75,7 @@ function showOnderzoek(onderzoek)
       <label for="title">Title:</label>
       <input type="text" name="title" id="title" value="${onderzoek.titel}" required><br>
       <label for="beschrijving">Beschrijving</label>
-      <textarea name="beschrijving" id="beschrijving" value="${onderzoek.beschrijving}" required></textarea><br>
+      <textarea name="beschrijving" id="beschrijving" required>${onderzoek.beschrijving}</textarea><br>
       <label for="datevanaf">Datum vanaf:</label>
       <input type="date" name="datevanaf" id="datevanaf" value="${onderzoek.datum_vanaf}" required><br>
       <label for="datetot">Datum tot:</label>
