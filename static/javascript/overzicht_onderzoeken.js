@@ -23,7 +23,6 @@ function showOnderzoeken (onderzoeken) {
                 <td>${onderzoek.beperking}</td>
                 <td><select name="actie" class="actie_update" data-actie-id="${onderzoek["onderzoek_id"]}" id="actie" aria-label="Selecteer een van onder (keuze optie)">
                     <option value="">Kies..</option>
-                    <option value="goedkeuren">Goedkeuren</option>
                     <option value="sluiten">Sluiten</option>
                 </select>
                 <button data-onderzoek-id="${onderzoek["onderzoek_id"]}" class="update" id="update_button" aria-label="update onderzoek"><i class="fa-solid fa-gear"></i></button>

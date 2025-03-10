@@ -180,7 +180,8 @@ def get_onderzoek(onderzoek_id):
     return jsonify(onderzoek),200
 
 @app.route("/api/overzicht_onderzoeken_organisatie/<onderzoek_id>", methods=["PATCH"])
-def update_status(onderzoek_id,status):
+def update_status(onderzoek_id):
+    status = request.json["status"]
     onderzoek = organisatie.update_onderzoek_status(onderzoek_id,status)
     return jsonify(onderzoek),200
 
