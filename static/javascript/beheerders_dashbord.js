@@ -32,9 +32,10 @@ function refresh_modals_deskundigen(data) {
                 <div id="myModal${i}" class="modal">
                   <div class="modal-content">
                       <button class="close" id="close${i}" >&times;</button>
+                      <h2>${deskundigenElement.volle_naam}</h2>
                       <main class="row">
-                          <h2>${deskundigenElement.volle_naam}</h2>
                           <section class="column">
+                              <p class="id">${deskundigenElement.ervaringsdeskundige_id}</p>
                               <h3>Persoonlijke informatie</h3>
                               <h4>Geslacht:</h4>
                               <p>${deskundigenElement.geslacht}</p>
@@ -68,6 +69,8 @@ function refresh_modals_deskundigen(data) {
                               <p>${deskundigenElement.telefoonnummer_voogd}</p>
                           </section>
                       </main>
+                      <button class="goedkeur_button"><strong>Goedkeuren</strong></button>
+                      <button class="afkeur_button"><strong>Afkeuren</strong></button>
                   </div>
                 </div>
       `;
@@ -79,11 +82,50 @@ function refresh_modals_deskundigen(data) {
   const modals = deskundigen_modals.querySelectorAll('.modal');
   const btns = document.querySelectorAll('.deskundige_btn');
   const spans = deskundigen_modals.querySelectorAll('.close');
+  const deskundigen_gb = deskundigen_modals.querySelectorAll('.goedkeur_button');
+  const deskundigen_ab = deskundigen_modals.querySelectorAll('.afkeur_button');
+  const ids = deskundigen_modals.querySelectorAll('.id')
+
+  ids.forEach((id) => {
+      id.style.display = 'none';
+  });
 
   btns.forEach((btn, index) => {
       btn.addEventListener('click', () => {
           modals[index].style.display = 'block';
           kill_interval()
+      });
+  });
+
+  deskundigen_gb.forEach((gb, index) => {
+      gb.addEventListener('click', () => {
+          modals[index].style.display = 'none';
+          let id = modals[index].getElementsByClassName('id')[0].innerHTML
+          console.log(id)
+          fetch('/api/deskundigen', {
+              method: 'PUT',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({"status": "goedgekeurd", "id":id})
+          }).then(r => r.json())
+          revive_interval()
+      });
+  });
+
+  deskundigen_ab.forEach((ab, index) => {
+      ab.addEventListener('click', () => {
+          modals[index].style.display = 'none';
+          let id = modals[index].getElementsByClassName('id')[0].innerHTML
+          console.log(id)
+          fetch('/api/deskundigen', {
+              method: 'PUT',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({"status": "afgekeurd", "id":id})
+          }).then(r => r.json())
+          revive_interval()
       });
   });
 
@@ -137,8 +179,9 @@ function refresh_modals_inschrijvingen(data) {
                 <div id="myModal${i}" class="modal">
                   <div class="modal-content">
                       <button class="close" id="close${i}" >&times;</button>
+                      <h2>${inschrijvingenElement.volle_naam} wil zich inschrijven voor '${inschrijvingenElement.titel}'</h2>
+                      <p class="id">${inschrijvingenElement.inschrijving_id}</p>
                       <main class="row">
-                          <h2>${inschrijvingenElement.volle_naam} wil zich inschrijven voor '${inschrijvingenElement.titel}'</h2>
                           <section class="column">
                               <h3>Informatie deskundige</h3>
                               <h4>Geslacht:</h4>
@@ -176,6 +219,8 @@ function refresh_modals_inschrijvingen(data) {
                               <p>${inschrijvingenElement.leeftijd_van} - ${inschrijvingenElement.leeftijd_tot}</p>
                           </section>
                       </main>
+                      <button class="goedkeur_button"><strong>Goedkeuren</strong></button>
+                      <button class="afkeur_button"><strong>Afkeuren</strong></button>
                   </div>
                 </div>
       `;
@@ -187,11 +232,51 @@ function refresh_modals_inschrijvingen(data) {
   const inschrijving_modals = inschrijvingen_modals.querySelectorAll('.modal');
   const inschrijvingen_btns = document.querySelectorAll('.inschrijvingen_btn');
   const inschrijvingen_spans = inschrijvingen_modals.querySelectorAll('.close');
+  const inschrijvingen_gb = inschrijvingen_modals.querySelectorAll('.goedkeur_button');
+  const inschrijvingen_ab = inschrijvingen_modals.querySelectorAll('.afkeur_button');
+  const inschrijvingen_ids = inschrijvingen_modals.querySelectorAll('.id')
+
+  inschrijvingen_ids.forEach((id) => {
+    id.style.display = 'none';
+  });
+
 
   inschrijvingen_btns.forEach((btn, index) => {
       btn.addEventListener('click', () => {
           inschrijving_modals[index].style.display = 'block';
           kill_interval()
+      });
+  });
+
+  inschrijvingen_gb.forEach((gb, index) => {
+      gb.addEventListener('click', () => {
+          inschrijving_modals[index].style.display = 'none';
+          let id = inschrijving_modals[index].getElementsByClassName('id')[0].innerHTML
+          console.log(id)
+          fetch('/api/inschrijvingen', {
+              method: 'PUT',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({"status": "goedgekeurd", "id":id})
+          }).then(r => r.json())
+          revive_interval()
+      });
+  });
+
+  inschrijvingen_ab.forEach((ab, index) => {
+      ab.addEventListener('click', () => {
+          inschrijving_modals[index].style.display = 'none';
+          let id = inschrijving_modals[index].getElementsByClassName('id')[0].innerHTML
+          console.log(id)
+          fetch('/api/inschrijvingen', {
+              method: 'PUT',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({"status": "afgekeurd", "id":id})
+          }).then(r => r.json())
+          revive_interval()
       });
   });
 
@@ -245,8 +330,9 @@ function refresh_modals_onderzoeken(data) {
                 <div id="myModal${i}" class="modal">
                   <div class="modal-content">
                       <button class="close" id="close${i}" >&times;</button>
+                      <h2>${onderzoekenElement.titel}</h2>
+                      <p class="id">${onderzoekenElement.onderzoek_id}</p>
                       <main class="row">
-                          <h2>${onderzoekenElement.titel}</h2>
                           <section class="column">
                               <h3>Informatie onderzoek</h3>
                               <h4>Beschrijving:</h4>
@@ -270,6 +356,8 @@ function refresh_modals_onderzoeken(data) {
                               <p>${onderzoekenElement.leeftijd_van} - ${onderzoekenElement.leeftijd_tot}</p>
                           </section>
                       </main>
+                      <button class="goedkeur_button"><strong>Goedkeuren</strong></button>
+                      <button class="afkeur_button"><strong>Afkeuren</strong></button>
                   </div>
                 </div>
       `;
@@ -281,11 +369,51 @@ function refresh_modals_onderzoeken(data) {
   const onderzoek_modals = onderzoeken_modals.querySelectorAll('.modal');
   const onderzoeken_btns = document.querySelectorAll('.onderzoeken_btn');
   const onderzoeken_spans = onderzoeken_modals.querySelectorAll('.close');
+  const onderzoeken_gb = onderzoeken_modals.querySelectorAll('.goedkeur_button');
+  const onderzoeken_ab = onderzoeken_modals.querySelectorAll('.afkeur_button');
+  const onderzoeken_ids = onderzoeken_modals.querySelectorAll('.id')
+
+  onderzoeken_ids.forEach((id) => {
+    id.style.display = 'none';
+  });
+
 
   onderzoeken_btns.forEach((btn, index) => {
       btn.addEventListener('click', () => {
           onderzoek_modals[index].style.display = 'block';
           kill_interval()
+      });
+  });
+
+  onderzoeken_gb.forEach((gb, index) => {
+      gb.addEventListener('click', () => {
+          onderzoek_modals[index].style.display = 'none';
+          let id = onderzoek_modals[index].getElementsByClassName('id')[0].innerHTML
+          console.log(id)
+          fetch('/api/onderzoeken', {
+              method: 'PUT',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({"status": "goedgekeurd", "id":id})
+          }).then(r => r.json())
+          revive_interval()
+      });
+  });
+
+  onderzoeken_ab.forEach((ab, index) => {
+      ab.addEventListener('click', () => {
+          onderzoek_modals[index].style.display = 'none';
+          let id = onderzoek_modals[index].getElementsByClassName('id')[0].innerHTML
+          console.log(id)
+          fetch('/api/onderzoeken', {
+              method: 'PUT',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({"status": "afgekeurd", "id":id})
+          }).then(r => r.json())
+          revive_interval()
       });
   });
 
@@ -327,6 +455,7 @@ function kill_interval() {
 }
 
 function revive_interval() {
+    get_all()
     interval = setInterval(get_all, 3000);
 }
 

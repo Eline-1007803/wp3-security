@@ -1,11 +1,8 @@
 from datetime import datetime
 from flask import *
-from flask import Flask, request, jsonify, render_template
 from lib.model.administrators import Administrator
 from lib.model.sign_up import SignUp
 
-
-app = Flask(__name__)
 from models import (
     ervaringsdeskundigen_model,
     inschrijvingen_model,
@@ -132,6 +129,13 @@ def get_deskundigen():
         dictresult.append(dict(row))
     return {"deskundigen": dictresult}
 
+@app.route('/api/deskundigen', methods=['PUT'])
+def update_deskundigen():
+    edm = ervaringsdeskundigen_model.Ervaringsdeskundigen()
+    status = request.json.get('status')
+    deskundige_id = request.json.get('id')
+    edm.update_status(deskundige_id, status)
+    return "200"
 
 @app.route("/api/inschrijvingen", methods=["GET"])
 def get_inschrijvingen():
@@ -142,6 +146,13 @@ def get_inschrijvingen():
         dictresult.append(dict(row))
     return {"inschrijvingen": dictresult}
 
+@app.route('/api/inschrijvingen', methods=['PUT'])
+def update_inschrijvingen():
+    ism = inschrijvingen_model.Inschrijvingen()
+    status = request.json.get('status')
+    inschrijving_id = request.json.get('id')
+    ism.update_status(inschrijving_id, status)
+    return "200"
 
 @app.route("/api/onderzoeken", methods=["GET"])
 def get_onderzoeken():
@@ -199,6 +210,14 @@ def update_onderzoek_gegevens(onderzoek_id):
     )
     return jsonify(updated_onderzoek_gegevens), 200
 
+@app.route('/api/onderzoeken', methods=['PUT'])
+def update_onderzoeken():
+    ozm = onderzoeken_model.Onderzoeken()
+    status = request.json.get('status')
+    onderzoek_id = request.json.get('id')
+    ozm.update_status(onderzoek_id, status)
+    return "200"
+
 
 @app.route("/onderzoekaanvragen", methods=["GET"])
 def onderzoek_pagina():
@@ -241,7 +260,7 @@ def onderzoek_aanvragen_organisatie():
     if type_onderzoek == "locatie":
             if locatie == "":
                 return jsonify("Typ hier de locatie!"),400
-            
+
     locatie = request.json["locatie_text"]
     met_beloning = request.json["metbeloning"]
     hoeveel_beloning = request.json["beloning"]

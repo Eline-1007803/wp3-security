@@ -14,3 +14,6 @@ class Onderzoeken:
                 FULL JOIN alle_beperkingen on (onderzoek_beperkingen.beperking_id = alle_beperkingen.beperking_id)
                 WHERE onderzoeken.status = 'nieuw'""").fetchall()
         return result
+    def update_status(self, onderzoek_id, status):
+        self.cursor.execute("UPDATE onderzoeken SET status = ? WHERE onderzoek_id = ?", (status, onderzoek_id))
+        self.con.commit()
