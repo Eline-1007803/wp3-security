@@ -21,6 +21,7 @@ function set_modal() {
         row.addEventListener("click", function() {
             popup.style.display = "block";
             popup.setAttribute("aria-hidden", "false");
+            stopInterval()
             document.getElementById("popupTitel").innerText = this.getAttribute("data-titel");
             if (popupId) popupId.innerText = this.getAttribute("data-id");
             popupStatus.innerText = this.getAttribute("data-status");
@@ -40,6 +41,7 @@ function set_modal() {
 
     closePopup.addEventListener("click", function () {
         popup.style.display = "none";
+        startInterval()
         popup.setAttribute("aria-hidden", "true");
     });
 
@@ -55,7 +57,7 @@ function set_modal() {
 //function refreshPage() {
 
 //}
-
+function getOnderzoeken() {
 fetch('/api/openstaande_onderzoeken', {  
     method: 'GET',
     headers: {
@@ -73,6 +75,8 @@ fetch('/api/openstaande_onderzoeken', {
     getOpenResearch(onderzoeken);
 })
 .catch(error => console.error("Fout bij ophalen onderzoeken:", error));
+
+}
 
                 
 function getOpenResearch(onderzoeken) {
@@ -103,4 +107,16 @@ function getOpenResearch(onderzoeken) {
     });
     set_modal()
 }
-                
+
+getOnderzoeken()
+
+interval = setInterval(getOnderzoeken, 3000);
+
+function stopInterval() {
+    clearInterval(interval)
+}
+
+function startInterval() {
+    getOnderzoeken()
+    interval = setInterval(getOnderzoeken, 3000);
+}
