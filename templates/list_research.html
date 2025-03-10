@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Onderzoeken waarvoor u zich hebt ingeschreven</title>
-    <link rel="stylesheet" href="../static/css/list_research.css">
+    <link rel="stylesheet" href="../static/css/ervaringsdeskundige_onderzoeken.css">
 </head>
 <body>
     <main class="row">
@@ -14,31 +14,36 @@
                 <tr>
                     <th>ID nummer</th>
                     <th>Naam onderzoek</th>
-                    <th>Status</th>
                     <th>Datum vanaf</th>
                     <th>Datum tot</th>
                     <th>Type onderzoek</th>
                 </tr>
             </thead>
             <tbody>
-                {% for onderzoeken in open_onderzoeken %}
-                <tr>
-                    <td>{{ onderzoeken.onderzoek_id }}</td>
-                    <td>{{ onderzoeken.titel }}</td>
-                    <td>{{ onderzoeken.status }}</td>
-                    <td>{{ onderzoeken.datum_vanaf }}</td>
-                    <td>{{ onderzoeken.datum_tot }}</td>
-                    <td>{{ onderzoeken.type }}</td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="5">U lijkt zich nog niet te hebben ingeschreven voor een onderzoek</td>
-                </tr>
-                {% endfor %}
+
             </tbody>
         </table>
             </section>
     </main>
 
+    <section id="onderzoekPopup" class="popup hide" role="dialog" aria-labelledby="popupTitel" aria-hidden="true">
+        <article class="popup-content">
+            <header>
+                <h2 id="popupTitel">Onderzoek details</h2>
+                <button class="close-popup" aria-label="Sluit details">&times;</button>
+            </header>
+            <p><strong>Status:</strong> <span id="popupStatus"></span></p>
+            <p><strong>Datum vanaf:</strong> <span id="popupDatumVanaf"></span></p>
+            <p><strong>Datum tot:</strong> <span id="popupDatumTot"></span></p>
+            <p><strong>Type:</strong> <span id="popupType"></span></p>
+            <p><strong>Beschrijving:</strong> <span id="popupBeschrijving"></span></p>
+            <p><strong>Beschikbare plaatsen:</strong> <span id="popupPlaatsen"></span></p>
+            <p><strong>Locatie: </strong><span id="popupLocatie"></span></p>
+            <p><strong>Beloning: </strong><span id="popupBeloning"></span></p>
+            <p><strong>Leeftijd vanaf: </strong><span id="popupLeeftijdVan"></span></p>
+            <p><strong>Leeftijd tot: </strong><span id="popupLeeftijdTot"></span></p>
+        </article>
+    </section>
+    <script src="{{ url_for('static', filename='javascript/list_research.js') }}"></script>
 </body>
 </html>
