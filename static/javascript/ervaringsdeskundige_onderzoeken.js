@@ -71,40 +71,48 @@
 
 //}
 
-fetch('/openstaande_onderzoeken', {
+fetch('/api/openstaande_onderzoeken', {  
     method: 'GET',
     headers: {
-            'Accept': 'application/json'
+        'Accept': 'application/json'
     }
 })
-.then(response => response.json())
-.then(onderzoeken => getOpenResearch(onderzoeken))
+.then(response => {
+    if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json();
+})
+.then(onderzoeken => {
+    console.log("Ontvangen onderzoeken:", onderzoeken);
+    getOpenResearch(onderzoeken);
+})
+.catch(error => console.error("Fout bij ophalen onderzoeken:", error));
 
                 
-                
-function getOpenResearch() {
-console.log(onderzoeken); 
-let row = `
-        <tr class="onderzoek-row">
-                    data-titel=${onderzoeken.titel}
-                    data-status= ${onderzoeken.status}
-                    data-datum-vanaf=${onderzoeken.datum_vanaf}
-                    data-datum-tot="{{ onderzoeken.datum_tot }}"
-                    data-type="{{ onderzoeken.type }}"
-                    data-beschrijving="{{ onderzoeken.beschrijving }}"
-                    data-plaatsen="{{ onderzoeken.beschikbaar }}">
-                    <td>{{ onderzoeken.onderzoek_id }}</td>
-                    <td>{{ onderzoeken.titel }}</td>
-                    <td>{{ onderzoeken.status }}</td>
-                    <td>{{ onderzoeken.datum_vanaf }}</td>
-                    <td>{{ onderzoeken.datum_tot }}</td>
-                    <td>{{ onderzoeken.type }}</td>
-                </tr>
-                ` 
-        document.querySelector('.row').innerHTML += row
-                
-                    
-        
+function getOpenResearch(onderzoeken) {
+    console.log(onderzoeken); 
+    let tableBody = document.querySelector('.table-clickable tbody');
+    tableBody.innerHTML = '';
 
+    onderzoeken.forEach(onderzoek => {
+        let row = `
+            <tr class="onderzoek-row"
+                data-titel="${onderzoek.titel}"
+                data-status="${onderzoek.status}"
+                data-datum-vanaf="${onderzoek.datum_vanaf}"
+                data-datum-tot="${onderzoek.datum_tot}"
+                data-type="${onderzoek.type}"
+                data-beschrijving="${onderzoek.beschrijving}"
+                data-plaatsen="${onderzoek.beschikbaar}">
+                <td>${onderzoek.onderzoek_id}</td>
+                <td>${onderzoek.titel}</td>
+                <td>${onderzoek.status}</td>
+                <td>${onderzoek.datum_vanaf}</td>
+                <td>${onderzoek.datum_tot}</td>
+                <td>${onderzoek.type}</td>
+            </tr>`;
+        tableBody.innerHTML += row;
+    });
 }
-
+                
