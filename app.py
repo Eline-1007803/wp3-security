@@ -303,7 +303,7 @@ def get_open_research():
 @app.route('/ingeschreven_onderzoeken', methods=['GET'])
 def get_signedup_research():
     onderzoeken_model = Onderzoeken()
-    ingeschreven_onderzoeken = onderzoeken_model.
+    ingeschreven_onderzoeken = onderzoeken_model.get_signedup_research()
 
     return render_template('list_research.html', ingeschreven_onderzoeken=ingeschreven_onderzoeken)
 
