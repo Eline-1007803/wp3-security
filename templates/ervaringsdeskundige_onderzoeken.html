@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Open onderzoeken</title>
+    <link rel="stylesheet" href="../static/css/ervaringsdeskundige_onderzoeken.css">
+</head>
+<body>
+    <main class="row">
+        <section aria-labelledby="table-heading1" class="column">
+        <h1 id="table-heading1">Openstaande onderzoeken</h1>
+        <h3>Onderzoeken voor u, klik voor meer informatie op het onderzoek wat u wilt bekijken</h3>
+        <table class="table-clickable" >
+            <thead>
+                <tr>
+                    <th>ID nummer</th>
+                    <th>Naam onderzoek</th>
+                    <th>Status</th>
+                    <th>Datum vanaf</th>
+                    <th>Datum tot</th>
+                    <th>Type onderzoek</th>
+                </tr>
+            </thead>
+            <tbody>
+               <!-- {% for onderzoeken in open_onderzoeken %}
+         <tr class="onderzoek-row"
+                    data-titel="{{ onderzoeken.titel }}"
+                    data-status="{{ onderzoeken.status }}"
+                    data-datum-vanaf="{{ onderzoeken.datum_vanaf }}"
+                    data-datum-tot="{{ onderzoeken.datum_tot }}"
+                    data-type="{{ onderzoeken.type }}"
+                    data-beschrijving="{{ onderzoeken.beschrijving }}"
+                    data-plaatsen="{{ onderzoeken.beschikbaar }}">
+                    <td>{{ onderzoeken.onderzoek_id }}</td>
+                    <td>{{ onderzoeken.titel }}</td>
+                    <td>{{ onderzoeken.status }}</td>
+                    <td>{{ onderzoeken.datum_vanaf }}</td>
+                    <td>{{ onderzoeken.datum_tot }}</td>
+                    <td>{{ onderzoeken.type }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">Geen onderzoeken gevonden</td>
+                </tr>
+                {% endfor %}
+            --></tbody>
+        </table>
+        </section>
+    </main>
+
+    <section id="onderzoekPopup" class="popup hide" role="dialog" aria-labelledby="popupTitel" aria-hidden="true">
+        <article class="popup-content">
+            <header>
+                <h2 id="popupTitel">Onderzoek details</h2>
+                <button class="close-popup" aria-label="Sluit details">&times;</button>
+            </header>
+            <p><strong>Status:</strong> <span id="popupStatus"></span></p>
+            <p><strong>Datum vanaf:</strong> <span id="popupDatumVanaf"></span></p>
+            <p><strong>Datum tot:</strong> <span id="popupDatumTot"></span></p>
+            <p><strong>Type:</strong> <span id="popupType"></span></p>
+            <p><strong>Beschrijving:</strong> <span id="popupBeschrijving"></span></p>
+            <p><strong>Beschikbare plaatsen:</strong> <span id="popupPlaatsen"></span></p>
+        </article>
+    </section>
+    <script src="{{ url_for('static', filename='javascript/ervaringsdeskundige_onderzoeken.js') }}"></script>
+</body>
+</html>

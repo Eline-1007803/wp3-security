@@ -2,6 +2,7 @@ from datetime import datetime
 from flask import *
 from lib.model.administrators import Administrator
 from lib.model.sign_up import SignUp
+from models.onderzoeken_model import Onderzoeken
 
 from models import (
     ervaringsdeskundigen_model,
@@ -13,7 +14,7 @@ from models import (
 app = Flask(__name__)
 app.secret_key = "wp3"
 
-
+app.jinja_env.autoescape = True
 
 @app.route('/login')
 def login_page():
@@ -303,6 +304,28 @@ def onderzoek_aanvragen_organisatie():
         organisatie.insert_onderzoek_disability(onderzoek_id, disability)
     return jsonify(onderzoek), 201
 
+@app.route('/api/openstaande_onderzoeken', methods=['GET'])
+def get_open_research():
+    onderzoeken_model = Onderzoeken()
+    open_onderzoeken = onderzoeken_model.get_open_research()
+
+    return jsonify(open_onderzoeken)
+#render_template('ervaringsdeskundige_onderzoeken.html', open_onderzoeken=open_onderzoeken)
+
+@app.route('/openstaande_onderzoeken')
+def onderzoeken_pagina():    
+    return render_template('ervaringsdeskundige_onderzoeken.html')
+
+
+#@app.route('/openstaande_onderzoeken', methods=['POST'])
+#def 
+
+@app.route('/ingeschreven_onderzoeken', methods=['GET'])
+def get_signedup_research():
+    onderzoeken_model = Onderzoeken()
+    ingeschreven_onderzoeken = onderzoeken_model.get_signedup_research()
+
+    return render_template('list_research.html', ingeschreven_onderzoeken=ingeschreven_onderzoeken)
 
 if __name__ == "__main__":
     organisatie = organisatie_model.Organisatie()
