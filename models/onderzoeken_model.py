@@ -36,9 +36,9 @@ class Onderzoeken:
             """ SELECT onderzoeken.*
                 FROM onderzoeken
 
-"""
+        """
         )
-        
+
     def update_status(self, onderzoek_id, status):
         self.cursor.execute("UPDATE onderzoeken SET status = ? WHERE onderzoek_id = ?", (status, onderzoek_id))
         self.con.commit()
