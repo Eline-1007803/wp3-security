@@ -290,12 +290,18 @@ def onderzoek_aanvragen_organisatie():
         organisatie.insert_onderzoek_disability(onderzoek_id, disability)
     return jsonify(onderzoek), 201
 
-@app.route('/openstaande_onderzoeken', methods=['GET'])
+@app.route('/api/openstaande_onderzoeken', methods=['GET'])
 def get_open_research():
     onderzoeken_model = Onderzoeken()
     open_onderzoeken = onderzoeken_model.get_open_research()
 
-    return render_template('ervaringsdeskundige_onderzoeken.html', open_onderzoeken=open_onderzoeken)
+    return jsonify(open_onderzoeken)
+#render_template('ervaringsdeskundige_onderzoeken.html', open_onderzoeken=open_onderzoeken)
+
+@app.route('/openstaande_onderzoeken')
+def onderzoeken_pagina():    
+    return render_template('ervaringsdeskundige_onderzoeken.html')
+
 
 #@app.route('/openstaande_onderzoeken', methods=['POST'])
 #def 
