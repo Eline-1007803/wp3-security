@@ -21,7 +21,8 @@ class Onderzoeken:
                 FROM onderzoeken
                 WHERE onderzoeken.status = 'goedgekeurd'""").fetchall()
         
-        return result
+        onderzoek_lijst = [dict(row) for row in result]
+        return onderzoek_lijst
     
     def get_research_details(self):
         result = self.cursor.execute(
@@ -34,6 +35,6 @@ class Onderzoeken:
         result = self.cursor.execute(
             """ SELECT onderzoeken.*
                 FROM onderzoeken
-                
+
 """
         )
