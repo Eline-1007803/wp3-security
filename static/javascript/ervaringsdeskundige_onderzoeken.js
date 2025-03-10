@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let popupLeeftijdTot = document.getElementById("popupLeeftijdTot");
 
     popup.setAttribute("aria-hidden", "true");
+    popup.style.display = 'none';
 
     onderzoekRijen.forEach(row => {
         row.addEventListener("click", function() {
@@ -31,12 +32,21 @@ document.addEventListener("DOMContentLoaded", function () {
             popupLeeftijdVan.innerText = this.getAttribute("data-leeftijd-van");
             popupLeeftijdTot.innerText = this.getAttribute("data-leeftijd-tot");
 
+            popup.style.display = "block";
             popup.setAttribute("aria-hidden", "false");
         });
     });
 
-    closePopup.addEventListener("click", function() {
+    closePopup.addEventListener("click", function () {
+        popup.style.display = "none";
         popup.setAttribute("aria-hidden", "true");
+    });
+
+    window.addEventListener("click", function (event) {
+        if (event.target === popup) {
+            popup.style.display = "none";
+            popup.setAttribute("aria-hidden", "true");
+        };
     });
 });
 
