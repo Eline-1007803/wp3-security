@@ -21,7 +21,7 @@ function showOnderzoeken (onderzoeken) {
                 <td>${onderzoek.leeftijd_van}</td>
                 <td>${onderzoek.leeftijd_tot}</td>
                 <td>${onderzoek.beperking}</td>
-                <td><select name="actie" class="actie_update" data-actie-id="${onderzoek["onderzoek_id"]}" id="actie" aria-label="Selecteer een van onder (keuze optie)">
+                <td><select name="actie" class="actie_update" data-actie-id="${onderzoek["onderzoek_id"]}" id="actie${onderzoek["onderzoek_id"]}" aria-label="Selecteer een van onder (keuze optie)">
                     <option value="">Kies..</option>
                     <option value="sluiten">Sluiten</option>
                 </select>
@@ -153,7 +153,7 @@ function showUsers(users)
 }
 function change_status(onderzoek_id)
 {
-  let status = document.getElementById("actie").value
+  let status = document.getElementById("actie"+onderzoek_id).value
   fetch(`/api/overzicht_onderzoeken_organisatie/${onderzoek_id}`, {
     method: 'PATCH',
     headers: {
