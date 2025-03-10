@@ -310,7 +310,6 @@ def get_open_research():
     open_onderzoeken = onderzoeken_model.get_open_research()
 
     return jsonify(open_onderzoeken)
-#render_template('ervaringsdeskundige_onderzoeken.html', open_onderzoeken=open_onderzoeken)
 
 @app.route('/openstaande_onderzoeken')
 def onderzoeken_pagina():    
@@ -320,12 +319,17 @@ def onderzoeken_pagina():
 #@app.route('/openstaande_onderzoeken', methods=['POST'])
 #def 
 
-@app.route('/ingeschreven_onderzoeken', methods=['GET'])
+@app.route('/api/ingeschreven_onderzoeken', methods=['GET'])
 def get_signedup_research():
     onderzoeken_model = Onderzoeken()
     ingeschreven_onderzoeken = onderzoeken_model.get_signedup_research()
 
-    return render_template('list_research.html', ingeschreven_onderzoeken=ingeschreven_onderzoeken)
+    return jsonify(ingeschreven_onderzoeken)
+    
+@app.route('/ingeschreven_onderzoeken')
+def lijst_ingeschreven_onderzoeken():
+    return render_template('list_research.html')
+
 
 if __name__ == "__main__":
     organisatie = organisatie_model.Organisatie()
