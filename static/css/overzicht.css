@@ -56,7 +56,12 @@ tr:nth-child(even)
     background-color: gray;
 }
 .update,.users
-
+{
+    border: none;
+    background: transparent;
+    margin-left: 10px;
+    color: black;
+}
 .button
 {
     border: none;

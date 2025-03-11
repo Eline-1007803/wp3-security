@@ -17,9 +17,6 @@
 
 {% endblock %}
 {% block main %}
-    <div class="container">
-        <h1>Overzicht Onderzoeken</h1>
-        <table>
             <tr>
                 <th>Title</th>
                 <th>Status</th>
@@ -38,27 +35,4 @@
     <script src="/static/javascript/overzicht_onderzoeken.js"></script>
 </body>
 </html>
-                <th style="width: 20%;">Acties</th>
-            </tr>
-            {%for onderzoek in onderzoeken%}
-            <tr>
-                <td>{{onderzoek.titel}}</td>
-                <td>{{onderzoek.status}}</td>
-                <td>{%if onderzoek.beschikbaar | int == 1 %} Ja
-                    {%else%} Nee
-                    {%endif%}</td>
-                <td>{{onderzoek.leeftijd_van}}</td>
-                <td>{{onderzoek.leeftijd_tot}}</td>
-                <td>{{onderzoek.beperking}}</td>
-                <td><select name="actie" id="actie" aria-label="Selecteer een van onder (keuze optie)">
-                    <option value="">Kies..</option>
-                    <option value="goedkeuren">Goedkeuren</option>
-                    <option value="sluiten">Sluiten</option>
-                    <i class="fa-solid fa-gear" aria-label="Wijzigen optie"></i>
-                </select>
-                </td>
-            </tr>
-        {%endfor%}
-    </table>
-    </div>
 {% endblock %}
