@@ -1,17 +1,22 @@
 
 // get all administrators
-fetch('/api/administrators', {
-        method: 'GET',
-        headers: {
-                'Accept': 'application/json'
-        }
-})
-.then(response => response.json())
-.then(administrators => showAdministrator(administrators))
-
+function getAllAdminstrators()
+{
+        fetch('/api/administrators', {
+                method: 'GET',
+                headers: {
+                        'Accept': 'application/json'
+                }
+        })
+            .then(response => response.json())
+            .then(administrators => showAdministrator(administrators))
+}
+getAllAdminstrators();
+setInterval(getAllAdminstrators, 5000);
 
 // showing each administrator on page
 function showAdministrator (administrators) {
+        document.querySelector(".js-administrator-table").innerHTML = '';
         administrators.forEach((administrator) => {
                 console.log(administrator)
                 let fullName = administrator.tussenvoegsel ? `${administrator.voornaam} ${administrator.tussenvoegsel} ${administrator.achternaam}` : `${administrator.voornaam} ${administrator.achternaam}`;
@@ -45,7 +50,6 @@ function showAdministrator (administrators) {
                         console.log('yaas');
                         document.querySelector(".js-background").classList.remove("hide");
                         document.querySelector(".js-add").classList.remove("hide");
-
                 });
             })
 
@@ -81,7 +85,7 @@ function showAdministrator (administrators) {
                         document.querySelector(".js-background").classList.remove("hide");
                         document.querySelector(".js-delete").classList.remove("hide");
 
-                        getAdminForDelete(adminId)
+                        getAdminForDelete(adminId);
                 })
         })
 
@@ -142,6 +146,7 @@ document.querySelector(".js-add-button").addEventListener("click", () => {
         document.querySelector(".js-details").classList.add("hide");
         document.querySelector(".js-edit").classList.add("hide");
         document.querySelector(".js-delete").classList.add("hide");
+        getAllAdminstrators();
 
 });
 
@@ -225,6 +230,7 @@ function showAdminEditPopup(administrator) {
         const popupEditButton = document.querySelector(".js-popup-edit-button")
         const adminId = popupEditButton.dataset.adminId
         editAdministrator(adminId);
+        getAllAdminstrators();
         closePopUp()
 })
          // closing pop up
@@ -283,8 +289,8 @@ function showAdminDeletePopup (administrator) {
         {
                 const popupDeleteButton = document.querySelector(".js-delete-button")
                 const adminId = popupDeleteButton.dataset.adminId
-                deleteAdministrator(adminId)
-                closePopUp()
+                deleteAdministrator(adminId);
+                closePopUp();
         })
 
          // closing pop up

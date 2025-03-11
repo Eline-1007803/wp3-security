@@ -1,26 +1,40 @@
 body {
     font-family: Arial;
     font-size: 18px;
+    background-color: rgb(250, 253, 253);
 }
 h1 {
     text-align: center;
     margin-bottom: 70px;
 }
 
-div {
+.js-sign-up {
     display: grid;
-    grid-template-columns:150px 200px;
-    row-gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 30px;
     width: 50%;
     margin:auto;
+    background-color: white;
+    padding: 50px;
+    justify-content: center;
+    border-radius: 20px;
+    box-shadow: 5px 5px 10px 10px lightgray;
+
 }
 
-form input {
+label {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
     height: 30px;
-    width: 500px;
+    border-radius: 8px;
+    border-width: 1px;
+    background-color: rgb(250, 253, 253);
 }
 
-form label {
+label {
     margin-bottom: 10px;
     margin-top: 10px;
     font-size: 18px;
@@ -59,4 +73,37 @@ textarea {
 
 .submit-button:hover {
     background-color: #d100d1 ;
+}
+
+.sign-up {
+    display: grid;
+    margin-top: 100px;
+    margin-left: 0;
+}
+
+.normal {
+    dipslay: grid;
+
+}
+
+.dropdown {
+    display: inline-block;
+    position: relative;
+}
+.dropdown-content{
+    display: none;
+    position: absolute;
+    z-index: 1;
+
+}
+
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.down {
+  transform: rotate(45deg);
 }

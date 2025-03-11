@@ -1,80 +1,92 @@
 
 {% extends 'base.html' %}
-{% block title %}Aanmelden{% endblock %}
+{% block title %}Registreren{% endblock %}
 {% block styles %}<link rel="stylesheet" href="../static/css/sign-up-page-style.css">{% endblock %}
-
+{% block nav_links %} <a class= "logo-image" href="/"><img class="logo-image" src="../static/images/logo.svg"></a> {% endblock %}
 {% block main %}
-<h1>Aanmelden</h1>
-    <div class ="js-sign-up">
-        <label for="first-name-input">Voornaam:</label>
-        <input class="js-first-name-input" id="first-name-input" name="first-name-input" type="text" required>
-        <label for="infix-input">
-        <input class="js-infix-input" id="infix-input" type="text">
-        <label for="last-name-input">Achternaam:</label>
+<h1>Registreren</h1>
+<div class ="js-sign-up">
+        <label>
+            Voornaam:
+            <input class="js-first-name-input" id="first-name-input" name="first-name-input" type="text" required>
+        </label>
+        <label for="infix-input"> Tussenvoegsel:
+            <input class="js-infix-input" id="infix-input" type="text">
+        </label>
+        <label for="last-name-input">Achternaam:
         <input class="js-last-name-input" id="last-name-input" name="last-name-input" type="text">
-        <label for="password-input">
-        <input class="js-password-input" id="password-input" name="password-input" type="text">
-        <label for="zip-code-input">Postcode:</label>
+        </label>
+        <label for="password-input">Wachtwoord:
+            <input class="js-password-input" id="password-input" name="password-input" type="text">
+        </label>
+        <label for="zip-code-input">Postcode:
         <input class="js-zip-code-input" id="zip-code-input" name="zip-code-input" type="text">
-        <label for="gender-input">Geslacht:</label>
+        </label>
+        <label for="gender-input">Geslacht:
         <input class="js-gender-input" id="gender-input" name="gender-input" type="text">
-        <label for="email-input">E-mailadres:</label>
+        </label>
+        <label for="email-input">E-mailadres:
         <input class="js-email-input" id="email-input" name="email-input" type="email">
-        <label for="phone-number-input">Telefoonnummer:</label>
+        </label>
+        <label for="phone-number-input">Telefoonnummer:
         <input class="js-phonenum-input" id="phone-number-input" name="phone-number-input" type="tel">
-        <label for="date-of-birth-input">Geboortedatum:</label>
+        </label>
+        <label for="date-of-birth-input">Geboortedatum:
         <input class="js-birthdate-input" id="date-of-birth-input" name="date-of-birth-input" type="date">
+        </label>
 
-        <label for="disability-type-input">Type beperking:</label>
-        <select id="disability-type-input" name="disability-type-input" multiple>
+        <label for="disability-type-input">Type beperking:<button class="button-disabilities">Beperkingen<i class="arrow down"></i></button>
+<!--            <div class="dropdown-content">-->
+            <select class="dropdown" id="disability-type-input" name="disability-type-input" multiple>
 
-            <optgroup label="Auditieve beperkingen">
-                <option value="deaf">Doof</option>
-                <option value="hard-of-hearing">Slechthorend</option>
-                <option value="deafblind">Doofblind</option>
-            </optgroup>
-            <optgroup label="Visuele beperkingen">
-                <option value="blind">Blind</option>
-                <option value="partially-sighted">Slechtziend</option>
-                <option value="color-blind">Kleurenblind</option>
-                <option value="deafblind">Doofblind</option>
-            </optgroup>
-            <optgroup label="Motorische/lichamelijke beperkingen">
-                <option value="amputation-deformity">Amputatie en mismaaktheid</option>
-                <option value="arthritis">Artritus</option>
-                <option value="fibromyalgia">Fibromyalgie</option>
-                <option value="rheumatism">Reuma</option>
-                <option value="reduced-manual-dexterity">Verminderde handvaardigheid</option>
-                <option value="muscular-dystrophy">Spierdystrofie</option>
-                <option value="RSI">RSI</option>
-                <option value="tremor-and-spasms">Tremor en spasmen</option>
-                <option value="Quadriplegia-or-tetraplegia">Quadriplegie of tetraplegie</option>
-            </optgroup>
-            <optgroup label="Cognitieve/neurologische beperkingen">
-                <option value="ADHD">ADHD</option>
-                <option value="autism">Autisme</option>
-                <option value="dyslexia">Dyslexie</option>
-                <option value="dyscalculia">Dyscalculie</option>
-                <option value="learning-disability">Leerstoornis</option>
-                <option value="memory-disorder">Geheugen beperking</option>
-                <option value="multiple-sclerosis">Multiple sclerose</option>
-                <option value="epilepsy">Epilepsie</option>
-                <option value="migraine">Migraine</option>
-            </optgroup>
-        </select>
-        <label for="tools-input">Gebruikte hulpmiddelen:</label>
-        <input class="js-tools-input" id="tools-input" name="tools-input" type="text">
-        <label for="introduction-input">Korte introductie:</label>
-        <textarea class="js-introduction-input" id="introduction-input" name="introduction-input" type="text"></textarea>
+                <optgroup label="Auditieve beperkingen">
+                    <option value="deaf">Doof</option>
+                    <option value="hard-of-hearing">Slechthorend</option>
+                    <option value="deafblind">Doofblind</option>
+                </optgroup>
+                <optgroup label="Visuele beperkingen">
+                    <option value="blind">Blind</option>
+                    <option value="partially-sighted">Slechtziend</option>
+                    <option value="color-blind">Kleurenblind</option>
+                    <option value="deafblind">Doofblind</option>
+                </optgroup>
+                <optgroup label="Motorische/lichamelijke beperkingen">
+                    <option value="amputation-deformity">Amputatie en mismaaktheid</option>
+                    <option value="arthritis">Artritus</option>
+                    <option value="fibromyalgia">Fibromyalgie</option>
+                    <option value="rheumatism">Reuma</option>
+                    <option value="reduced-manual-dexterity">Verminderde handvaardigheid</option>
+                    <option value="muscular-dystrophy">Spierdystrofie</option>
+                    <option value="RSI">RSI</option>
+                    <option value="tremor-and-spasms">Tremor en spasmen</option>
+                    <option value="Quadriplegia-or-tetraplegia">Quadriplegie of tetraplegie</option>
+                </optgroup>
+                <optgroup label="Cognitieve/neurologische beperkingen">
+                    <option value="ADHD">ADHD</option>
+                    <option value="autism">Autisme</option>
+                    <option value="dyslexia">Dyslexie</option>
+                    <option value="dyscalculia">Dyscalculie</option>
+                    <option value="learning-disability">Leerstoornis</option>
+                    <option value="memory-disorder">Geheugen beperking</option>
+                    <option value="multiple-sclerosis">Multiple sclerose</option>
+                    <option value="epilepsy">Epilepsie</option>
+                    <option value="migraine">Migraine</option>
+                </optgroup>
+            </select>
+<!--            </div>-->
+        </label>
+    <div class="normal">
+        <label for="tools-input">Gebruikte hulpmiddelen:
+            <input class="js-tools-input" id="tools-input" name="tools-input" type="text">
+        </label>
+        <label for="introduction-input">Korte introductie:
+        <textarea class="js-introduction-input" id="introduction-input" name="introduction-input" type="text"></textarea></label>
+
 
 <!--Optional-->
-        <label for="details-input">Bijzonderheden:</label>
-        <textarea class="js-details-input" id="details-input" name="details-input" placeholder="Eventuele extra informatie over uw beperking/beperkingen">+-</textarea>
-        <label for="agreement-terms-input">Akkoord met voorwaarden:</label>
-        <input class="js-agreement-terms-input" id="agreement-terms-input" name="agreement-terms-input" type="checkbox">
-        <label for="supervisor-input">Toezichthouder/voogd:</label>
-        <input class="js-supervisor-input" id="supervisor-input" name="supervisor-input" type="checkbox">
-
+        <label for="details-input">Bijzonderheden: <textarea class="js-details-input" id="details-input" name="details-input" placeholder="Eventuele extra informatie over uw beperking/beperkingen">+-</textarea></label>
+        <label for="agreement-terms-input">Akkoord met voorwaarden:<input class="js-agreement-terms-input" id="agreement-terms-input" name="agreement-terms-input" type="checkbox"></label>
+        <label for="supervisor-input">Toezichthouder/voogd: <input class="js-supervisor-input" id="supervisor-input" name="supervisor-input" type="checkbox"></label>
         <div class="hide js-supervisor-info supervisor-info">
 <!--only show if supervisor checkbox is checked -->
             <label for="supervisor-name-input">Naam van voogd of toezichthouder:</label>
@@ -109,9 +121,10 @@
         <input class="js-color-foreground-input">
         <label>Achtergrond kleur:</label>
         <input class="js-color-background-input">
-
-        <button class="js-submit-button submit-button" type="submit">Indienen</button>
     </div>
+</div>
+        <button class="js-submit-button submit-button" type="submit">Indienen</button>
+
 
 {% endblock %}
 
