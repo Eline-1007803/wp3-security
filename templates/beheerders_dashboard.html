@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="../static/css/beheerders_dashbord.css">
-</head>
-<body>
-    <button class="js-admin-overview-button">Beheerdersoverzicht</button>
+{% extends 'base.html' %}
+{% block title %} Beheerders Dashboard {% endblock %}
+{% block styles %}<link rel="stylesheet" href="../static/css/beheerders_dashbord.css"> {% endblock %}
+
+{% block nav_links %}
+<a class= "logo-image" href="/"><img class="logo-image" src="../static/images/logo.svg"></a>
+<a href="/administrator-overview">Beheerders</a>
+{% endblock %}
+
+{% block main %}
 <!--the three tables-->
     <main class="row">
         <section aria-labelledby="table-heading1" class="column">
@@ -86,7 +87,5 @@
     <div id="onderzoeken_modal">
         <p>test</p>
     </div>
-
-        <script src="static/javascript/beheerders_dashbord.js"></script>
-</body>
-</html>
+{% endblock %}
+{% block scripts %} <script src="static/javascript/beheerders_dashbord.js"></script> {% endblock %}

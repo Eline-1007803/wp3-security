@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <title>Open onderzoeken</title>
-    <link rel="stylesheet" href="../static/css/ervaringsdeskundige_onderzoeken.css">
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Open onderzoeken{% endblock %}
+{% block styles %}<link rel="stylesheet" href="../static/css/ervaringsdeskundige_onderzoeken.css">{% endblock%}
+{% block nav_links %}
+<a class= "logo-image" href="/"><img class="logo-image" src="../static/images/logo.svg"></a>
+<a href="/ingeschreven_onderzoeken">Mijn Onderzoeken</a>
+{% endblock %}
+
+{% block main %}
     <main class="row">
         <section aria-labelledby="table-heading1" class="column">
         <h1 id="table-heading1">Openstaande onderzoeken</h1>
@@ -62,6 +63,7 @@
             <p><strong>Beschikbare plaatsen:</strong> <span id="popupPlaatsen"></span></p>
         </article>
     </section>
-    <script src="{{ url_for('static', filename='javascript/ervaringsdeskundige_onderzoeken.js') }}"></script>
-</body>
-</html>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='javascript/ervaringsdeskundige_onderzoeken.js') }}"></script>{% endblock %}
+
+

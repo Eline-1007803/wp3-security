@@ -61,8 +61,6 @@ function showAdministrator (administrators) {
                 });
         })
 
-
-
         // Edit button pop up
         document.querySelectorAll(".edit-button").forEach(editButton => {
                 const adminId = editButton.dataset.adminId;
@@ -126,7 +124,7 @@ function showSingleAdministrator(administrator) {
                         console.log("yuh");
                 })
 
-        function closePopUp () {
+        function closePopUp() {
                 document.querySelector(".js-background").classList.add("hide");
                 document.querySelector(".js-add").classList.add("hide");
                 document.querySelector(".js-details").classList.add("hide");
@@ -304,3 +302,12 @@ function showAdminDeletePopup (administrator) {
         }
 }
 
+ document.querySelectorAll(".js-cross-image").forEach(crossImage => {
+                crossImage.addEventListener("click", closePopUp)
+                        console.log("yuh");
+                })
+
+        function closePopUp() {
+                document.querySelector(".js-background").classList.add("hide");
+                document.querySelector(".js-add").classList.add("hide");
+        }

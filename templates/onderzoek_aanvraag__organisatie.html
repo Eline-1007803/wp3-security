@@ -1,13 +1,14 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/onderzoek_aanvraag_organisaite.css">
-    <title>Onderzoek Aanvraag</title>
-</head>
-<body>
-    
+{% extends 'base.html' %}
+{% block styles %}<link rel="stylesheet" href="/static/css/onderzoek_aanvraag_organisaite.css"> {% endblock %}
+{% block title %} Onderzoek Aanvraag {% endblock %}
+
+{% block nav_links %}
+<a class= "logo-image" href="/"><img class="logo-image" src="../static/images/logo.svg"></a>
+<a href="/api/overzicht_onderzoeken">Onderzoeken</a>
+{% endblock %}
+
+{% block main %}
+<div class="form-container">
     <form method="post">
         <h1>Onderzoek Aanvraag</h1>
         <label for="titel">Titel:</label>
@@ -82,6 +83,6 @@
         </div>
         <div id="submit_button" class="button" aria-label="onderzoek aanvragen">Aanvragen</div>
     </form>
-</body>
-<script src="/static/javascript/onderzoek_aanvraag_organisatie.js"></script>
-</html>
+</div>
+{% endblock %}
+{% block scripts %}<script src="/static/javascript/onderzoek_aanvraag_organisatie.js"></script>{% endblock %}
