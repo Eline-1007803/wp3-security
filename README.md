@@ -13,6 +13,7 @@ styling optgroup en option: https://stackoverflow.com/questions/6415747/styling-
 age calculation for if younger than 18 function: https://www.youtube.com/watch?v=Q3oiSwdGAq8,
 https://www.w3schools.com/jsref/jsref_parse.asp
 
+
 afbeelding: https://pixabay.com/images/search/bin%20icon/
             https://pixabay.com/illustrations/icon-symbol-design-direction-web-2429830/
             https://pixabay.com/vectors/eye-see-viewing-icon-1103592/

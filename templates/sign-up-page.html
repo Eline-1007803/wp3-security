@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <title>Aanmelden</title>
-    <link rel="stylesheet" href="../static/css/sign-up-page-style.css">
-</head>
-<body>
-<p ></p>
+
+{% extends 'base.html' %}
+{% block title %}Aanmelden{% endblock %}
+{% block styles %}<link rel="stylesheet" href="../static/css/sign-up-page-style.css">{% endblock %}
+
+{% block main %}
 <h1>Aanmelden</h1>
     <div class ="js-sign-up">
         <label for="first-name-input">Voornaam:</label>
@@ -116,6 +113,6 @@
         <button class="js-submit-button submit-button" type="submit">Indienen</button>
     </div>
 
-    <script src="/static/javascript/sign-up-page-javascript.js"></script>
-</body>
-</html>
+{% endblock %}
+
+{% block scripts %}<script src="/static/javascript/sign-up-page-javascript.js"></script>{% endblock %}

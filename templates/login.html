@@ -1,24 +1,24 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/login_page_style.css">
-    <title>Login</title>
-</head>
-<body>
-    
+{% extends 'base.html' %}
+{% block title %}<title>Login</title> {% endblock %}
+{% block styles %}<link rel="stylesheet" href="/static/css/login_page_style.css"> {% endblock %}
+{% block nav_links %} <img class="logo-image" src="../static/images/logo.svg">{% endblock %}
+{% block main %}
     <h1>Inloggen</h1>
-    <form action="tobeadded" method="post">
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email" placeholder="Email" aria-label="Voer hier uw email in" required>
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password" placeholder="Password" required>
-        <input type="submit" value="Login" aria-label="Druk om in te loggen">
-        <p>Heeft u geen account?<a href="{{ url_for('expert_sign_up') }}" aria-label="Druk op dit button om te registreren" > Sign up!</a></p>
-    </form>
+    <div class="form-container">
+        <form action="tobeadded" method="post">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" placeholder="Email" aria-label="Voer hier uw email in" required>
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" placeholder="Password" required>
+            <input type="submit" value="Login" aria-label="Druk om in te loggen">
+            <p>Heeft u geen account?<a href="{{ url_for('expert_sign_up') }}" aria-label="Druk op dit button om te registreren" > Sign up!</a></p>
+        </form>
+    </div>
 
-<script src="/static/javascript/login.js"></script>
-</body>
-
-</html>
+<div class="buttons">
+   <a href=""><button>Ervaringsdeskundigen</button></a>
+    <a href="/dashboard"><button>Beheerders</button></a>
+    <a href="/api/overzicht_onderzoeken"><button>Organisaties</button></a>
+</div>
+{% endblock %}
+{% block scripts %}<script src="/static/javascript/login.js"></script> {% endblock %}
