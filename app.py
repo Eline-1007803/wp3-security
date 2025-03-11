@@ -198,7 +198,7 @@ def update_status(onderzoek_id):
     return jsonify(onderzoek),200
 
 
-@app.route("/api/overzicht_onderzoeken_organisatie/<onderzoek_id>", methods=["PATCH"])
+@app.route("/api/overzicht_onderzoeken_organisatie/update=<onderzoek_id>", methods=["PATCH"])
 def update_onderzoek_gegevens(onderzoek_id):
     title = request.json["titel"]
     if title == "":

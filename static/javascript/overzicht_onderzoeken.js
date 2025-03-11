@@ -72,17 +72,22 @@ function showOnderzoek(onderzoek)
     <div class="modal-content">
       <span class="close_updatemodal">&times;</span>
       <h2>Wijzig onderzoek gegevens</h2>
-      <label for="title">Title:</label>
-      <input type="text" name="title" id="title" value="${onderzoek.titel}" required><br>
+      <label for="titel">Title:</label>
+      <input type="text" name="title" id="titel" value="${onderzoek.titel}" required><br>
       <label for="beschrijving">Beschrijving</label>
       <textarea name="beschrijving" id="beschrijving" required>${onderzoek.beschrijving}</textarea><br>
-      <label for="datevanaf">Datum vanaf:</label>
-      <input type="date" name="datevanaf" id="datevanaf" value="${onderzoek.datum_vanaf}" required><br>
-      <label for="datetot">Datum tot:</label>
-      <input type="date" name="datetot" id="datetot" value="${onderzoek.datum_tot}" required><br>
-      <input type="submit" value="Wijzig">
+      <label for="datumvanaf">Datum vanaf:</label>
+      <input type="date" name="datevanaf" id="datumvanaf" value="${onderzoek.datum_vanaf}" required><br>
+      <label for="datumtot">Datum tot:</label>
+      <input type="date" name="datetot" id="datumtot" value="${onderzoek.datum_tot}" required><br>
+      <button data-onderzoek-id="${onderzoek["onderzoek_id"]}" id="wijzigbutton">Wijzig</button>
     </div>
   `;
+  document.getElementById("wijzigbutton").addEventListener("click",function(){
+    const wijzigbutton = document.getElementById("wijzigbutton")
+    const onderzoek_id = wijzigbutton.dataset.onderzoekId
+    update_onderzoek(onderzoek_id)
+  });
 }
 
 
@@ -93,7 +98,7 @@ function update_onderzoek(onderzoek_id)
   let datumvanaf = document.getElementById("datumvanaf").value
   let datumtot = document.getElementById("datumtot").value
 
-  fetch(`/api/overzicht_onderzoeken_organisatie/${onderzoek_id}`, {
+  fetch(`/api/overzicht_onderzoeken_organisatie/update=${onderzoek_id}`, {
     method: 'PATCH',
     headers: {
             'Content-Type': 'application/json'
