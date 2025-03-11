@@ -80,7 +80,7 @@ function showOnderzoek(onderzoek)
       <input type="date" name="datevanaf" id="datumvanaf" value="${onderzoek.datum_vanaf}" required><br>
       <label for="datumtot">Datum tot:</label>
       <input type="date" name="datetot" id="datumtot" value="${onderzoek.datum_tot}" required><br>
-      <button data-onderzoek-id="${onderzoek["onderzoek_id"]}" id="wijzigbutton">Wijzig</button>
+      <button data-onderzoek-id="${onderzoek["onderzoek_id"]}" class="wijzigbutton" id="wijzigbutton">Wijzig</button>
     </div>
   `;
   onderzoekPOPUP.style.display = "block";
@@ -155,12 +155,10 @@ function showUsers(users)
 
             </tr>
             <tr>
-                <td>${users.voornam}</td>
+                <td>${users.voornaam}</td>
                 <td>${users.postcode}</td>
                 <td>${users.geslacht}</td>
                 <td>${users.emailadres}</td>
-                <td></td>
-                <td></td>
             </tr>
         </table>
     </div>
