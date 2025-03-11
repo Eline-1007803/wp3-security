@@ -70,7 +70,7 @@ function showOnderzoek(onderzoek)
   onderzoekPOPUP.innerHTML =
   `
     <div class="modal-content">
-      <span class="close_updatemodal">&times;</span>
+      <span id="close" class="close_updatemodal">&times;</span>
       <h2>Wijzig onderzoek gegevens</h2>
       <label for="titel">Title:</label>
       <input type="text" name="title" id="titel" value="${onderzoek.titel}" required><br>
@@ -83,11 +83,21 @@ function showOnderzoek(onderzoek)
       <button data-onderzoek-id="${onderzoek["onderzoek_id"]}" id="wijzigbutton">Wijzig</button>
     </div>
   `;
+  onderzoekPOPUP.style.display = "block";
   document.getElementById("wijzigbutton").addEventListener("click",function(){
     const wijzigbutton = document.getElementById("wijzigbutton")
     const onderzoek_id = wijzigbutton.dataset.onderzoekId
     update_onderzoek(onderzoek_id)
   });
+
+  document.getElementById("close").addEventListener("click",function()
+  {
+    onderzoekPOPUP.style.display = "none";
+  })
+  window.onclick = function(event) {
+    if (event.target == onderzoekPOPUP) {
+        onderzoekPOPUP.style.display = "none";
+    }}
 }
 
 
@@ -155,6 +165,15 @@ function showUsers(users)
         </table>
     </div>
   `;
+  usersPOPUP.style.display = "block";
+  document.querySelector(".close_usersmodal").addEventListener("click",function()
+  {
+    usersPOPUP.style.display = "none";
+  })
+  window.onclick = function(event) {
+    if (event.target == usersPOPUP) {
+        usersPOPUP.style.display = "none";
+    }}
 }
 function change_status(onderzoek_id)
 {

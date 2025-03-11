@@ -59,7 +59,7 @@ tr:nth-child(even)
     color: black;
     font-size: large;
 }
-.modal {
+.updatemodal,.usersmodal {
     display: none;
     position: fixed;
     z-index: 1;
