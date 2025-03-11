@@ -57,3 +57,26 @@ form a
 {
     text-decoration: none;
 }
+
+.buttons{
+    margin-left: 480px;
+}
+button{
+    margin-top: 50px;
+    margin-left: 20px;
+    width: 180px;
+    height: 45px;
+    border-radius: 200px;
+    border: none;
+    background-color: deeppink;
+    color: white;
+    font-size: 17px;
+
+
+}
+
+button:hover{
+    background-color: darkmagenta;
+    cursor: pointer;
+
+}

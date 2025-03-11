@@ -2,8 +2,12 @@
 {% block title %} Beheerders Dashboard {% endblock %}
 {% block styles %}<link rel="stylesheet" href="../static/css/beheerders_dashbord.css"> {% endblock %}
 
+{% block nav_links %}
+<a class= "logo-image" href="/dashboard"><img class="logo-image" src="../static/images/logo.svg"></a>
+<a href="/administrator-overview">Beheerders</a>
+{% endblock %}
+
 {% block main %}
-    <button class="js-admin-overview-button">Beheerdersoverzicht</button>
 <!--the three tables-->
     <main class="row">
         <section aria-labelledby="table-heading1" class="column">

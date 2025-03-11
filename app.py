@@ -18,15 +18,15 @@ app.secret_key = "wp3"
 
 
 
-@app.route('/login')
+@app.route('/')
 def login_page():
     return render_template("login.html")
 
 
-@app.route("/", methods=["GET"])
-def test():
-    if request.method == "GET":
-        return jsonify({"response": "hallo"})
+#@app.route("/", methods=["GET"])
+# def test():
+#     if request.method == "GET":
+#       return jsonify({"response": "hallo"})
 
 
 @app.route("/api/administrators", methods=["GET"])

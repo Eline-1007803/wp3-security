@@ -2,6 +2,10 @@
 {% block title %} Overzicht beheerders {%endblock%}
 {% block styles %}<link rel="stylesheet" href="../static/css/administrators-overview.css">{% endblock %}
 
+{% block nav_links %}
+<a class="logo-image" href="/dashboard"><img class="logo-image" src="../static/images/logo.svg"></a>
+<a href="/dashboard">Dashboard</a>
+{% endblock %}
 {% block main %}
  <!-- pop up after clicking button to add administrators-->
     <div class="js-background background hide"></div>
@@ -50,7 +54,7 @@
     </div>
 
  <!-- administrator overview -->
-    <h1> Beheerders overzicht</h1>
+    <h1> Beheerdersoverzicht</h1>
     <button class="add-administrator-button">Beheerder toevoegen<img class="action-img add-img" src="../static/images/add-icon.svg"></button>
 
     <table class="administrator-table">

@@ -329,7 +329,3 @@ function kill_interval() {
 function revive_interval() {
     interval = setInterval(get_all, 3000);
 }
-
-document.querySelector(".js-admin-overview-button").addEventListener("click", () => {
-    location.href = ('/administrator-overview')
-})
