@@ -16,15 +16,15 @@ app.secret_key = "wp3"
 
 app.jinja_env.autoescape = True
 
-@app.route('/login')
+@app.route('/')
 def login_page():
     return render_template("login.html")
 
 
-@app.route("/", methods=["GET"])
-def test():
-    if request.method == "GET":
-        return jsonify({"response": "hallo"})
+#@app.route("/", methods=["GET"])
+# def test():
+#     if request.method == "GET":
+#       return jsonify({"response": "hallo"})
 
 
 @app.route("/api/administrators", methods=["GET"])
@@ -175,12 +175,30 @@ def beperkingen():
 
 @app.route("/api/overzicht_onderzoeken", methods=["GET"])
 def overzicht_onderzoeken():
+    return render_template("overzicht_onderzoeken.html")
+
+@app.route("/api/overzicht_onderzoeken_organisatie", methods=["GET"])
+def overzicht_onderzoeken_organisatie():
     organisatie_id = 1  # for now
-    onderzoeken = organisatie.get_all_onderzoeken(organisatie_id)
-    return render_template("overzicht_onderzoeken.html", onderzoeken=onderzoeken)
+    onderzoek = organisatie.get_all_onderzoeken(organisatie_id)
+    onderzoeken = []
+    for row in onderzoek:
+        onderzoeken.append(dict(row))
+    return jsonify(onderzoeken)
+
+@app.route("/api/overzicht_onderzoeken_organisatie/<onderzoek_id>", methods=["GET"])
+def get_onderzoek(onderzoek_id):
+    onderzoek = organisatie.get_onderzoek(onderzoek_id)
+    return jsonify(onderzoek),200
+
+@app.route("/api/overzicht_onderzoeken_organisatie/<onderzoek_id>", methods=["PATCH"])
+def update_status(onderzoek_id):
+    status = request.json["status"]
+    onderzoek = organisatie.update_onderzoek_status(onderzoek_id,status)
+    return jsonify(onderzoek),200
 
 
-@app.route("/api/overzicht_onderzoeken/<onderzoek_id>", methods=["PATCH"])
+@app.route("/api/overzicht_onderzoeken_organisatie/update=<onderzoek_id>", methods=["PATCH"])
 def update_onderzoek_gegevens(onderzoek_id):
     title = request.json["titel"]
     if title == "":
@@ -211,6 +229,15 @@ def update_onderzoek_gegevens(onderzoek_id):
     )
     return jsonify(updated_onderzoek_gegevens), 200
 
+
+@app.route("/api/overzicht_onderzoeken_organisatie/<onderzoek_id>/users",methods=["GET"])
+def ingeschreven_users_onderzoekid(onderzoek_id):
+    onderzoek = organisatie.get_users_by_onderzoek(onderzoek_id)
+    onderzoeken = []
+    for row in onderzoek:
+        onderzoeken.append(dict(row))
+    return jsonify(onderzoeken)
+
 @app.route('/api/onderzoeken', methods=['PUT'])
 def update_onderzoeken():
     ozm = onderzoeken_model.Onderzoeken()
@@ -218,6 +245,7 @@ def update_onderzoeken():
     onderzoek_id = request.json.get('id')
     ozm.update_status(onderzoek_id, status)
     return "200"
+
 
 
 @app.route("/onderzoekaanvragen", methods=["GET"])
@@ -258,10 +286,10 @@ def onderzoek_aanvragen_organisatie():
         return jsonify("Datum tot cant be empty!"), 400
 
     type_onderzoek = request.json["typeonderzoek"]
+    locatie = request.json["locatie_text"]
     if type_onderzoek == "locatie":
             if locatie == "":
                 return jsonify("Typ hier de locatie!"),400
-
     locatie = request.json["locatie_text"]
     met_beloning = request.json["metbeloning"]
     hoeveel_beloning = request.json["beloning"]

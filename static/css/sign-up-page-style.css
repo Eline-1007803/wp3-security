@@ -1,26 +1,43 @@
 body {
     font-family: Arial;
     font-size: 18px;
-}
+    background-color: rgb(250, 253, 253);
+    margin-bottom: 160px;
 h1 {
     text-align: center;
     margin-bottom: 70px;
 }
 
-div {
-    display: grid;
-    grid-template-columns:150px 200px;
-    row-gap: 10px;
+.js-sign-up {
     width: 50%;
     margin:auto;
+    background-color: white;
+    padding: 50px;
+    justify-content: center;
+    border-radius: 20px;
+    box-shadow: 5px 5px 10px 10px lightgray;
+
 }
 
-form input {
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 30px;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
     height: 30px;
-    width: 500px;
+    border-width: 1px;
+    border-radius: 8px;
+    background-color: rgb(240, 243, 243);
 }
 
-form label {
+label {
     margin-bottom: 10px;
     margin-top: 10px;
     font-size: 18px;
@@ -29,6 +46,7 @@ form label {
 textarea {
     width: 500px;
     height: 150px;
+    background-color: rgb(240, 243, 243);
 }
 
 .supervisor-info {
@@ -44,19 +62,58 @@ textarea {
     display: none;
 }
 
+.submit-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .submit-button {
+    margin: 20px auto 0 auto;
     border-radius: 25px;
     background-color: #8b008b;
     color: white;
     border: none;
     width: 300px;
     height: 50px;
-    margin-left: 160px;
-    margin-top: 20px;
     text-align: center;
     cursor: pointer;
 }
 
 .submit-button:hover {
     background-color: #d100d1 ;
+}
+
+.sign-up {
+    display: grid;
+    margin-top: 100px;
+    margin-left: 0;
+}
+
+.normal {
+    display: flex;
+    align-items: left;
+    flex-direction: column;
+}
+
+.dropdown {
+    display: inline-block;
+    position: relative;
+}
+.dropdown-content{
+    display: none;
+    position: absolute;
+    z-index: 1;
+
+}
+
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.down {
+  transform: rotate(45deg);
 }

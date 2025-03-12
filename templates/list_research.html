@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <title>Onderzoeken waarvoor u zich hebt ingeschreven</title>
-    <link rel="stylesheet" href="../static/css/ervaringsdeskundige_onderzoeken.css">
-</head>
-<body>
+
+{% extends 'base.html' %}
+{% block title %}<title>Onderzoeken waarvoor u zich hebt ingeschreven</title> {% endblock %}
+{% block styles %}<link rel="stylesheet" href="../static/css/list_research.css"> {% endblock %}
+{% block nav_links %}
+<a class= "logo-image" href="/"><img class="logo-image" src="../static/images/logo.svg"></a>
+<a href="/openstaande_onderzoeken">Onderzoeken</a>
+{% endblock %}
+{% block main %}
+
     <main class="row">
         <section aria-labelledby="table-heading1" class="column">
         <h1 id="table-heading1">Overzicht van ingeschreven onderzoeken</h1>
@@ -25,6 +27,7 @@
         </table>
             </section>
     </main>
+
 
     <section id="onderzoekPopup" class="popup hide" role="dialog" aria-labelledby="popupTitel" aria-hidden="true">
         <article class="popup-content">
@@ -47,3 +50,6 @@
     <script src="{{ url_for('static', filename='javascript/list_research.js') }}"></script>
 </body>
 </html>
+
+{% endblock %}
+
