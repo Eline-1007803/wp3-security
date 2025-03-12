@@ -6,6 +6,7 @@
 {% block main %}
 <h1>Registreren</h1>
 <div class ="js-sign-up">
+    <div class="grid-container">
         <label>
             Voornaam:
             <input class="js-first-name-input" id="first-name-input" name="first-name-input" type="text" required>
@@ -75,6 +76,7 @@
             </select>
 <!--            </div>-->
         </label>
+    </div>
     <div class="normal">
         <label for="tools-input">Gebruikte hulpmiddelen:
             <input class="js-tools-input" id="tools-input" name="tools-input" type="text">
@@ -121,9 +123,13 @@
         <input class="js-color-foreground-input">
         <label>Achtergrond kleur:</label>
         <input class="js-color-background-input">
+
+    </div>
+    <div class="submit-container">
+        <button class="js-submit-button submit-button" type="submit">Indienen</button>
     </div>
 </div>
-        <button class="js-submit-button submit-button" type="submit">Indienen</button>
+
 
 
 {% endblock %}
