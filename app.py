@@ -172,6 +172,9 @@ def beperkingen():
         beperkingen.append(dict(row))
     return jsonify(beperkingen)
 
+@app.route("/api/organisatie_aanmaken", methods=["GET"])
+def organisatie_aanmaken():
+    return render_template("organisatie_aanmaken.html")
 
 @app.route("/api/overzicht_onderzoeken", methods=["GET"])
 def overzicht_onderzoeken():
