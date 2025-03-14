@@ -10,7 +10,7 @@ function organisatie_aanmaken()
     let contactpersoon = document.getElementById("contactpersoon").value
     let email = document.getElementById("email").value
     let number_ = document.getElementById("number").value
-    let number = Number(number)
+    let number = Number(number_)
     let overige_details = document.getElementById("overigedetails").value
 
     fetch("/api/organisatie_aanmaken/new",{
