@@ -1,5 +1,6 @@
 from datetime import datetime
 from flask import *
+import re
 from lib.model.administrators import Administrator
 from lib.model.sign_up import SignUp
 from models.onderzoeken_model import Onderzoeken
@@ -176,18 +177,40 @@ def beperkingen():
 def organisatie_aanmaken():
     return render_template("organisatie_aanmaken.html")
 
+#dit regex variable is om te checken of het email is.
+regex_email = r"^\S+@\S+\.\S+$"
+#dit regex variable is om te checken of het website is.
+regex_website = "^[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$"
 
-@app.route("api/organisatie_aanmaken/new",methods=["POST"])
+@app.route("/api/organisatie_aanmaken/new",methods=["POST"])
 def nieuwe_organisatie():
     naam = request.json["naam"]
+    if naam == "":
+        return jsonify("Typ organisatie naam in!"),400
     option = request.json["option"]
+    if option != "non-profit" and option != "commercieel":
+        return jsonify("Kies het type organisatie type! \nTip: het is of (non-profit) of (commercieel)"),400
     website = request.json["website"]
+    if not re.match(regex_website,website):
+        return jsonify("Voer een goede website adres in!"),400
     beschrijving = request.json["beschrijving"]
+    if beschrijving == "":
+        return jsonify("Voer beschrijving in"), 400
     contactpersoon = request.json["contactpersoon"]
+    if contactpersoon == "":
+        return jsonify("Voer naam van de contact persoon in in"), 400
     email = request.json["email"]
+    if not re.match(regex_email,email):
+        return jsonify("Voer een goede email adres in!"),400
     number = request.json["number"]
+    if not isinstance(number, int):
+        return jsonify("Voer nummer van organisatie in"),400
     overige_details = request.json["overigedetails"]
-    new_organisatie = organisatie.organisatie_aanmaaken(naam,option,website,beschrijving,contactpersoon,email,number,overige_details)
+    api_key = request.json["api_key"]
+    if api_key == "":
+        return jsonify("Api-key kan niet leeg zijn!"),400
+
+    new_organisatie = organisatie.organisatie_aanmaaken(naam,option,website,beschrijving,contactpersoon,email,number,overige_details,api_key)
     return jsonify(new_organisatie),200
 
 

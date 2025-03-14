@@ -20,3 +20,5 @@ afbeelding: https://pixabay.com/images/search/bin%20icon/
             https://github.com/apancik/public-domain-icons/blob/master/dist/symbol%20cross%20delete%20remove%20multiply.svg
 
 modal: https://www.w3schools.com/howto/howto_css_modals.asp
+regex pattern email: https://uibakery.io/regex-library/email-regex-python
+regex pattern website: https://uibakery.io/regex-library/url-regex-python
