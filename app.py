@@ -176,6 +176,22 @@ def beperkingen():
 def organisatie_aanmaken():
     return render_template("organisatie_aanmaken.html")
 
+
+@app.route("api/organisatie_aanmaken/new",methods=["POST"])
+def nieuwe_organisatie():
+    naam = request.json["naam"]
+    option = request.json["option"]
+    website = request.json["website"]
+    beschrijving = request.json["beschrijving"]
+    contactpersoon = request.json["contactpersoon"]
+    email = request.json["email"]
+    number = request.json["number"]
+    overige_details = request.json["overigedetails"]
+    new_organisatie = organisatie.organisatie_aanmaaken(naam,option,website,beschrijving,contactpersoon,email,number,overige_details)
+    return jsonify(new_organisatie),200
+
+
+
 @app.route("/api/overzicht_onderzoeken", methods=["GET"])
 def overzicht_onderzoeken():
     return render_template("overzicht_onderzoeken.html")
