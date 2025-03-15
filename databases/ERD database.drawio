@@ -1,0 +1,103 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36" version="26.1.1">
+  <diagram id="shR7kjbE3yxnGY4coeIw" name="Pagina-1">
+    <mxGraphModel dx="3585" dy="3" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="node4" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;alle_beperkingen&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; naam: text&lt;br/&gt; type: text&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; beperking_id: integer&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="-510" y="1230" width="178" height="121" as="geometry" />
+        </mxCell>
+        <mxCell id="node5" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;beheerders&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; voornaam: text&lt;br/&gt; tussenvoegsel: text&lt;br/&gt; achternaam: text&lt;br/&gt; wachtwoord: text&lt;br/&gt; email: text&lt;br/&gt; telefoonnummer: text&lt;br/&gt; status: text&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; beheerder_id: integer&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="-832" y="1795" width="172" height="232" as="geometry" />
+        </mxCell>
+        <mxCell id="node8" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ervaringsdeskundigen&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; voornaam: text&lt;br/&gt; tussenvoegsel: text&lt;br/&gt; achternaam: text&lt;br/&gt; wachtwoord: text&lt;br/&gt; postcode: text&lt;br/&gt; geslacht: text&lt;br/&gt; emailadres: text&lt;br/&gt; telefoonnummer: text&lt;br/&gt; geboortedatum: datetime&lt;br/&gt; hulpmiddelen: text&lt;br/&gt; introductie: text&lt;br/&gt; bijzonderheden: text&lt;br/&gt; akkoord_met_voorwaarde: boolean&lt;br/&gt; toezichthouder: boolean&lt;br/&gt; naam_voogd: text&lt;br/&gt; telefoonnummer_voogd: text&lt;br/&gt; email_voogd: text&lt;br/&gt; voorkeur_benadering: text&lt;br/&gt; type_onderzoek: text&lt;br/&gt; beschikbaarheid: text&lt;br/&gt; status: text&lt;br/&gt; kleur_voorgrond: text&lt;br/&gt; kleur_achtergrond: text&lt;br/&gt; beheerder_id: integer&lt;br/&gt; datum_goedgekeurd: datetime&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; ervaringsdeskundige_id: integer&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="-12" y="1110" width="262" height="664" as="geometry" />
+        </mxCell>
+        <mxCell id="node2" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;geregistreerde_beperkingen&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; ervaringsdeskundige_id: integer&lt;br/&gt; beperking_id: integer&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; gb_id: integer&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="-332" y="1440" width="271" height="121" as="geometry" />
+        </mxCell>
+        <mxCell id="node6" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;inschrijvingen&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; ervaringsdeskundige_id: integer&lt;br/&gt; onderzoek_id: integer&lt;br/&gt; status: text&lt;br/&gt; datum: datetime&lt;br/&gt; afgerond: boolean&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; inschrijving_id: integer&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="-560" y="1654" width="244" height="184" as="geometry" />
+        </mxCell>
+        <mxCell id="node7" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;onderzoek_beperkingen&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; onderzoek_id: integer&lt;br/&gt; beperking_id: integer&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; ob_id: integer&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="-750" y="1410" width="236" height="121" as="geometry" />
+        </mxCell>
+        <mxCell id="node9" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;onderzoeken&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; titel: text&lt;br/&gt; status: text&lt;br/&gt; beschikbaar: boolean&lt;br/&gt; beschrijving: text&lt;br/&gt; datum_vanaf: datetime&lt;br/&gt; datum_tot: datetime&lt;br/&gt; type: text&lt;br/&gt; locatie: text&lt;br/&gt; met_beloning: boolean&lt;br/&gt; beloning: text&lt;br/&gt; leeftijd_van: integer&lt;br/&gt; leeftijd_tot: integer&lt;br/&gt; organisatie_id: integer&lt;br/&gt; beheerder_id: integer&lt;br/&gt; datum_goedgekeurd: datetime&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; onderzoek_id: integer&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="-1030" y="1230" width="229" height="424" as="geometry" />
+        </mxCell>
+        <mxCell id="node0" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;organisaties&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; naam: text&lt;br/&gt; wachtwoord: text&lt;br/&gt; type: text&lt;br/&gt; website: text&lt;br/&gt; beschrijving: text&lt;br/&gt; contactpersoon: text&lt;br/&gt; email: text&lt;br/&gt; telefoonnummer: text&lt;br/&gt; overige_details: text&lt;br/&gt; status: text&lt;br/&gt; api_key: text&lt;br/&gt; beheerder_id: integer&lt;br/&gt; datum_goedgekeurd: datetime&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; organisatie_id: integer&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="-1480" y="1220" width="229" height="376" as="geometry" />
+        </mxCell>
+        <mxCell id="xcE32xkf9qwSd9g1W3Fs-1" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="node4" target="node2">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="-380" y="1370" as="sourcePoint" />
+            <mxPoint x="-280" y="1270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xcE32xkf9qwSd9g1W3Fs-2" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="node4" target="node7">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="-322" y="1301" as="sourcePoint" />
+            <mxPoint x="-186" y="1450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xcE32xkf9qwSd9g1W3Fs-5" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;" edge="1" parent="1" source="node8" target="node6">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="-226" y="1600" as="sourcePoint" />
+            <mxPoint x="-250" y="2015" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xcE32xkf9qwSd9g1W3Fs-6" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" edge="1" parent="1" source="node9" target="node6">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="-282" y="1341" as="sourcePoint" />
+            <mxPoint x="-146" y="1490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xcE32xkf9qwSd9g1W3Fs-7" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="node0" target="node9">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="-272" y="1351" as="sourcePoint" />
+            <mxPoint x="-136" y="1500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xcE32xkf9qwSd9g1W3Fs-8" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;startArrow=ERmandOne;rounded=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;" edge="1" parent="1" source="node9" target="node7">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="-650" y="1540" as="sourcePoint" />
+            <mxPoint x="-550" y="1440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xcE32xkf9qwSd9g1W3Fs-9" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;startArrow=ERmandOne;rounded=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;exitX=-0.005;exitY=0.271;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="node8" target="node2">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="-791" y="1346" as="sourcePoint" />
+            <mxPoint x="-681" y="1420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xcE32xkf9qwSd9g1W3Fs-12" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="node5" target="node8">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-428" y="2010" as="sourcePoint" />
+            <mxPoint x="-428" y="1848" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xcE32xkf9qwSd9g1W3Fs-13" value="beheerder_id" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="xcE32xkf9qwSd9g1W3Fs-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xcE32xkf9qwSd9g1W3Fs-14" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="node5" target="node9">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-342" y="2068" as="sourcePoint" />
+            <mxPoint x="129" y="1784" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xcE32xkf9qwSd9g1W3Fs-15" value="beheerder_id" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="xcE32xkf9qwSd9g1W3Fs-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xcE32xkf9qwSd9g1W3Fs-16" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="node5" target="node0">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-332" y="2078" as="sourcePoint" />
+            <mxPoint x="139" y="1794" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xcE32xkf9qwSd9g1W3Fs-17" value="beheerder_id" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="xcE32xkf9qwSd9g1W3Fs-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
