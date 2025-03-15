@@ -1,5 +1,6 @@
 from datetime import datetime
 from flask import *
+import re,random,string
 from lib.model.administrators import Administrator
 from lib.model.sign_up import SignUp
 from models.onderzoeken_model import Onderzoeken
@@ -16,12 +17,13 @@ app.secret_key = "wp3"
 
 app.jinja_env.autoescape = True
 
-@app.route('/')
+
+@app.route("/")
 def login_page():
     return render_template("login.html")
 
 
-#@app.route("/", methods=["GET"])
+# @app.route("/", methods=["GET"])
 # def test():
 #     if request.method == "GET":
 #       return jsonify({"response": "hallo"})
@@ -59,7 +61,9 @@ def update_administrator(administrator_id):
     lname = request.json["achternaam"]
     email = request.json["email"]
     administrator_model = Administrator()
-    updated_administrator = administrator_model.update_administrator(fname, lname, email, administrator_id)
+    updated_administrator = administrator_model.update_administrator(
+        fname, lname, email, administrator_id
+    )
     print(updated_administrator)
     return updated_administrator
 
@@ -102,7 +106,7 @@ def save_sign_up():
     supervisor = request.json["supervisor"]
     name_supervisor = request.json["name_supervisor"]
     phonenum_supervisor = request.json["phonenum_supervisor"]
-    email_supervisor= request.json["email_parent"]
+    email_supervisor = request.json["email_parent"]
     preferred_approach = request.json["preferred_approach"]
     research_type = request.json["research_type"]
     availability = request.json["availability"]
@@ -110,9 +114,32 @@ def save_sign_up():
     color_foreground = request.json["color_foreground"]
     color_background = request.json["color_background"]
 
-
     signup_model = SignUp()
-    save_sign_up = signup_model.save_signup(fname, infix, lname, password, zipcode, gender, email, phonenum, birthdate, tools, introduction, details, agreement_terms, supervisor, name_supervisor, phonenum_supervisor, email_supervisor, preferred_approach, research_type, availability, status, color_foreground, color_background )
+    save_sign_up = signup_model.save_signup(
+        fname,
+        infix,
+        lname,
+        password,
+        zipcode,
+        gender,
+        email,
+        phonenum,
+        birthdate,
+        tools,
+        introduction,
+        details,
+        agreement_terms,
+        supervisor,
+        name_supervisor,
+        phonenum_supervisor,
+        email_supervisor,
+        preferred_approach,
+        research_type,
+        availability,
+        status,
+        color_foreground,
+        color_background,
+    )
     return save_sign_up
 
 
@@ -130,13 +157,15 @@ def get_deskundigen():
         dictresult.append(dict(row))
     return {"deskundigen": dictresult}
 
-@app.route('/api/deskundigen', methods=['PUT'])
+
+@app.route("/api/deskundigen", methods=["PUT"])
 def update_deskundigen():
     edm = ervaringsdeskundigen_model.Ervaringsdeskundigen()
-    status = request.json.get('status')
-    deskundige_id = request.json.get('id')
+    status = request.json.get("status")
+    deskundige_id = request.json.get("id")
     edm.update_status(deskundige_id, status)
     return "200"
+
 
 @app.route("/api/inschrijvingen", methods=["GET"])
 def get_inschrijvingen():
@@ -147,13 +176,15 @@ def get_inschrijvingen():
         dictresult.append(dict(row))
     return {"inschrijvingen": dictresult}
 
-@app.route('/api/inschrijvingen', methods=['PUT'])
+
+@app.route("/api/inschrijvingen", methods=["PUT"])
 def update_inschrijvingen():
     ism = inschrijvingen_model.Inschrijvingen()
-    status = request.json.get('status')
-    inschrijving_id = request.json.get('id')
+    status = request.json.get("status")
+    inschrijving_id = request.json.get("id")
     ism.update_status(inschrijving_id, status)
     return "200"
+
 
 @app.route("/api/onderzoeken", methods=["GET"])
 def get_onderzoeken():
@@ -164,7 +195,8 @@ def get_onderzoeken():
         dictresult.append(dict(row))
     return {"onderzoeken": dictresult}
 
-@app.route("/api/alle_beperkingen",methods=["GET"])
+
+@app.route("/api/alle_beperkingen", methods=["GET"])
 def beperkingen():
     result = organisatie.get_all_disabilities()
     beperkingen = []
@@ -173,9 +205,64 @@ def beperkingen():
     return jsonify(beperkingen)
 
 
+@app.route("/api/organisatie_aanmaken", methods=["GET"])
+def organisatie_aanmaken():
+    return render_template("organisatie_aanmaken.html")
+
+# dit regex variable is om te checken of het email is.
+regex_email = r"^\S+@\S+\.\S+$"
+# dit regex variable is om te checken of het website is.
+regex_website = "^[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$"
+
+@app.route("/api/organisatie_aanmaken/new", methods=["POST"])
+def nieuwe_organisatie():
+    naam = request.json["naam"]
+    if naam == "":
+        return jsonify("Typ organisatie naam in!"), 400
+    option = request.json["option"]
+    if option != "non-profit" and option != "commercieel":
+        return (
+            jsonify(
+                "Kies het type organisatie type! \nTip: het is of (non-profit) of (commercieel)"
+            ),
+            400,
+        )
+    website = request.json["website"]
+    if not re.match(regex_website, website):
+        return jsonify("Voer een goede website adres in!"), 400
+    beschrijving = request.json["beschrijving"]
+    if beschrijving == "":
+        return jsonify("Voer beschrijving in"), 400
+    contactpersoon = request.json["contactpersoon"]
+    if contactpersoon == "":
+        return jsonify("Voer naam van de contact persoon in in"), 400
+    email = request.json["email"]
+    if not re.match(regex_email, email):
+        return jsonify("Voer een goede email adres in!"), 400
+    number = request.json["number"]
+    check_number_10_digit = str(number)
+    if not isinstance(number, int) or len(check_number_10_digit) != 10:
+        return jsonify("U heeft geen nummer ingevuld of het heeft geen 10 cijfers"), 400
+    overige_details = request.json["overige_details"]
+    api_key = ''.join(random.choices(string.ascii_letters + string.digits + string.punctuation, k=32))
+    new_organisatie = organisatie.organisatie_aanmaaken(
+        naam,
+        option,
+        website,
+        beschrijving,
+        contactpersoon,
+        email,
+        number,
+        overige_details,
+        api_key,
+    )
+    return jsonify(new_organisatie), 201
+
+
 @app.route("/api/overzicht_onderzoeken", methods=["GET"])
 def overzicht_onderzoeken():
     return render_template("overzicht_onderzoeken.html")
+
 
 @app.route("/api/overzicht_onderzoeken_organisatie", methods=["GET"])
 def overzicht_onderzoeken_organisatie():
@@ -186,19 +273,23 @@ def overzicht_onderzoeken_organisatie():
         onderzoeken.append(dict(row))
     return jsonify(onderzoeken)
 
+
 @app.route("/api/overzicht_onderzoeken_organisatie/<onderzoek_id>", methods=["GET"])
 def get_onderzoek(onderzoek_id):
     onderzoek = organisatie.get_onderzoek(onderzoek_id)
-    return jsonify(onderzoek),200
+    return jsonify(onderzoek), 200
+
 
 @app.route("/api/overzicht_onderzoeken_organisatie/<onderzoek_id>", methods=["PATCH"])
 def update_status(onderzoek_id):
     status = request.json["status"]
-    onderzoek = organisatie.update_onderzoek_status(onderzoek_id,status)
-    return jsonify(onderzoek),200
+    onderzoek = organisatie.update_onderzoek_status(onderzoek_id, status)
+    return jsonify(onderzoek), 200
 
 
-@app.route("/api/overzicht_onderzoeken_organisatie/update=<onderzoek_id>", methods=["PATCH"])
+@app.route(
+    "/api/overzicht_onderzoeken_organisatie/update=<onderzoek_id>", methods=["PATCH"]
+)
 def update_onderzoek_gegevens(onderzoek_id):
     title = request.json["titel"]
     if title == "":
@@ -230,7 +321,9 @@ def update_onderzoek_gegevens(onderzoek_id):
     return jsonify(updated_onderzoek_gegevens), 200
 
 
-@app.route("/api/overzicht_onderzoeken_organisatie/<onderzoek_id>/users",methods=["GET"])
+@app.route(
+    "/api/overzicht_onderzoeken_organisatie/<onderzoek_id>/users", methods=["GET"]
+)
 def ingeschreven_users_onderzoekid(onderzoek_id):
     onderzoek = organisatie.get_users_by_onderzoek(onderzoek_id)
     onderzoeken = []
@@ -238,14 +331,14 @@ def ingeschreven_users_onderzoekid(onderzoek_id):
         onderzoeken.append(dict(row))
     return jsonify(onderzoeken)
 
-@app.route('/api/onderzoeken', methods=['PUT'])
+
+@app.route("/api/onderzoeken", methods=["PUT"])
 def update_onderzoeken():
     ozm = onderzoeken_model.Onderzoeken()
-    status = request.json.get('status')
-    onderzoek_id = request.json.get('id')
+    status = request.json.get("status")
+    onderzoek_id = request.json.get("id")
     ozm.update_status(onderzoek_id, status)
     return "200"
-
 
 
 @app.route("/onderzoekaanvragen", methods=["GET"])
@@ -288,17 +381,22 @@ def onderzoek_aanvragen_organisatie():
     type_onderzoek = request.json["typeonderzoek"]
     locatie = request.json["locatie_text"]
     if type_onderzoek == "locatie":
-            if locatie == "":
-                return jsonify("Typ hier de locatie!"),400
+        if locatie == "":
+            return jsonify("Typ hier de locatie!"), 400
     locatie = request.json["locatie_text"]
     met_beloning = request.json["metbeloning"]
     hoeveel_beloning = request.json["beloning"]
     if met_beloning == "1":
         if hoeveel_beloning == "":
-            return jsonify("U heeft geen beloning getypt."),400
+            return jsonify("U heeft geen beloning getypt."), 400
     type_disability = request.json["disability-type-input"]
     if not isinstance(type_disability, list):
-        return jsonify("Voeg beperking(en) in een list! \nTip: bij /api/alle_beperkingen kan je id's vinden van alle beperkingen"), 400
+        return (
+            jsonify(
+                "Voeg beperking(en) in een list! \nTip: bij /api/alle_beperkingen kan je id's vinden van alle beperkingen"
+            ),
+            400,
+        )
 
     leeftijd_van = request.json["leeftijdvan"]
     if leeftijd_van == "":
@@ -332,32 +430,38 @@ def onderzoek_aanvragen_organisatie():
         organisatie.insert_onderzoek_disability(onderzoek_id, disability)
     return jsonify(onderzoek), 201
 
-@app.route('/api/openstaande_onderzoeken', methods=['GET'])
+
+@app.route("/api/openstaande_onderzoeken", methods=["GET"])
 def get_open_research():
     onderzoeken_model = Onderzoeken()
     open_onderzoeken = onderzoeken_model.get_open_research()
 
     return jsonify(open_onderzoeken)
 
-@app.route('/openstaande_onderzoeken')
-def onderzoeken_pagina():    
-    return render_template('ervaringsdeskundige_onderzoeken.html')
+
+@app.route("/openstaande_onderzoeken")
+def onderzoeken_pagina():
+    return render_template("ervaringsdeskundige_onderzoeken.html")
 
 
-#@app.route('/openstaande_onderzoeken', methods=['POST'])
-#def 
+# @app.route('/openstaande_onderzoeken', methods=['POST'])
+# def
 
-@app.route('/api/ingeschreven_onderzoeken', methods=['GET'])
+
+@app.route("/api/ingeschreven_onderzoeken", methods=["GET"])
 def get_signedup_research():
     onderzoeken_model = Onderzoeken()
-    ervaringsdeskundige_id = 1 #moet nog worden veranderd
-    ingeschreven_onderzoeken = onderzoeken_model.get_signedup_research(ervaringsdeskundige_id)
+    ervaringsdeskundige_id = 1  # moet nog worden veranderd
+    ingeschreven_onderzoeken = onderzoeken_model.get_signedup_research(
+        ervaringsdeskundige_id
+    )
 
     return jsonify(ingeschreven_onderzoeken)
-    
-@app.route('/ingeschreven_onderzoeken')
+
+
+@app.route("/ingeschreven_onderzoeken")
 def lijst_ingeschreven_onderzoeken():
-    return render_template('list_research.html')
+    return render_template("list_research.html")
 
 
 if __name__ == "__main__":

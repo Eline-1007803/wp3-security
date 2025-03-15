@@ -95,3 +95,32 @@ class Organisatie:
         )
         self.con.commit()
         return True
+    
+    def organisatie_aanmaaken(
+        self,
+        naam,
+        option,
+        website,
+        beschrijving,
+        contactpersoon,
+        email,
+        telefoonnummer,
+        overige_details,
+        api_key
+    ):
+        self.cursor.execute(
+            "INSERT into organisaties (naam,type,website,beschrijving,contactpersoon,email,telefoonnummer,overige_details,api_key) VALUES (?,?,?,?,?,?,?,?,?)",
+            (
+                naam,
+                option,
+                website,
+                beschrijving,
+                contactpersoon,
+                email,
+                telefoonnummer,
+                overige_details,
+                api_key,
+            ),
+        )
+        self.con.commit()
+        return True
