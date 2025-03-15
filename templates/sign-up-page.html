@@ -5,35 +5,36 @@
 {% block nav_links %} <a class= "logo-image" href="/"><img class="logo-image" src="../static/images/logo.svg"></a> {% endblock %}
 {% block main %}
 <h1>Registreren</h1>
+<form class="sign-up-form">
 <div class ="js-sign-up">
     <div class="grid-container">
         <label>
             Voornaam:
-            <input class="js-first-name-input" id="first-name-input" name="first-name-input" type="text" required>
+            <input class="js-first-name-input" id="first-name-input" name="first-name-input" type="text" aria-label="Vul hier uw voornaam in" required>
         </label>
         <label for="infix-input"> Tussenvoegsel:
             <input class="js-infix-input" id="infix-input" type="text">
         </label>
         <label for="last-name-input">Achternaam:
-        <input class="js-last-name-input" id="last-name-input" name="last-name-input" type="text">
+        <input class="js-last-name-input" id="last-name-input" name="last-name-input" type="text" required>
         </label>
         <label for="password-input">Wachtwoord:
-            <input class="js-password-input" id="password-input" name="password-input" type="text">
+            <input class="js-password-input" id="password-input" name="password-input" type="password" required>
         </label>
         <label for="zip-code-input">Postcode:
-        <input class="js-zip-code-input" id="zip-code-input" name="zip-code-input" type="text">
+        <input class="js-zip-code-input" id="zip-code-input" name="zip-code-input" type="text" required>
         </label>
         <label for="gender-input">Geslacht:
         <input class="js-gender-input" id="gender-input" name="gender-input" type="text">
         </label>
         <label for="email-input">E-mailadres:
-        <input class="js-email-input" id="email-input" name="email-input" type="email">
+        <input class="js-email-input" id="email-input" name="email-input" type="email" required>
         </label>
         <label for="phone-number-input">Telefoonnummer:
-        <input class="js-phonenum-input" id="phone-number-input" name="phone-number-input" type="tel">
+        <input class="js-phonenum-input" id="phone-number-input" name="phone-number-input" type="tel" required>
         </label>
         <label for="date-of-birth-input">Geboortedatum:
-        <input class="js-birthdate-input" id="date-of-birth-input" name="date-of-birth-input" type="date">
+        <input class="js-birthdate-input" id="date-of-birth-input" name="date-of-birth-input" type="date" required>
         </label>
 
         <label for="disability-type-input">Type beperking:<button class="button-disabilities">Beperkingen<i class="arrow down"></i></button>
@@ -117,19 +118,12 @@
         <label for="availability-input">Bijzonderheden beschikbaarheid:</label>
         <textarea class="js-availability-input" id="availability-input" name="details-availability-input"></textarea>
 
-        <label>Status:</label>
-        <input class="js-status-input">
-        <label>Voorgrond kleur:</label>
-        <input class="js-color-foreground-input">
-        <label>Achtergrond kleur:</label>
-        <input class="js-color-background-input">
-
     </div>
     <div class="submit-container">
         <button class="js-submit-button submit-button" type="submit">Indienen</button>
     </div>
 </div>
-
+</form>
 
 
 {% endblock %}

@@ -57,9 +57,6 @@ function saveSignup () {
     let preferredApproach = document.querySelector('.js-preferred-approach-input').value
     let researchType = document.querySelector('.js-researchtype-input').value
     let availability = document.querySelector('.js-availability-input').value
-    let status = document.querySelector('.js-status-input').value
-    let colorForeground = document.querySelector('.js-color-foreground-input').value
-    let colorBackground = document.querySelector('.js-color-background-input').value
 
     console.log(fname, lname, zipcode, nameSupervisor, researchType)
     fetch('/api/save-signup', {
@@ -87,10 +84,7 @@ function saveSignup () {
             email_parent: emailParent,
             preferred_approach: preferredApproach,
             research_type: researchType,
-            availability: availability,
-            status: status,
-            color_foreground: colorForeground,
-            color_background: colorBackground})
+            availability: availability})
 
         })
             .then(response => response)
@@ -101,3 +95,32 @@ function saveSignup () {
 
 document.querySelector(".js-submit-button").addEventListener("click", saveSignup);
 
+
+let fname = document.querySelector('.js-first-name-input').value
+    let infix = document.querySelector('.js-infix-input').value
+    let lname = document.querySelector('.js-last-name-input').value
+    let password = document.querySelector('.js-password-input').value
+    let zipcode = document.querySelector('.js-zip-code-input').value
+    let gender = document.querySelector('.js-gender-input').value
+    let email = document.querySelector('.js-email-input').value
+    let phonenum = document.querySelector('.js-phonenum-input').value
+    let birthdate = document.querySelector('.js-birthdate-input').value
+    let tools = document.querySelector('.js-tools-input').value
+    let introduction = document.querySelector('.js-introduction-input').value
+    let details = document.querySelector('.js-details-input').value
+    let agreementTerms = document.querySelector('.js-agreement-terms-input').value
+    let supervisor = document.querySelector('.js-supervisor-input').value
+    let nameSupervisor = document.querySelector('.js-supervisor-name-input').value
+    let phonenumSupervisor = document.querySelector('.js-supervisor-phonenum-input').value
+    let emailParent = document.querySelector('.js-supervisor-email-input').value
+    let preferredApproach = document.querySelector('.js-preferred-approach-input').value
+    let researchType = document.querySelector('.js-researchtype-input').value
+    let availability = document.querySelector('.js-availability-input').value
+    let errormessage = document.querySelector('.js-error-message')
+
+document.querySelector(".sign-up-form").addEventListener("submit", () => {
+
+    if (fname === '' || fname === null){
+        errormessage.innerHTML = 'vul uw voornaam in'
+    }
+})
