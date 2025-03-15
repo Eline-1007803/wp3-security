@@ -203,15 +203,16 @@ def nieuwe_organisatie():
     if not re.match(regex_email,email):
         return jsonify("Voer een goede email adres in!"),400
     number = request.json["number"]
-    if not isinstance(number, int):
-        return jsonify("Voer nummer van organisatie in"),400
-    overige_details = request.json["overigedetails"]
+    check_number_10_digit = str(number)
+    if not isinstance(number, int) or len(check_number_10_digit) != 10:
+        return jsonify("U heeft geen nummer ingevuld of het heeft geen 10 cijfers"),400
+    overige_details = request.json["overige_details"]
     api_key = request.json["api_key"]
     if api_key == "":
         return jsonify("Api-key kan niet leeg zijn!"),400
 
     new_organisatie = organisatie.organisatie_aanmaaken(naam,option,website,beschrijving,contactpersoon,email,number,overige_details,api_key)
-    return jsonify(new_organisatie),200
+    return jsonify(new_organisatie),201
 
 
 

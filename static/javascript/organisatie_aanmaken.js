@@ -1,4 +1,4 @@
-document.getElementById("aanmaken").addEventListener("click",organisatie_aanmaken)
+document.getElementById("submit_button").addEventListener("click",organisatie_aanmaken)
 
 function organisatie_aanmaken()
 {
