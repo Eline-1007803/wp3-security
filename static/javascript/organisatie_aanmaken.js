@@ -29,5 +29,8 @@ function organisatie_aanmaken()
         })
     })
     .then((response => response.json()))
-    .then((data => console.log(data)))
+    .then(data => {
+        alert(data)
+        console.log(data)
+    })
 }
