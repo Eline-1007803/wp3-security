@@ -141,6 +141,21 @@ function users_registered_to_onderzoek(onderzoek_id) {
 function showUsers(users)
 {
   const usersPOPUP = document.getElementById("users_modal");
+  let gegevens = "";
+  users.forEach((user)=>
+  {
+    console.log(user)
+    let row =
+    `
+      <tr>
+      <td>${user.voornaam}</td>
+      <td>${user.postcode}</td>
+      <td>${user.geslacht}</td>
+      <td>${user.emailadres}</td>
+      </tr>
+    `;
+    gegevens +=row;
+  });
   usersPOPUP.innerHTML =
   `
     <div class="modal-content">
@@ -154,12 +169,7 @@ function showUsers(users)
                 <th>Email</th>
 
             </tr>
-            <tr>
-                <td>${users.voornaam}</td>
-                <td>${users.postcode}</td>
-                <td>${users.geslacht}</td>
-                <td>${users.emailadres}</td>
-            </tr>
+            ${gegevens}
         </table>
     </div>
   `;

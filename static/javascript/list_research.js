@@ -53,8 +53,9 @@ function set_modal() {
     });
 }
 
+
 function getOnderzoeken() {
-fetch('/api/openstaande_onderzoeken', {  
+fetch('/api/ingeschreven_onderzoeken', {  
     method: 'GET',
     headers: {
         'Accept': 'application/json'
@@ -68,14 +69,14 @@ fetch('/api/openstaande_onderzoeken', {
 })
 .then(onderzoeken => {
     console.log("Ontvangen onderzoeken:", onderzoeken);
-    getOpenResearch(onderzoeken);
+    getSignedUpResearch(onderzoeken);
 })
 .catch(error => console.error("Fout bij ophalen onderzoeken:", error));
 
 }
 
                 
-function getOpenResearch(onderzoeken) {
+function getSignedUpResearch(onderzoeken) {
     console.log(onderzoeken); 
     let tableBody = document.querySelector('.table-clickable tbody');
     tableBody.innerHTML = '';

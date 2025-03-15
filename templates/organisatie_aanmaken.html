@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Organisatie Aanmaken {% endblock %}
+{% block styles %}<link rel="stylesheet" href="/static/css/organisatie_aanmaken.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> {% endblock %}
+{% block nav_links %} <img class="logo-image" src="../static/images/logo.svg" alt="Logo van de organisatie"> {% endblock %}
+{% block main %}
+    <form>
+      <h1>Organisatie aanmaken </h1>
+      <label for="naam">Naam:</label>
+      <input type="text" name="naam" id="naam" class="form-control" placeholder="Naam organisatie" required aria-label="Voer de naam van de organisatie in">
+      <label for="options">Options</label>
+      <select class="form-select" id="option" name="option" aria-label="Selecteer de type organisatie">
+        <option value="" selected disabled>Maak een keuze</option>
+        <option value="non-profit">Non-Profit</option>
+        <option value="commercieel">Commercieel</option>
+      </select>
+        <label for="website">Website:</label>
+      <input type="text" name="website" class="form-control" id="website" placeholder= "https://example.com" required aria-label="Voer de URL van de website in">
+      <label for="beschrijving">Beschrijving:</label>
+      <textarea id="beschrijving" class="form-control" name="beschrijving" id="beschrijving" required aria-label="Voer een beschrijving van de organisatie in"></textarea><br>
+      <label for="contactpersoon">Contact Persoon:</label>
+      <input type="text" class="form-control" name="contactpersoon" id="contactpersoon" placeholder="Contact Persoon" required aria-label="Voer de naam van de contact persoon in">
+      <br>
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" name="email" id="email" placeholder="Voer hier email in" required aria-label="Voer de email adres in">
+      <br>
+      <label for="number">Telefoonnummer:</label>
+      <input type="text" class="form-control" name="number" id="number" placeholder="Voer hier juiste telefoonnummer in" required aria-label="Voer het telefoonnummer in">
+      <label for="overigedetails">Overige Details:</label>
+      <textarea id="overigedetails" class="form-control" name="overigedetails" id="overigedetails" aria-label="Voer overige details in"></textarea><br>
+      <div id="submit_button" class="button" aria-label="onderzoek aanvragen">Aanvragen</div>
+    </form>
+{% endblock %}
+{% block scripts %}<script src="/static/javascript/organisatie_aanmaken.js"></script> {% endblock %}
