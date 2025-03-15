@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask import *
-import re
+import re,random,string
 from lib.model.administrators import Administrator
 from lib.model.sign_up import SignUp
 from models.onderzoeken_model import Onderzoeken
@@ -209,12 +209,10 @@ def beperkingen():
 def organisatie_aanmaken():
     return render_template("organisatie_aanmaken.html")
 
-
 # dit regex variable is om te checken of het email is.
 regex_email = r"^\S+@\S+\.\S+$"
 # dit regex variable is om te checken of het website is.
 regex_website = "^[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$"
-
 
 @app.route("/api/organisatie_aanmaken/new", methods=["POST"])
 def nieuwe_organisatie():
@@ -246,10 +244,7 @@ def nieuwe_organisatie():
     if not isinstance(number, int) or len(check_number_10_digit) != 10:
         return jsonify("U heeft geen nummer ingevuld of het heeft geen 10 cijfers"), 400
     overige_details = request.json["overige_details"]
-    api_key = request.json["api_key"]
-    if api_key == "":
-        return jsonify("Api-key kan niet leeg zijn!"), 400
-
+    api_key = ''.join(random.choices(string.ascii_letters + string.digits + string.punctuation, k=32))
     new_organisatie = organisatie.organisatie_aanmaaken(
         naam,
         option,

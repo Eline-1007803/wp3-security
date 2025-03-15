@@ -2,7 +2,6 @@ document.getElementById("submit_button").addEventListener("click",organisatie_aa
 
 function organisatie_aanmaken()
 {
-    let api_key = "xd"
     let naam = document.getElementById("naam").value
     let option = document.getElementById("option").value
     let website = document.getElementById("website").value
@@ -26,8 +25,7 @@ function organisatie_aanmaken()
             "contactpersoon":contactpersoon,
             "email":email,
             "number":number,
-            "overige_details":overige_details,
-            "api_key":api_key
+            "overige_details":overige_details
         })
     })
     .then((response => response.json()))

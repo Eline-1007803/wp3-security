@@ -248,7 +248,7 @@ class WP3DatabaseGenerator:
             ("gfx", "non-profit", "https://www.gfx.com", "organisatie", "Angela Koe", "gfx@info.com", "0654826582", "leeg", "goedgekeurd", "A1B2", 2, "2025-02-03"),
             ("plams", "commercieel", "https://www.plams.nl", "ook een organisatie", "Lenn van Dam", "plams@info.com", "0665835683", "het is een organisatie", "nieuw", "C3D4", None, None),
         ]
-        insert_statement = "INSERT INTO organisaties (naam, type, website, beschrijving, contactpersoon, email, telefoonnummer, overige_details, status, api_key, beheerder_id, datum_goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+        insert_statement = "INSERT INTO organisaties (naam, type, website, beschrijving, contactpersoon, email, telefoonnummer, overige_details, status, api_key, beheerder_id, datum_goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?);"
         self.__execute_many_transaction_statement(insert_statement, users)
         print("✅ Default organisaties created")
     def insert_onderzoek_beperkingen(self):
