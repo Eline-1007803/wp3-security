@@ -1,18 +1,16 @@
 {% extends 'base.html' %}
-{% block title %}<title>Login</title> {% endblock %}
+{% block title %}Login{% endblock %}
 {% block styles %}<link rel="stylesheet" href="/static/css/login_page_style.css"> {% endblock %}
 {% block nav_links %} <img class="logo-image" src="../static/images/logo.svg">{% endblock %}
 {% block main %}
     <h1>Inloggen</h1>
     <div class="form-container">
-        <form action="tobeadded" method="post">
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email" placeholder="Email" aria-label="Voer hier uw email in" required>
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password" placeholder="Password" required>
-            <input type="submit" value="Login" aria-label="Druk om in te loggen">
-            <p>Heeft u geen account?<a href="{{ url_for('expert_sign_up') }}" aria-label="Druk op dit knop om te registreren" > Sign up!</a></p>
-        </form>
+        <label for="email">Email:</label>
+        <input class="js-login-email-input" type="email" name="email" id="email" placeholder="Email" aria-label="Voer hier uw email in" required>
+        <label for="password">Password:</label>
+        <input class="js-login-password-input" type="password" name="password" id="password" placeholder="Password" required>
+        <button class="js-submit-button" type="submit" aria-label="Druk om in te loggen">Inloggen</button>
+        <p>Heeft u geen account?<a href="{{ url_for('expert_sign_up') }}" aria-label="Druk op dit button om te registreren" > Sign up!</a></p>
     </div>
 
 <div class="buttons">
@@ -21,4 +19,5 @@
     <a href="/api/overzicht_onderzoeken"><button>Organisaties</button></a>
 </div>
 {% endblock %}
-{% block scripts %}<script src="/static/javascript/login.js"></script> {% endblock %}
+
+{% block scripts%}<script src="../static/javascript/login.js"></script>{% endblock %}

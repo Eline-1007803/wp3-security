@@ -3,6 +3,7 @@ from flask import *
 import re,random,string
 from lib.model.administrators import Administrator
 from lib.model.sign_up import SignUp
+from models.ervaringsdeskundigen_model import Ervaringsdeskundigen
 from models.onderzoeken_model import Onderzoeken
 
 from models import (
@@ -18,12 +19,39 @@ app.secret_key = "wp3"
 app.jinja_env.autoescape = True
 
 
-@app.route("/")
+@app.route('/', methods=['GET'])
 def login_page():
-    return render_template("login.html")
+    return render_template('login.html')
+
+@app.route('/', methods=['POST'])
+def login():
+    email = request.json['email']
+    password = request.json['password']
+    print(request.json)
+
+    expert_model = Ervaringsdeskundigen()
+    expert = expert_model.authentication_expert(email, password)
+
+    admin_model = Administrator()
+    admin = admin_model.get_administrator_login(email, password)
+
+    if expert:
+        print("yess")
+        return {"message": "Login successful", "success": True}
+
+    if admin:
+        print("admin")
+        return {"message": "Login successful", "success": True}
+
+    else:
+        print("no")
+        return {"message": "Login failed", "success": False}
 
 
-# @app.route("/", methods=["GET"])
+@app.route('/logout')
+def logout():
+    session.pop('expert', None)
+#@app.route("/", methods=["GET"])
 # def test():
 #     if request.method == "GET":
 #       return jsonify({"response": "hallo"})
@@ -61,9 +89,7 @@ def update_administrator(administrator_id):
     lname = request.json["achternaam"]
     email = request.json["email"]
     administrator_model = Administrator()
-    updated_administrator = administrator_model.update_administrator(
-        fname, lname, email, administrator_id
-    )
+    updated_administrator = administrator_model.update_administrator(fname, lname, email, administrator_id)
     print(updated_administrator)
     return updated_administrator
 
@@ -106,40 +132,14 @@ def save_sign_up():
     supervisor = request.json["supervisor"]
     name_supervisor = request.json["name_supervisor"]
     phonenum_supervisor = request.json["phonenum_supervisor"]
-    email_supervisor = request.json["email_parent"]
+    email_supervisor= request.json["email_parent"]
     preferred_approach = request.json["preferred_approach"]
     research_type = request.json["research_type"]
     availability = request.json["availability"]
-    status = request.json["status"]
-    color_foreground = request.json["color_foreground"]
-    color_background = request.json["color_background"]
+
 
     signup_model = SignUp()
-    save_sign_up = signup_model.save_signup(
-        fname,
-        infix,
-        lname,
-        password,
-        zipcode,
-        gender,
-        email,
-        phonenum,
-        birthdate,
-        tools,
-        introduction,
-        details,
-        agreement_terms,
-        supervisor,
-        name_supervisor,
-        phonenum_supervisor,
-        email_supervisor,
-        preferred_approach,
-        research_type,
-        availability,
-        status,
-        color_foreground,
-        color_background,
-    )
+    save_sign_up = signup_model.save_signup(fname, infix, lname, password, zipcode, gender, email, phonenum, birthdate, tools, introduction, details, agreement_terms, supervisor, name_supervisor, phonenum_supervisor, email_supervisor, preferred_approach, research_type, availability)
     return save_sign_up
 
 
@@ -166,7 +166,6 @@ def update_deskundigen():
     edm.update_status(deskundige_id, status)
     return "200"
 
-
 @app.route("/api/inschrijvingen", methods=["GET"])
 def get_inschrijvingen():
     ism = inschrijvingen_model.Inschrijvingen()
@@ -184,7 +183,6 @@ def update_inschrijvingen():
     inschrijving_id = request.json.get("id")
     ism.update_status(inschrijving_id, status)
     return "200"
-
 
 @app.route("/api/onderzoeken", methods=["GET"])
 def get_onderzoeken():
@@ -263,7 +261,6 @@ def nieuwe_organisatie():
 def overzicht_onderzoeken():
     return render_template("overzicht_onderzoeken.html")
 
-
 @app.route("/api/overzicht_onderzoeken_organisatie", methods=["GET"])
 def overzicht_onderzoeken_organisatie():
     organisatie_id = 1  # for now
@@ -273,12 +270,10 @@ def overzicht_onderzoeken_organisatie():
         onderzoeken.append(dict(row))
     return jsonify(onderzoeken)
 
-
 @app.route("/api/overzicht_onderzoeken_organisatie/<onderzoek_id>", methods=["GET"])
 def get_onderzoek(onderzoek_id):
     onderzoek = organisatie.get_onderzoek(onderzoek_id)
     return jsonify(onderzoek), 200
-
 
 @app.route("/api/overzicht_onderzoeken_organisatie/<onderzoek_id>", methods=["PATCH"])
 def update_status(onderzoek_id):
@@ -339,6 +334,7 @@ def update_onderzoeken():
     onderzoek_id = request.json.get("id")
     ozm.update_status(onderzoek_id, status)
     return "200"
+
 
 
 @app.route("/onderzoekaanvragen", methods=["GET"])
@@ -437,6 +433,7 @@ def get_open_research():
     open_onderzoeken = onderzoeken_model.get_open_research()
 
     return jsonify(open_onderzoeken)
+#render_template('ervaringsdeskundige_onderzoeken.html', open_onderzoeken=open_onderzoeken)
 
 
 @app.route("/openstaande_onderzoeken")
@@ -444,8 +441,8 @@ def onderzoeken_pagina():
     return render_template("ervaringsdeskundige_onderzoeken.html")
 
 
-# @app.route('/openstaande_onderzoeken', methods=['POST'])
-# def
+#@app.route('/openstaande_onderzoeken', methods=['POST'])
+#def 
 
 
 @app.route("/api/ingeschreven_onderzoeken", methods=["GET"])

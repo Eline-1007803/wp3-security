@@ -31,8 +31,12 @@ class Administrator():
         if result:
             return dict(result)
 
-    def add_administrator(self, fname, lname, email):
-        result = self.cursor.execute('''INSERT INTO beheerders (voornaam, achternaam, email) VALUES (?, ?, ?)''', (fname, lname, email))
+    def get_administrator_login(self, email, password):
+        result = self.cursor.execute('''SELECT email, wachtwoord FROM beheerders WHERE email = ? AND wachtwoord = ?''', (email, password)).fetchone()
+        return result
+
+    def add_administrator(self, fname, lname, email, password):
+        result = self.cursor.execute('''INSERT INTO beheerders (voornaam, achternaam, email, wachtwoord) VALUES (?, ?, ?, ?)''', (fname, lname, email, password))
         self.con.commit()
         print(result)
         return dict(result)
