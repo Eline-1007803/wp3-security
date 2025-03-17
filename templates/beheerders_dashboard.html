@@ -39,7 +39,10 @@
         </section>
         <section aria-labelledby="table-heading2" class="column">
             <h2 id="table-heading2">Tabel met inschrijvingen</h2>
-            <table class="table-clickable">
+            <input type="text" id="inschrijvingen_input" onkeyup="inschrijvingen_filter()" placeholder="Zoek onderzoek titel.." title="Type in een titel">
+            <input type="text" id="inschrijvingen_input2" onkeyup="inschrijvingen_filter()" placeholder="Zoek onderzoek beschrijving.." title="Type in een beschrijving">
+            <input type="text" id="inschrijvingen_input3" onkeyup="inschrijvingen_filter()" placeholder="Zoek ervaringsdeskundige.." title="Type in een naam">
+            <table id="inschrijvingen_table" class="table-clickable">
                 <thead>
                     <tr>
                         <th>Titel onderzoek</th>
