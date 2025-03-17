@@ -12,12 +12,7 @@ function login () {
         body: JSON.stringify({"email": email, "password": password})
     })
         .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            if (data['success']) {
-                window.location.replace('/openstaande_onderzoeken')
-            }
-        });
+        .then(data => console.log(data));
 }
 
 document.querySelector(".js-submit-button").addEventListener("click", login)

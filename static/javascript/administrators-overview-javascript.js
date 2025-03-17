@@ -155,16 +155,16 @@ function addAdministrator () {
         let fname = document.querySelector('.js-fname-input').value
         let lname = document.querySelector('.js-lname-input').value
         let email = document.querySelector('.js-email-input').value
-        let password = document.querySelector('.js-password-input').value
 
-        console.log(fname, lname, email, password);
+
+        console.log(fname, lname, email);
 
         fetch('/api/new-administrator', {
                 method: 'POST',
                 headers: {
                         'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({fname: fname, lname: lname, email: email, password: password})
+                body: JSON.stringify({fname: fname, lname: lname, email: email})
         })
             .then(response => response.json())
             .then(data => {
