@@ -63,6 +63,7 @@ class WP3DatabaseGenerator:
             "status"	TEXT NOT NULL DEFAULT 'nieuw',
             "beschikbaar"	BOOLEAN NOT NULL DEFAULT 1,
             "beschrijving"	TEXT NOT NULL,
+            "time_slot"	TEXT NOT NULL,
             "datum_vanaf"	DATETIME NOT NULL,
             "datum_tot"	DATETIME NOT NULL,
             "type"	TEXT NOT NULL,
@@ -237,10 +238,10 @@ class WP3DatabaseGenerator:
         print("✅ Default inschrijvingen created")
     def insert_onderzoeken(self):
         users = [
-            ("website voor blinden", "goedgekeurd", 1, "blinden mensen moeten testen of de website die gemaakt is goed accessible is voor hun", "2025-02-09", "2027-02-19", "op locatie", "hogeschool rotterdam", 1, "5 euro", 10, 60, 2, 1, "2025-02-10"),
-            ("onderzoek 2", "nieuw", 0, "beschrijving van onderzoek 2", "2024-01-02", "2025-11-13", "telefonische", None, 0, None, 0, 99, 1, None, None),
+            ("website voor blinden", "goedgekeurd", 1,"13:50", "blinden mensen moeten testen of de website die gemaakt is goed accessible is voor hun", "2025-02-09", "2027-02-19", "op locatie", "hogeschool rotterdam", 1, "5 euro", 10, 60, 2, 1, "2025-02-10"),
+            ("onderzoek 2", "nieuw", 0,"13:50", "beschrijving van onderzoek 2", "2024-01-02", "2025-11-13", "telefonische", None, 0, None, 0, 99, 1, None, None),
         ]
-        insert_statement = "INSERT INTO onderzoeken (titel, status, beschikbaar, beschrijving, datum_vanaf, datum_tot, type, locatie, met_beloning, beloning, leeftijd_van, leeftijd_tot, organisatie_id, beheerder_id, datum_goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+        insert_statement = "INSERT INTO onderzoeken (titel, status, beschikbaar,time_slot, beschrijving, datum_vanaf, datum_tot, type, locatie, met_beloning, beloning, leeftijd_van, leeftijd_tot, organisatie_id, beheerder_id, datum_goedgekeurd) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
         self.__execute_many_transaction_statement(insert_statement, users)
         print("✅ Default onderzoeken created")
     def insert_organisaties(self):
