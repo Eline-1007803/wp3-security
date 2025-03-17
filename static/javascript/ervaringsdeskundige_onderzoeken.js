@@ -116,3 +116,8 @@ function startInterval() {
     getOnderzoeken()
     interval = setInterval(getOnderzoeken, 3000);
 }
+
+document.getElementById('aanmeldenButton').onclick = function () {
+    alert('Je hebt je nu ingeschreven voor dit onderzoek.');
+    document.getElementById('set_modal').style.display = 'none';
+    }
