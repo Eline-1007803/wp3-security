@@ -385,7 +385,7 @@ def onderzoek_aanvragen_organisatie():
     locatie = request.json["locatie_text"]
     met_beloning = request.json["metbeloning"]
     hoeveel_beloning = request.json["beloning"]
-    if met_beloning == "1":
+    if met_beloning == "1" or met_beloning == 1:
         if hoeveel_beloning == "":
             return jsonify("U heeft geen beloning getypt."), 400
     type_disability = request.json["disability-type-input"]
@@ -398,11 +398,11 @@ def onderzoek_aanvragen_organisatie():
         )
 
     leeftijd_van = request.json["leeftijdvan"]
-    if leeftijd_van == "":
+    if leeftijd_van == "" and not isinstance(leeftijd_van,int):
         return jsonify("Je hebt geen leeftijd ingevoerd"), 400
 
     leeftijd_tot = request.json["leeftijdtot"]
-    if leeftijd_tot == "":
+    if leeftijd_tot == "" and not isinstance(leeftijd_van,int):
         return jsonify("Kies leeftijd tot!"), 400
 
     if met_beloning == "on":
