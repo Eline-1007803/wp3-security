@@ -165,8 +165,8 @@ cursor: pointer;
 
 .dark-mode-toggle {
     position: absolute;
-    top: 80px;  /* Afstand onder de navbar */
-    right: 20px; /* Rechts uitlijnen */
+    top: 80px;  
+    right: 20px;
     background-color: blue;
     color: white;
     padding: 10px 20px;
