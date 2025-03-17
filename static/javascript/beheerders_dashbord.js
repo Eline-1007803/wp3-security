@@ -519,3 +519,32 @@ function inschrijvingen_filter() {
     }
   }
 }
+function ervaringsdeskundige_filter() {
+  let input_naam, filter_naam, table, tr, td_naam, i, txtValue_naam, input_leeftijd, filter_leeftijd, td_leeftijd,
+      txtValue_leeftijd, input_beperking, filter_beperking, td_beperking,txtValue_beperking;
+  input_naam = document.getElementById("ervaringsdeskundige_input");
+  input_leeftijd = document.getElementById("ervaringsdeskundige_input2");
+  input_beperking = document.getElementById("ervaringsdeskundige_input3");
+  filter_naam = input_naam.value.toUpperCase();
+  filter_leeftijd = input_leeftijd.value.toUpperCase();
+  filter_beperking = input_beperking.value.toUpperCase();
+  table = document.getElementById("ervaringsdeskundige_table");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td_naam = tr[i].getElementsByTagName("td")[0];
+    td_leeftijd = tr[i].getElementsByTagName("td")[1];
+    td_beperking = tr[i].getElementsByTagName("td")[2];
+    if (td_naam || td_leeftijd || td_beperking) {
+      txtValue_naam = td_naam.textContent || td_naam.innerText;
+      txtValue_leeftijd = td_leeftijd.textContent || td_leeftijd.innerText;
+      txtValue_beperking = td_beperking.textContent || td_beperking.innerText;
+      if (txtValue_naam.toUpperCase().indexOf(filter_naam) > -1 &&
+      txtValue_leeftijd.toUpperCase().indexOf(filter_leeftijd) > -1 &&
+      txtValue_beperking.toUpperCase().indexOf(filter_beperking) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
