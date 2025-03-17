@@ -154,7 +154,18 @@ def get_deskundigen():
     result = edm.get_all_pending()
     dictresult = []
     for row in result:
-        dictresult.append(dict(row))
+        corresponding_beperkingen = edm.get_corresponding_beperkingen(row["ervaringsdeskundige_id"])
+        row_dict = dict(row)
+        beperkingen_str = ''
+        first = 0
+        for rows in corresponding_beperkingen:
+            if first == 0:
+                beperkingen_str += rows["naam"]
+                first = 1
+            else:
+                beperkingen_str += ', ' + rows["naam"]
+        row_dict["naam"] = beperkingen_str
+        dictresult.append(row_dict)
     return {"deskundigen": dictresult}
 
 
