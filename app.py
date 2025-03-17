@@ -322,7 +322,7 @@ def update_onderzoek_gegevens(onderzoek_id):
             ),
             400,
         )
-
+ 
     organisatie_id = 1  # for now
     updated_onderzoek_gegevens = organisatie.update_onderzoek(
         title, beschrijving, datum_vanaf, datum_tot, onderzoek_id, organisatie_id
