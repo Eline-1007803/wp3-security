@@ -45,6 +45,7 @@ function add_onderzoek () {
     let beschrijving = document.getElementById('beschrijving').value
     let datum_vanaf = document.getElementById('datumvanaf').value
     let datum_tot = document.getElementById('datumtot').value
+    let time_slot = document.getElementById('tijd').value
     let type_onderzoek = document.getElementById('typeonderzoek').value
     let locatie = document.getElementById('locatie_text').value
     let met_beloning = document.getElementById('metbeloning').value
@@ -63,7 +64,7 @@ function add_onderzoek () {
             headers: {
                     'Content-Type': 'application/json'
             },
-            body: JSON.stringify({"titel":titel,"beschrijving":beschrijving,"datumvanaf":datum_vanaf,"datumtot":datum_tot,"typeonderzoek":type_onderzoek,"locatie_text":locatie,
+            body: JSON.stringify({"titel":titel,"beschrijving":beschrijving,"tijd":time_slot,"datumvanaf":datum_vanaf,"datumtot":datum_tot,"typeonderzoek":type_onderzoek,"locatie_text":locatie,
                 "metbeloning":met_beloning,"beloning":beloning,"disability-type-input":disabilities,"leeftijdvan":leeftijd_van,"leeftijdtot":leeftijd_tot})
     })
         .then(response => response.json())

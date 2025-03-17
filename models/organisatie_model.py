@@ -10,6 +10,7 @@ class Organisatie:
         self,
         titel,
         beschjrijving,
+        time_slot,
         datum_vanaf,
         datum_tot,
         typeonderzoek,
@@ -21,10 +22,11 @@ class Organisatie:
         organisatie_id,
     ):
         self.cursor.execute(
-            "INSERT into onderzoeken (titel,beschrijving,datum_vanaf,datum_tot,type,locatie,met_beloning,beloning,leeftijd_van,leeftijd_tot,organisatie_id) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+            "INSERT into onderzoeken (titel,beschrijving,time_slot,datum_vanaf,datum_tot,type,locatie,met_beloning,beloning,leeftijd_van,leeftijd_tot,organisatie_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
             (
                 titel,
                 beschjrijving,
+                time_slot,
                 datum_vanaf,
                 datum_tot,
                 typeonderzoek,
