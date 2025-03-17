@@ -474,6 +474,23 @@ def get_signedup_research():
 def lijst_ingeschreven_onderzoeken():
     return render_template("list_research.html")
 
+@app.route("/api/inschrijven_onderzoek", methods=["POST"])
+def inschrijven_onderzoek():
+    onderzoeken_model = Onderzoeken()
+    data = request.get_json()
+    ervaringsdeskundige_id = 1 #moet nog aanpassen
+    onderzoek_id = data.get("onderzoek_id")
+    ervaringsdeskundigen_model = Ervaringsdeskundigen()
+    ervaringsdeskundigen = ervaringsdeskundigen_model.get_expert()
+
+    if not onderzoek_id:
+        return jsonify({"succes": False, "error": "Geen onderzoek ID gevonden."})
+    try:
+        for ervaringsdeskundige_id in ervaringsdeskundigen:
+            onderzoeken_model.inschrijving(ervaringsdeskundige_id, onderzoek_id)
+        return jsonify({"success": True, "onderzoek_id": onderzoek_id}), 201
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
 
 if __name__ == "__main__":
     organisatie = organisatie_model.Organisatie()
