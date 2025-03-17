@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from flask import *
 import re,random,string
 from lib.model.administrators import Administrator
@@ -353,31 +353,27 @@ def onderzoek_aanvragen_organisatie():
         return jsonify("Beschrijving can't be empty!"), 400
 
     datum_vanaf = request.json["datumvanaf"]
-    date_vanaf = datetime.strptime(datum_vanaf, "%Y-%m-%d")
-    if datum_vanaf == "" or date_vanaf < datetime.now():
-        return jsonify("You have not chosen a date from or chosen a past date."), 400
-
-    datum_tot = request.json["datumtot"]
-    date_tot = datetime.strptime(datum_tot, "%Y-%m-%d")
-    if datum_tot == "" or date_tot < date_vanaf:
-        return (
-            jsonify(
-                "You have not chosen a date till or chosen a date before date from"
-            ),
-            400,
-        )
-
     if datum_vanaf == "":
-        return jsonify("Datum vanaf cant be empty!"), 400
+        return jsonify("You must select a date from"), 400
+
+    date_vanaf = datetime.strptime(datum_vanaf, "%Y-%m-%d")
+    if date_vanaf < datetime.now()- timedelta(days=1):
+        return jsonify("You have chosen a past date."), 400
 
     datum_tot = request.json["datumtot"]
     if datum_tot == "":
-        return jsonify("Datum tot cant be empty!"), 400
+        return jsonify("You must select a date till"), 400
+
+    date_tot = datetime.strptime(datum_tot, "%Y-%m-%d")
+    if date_tot < date_vanaf:
+        return jsonify("You have chosen a date before date from"), 400
     time_slot = request.json["tijd"]
     if time_slot == "":
         return jsonify('Time slot cant be empty!\nTip: voeg het tijd in als string bijv ("13:00")'), 400
 
     type_onderzoek = request.json["typeonderzoek"]
+    if type_onderzoek == "":
+        return jsonify("Kies het type onderzoek!\nLocatie/Telefonisch/Online"),400
     locatie = request.json["locatie_text"]
     if type_onderzoek == "locatie":
         if locatie == "":
