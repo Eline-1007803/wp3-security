@@ -322,7 +322,7 @@ def update_onderzoek_gegevens(onderzoek_id):
             ),
             400,
         )
- 
+
     organisatie_id = 1  # for now
     updated_onderzoek_gegevens = organisatie.update_onderzoek(
         title, beschrijving, datum_vanaf, datum_tot, onderzoek_id, organisatie_id
@@ -456,7 +456,7 @@ def onderzoeken_pagina():
 
 
 #@app.route('/openstaande_onderzoeken', methods=['POST'])
-#def 
+#def
 
 
 @app.route("/api/ingeschreven_onderzoeken", methods=["GET"])
@@ -481,13 +481,12 @@ def inschrijven_onderzoek():
     ervaringsdeskundige_id = 1 #moet nog aanpassen
     onderzoek_id = data.get("onderzoek_id")
     ervaringsdeskundigen_model = Ervaringsdeskundigen()
-    ervaringsdeskundigen = ervaringsdeskundigen_model.get_expert()
+    ervaringsdeskundigen = ervaringsdeskundigen_model.get_expert(ervaringsdeskundige_id)
 
     if not onderzoek_id:
         return jsonify({"succes": False, "error": "Geen onderzoek ID gevonden."})
     try:
-        for ervaringsdeskundige_id in ervaringsdeskundigen:
-            onderzoeken_model.inschrijving(ervaringsdeskundige_id, onderzoek_id)
+        onderzoeken_model.inschrijving(ervaringsdeskundige_id, onderzoek_id)
         return jsonify({"success": True, "onderzoek_id": onderzoek_id}), 201
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500

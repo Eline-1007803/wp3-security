@@ -83,6 +83,7 @@ function getOpenResearch(onderzoeken) {
     onderzoeken.forEach(onderzoek => {
         let row = `
             <tr class="onderzoek-row"
+                data-id="${onderzoek.onderzoek_id}"
                 data-titel="${onderzoek.titel}"
                 data-status="${onderzoek.status}"
                 data-datum-vanaf="${onderzoek.datum_vanaf}"
@@ -118,7 +119,7 @@ function startInterval() {
 }
 
 document.getElementById('aanmeldenButton').addEventListener('click', function () {
-    let onderzoekId = document.getElementById(popupId).innerText;
+    let onderzoekId = document.getElementById('popupId').innerText;
 
     fetch('/api/inschrijven_onderzoek', {
         method: 'POST',
