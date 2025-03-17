@@ -7,7 +7,7 @@
 <a href="/openstaande_onderzoeken">Onderzoeken</a>
 {% endblock %}
 {% block main %}
-
+<button class="button dark-mode-toggle" onclick="darkLightMode()">Verander kleur van de pagina</button>
     <main class="row">
         <section aria-labelledby="table-heading1" class="column">
         <h1 id="table-heading1">Overzicht van ingeschreven onderzoeken</h1>
@@ -49,6 +49,7 @@
         </article>
     </section>
     <script src="{{ url_for('static', filename='javascript/list_research.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/dark_mode.js')}}"></script>
 </body>
 </html>
 
