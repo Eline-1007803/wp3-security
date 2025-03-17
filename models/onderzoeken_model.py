@@ -39,3 +39,13 @@ class Onderzoeken:
     def update_status(self, onderzoek_id, status):
         self.cursor.execute("UPDATE onderzoeken SET status = ? WHERE onderzoek_id = ?", (status, onderzoek_id))
         self.con.commit()
+
+    def inschrijving(self, ervaringsdeskundige_id, onderzoek_id):
+        result = self.cursor.execute(
+        """INSERT INTO inschrijvingen (ervaringsdeskundige_id, onderzoek_id) 
+           VALUES (?, ?)""",
+        (ervaringsdeskundige_id, onderzoek_id),
+        )
+        self.con.commit()
+
+        return result
