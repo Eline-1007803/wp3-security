@@ -117,3 +117,8 @@ function startInterval() {
     getOnderzoeken()
     interval = setInterval(getOnderzoeken, 3000);
 }
+
+document.getElementById('afmeldenButton').onclick = function () {
+alert('Je hebt je nu uitgeschreven voor dit onderzoek.');
+document.getElementById('set_modal').style.display = 'none';
+}
