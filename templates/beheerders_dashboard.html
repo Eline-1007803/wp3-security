@@ -12,7 +12,10 @@
     <main class="row">
         <section aria-labelledby="table-heading1" class="column">
             <h2 id="table-heading1">Tabel met onderzoeken</h2>
-            <table class="table-clickable">
+            <input type="text" id="onderzoeken_input" onkeyup="onderzoeken_filter()" placeholder="Zoek titel.." title="Type in een titel">
+            <input type="text" id="onderzoeken_input2" onkeyup="onderzoeken_filter()" placeholder="Zoek beschrijving.." title="Type in een beschrijving">
+            <input type="text" id="onderzoeken_input3" onkeyup="onderzoeken_filter()" placeholder="Zoek organisatie.." title="Type in een organisatie">
+            <table id="onderzoeken_table" class="table-clickable">
                 <thead>
                     <tr>
                         <th>Titel onderzoek</th>
@@ -36,7 +39,10 @@
         </section>
         <section aria-labelledby="table-heading2" class="column">
             <h2 id="table-heading2">Tabel met inschrijvingen</h2>
-            <table class="table-clickable">
+            <input type="text" id="inschrijvingen_input" onkeyup="inschrijvingen_filter()" placeholder="Zoek onderzoek titel.." title="Type in een titel">
+            <input type="text" id="inschrijvingen_input2" onkeyup="inschrijvingen_filter()" placeholder="Zoek onderzoek beschrijving.." title="Type in een beschrijving">
+            <input type="text" id="inschrijvingen_input3" onkeyup="inschrijvingen_filter()" placeholder="Zoek ervaringsdeskundige.." title="Type in een naam">
+            <table id="inschrijvingen_table" class="table-clickable">
                 <thead>
                     <tr>
                         <th>Titel onderzoek</th>
@@ -60,7 +66,10 @@
         </section>
         <section aria-labelledby="table-heading3" class="column">
             <h2 id="table-heading3">Nieuwe ervaringsdeskundigen</h2>
-            <table class="table-clickable">
+            <input type="text" id="ervaringsdeskundige_input" onkeyup="ervaringsdeskundige_filter()" placeholder="Zoek naam.." title="Type in een naam">
+            <input type="text" id="ervaringsdeskundige_input2" onkeyup="ervaringsdeskundige_filter()" placeholder="Zoek leeftijd.." title="Type in een leeftijd">
+            <input type="text" id="ervaringsdeskundige_input3" onkeyup="ervaringsdeskundige_filter()" placeholder="Zoek beperking.." title="Type in een beperking">
+            <table id="ervaringsdeskundige_table" class="table-clickable">
                 <thead>
                     <tr>
                         <th>Naam ervaringsdeskundige</th>
