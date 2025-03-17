@@ -7,6 +7,29 @@ body {
     padding: 20px;
 }
 
+.dark-mode {
+    background-color: black;
+    color: white;
+}
+
+.dark-mode .popup-content {
+    background-color: #333;
+    color: white;
+}
+
+.dark-mode .column {
+    background-color: #222;
+    color: white;
+}
+
+.dark-mode .table-clickable tbody tr:nth-child(even) {
+    background-color: #444;
+}
+
+.dark-mode .table-clickable tbody tr:hover {
+    background-color: #666;
+}
+
 .row {
     display: flex;
     justify-content: center;
@@ -135,9 +158,30 @@ th {
 .button {
 background-color: blue;
 color: white;
-padding: 15px 15px;
-font-size: medium;
+padding: 10px 10px;
+font-size: 16px;
 cursor: pointer;
+display: inline-block;
+margin-bottom: 15px;
+text-align: center;
+}
+
+.dark-mode-toggle {
+    position: absolute;
+    top: 80px;  
+    right: 20px; 
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode-toggle:hover {
+    background-color: darkblue;
 }
 
 #aanmeldenButton {
