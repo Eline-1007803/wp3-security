@@ -23,5 +23,6 @@ class Ervaringsdeskundigen:
         return result
 
     def authentication_expert(self, email, password):
-        result =  self.cursor.execute('''SELECT emailadres, wachtwoord FROM ervaringsdeskundigen WHERE emailadres = ? AND wachtwoord = ?''', (email, password)).fetchone()
-        return result
+        result =  self.cursor.execute('''SELECT ervaringsdeskundige_id FROM ervaringsdeskundigen WHERE emailadres = ? AND wachtwoord = ?''', (email, password)).fetchone()
+        if result:
+            return dict(result)

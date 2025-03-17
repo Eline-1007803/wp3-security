@@ -20,10 +20,22 @@ app.jinja_env.autoescape = True
 
 
 @app.route('/', methods=['GET'])
+def index():
+    if session.get('expert'):
+        return redirect(url_for('onderzoeken_pagina'))
+
+    if session.get('admin'):
+        return redirect(url_for('dashboard'))
+
+    return redirect(url_for('login_page'))
+
+
+
+@app.route('/login', methods=['GET'])
 def login_page():
     return render_template('login.html')
 
-@app.route('/', methods=['POST'])
+@app.route('/login', methods=['POST'])
 def login():
     email = request.json['email']
     password = request.json['password']
@@ -32,17 +44,18 @@ def login():
     expert_model = Ervaringsdeskundigen()
     expert = expert_model.authentication_expert(email, password)
 
+    if expert:
+        print("yess")
+        session['expert'] = expert
+        return {"message": "Login successful", "success": True}
+
+
     admin_model = Administrator()
     admin = admin_model.get_administrator_login(email, password)
 
-    if expert:
-        print("yess")
-        return {"message": "Login successful", "success": True}
-
     if admin:
-        print("admin")
+        session['admin'] = admin
         return {"message": "Login successful", "success": True}
-
     else:
         print("no")
         return {"message": "Login failed", "success": False}
@@ -50,7 +63,8 @@ def login():
 
 @app.route('/logout')
 def logout():
-    session.pop('expert', None)
+    session.clear()
+    return redirect(url_for('login_page'))
 #@app.route("/", methods=["GET"])
 # def test():
 #     if request.method == "GET":

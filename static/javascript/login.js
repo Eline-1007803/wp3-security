@@ -4,7 +4,7 @@ function login () {
 
 
     console.log(email, password)
-    fetch('/', {
+    fetch('/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -12,9 +12,13 @@ function login () {
         body: JSON.stringify({"email": email, "password": password})
     })
         .then(response => response.json())
-        .then(data => console.log(data));
+        .then(data => {
+            if (data['success'] === true) {
+                window.location.href = '/';
+            }
+
+        })
 }
 
-document.querySelector(".js-submit-button").addEventListener("click", login)
-
+document.querySelector(".js-submit-button").addEventListener("click", login);
 

@@ -28,12 +28,11 @@ class Administrator():
 
     def get_administrator_by_id(self, administrator_id):
         result = self.cursor.execute('''SELECT beheerder_id, voornaam, tussenvoegsel, achternaam, email FROM beheerders WHERE beheerder_id = ?''', (administrator_id,)).fetchone()
-        if result:
-            return dict(result)
+        return dict(result)
 
     def get_administrator_login(self, email, password):
-        result = self.cursor.execute('''SELECT email, wachtwoord FROM beheerders WHERE email = ? AND wachtwoord = ?''', (email, password)).fetchone()
-        return result
+        result = self.cursor.execute('''SELECT beheerder_id FROM beheerders WHERE email = ? AND wachtwoord = ?''', (email, password)).fetchone()
+        return dict(result)
 
     def add_administrator(self, fname, lname, email, password):
         result = self.cursor.execute('''INSERT INTO beheerders (voornaam, achternaam, email, wachtwoord) VALUES (?, ?, ?, ?)''', (fname, lname, email, password))
