@@ -373,6 +373,9 @@ def onderzoek_aanvragen_organisatie():
     datum_tot = request.json["datumtot"]
     if datum_tot == "":
         return jsonify("Datum tot cant be empty!"), 400
+    time_slot = request.json["tijd"]
+    if time_slot == "":
+        return jsonify('Time slot cant be empty!\nTip: voeg het tijd in als string bijv ("13:00")'), 400
 
     type_onderzoek = request.json["typeonderzoek"]
     locatie = request.json["locatie_text"]
@@ -410,6 +413,7 @@ def onderzoek_aanvragen_organisatie():
     onderzoek = organisatie.insert_onderzoek(
         title,
         beschrijving,
+        time_slot,
         datum_vanaf,
         datum_tot,
         type_onderzoek,
