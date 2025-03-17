@@ -11,9 +11,16 @@
 {% block main %}
     <main>
         <h1>Overzicht Onderzoeken</h1>
+        <input type="text" id="idinput" onkeyup="filter()" placeholder="Zoek onderzoek id..">
+        <input type="text" id="titleinput" onkeyup="filter()" placeholder="Zoek onderzoek..">
+        <input type="text" id="statusinput" onkeyup="filter()" placeholder="Zoek status..">
+        <input type="text" id="beschikbaarinput" onkeyup="filter()" placeholder="Zoek op beschikbaarheid..">
+        <input type="text" id="leeftijdvaninput" onkeyup="filter()" placeholder="Leeftijd van..">
+        <input type="text" id="leeftijdtotinput" onkeyup="filter()" placeholder="Leeftijd tot..">
         <div class="research-table-container">
             <table class="js-onderzoektabel">
                 <tr>
+                    <th>#</th>
                     <th>Title</th>
                     <th>Status</th>
                     <th>Beschikbaarheid</th>

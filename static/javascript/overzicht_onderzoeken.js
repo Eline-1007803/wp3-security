@@ -15,6 +15,7 @@ function showOnderzoeken (onderzoeken) {
          let row =
           `
           <tr>
+                <td>${onderzoek.onderzoek_id}</td>
                 <td>${onderzoek.titel}</td>
                 <td>${onderzoek.status}</td>
                 <td>Ja</td>
@@ -62,7 +63,55 @@ function get_onderzoek(onderzoek_id) {
       .then(response => response.json())
       .then(onderzoek => showOnderzoek(onderzoek))
 }
+function filter() {
+  var id_input,input_title, input_status, input_beschikbaarheid, input_leeftijdvan, input_leeftijdtot, filter_title, filter_status, filter_beschikbaar, filter_leeftijdvan, filter_leeftijdtot, table, tr, td, i;
+  id_input = document.getElementById("idinput")
+  input_title = document.getElementById("titleinput");
+  input_status = document.getElementById("statusinput");
+  input_beschikbaarheid = document.getElementById("beschikbaarinput");
+  input_leeftijdvan = document.getElementById("leeftijdvaninput");
+  input_leeftijdtot = document.getElementById("leeftijdtotinput");
+  leeftijd_tot = document.getElementById("leeftijdtotinput");
 
+  filter_id = id_input.value.toUpperCase();
+  filter_title = input_title.value.toUpperCase();
+  filter_status = input_status.value.toUpperCase();
+  filter_beschikbaar = input_beschikbaarheid.value.toUpperCase();
+  filter_leeftijdvan = input_leeftijdvan.value.toUpperCase();
+  filter_leeftijdtot = input_leeftijdtot.value.toUpperCase();
+
+  table = document.querySelector(".js-onderzoektabel");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 0; i < tr.length; i++) {
+    td_id = tr[i].getElementsByTagName("td")[0];
+    td_title = tr[i].getElementsByTagName("td")[1];
+    td_status = tr[i].getElementsByTagName("td")[2];
+    td_beschikbaarheid = tr[i].getElementsByTagName("td")[3];
+    td_leeftijdvan = tr[i].getElementsByTagName("td")[4];
+    td_leeftijdtot = tr[i].getElementsByTagName("td")[5];
+
+    if (td_id || td_title || td_status || td_beschikbaarheid || td_leeftijdvan || td_leeftijdtot) {
+      idvalue = td_id.textContent || td_id.textContent;
+      titlevalue = td_title.textContent || td_title.textContent;
+      statusvalue = td_status.textContent || td_status.textContent;
+      beschikbaarvalue = td_beschikbaarheid.textContent || td_beschikbaarheid.textContent;
+      leeftijd_vanstatus = td_leeftijdvan.textContent || td_leeftijdvan.textContent;
+      leeftijd_totstatus = td_leeftijdtot.textContent || td_leeftijdtot.textContent;
+
+      if (idvalue.toUpperCase().indexOf(filter_id) > -1 &&
+          titlevalue.toUpperCase().indexOf(filter_title) > -1 &&
+          statusvalue.toUpperCase().indexOf(filter_status) > -1 &&
+          beschikbaarvalue.toUpperCase().indexOf(filter_beschikbaar) > -1 &&
+          leeftijd_vanstatus.toUpperCase().indexOf(filter_leeftijdvan) > -1 &&
+          leeftijd_totstatus.toUpperCase().indexOf(filter_leeftijdtot) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
 
 function showOnderzoek(onderzoek)
 {
