@@ -12,7 +12,10 @@
     <main class="row">
         <section aria-labelledby="table-heading1" class="column">
             <h2 id="table-heading1">Tabel met onderzoeken</h2>
-            <table class="table-clickable">
+            <input type="text" id="onderzoeken_input" onkeyup="onderzoeken_filter()" placeholder="Zoek titel.." title="Type in een titel">
+            <input type="text" id="onderzoeken_input2" onkeyup="onderzoeken_filter()" placeholder="Zoek beschrijving.." title="Type in een beschrijving">
+            <input type="text" id="onderzoeken_input3" onkeyup="onderzoeken_filter()" placeholder="Zoek organisatie.." title="Type in een organisatie">
+            <table id="onderzoeken_table" class="table-clickable">
                 <thead>
                     <tr>
                         <th>Titel onderzoek</th>

@@ -143,6 +143,7 @@ function refresh_modals_deskundigen(data) {
           }
       });
   });
+  ervaringsdeskundige_filter()
 }
 
 function refresh_inschrijvingen(data) {
@@ -294,6 +295,7 @@ function refresh_modals_inschrijvingen(data) {
           }
       });
   });
+  inschrijvingen_filter()
 }
 
 function refresh_onderzoeken(data) {
@@ -431,6 +433,7 @@ function refresh_modals_onderzoeken(data) {
           }
       });
   });
+  onderzoeken_filter()
 }
 
 function get_all() {
@@ -448,13 +451,38 @@ function get_all() {
 get_all();
 
 interval = setInterval(get_all, 3000);
-
-
 function kill_interval() {
     clearInterval(interval)
 }
-
 function revive_interval() {
     get_all()
     interval = setInterval(get_all, 3000);
+}
+
+function onderzoeken_filter() {
+  let input_title, filter_title, table, tr, td_title, i, txtValue_title, input_description, filter_description,
+      td_description, txtValue_description, input_organisation, filter_organisation, td_organisation, txtValue_organisation;
+  input_title = document.getElementById("onderzoeken_input");
+  input_description = document.getElementById("onderzoeken_input2");
+  input_organisation = document.getElementById("onderzoeken_input3");
+  filter_title = input_title.value.toUpperCase();
+  filter_description = input_description.value.toUpperCase();
+  filter_organisation = input_organisation.value.toUpperCase();
+  table = document.getElementById("onderzoeken_table");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td_title = tr[i].getElementsByTagName("td")[0];
+    td_description = tr[i].getElementsByTagName("td")[1];
+    td_organisation = tr[i].getElementsByTagName("td")[2];
+    if (td_title || td_description || td_organisation) {
+      txtValue_title = td_title.textContent || td_title.innerText;
+      txtValue_description = td_description.textContent || td_description.innerText;
+      txtValue_organisation = td_organisation.textContent || td_organisation.innerText;
+      if (txtValue_title.toUpperCase().indexOf(filter_title) > -1 && txtValue_description.toUpperCase().indexOf(filter_description) > -1 && txtValue_organisation.toUpperCase().indexOf(filter_organisation) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
 }
