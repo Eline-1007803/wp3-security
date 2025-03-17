@@ -5,18 +5,21 @@
 {% endblock %}
 {% block title %}Overzicht - Accessibility Hub{% endblock %}
 {% block nav_links %}
-<a class= "logo-image" href="/"><img class="logo-image" src="../static/images/logo.svg"></a>
+<a class= "logo-image" href="/"><img class="logo-image" src="../static/images/logo.svg" alt="Accessibility Hub Logo"></a>
 <a href="/onderzoekaanvragen">Aanvraag</a>
 {% endblock %}
 {% block main %}
     <main>
         <h1>Overzicht Onderzoeken</h1>
-        <input type="text" id="idinput" onkeyup="filter()" placeholder="Zoek onderzoek id..">
-        <input type="text" id="titleinput" onkeyup="filter()" placeholder="Zoek onderzoek..">
-        <input type="text" id="statusinput" onkeyup="filter()" placeholder="Zoek status..">
-        <input type="text" id="beschikbaarinput" onkeyup="filter()" placeholder="Zoek op beschikbaarheid..">
-        <input type="text" id="leeftijdvaninput" onkeyup="filter()" placeholder="Leeftijd van..">
-        <input type="text" id="leeftijdtotinput" onkeyup="filter()" placeholder="Leeftijd tot..">
+        <div class="filters">
+
+            <input type="text" id="idinput" onkeyup="filter()" placeholder="Zoek onderzoek id.." aria-label="Zoek onderzoek ID">
+            <input type="text" id="titleinput" onkeyup="filter()" placeholder="Zoek onderzoek.." aria-label="Zoek onderzoek">
+            <input type="text" id="statusinput" onkeyup="filter()" placeholder="Zoek status.." aria-label="Zoek status van onderzoek">
+            <input type="text" id="beschikbaarinput" onkeyup="filter()" placeholder="Zoek op beschikbaarheid.." aria-label="Zoek beschikbaarheid van onderzoek">
+            <input type="text" id="leeftijdvaninput" onkeyup="filter()" placeholder="Leeftijd van.." aria-label="Zoek leeftijd van">
+            <input type="text" id="leeftijdtotinput" onkeyup="filter()" placeholder="Leeftijd tot.." aria-label="Zoek leeftijd tot">
+        </div>
         <div class="research-table-container">
             <table class="js-onderzoektabel">
                 <tr>
@@ -34,8 +37,7 @@
             </div>
             <div class="usersmodal" id="users_modal">
             </div>
-            </div>
+        </div>
     </main>
 {% endblock %}
 {% block scripts %}  <script src="/static/javascript/overzicht_onderzoeken.js"></script> {% endblock %}
-
