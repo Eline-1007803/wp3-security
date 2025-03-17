@@ -183,7 +183,27 @@ def get_inschrijvingen():
     result = ism.get_all_pending()
     dictresult = []
     for row in result:
-        dictresult.append(dict(row))
+        ev_corresponding_beperkingen, on_corresponding_beperkingen = ism.get_corresponding_beperkingen(row["ervaringsdeskundige_id"], row["onderzoek_id"])
+        row_dict = dict(row)
+        beperkingen_str = ''
+        first = 0
+        for rows in ev_corresponding_beperkingen:
+            if first == 0:
+                beperkingen_str += rows["ev_bep_naam"]
+                first = 1
+            else:
+                beperkingen_str += ', ' + rows["ev_bep_naam"]
+        row_dict["ev_bep_naam"] = beperkingen_str
+        beperkingen_str = ''
+        first = 0
+        for rows in on_corresponding_beperkingen:
+            if first == 0:
+                beperkingen_str += rows["on_bep_naam"]
+                first = 1
+            else:
+                beperkingen_str += ', ' + rows["on_bep_naam"]
+        row_dict["on_bep_naam"] = beperkingen_str
+        dictresult.append(row_dict)
     return {"inschrijvingen": dictresult}
 
 
