@@ -117,7 +117,16 @@ function startInterval() {
     interval = setInterval(getOnderzoeken, 3000);
 }
 
-document.getElementById('aanmeldenButton').onclick = function () {
-    alert('Je hebt je nu ingeschreven voor dit onderzoek.');
-    document.getElementById('set_modal').style.display = 'none';
-    }
+document.getElementById('aanmeldenButton').addEventListener('click', function () {
+    let onderzoekId = document.getElementById(popupId).innerText;
+
+    fetch('/api/inschrijven_onderzoek', {
+        method: 'POST',
+        headers: {'Content-type': 'application/json'},
+        body: JSON.stringify({onderzoek_id: onderzoekId})
+    })
+    .then(response => response.json())
+    .then(data => {if (data.succes) {alert("U heeft zich succesvol voor dit onderzoek ingeschreven.");
+    } else {alert("Er ging iets fout bij het inschrijven, probeer het zo opnieuw.")
+    }})
+});
