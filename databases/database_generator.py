@@ -209,6 +209,7 @@ class WP3DatabaseGenerator:
         users = [
             ( "Kevin", "van", "Dam", "abc", "kevinvandam@gmail.com", "0643396274"),
             ( "Peter", None, "Selie", "123", "peterselie@gmail.com", "0603587210"),
+            ( "Roos", None, "Bouketer", "12345", "roos@kabouter.muts", "0678357623"),
         ]
         insert_statement = "INSERT INTO beheerders (voornaam, tussenvoegsel, achternaam, wachtwoord, email, telefoonnummer) VALUES (?, ?, ?, ?, ?, ?);"
         self.__execute_many_transaction_statement(insert_statement, users)
