@@ -3,6 +3,7 @@ body {
     font-size: 18px;
     background-color: rgb(250, 253, 253);
     margin-bottom: 160px;
+
 h1 {
     text-align: center;
     margin-bottom: 70px;
@@ -16,7 +17,6 @@ h1 {
     justify-content: center;
     border-radius: 20px;
     box-shadow: 5px 5px 10px 10px lightgray;
-
 }
 
 .grid-container {
@@ -92,7 +92,7 @@ textarea {
 
 .normal {
     display: flex;
-    align-items: left;
+    align-items: start;
     flex-direction: column;
 }
 
