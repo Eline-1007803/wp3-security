@@ -40,6 +40,10 @@ function showAdministrator (administrators) {
                 `
                 document.querySelector(".js-administrator-table").innerHTML += row;
 
+        //dark-mode ook bij refreshen
+        if (document.body.classList.contains("dark-mode")) {
+                document.querySelectorAll("table, th, td").forEach(element => {element.classList.add("dark-mode");})
+        }
 
         });
 
