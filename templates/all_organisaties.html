@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block styles %}
+    <link rel="stylesheet" href="/static/css/overzicht_organisatie.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+{% endblock %}
+{% block title %}Overzicht Organisaties - Accessibility Hub{% endblock %}
+{% block nav_links %}
+<a class= "logo-image" href="/"><img class="logo-image" src="../static/images/logo.svg" alt="Accessibility Hub Logo"></a>
+<a href="/onderzoekaanvragen">Aanvraag</a>
+{% endblock %}
+{% block main %}
+    <main>
+        <h1>Overzicht Organisaties</h1>
+        <div class="filters">
+            <input type="text" id="naaminput" onkeyup="filter()" placeholder="Zoek organisatie naam.." aria-label="Zoek organisatie naam">
+        </div>
+        <div class="organisatie-table-container">
+            <table class="js-organisatietabel">
+                <tr>
+                    <th>#</th>
+                    <th>Naam</th>
+                    <th>Type</th>
+                    <th>Website</th>
+                    <th>Beschrijving</th>
+                    <th>Contact Persoon</th>
+                    <th>Email</th>
+                    <th>Telefoonnummer</th>
+                    <th style="width:auto;">Acties</th>
+                </tr>
+            </table>
+        </div>
+    </main>
+{% endblock %}
+{% block scripts %}  <script src="/static/javascript/overzicht_organisatie.js"></script> {% endblock %}

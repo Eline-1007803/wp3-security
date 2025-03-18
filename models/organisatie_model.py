@@ -126,3 +126,9 @@ class Organisatie:
         )
         self.con.commit()
         return True
+    def get_all_organisaties(self):
+        result = self.cursor.execute("SELECT * FROM organisaties").fetchall()
+        organisaties = []
+        for row in result:
+            organisaties.append(dict(row))
+        return organisaties

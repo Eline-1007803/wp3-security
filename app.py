@@ -202,10 +202,18 @@ def beperkingen():
         beperkingen.append(dict(row))
     return jsonify(beperkingen)
 
+@app.route("/api/overzicht_organisaties", methods=["GET"])
+def overzicht_organisaties():
+    return render_template("all_organisaties.html")
 
 @app.route("/api/organisatie_aanmaken", methods=["GET"])
 def organisatie_aanmaken():
     return render_template("organisatie_aanmaken.html")
+
+@app.route("/api/alle_organisaties", methods=["GET"])
+def organisaties():
+    result = organisatie.get_all_organisaties()
+    return jsonify(result)
 
 # dit regex variable is om te checken of het email is.
 regex_email = r"^\S+@\S+\.\S+$"
