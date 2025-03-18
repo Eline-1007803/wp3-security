@@ -11,7 +11,14 @@
     <main class="row">
         <section aria-labelledby="table-heading1" class="column">
         <h1 id="table-heading1">Overzicht van ingeschreven onderzoeken</h1>
-        <table class="table-clickable">
+        <select id="statusOnderzoek" onchange="filterStatus()">
+            <option value="">Alle statussen</option>
+            <option value="afgerond">Afgerond</option>
+            <option value="in-behandeling">In behandeling</option>
+            <option value="lopend">Lopend</option>
+        </select>
+        <input type="text" id="zoekTitel" onkeyup="zoekTitels()" placeholder="Zoek op naam van onderzoek" title="Type om te zoeken op titel">
+        <table class="table-clickable" id="tabelOnderzoeken">
             <thead>
                 <tr>
                     <th>ID nummer</th>
@@ -54,4 +61,3 @@
 </html>
 
 {% endblock %}
-
