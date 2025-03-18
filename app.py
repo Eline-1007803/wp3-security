@@ -215,6 +215,12 @@ def organisaties():
     result = organisatie.get_all_organisaties()
     return jsonify(result)
 
+@app.route("/api/alle_organisaties/delete=<organisatie_id>", methods=["DELETE"])
+def delete_organisatie(organisatie_id):
+    result = organisatie.delete_organisatie(organisatie_id)
+    return jsonify(result)
+
+
 # dit regex variable is om te checken of het email is.
 regex_email = r"^\S+@\S+\.\S+$"
 # dit regex variable is om te checken of het website is.
