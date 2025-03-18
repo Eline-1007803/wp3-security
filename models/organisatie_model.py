@@ -97,7 +97,7 @@ class Organisatie:
         )
         self.con.commit()
         return True
-    
+
     def organisatie_aanmaaken(
         self,
         naam,
@@ -108,7 +108,7 @@ class Organisatie:
         email,
         telefoonnummer,
         overige_details,
-        api_key
+        api_key,
     ):
         self.cursor.execute(
             "INSERT into organisaties (naam,type,website,beschrijving,contactpersoon,email,telefoonnummer,overige_details,api_key) VALUES (?,?,?,?,?,?,?,?,?)",
@@ -123,6 +123,21 @@ class Organisatie:
                 overige_details,
                 api_key,
             ),
+        )
+        self.con.commit()
+        return True
+
+    def get_all_organisaties(self):
+        result = self.cursor.execute("SELECT * FROM organisaties").fetchall()
+        organisaties = []
+        for row in result:
+            organisaties.append(dict(row))
+        return organisaties
+
+    def delete_organisatie(self, organisatie_id):
+        self.cursor.execute(
+            "DELETE FROM organisaties WHERE organisatie_id = ?",
+            (organisatie_id),
         )
         self.con.commit()
         return True
