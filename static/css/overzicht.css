@@ -16,13 +16,12 @@ main {
     font-family: Arial, sans-serif;
 }
 .research-table-container {
-    width: 200px;
-    height: 300px;
+    height: auto;
     display: flex;
     justify-content: center;
     background-color: white;
     box-shadow: 5px 5px 10px 10px lightgray;
-    width: 50%;
+    width: 56%;
     margin: auto;
     border-radius: 20px;
 }
@@ -47,12 +46,15 @@ table
     margin-top: 40px;
     width: 40%;
     height: 17%;
+    
 }
 
 table, th, td 
 {
     border: 1px solid black;
     border-collapse: collapse;
+    text-align: left;
+    padding: 5px;
 }
 
 th, td {
@@ -60,14 +62,6 @@ th, td {
     border-radius: 10px;
 }
 
-td {
-    text-align: center;
-}
-
-tr:nth-child(even) 
-{
-    background-color: gray;
-}
 .update,.users
 {
     border: none;
@@ -150,4 +144,9 @@ textarea
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+.filters
+{
+    position: absolute;
+    left: 420px;
 }
