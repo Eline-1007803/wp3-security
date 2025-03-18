@@ -50,15 +50,14 @@ function set_modal() {
         if (event.target === popup) {
             popup.style.display = "none";
             popup.setAttribute("aria-hidden", "true");
-        };
+        }
     });
+    filterStatus()
+    zoekTitels()
 }
 
 
 function getOnderzoeken() {
-
-    let zoekTitels = document.getElementById("zoekTitel").value.toUpperCase();
-    let statusFilter = document.getElementById("statusOnderzoek").value.toUpperCase();
 
 fetch('/api/ingeschreven_onderzoeken', {  
     method: 'GET',
@@ -75,11 +74,6 @@ fetch('/api/ingeschreven_onderzoeken', {
 .then(onderzoeken => {
     console.log("Ontvangen onderzoeken:", onderzoeken);
     getSignedUpResearch(onderzoeken);
-
-    document.getElementById("zoekTitel").value = zoekTitels;
-    document.getElementById("statusOnderzoek").value = statusFilter;
-    zoekTitels();
-    zoekTitels();
 })
 .catch(error => console.error("Fout bij ophalen onderzoeken:", error));
 
@@ -134,16 +128,16 @@ document.getElementById('set_modal').style.display = 'none';
 }
 
 function zoekTitels() {
-    var input_titel, filter, table, tr, td, i, txtValue;
+    let input_titel, filter, table, tr, td, i, txtValue;
     input_titel = document.getElementById("zoekTitel");
     filter = input_titel.value.toUpperCase();
     table = document.getElementById("tabelOnderzoeken");
     tr = table.getElementsByTagName("tr");
 
-    for (var i = 0; i < tr.length; i++) {
-        var td = tr[i].getElementsByTagName("td")[1];
+    for ( i = 0; i < tr.length; i++) {
+         td = tr[i].getElementsByTagName("td")[1];
         if (td) {
-            var txtValue = td.textContent || td.innerText;
+             txtValue = td.textContent || td.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) { tr[i].style.display = "";
             } else {
                 tr[i].style.display = "none";
@@ -153,7 +147,7 @@ function zoekTitels() {
 }
 
 function filterStatus() {
-    var select, selectedStatus, table, tr, td, i;
+    let select, selectedStatus, table, tr, td, i;
     select = document.getElementById("statusOnderzoek");
     selectedStatus = select.value.toUpperCase();
     table = document.getElementById("tabelOnderzoeken");
