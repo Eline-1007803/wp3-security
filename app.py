@@ -310,7 +310,7 @@ def update_onderzoek_gegevens(onderzoek_id):
 
     datum_vanaf = request.json["datumvanaf"]
     date_vanaf = datetime.strptime(datum_vanaf, "%Y-%m-%d")
-    if datum_vanaf == "" or date_vanaf < datetime.now():
+    if datum_vanaf == "" or date_vanaf < datetime.now()- timedelta(days=1):
         return jsonify("You have not chosen a date from or chosen a past date."), 400
 
     datum_tot = request.json["datumtot"]

@@ -210,6 +210,7 @@ function update_onderzoek(onderzoek_id)
   })
   .then(response => response.json())
   .then(data => {
+    alert(data)
     console.log(data);
   })
 }
