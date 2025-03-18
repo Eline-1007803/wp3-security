@@ -67,7 +67,7 @@ function filter() {
   var id_input,input_title, input_status, input_beschikbaarheid, input_leeftijdvan, input_leeftijdtot, filter_title, filter_status, filter_beschikbaar, filter_leeftijdvan, filter_leeftijdtot, table, tr, td, i;
   id_input = document.getElementById("idinput")
   input_title = document.getElementById("titleinput");
-  input_status = document.getElementById("statusinput");
+  input_status = document.getElementById("select");
   input_beschikbaarheid = document.getElementById("beschikbaarinput");
   input_leeftijdvan = document.getElementById("leeftijdvaninput");
   input_leeftijdtot = document.getElementById("leeftijdtotinput");
