@@ -53,12 +53,22 @@ function saveSignup () {
     let supervisor = document.querySelector('.js-supervisor-input').value
     let nameSupervisor = document.querySelector('.js-supervisor-name-input').value
     let phonenumSupervisor = document.querySelector('.js-supervisor-phonenum-input').value
-    let emailParent = document.querySelector('.js-supervisor-email-input').value
+    let emailSupervisor = document.querySelector('.js-supervisor-email-input').value
     let preferredApproach = document.querySelector('.js-preferred-approach-input').value
     let researchType = document.querySelector('.js-researchtype-input').value
     let availability = document.querySelector('.js-availability-input').value
 
-    console.log(fname, lname, zipcode, nameSupervisor, researchType)
+    let disabilityOptions = document.querySelector('.js-dropdown').selectedOptions;
+    disabilityOptions = Array.from(disabilityOptions)
+
+    const selectedDisabilities = [];
+    disabilityOptions.forEach(option => {
+        selectedDisabilities.push(option['value']);
+    });
+
+    console.log(selectedDisabilities)
+
+
     fetch('/api/save-signup', {
         method: 'POST',
         headers: {
@@ -81,10 +91,12 @@ function saveSignup () {
             supervisor: supervisor,
             name_supervisor: nameSupervisor,
             phonenum_supervisor: phonenumSupervisor,
-            email_parent: emailParent,
+            email_supervisor: emailSupervisor,
             preferred_approach: preferredApproach,
             research_type: researchType,
-            availability: availability})
+            availability: availability,
+            disabilities: selectedDisabilities
+        })
 
         })
             .then(response => response)
@@ -124,3 +136,42 @@ document.querySelector(".sign-up-form").addEventListener("submit", () => {
         errormessage.innerHTML = 'vul uw voornaam in'
     }
 })
+
+function getAllDisabilities(){
+    fetch('api/beperkingen-ophalen', {
+        method: ['GET'],
+        headers: {
+            'Accept': 'application/json'
+        }
+        })
+        .then (response => response.json())
+        .then (disabilities => showDisabilities(disabilities))
+}
+getAllDisabilities()
+
+function showDisabilities(disabilities) {
+    const dropdown = document.querySelector('.js-dropdown');
+    disabilities.forEach((disability) => {
+        let dropdownElement =  `
+        <option value="${disability['beperking_id']}">${disability['naam']}</option>`
+        dropdown.innerHTML += dropdownElement;
+    });
+}
+
+/*function save_disabilities() {
+    let disabilities = document.querySelector('.js-dropdown').value;
+    fetch('/api/beperkingen-opslaan', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            'disability': disabilities
+        })
+    })
+            .then(response => response)
+            .then(data => {console.log(data)})
+    }
+
+document.querySelector('.js-submit-button').addEventListener('click', save_disabilities)
+*/
