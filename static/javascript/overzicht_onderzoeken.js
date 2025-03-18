@@ -15,6 +15,7 @@ function showOnderzoeken (onderzoeken) {
          let row =
           `
           <tr>
+                <td>${onderzoek.onderzoek_id}</td>
                 <td>${onderzoek.titel}</td>
                 <td>${onderzoek.status}</td>
                 <td>Ja</td>
@@ -62,7 +63,94 @@ function get_onderzoek(onderzoek_id) {
       .then(response => response.json())
       .then(onderzoek => showOnderzoek(onderzoek))
 }
+function filter() {
+  var id_input,input_title, input_status, input_beschikbaarheid, input_leeftijdvan, input_leeftijdtot, filter_title, filter_status, filter_beschikbaar, filter_leeftijdvan, filter_leeftijdtot, table, tr, td, i;
+  id_input = document.getElementById("idinput")
+  input_title = document.getElementById("titleinput");
+  input_status = document.getElementById("select");
+  input_beschikbaarheid = document.getElementById("beschikbaarinput");
+  input_leeftijdvan = document.getElementById("leeftijdvaninput");
+  input_leeftijdtot = document.getElementById("leeftijdtotinput");
+  leeftijd_tot = document.getElementById("leeftijdtotinput");
 
+  filter_id = id_input.value.toUpperCase();
+  filter_title = input_title.value.toUpperCase();
+  filter_status = input_status.value.toUpperCase();
+  filter_beschikbaar = input_beschikbaarheid.value.toUpperCase();
+  filter_leeftijdvan = input_leeftijdvan.value.toUpperCase();
+  filter_leeftijdtot = input_leeftijdtot.value.toUpperCase();
+
+  table = document.querySelector(".js-onderzoektabel");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 0; i < tr.length; i++) {
+    td_id = tr[i].getElementsByTagName("td")[0];
+    td_title = tr[i].getElementsByTagName("td")[1];
+    td_status = tr[i].getElementsByTagName("td")[2];
+    td_beschikbaarheid = tr[i].getElementsByTagName("td")[3];
+    td_leeftijdvan = tr[i].getElementsByTagName("td")[4];
+    td_leeftijdtot = tr[i].getElementsByTagName("td")[5];
+
+    if (td_id || td_title || td_status || td_beschikbaarheid || td_leeftijdvan || td_leeftijdtot) {
+      idvalue = td_id.textContent || td_id.textContent;
+      titlevalue = td_title.textContent || td_title.textContent;
+      statusvalue = td_status.textContent || td_status.textContent;
+      beschikbaarvalue = td_beschikbaarheid.textContent || td_beschikbaarheid.textContent;
+      leeftijd_vanstatus = td_leeftijdvan.textContent || td_leeftijdvan.textContent;
+      leeftijd_totstatus = td_leeftijdtot.textContent || td_leeftijdtot.textContent;
+
+      if (idvalue.toUpperCase().indexOf(filter_id) > -1 &&
+          titlevalue.toUpperCase().indexOf(filter_title) > -1 &&
+          statusvalue.toUpperCase().indexOf(filter_status) > -1 &&
+          beschikbaarvalue.toUpperCase().indexOf(filter_beschikbaar) > -1 &&
+          leeftijd_vanstatus.toUpperCase().indexOf(filter_leeftijdvan) > -1 &&
+          leeftijd_totstatus.toUpperCase().indexOf(filter_leeftijdtot) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+function filter_users() {
+  var naaminput,postcodeinput, geslachtinput, emailinput, filter_naam, filter_postcode, filter_geslacht,filter_email, table, tr, td, i;
+  naaminput = document.getElementById("idinput")
+  postcodeinput = document.getElementById("titleinput");
+  geslachtinput = document.getElementById("statusinput");
+  emailinput = document.getElementById("beschikbaarinput");
+
+  filter_naam = naaminput.value.toUpperCase();
+  filter_postcode = postcodeinput.value.toUpperCase();
+  filter_geslacht = geslachtinput.value.toUpperCase();
+  filter_email = emailinput.value.toUpperCase();
+
+  table = document.getElementById("users_modal");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 0; i < tr.length; i++) {
+    td_naam = tr[i].getElementsByTagName("td")[0];
+    td_postcode = tr[i].getElementsByTagName("td")[1];
+    td_geslacht = tr[i].getElementsByTagName("td")[2];
+    td_email = tr[i].getElementsByTagName("td")[3];
+
+
+    if (td_naam || td_postcode || td_geslacht || td_email) {
+      naamvalue = td_naam.textContent || td_naam.textContent;
+      postcodevalue = td_postcode.textContent || td_postcode.textContent;
+      geslachtvalue = td_geslacht.textContent || td_geslacht.textContent;
+      emailvalue = td_email.textContent || td_email.textContent;
+
+      if (naamvalue.toUpperCase().indexOf(filter_naam) > -1 &&
+          postcodevalue.toUpperCase().indexOf(filter_postcode) > -1 &&
+          geslachtvalue.toUpperCase().indexOf(filter_geslacht) > -1 &&
+          emailvalue.toUpperCase().indexOf(filter_email) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
 
 function showOnderzoek(onderzoek)
 {
@@ -122,6 +210,7 @@ function update_onderzoek(onderzoek_id)
   })
   .then(response => response.json())
   .then(data => {
+    alert(data)
     console.log(data);
   })
 }
@@ -161,6 +250,10 @@ function showUsers(users)
     <div class="modal-content">
         <span class="close_usersmodal">&times;</span>
         <h2>ingeschreven mensen</h2>
+        <input type="text" id="naaminput" onkeyup="filter_users()" placeholder="Zoek ervaringdeskundige op naam.." aria-label="Zoek ervaringdeskundige op naam">
+        <input type="text" id="postcodeinput" onkeyup="filter_users()" placeholder="Zoek poscode van ervaringdeskundige.." aria-label="Zoek poscode van ervaringdeskundige">
+        <input type="text" id="geslachtinput" onkeyup="filter_users()" placeholder="Zoek status.." aria-label="Zoek status van onderzoek">
+        <input type="text" id="emailinput" onkeyup="filter_users()" placeholder="Zoek op beschikbaarheid.." aria-label="Zoek beschikbaarheid van onderzoek">
         <table>
             <tr>
                 <th>Naam</th>

@@ -202,10 +202,24 @@ def beperkingen():
         beperkingen.append(dict(row))
     return jsonify(beperkingen)
 
+@app.route("/api/overzicht_organisaties", methods=["GET"])
+def overzicht_organisaties():
+    return render_template("all_organisaties.html")
 
 @app.route("/api/organisatie_aanmaken", methods=["GET"])
 def organisatie_aanmaken():
     return render_template("organisatie_aanmaken.html")
+
+@app.route("/api/alle_organisaties", methods=["GET"])
+def organisaties():
+    result = organisatie.get_all_organisaties()
+    return jsonify(result)
+
+@app.route("/api/alle_organisaties/delete=<organisatie_id>", methods=["DELETE"])
+def delete_organisatie(organisatie_id):
+    result = organisatie.delete_organisatie(organisatie_id)
+    return jsonify(result)
+
 
 # dit regex variable is om te checken of het email is.
 regex_email = r"^\S+@\S+\.\S+$"
@@ -296,7 +310,7 @@ def update_onderzoek_gegevens(onderzoek_id):
 
     datum_vanaf = request.json["datumvanaf"]
     date_vanaf = datetime.strptime(datum_vanaf, "%Y-%m-%d")
-    if datum_vanaf == "" or date_vanaf < datetime.now():
+    if datum_vanaf == "" or date_vanaf < datetime.now()- timedelta(days=1):
         return jsonify("You have not chosen a date from or chosen a past date."), 400
 
     datum_tot = request.json["datumtot"]
@@ -384,6 +398,9 @@ def onderzoek_aanvragen_organisatie():
     if met_beloning == "1" or met_beloning == 1:
         if hoeveel_beloning == "":
             return jsonify("U heeft geen beloning getypt."), 400
+    if met_beloning == "0" or met_beloning == 0:
+        if len(hoeveel_beloning)>0:
+            return jsonify("u heeft vergoeding niet geselecteerd"),400
     type_disability = request.json["disability-type-input"]
     if not isinstance(type_disability, list):
         return (
