@@ -37,7 +37,7 @@ document.querySelector('.js-birthdate-input').addEventListener('change', () =>
 
 
 function saveSignup () {
-    let fname = document.querySelector('.js-first-name-input').value
+    const fname = document.querySelector('.js-first-name-input').value
     let infix = document.querySelector('.js-infix-input').value
     let lname = document.querySelector('.js-last-name-input').value
     let password = document.querySelector('.js-password-input').value
@@ -58,13 +58,63 @@ function saveSignup () {
     let researchType = document.querySelector('.js-researchtype-input').value
     let availability = document.querySelector('.js-availability-input').value
 
+
+    const errormessage = document.querySelector('.js-error-message');
+    const lnameMessage = document.querySelector('.js-lname-message');
+    const passwordMessage = document.querySelector('.js-password-message');
+    const zipcodeMessage = document.querySelector('.js-zipcode-message');
+    const genderMessage = document.querySelector('.js-gender-message');
+    const emailMessage = document.querySelector('.js-email-message');
+    const phonenumMessage = document.querySelector('.js-phonenum-message');
+    const birthdateMessage = document.querySelector('.js-birthdate-message');
+    const disabilitiesMessage = document.querySelector('.js-disabilities-message');
+    const termsAgreementMessage = document.querySelector('.js-agreement-terms-message');
+
     let disabilityOptions = document.querySelector('.js-dropdown').selectedOptions;
     disabilityOptions = Array.from(disabilityOptions)
 
     const selectedDisabilities = [];
     disabilityOptions.forEach(option => {
-        selectedDisabilities.push(option['value']);
-    });
+        selectedDisabilities.push(option['value'])
+    })
+
+    console.log(fname)
+    if (fname === '') {
+        errormessage.innerHTML = 'Vul uw voornaam in';
+    }
+    if (lname === '') {
+        lnameMessage.innerHTML = 'Vul uw achternaam in'
+    }
+
+    if (password === '') {
+        passwordMessage.innerHTML = 'vul uw wachtwoord in'
+    }
+
+    if (zipcode === '') {
+        zipcodeMessage.innerHTML = 'vul uw postcode in'
+    }
+
+    if (gender === '' || gender === null) {
+        genderMessage.innerHTML = 'kruis een geslacht aan'
+    }
+
+    if (email === '') {
+        emailMessage.innerHTML = 'vul uw emailadres in'
+    }
+
+    if (phonenum === '') {
+        phonenumMessage.innerHTML = 'vul uw telefoonnummer in'
+    }
+
+    if (birthdate === '' || birthdate === null) {
+        birthdateMessage.innerHTML = 'vul uw geboortedatum in'
+    }
+    if (selectedDisabilities < 1 || selectedDisabilities === null) {
+        disabilitiesMessage.innerHTML = 'klik uw type beperking aan'
+    }
+    if (agreementTerms === '' || agreementTerms === null) {
+        termsAgreementMessage.innerHTML = 'Kruis aan dat u akkoord gaat met de voorwaarden'
+    }
 
     console.log(selectedDisabilities)
 
@@ -98,44 +148,16 @@ function saveSignup () {
             disabilities: selectedDisabilities
         })
 
-        })
-            .then(response => response)
-            .then(data => {
-                console.log(data);
-            });
+    })
+        .then(response => response)
+        .then(data => {
+            console.log(data);
+        });
 }
 
 document.querySelector(".js-submit-button").addEventListener("click", saveSignup);
 
 
-let fname = document.querySelector('.js-first-name-input').value
-    let infix = document.querySelector('.js-infix-input').value
-    let lname = document.querySelector('.js-last-name-input').value
-    let password = document.querySelector('.js-password-input').value
-    let zipcode = document.querySelector('.js-zip-code-input').value
-    let gender = document.querySelector('.js-gender-input').value
-    let email = document.querySelector('.js-email-input').value
-    let phonenum = document.querySelector('.js-phonenum-input').value
-    let birthdate = document.querySelector('.js-birthdate-input').value
-    let tools = document.querySelector('.js-tools-input').value
-    let introduction = document.querySelector('.js-introduction-input').value
-    let details = document.querySelector('.js-details-input').value
-    let agreementTerms = document.querySelector('.js-agreement-terms-input').value
-    let supervisor = document.querySelector('.js-supervisor-input').value
-    let nameSupervisor = document.querySelector('.js-supervisor-name-input').value
-    let phonenumSupervisor = document.querySelector('.js-supervisor-phonenum-input').value
-    let emailParent = document.querySelector('.js-supervisor-email-input').value
-    let preferredApproach = document.querySelector('.js-preferred-approach-input').value
-    let researchType = document.querySelector('.js-researchtype-input').value
-    let availability = document.querySelector('.js-availability-input').value
-    let errormessage = document.querySelector('.js-error-message')
-
-document.querySelector(".sign-up-form").addEventListener("submit", () => {
-
-    if (fname === '' || fname === null){
-        errormessage.innerHTML = 'vul uw voornaam in'
-    }
-})
 
 function getAllDisabilities(){
     fetch('api/beperkingen-ophalen', {

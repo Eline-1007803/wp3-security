@@ -11,36 +11,46 @@
         <label>
             Voornaam:
             <input class="js-first-name-input" id="first-name-input" name="first-name-input" type="text" aria-label="Vul hier uw voornaam in" required>
+            <p role="alert" class="js-error-message"></p>
         </label>
+
         <label for="infix-input"> Tussenvoegsel:
             <input class="js-infix-input" id="infix-input" type="text">
         </label>
         <label for="last-name-input">Achternaam:
-        <input class="js-last-name-input" id="last-name-input" name="last-name-input" type="text" required>
+            <input class="js-last-name-input" id="last-name-input" name="last-name-input" type="text" required>
+            <p role="alert" class="js-lname-message"></p>
         </label>
         <label for="password-input">Wachtwoord:
             <input class="js-password-input" id="password-input" name="password-input" type="password" required>
+            <p role="alert" class="js-password-message"></p>
         </label>
         <label for="zip-code-input">Postcode:
-        <input class="js-zip-code-input" id="zip-code-input" name="zip-code-input" type="text" required>
+            <input class="js-zip-code-input" id="zip-code-input" name="zip-code-input" type="text" required>
+            <p role="alert" class="js-zipcode-message"></p>
         </label>
         <label for="gender-input">Geslacht:
-        <input class="js-gender-input" id="gender-input" name="gender-input" type="text">
+            <input class="js-gender-input" id="gender-input" name="gender-input" type="text">
+            <p role="alert" class="js-gender-message"></p>
         </label>
         <label for="email-input">E-mailadres:
-        <input class="js-email-input" id="email-input" name="email-input" type="email" required>
+            <input class="js-email-input" id="email-input" name="email-input" type="email" required>
+            <p role="alert" class="js-email-message"></p>
         </label>
         <label for="phone-number-input">Telefoonnummer:
-        <input class="js-phonenum-input" id="phone-number-input" name="phone-number-input" type="tel" required>
+            <input class="js-phonenum-input" id="phone-number-input" name="phone-number-input" type="tel" required>
+            <p role="alert" class="js-phonenum-message"></p>
         </label>
         <label for="date-of-birth-input">Geboortedatum:
-        <input class="js-birthdate-input" id="date-of-birth-input" name="date-of-birth-input" type="date" required>
+            <input class="js-birthdate-input" id="date-of-birth-input" name="date-of-birth-input" type="date" required>
+            <p role="alert" class="js-birthdate-message"></p>
         </label>
 
         <label>Type beperking:<button class="button-disabilities">Beperkingen<i class="arrow down"></i></button>
                 <!--<div> class="dropdown-content"> -->
-            <select class="js-dropdown dropdown" id="disability-type-input" name="disability-type-input" multiple>
+            <select class="js-dropdown dropdown" id="disability-type-input" name="disability-type-input" multiple required>
             </select>
+            <p role="alert" class="js-disabilities-message"></p>
 <!--         </div>-->
         </label>
     </div>
@@ -54,7 +64,9 @@
 
 <!--Optional-->
         <label for="details-input">Bijzonderheden: <textarea class="js-details-input" id="details-input" name="details-input" placeholder="Eventuele extra informatie over uw beperking/beperkingen">+-</textarea></label>
-        <label for="agreement-terms-input">Akkoord met voorwaarden:<input class="js-agreement-terms-input" id="agreement-terms-input" name="agreement-terms-input" type="checkbox"></label>
+        <label for="agreement-terms-input">Akkoord met voorwaarden:<input class="js-agreement-terms-input" id="agreement-terms-input" name="agreement-terms-input" type="checkbox" required>
+        <p role="alert" class="js-agreement-terms-message"></p>
+        </label>
         <label for="supervisor-input">Toezichthouder/voogd: <input class="js-supervisor-input" id="supervisor-input" name="supervisor-input" type="checkbox"></label>
         <div class="hide js-supervisor-info supervisor-info">
 <!--only show if supervisor checkbox is checked -->
