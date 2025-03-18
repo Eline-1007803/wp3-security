@@ -188,3 +188,83 @@ add-img{
     margin-top: 100px;
     text-align: center;
 }
+
+.button {
+    background-color: blue;
+    color: white;
+    padding: 10px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+    margin-bottom: 15px;
+    text-align: center;
+    }
+    
+ .dark-mode-toggle {
+        position: absolute;
+        top: 80px;  
+        right: 20px; 
+        background-color: blue;
+        color: white;
+        padding: 10px 20px;
+        font-size: 14px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    
+.dark-mode-toggle:hover {
+        background-color: darkblue;
+    }
+
+.dark-mode {
+        background-color: rgb(46, 46, 46);
+        color: white;
+    }
+    
+.dark-mode .popup-content {
+        background-color: #333;
+        color: white;
+    }
+    
+.dark-mode .column {
+        background-color: #222;
+        color: white;
+    }
+    
+.dark-mode .table-clickable tbody tr:nth-child(even) {
+        background-color: #444;
+    }
+    
+.dark-mode .table-clickable tbody tr:hover {
+        background-color: #666;
+    }
+
+.dark-mode table,
+.dark-mode th,
+.dark-mode td  {
+    border-color: white;
+}
+
+.dark-mode .administrator-add,
+.dark-mode .administrator-delete,
+.dark-mode .administrator-details,
+.dark-mode .administrator-edit {
+    background-color: black;
+    color: white;
+    box-shadow: none;
+}
+
+.dark-mode .popup-content h1, 
+.dark-mode .modal-content h1, 
+.dark-mode .js-details h1, 
+.dark-mode .js-edit h1, 
+.dark-mode .js-delete h1, 
+.dark-mode .js-add h1 {
+    color: white !important;
+}
+
+.dark-mode .cross-image {
+    content: url("../static/images/whitecross.png");
+}
