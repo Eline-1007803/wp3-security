@@ -82,7 +82,7 @@ button:hover{
 }
 
 .dark-mode {
-    background-color: rgb(46, 46, 46);
+    background-color: rgb(0, 0, 0);
     color: white;
 }
 
@@ -133,5 +133,5 @@ button:hover{
     }
 
     .dark-mode .form-container {
-        background-color: #030303;
+        background-color: #4b4b4b;
     }
