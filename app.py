@@ -65,11 +65,6 @@ def login():
 def logout():
     session.clear()
     return redirect(url_for('login_page'))
-#@app.route("/", methods=["GET"])
-# def test():
-#     if request.method == "GET":
-#       return jsonify({"response": "hallo"})
-
 
 @app.route("/api/administrators", methods=["GET"])
 def get_all_administrators():
@@ -127,33 +122,24 @@ def administrator_page():
 def expert_sign_up():
     return render_template("sign-up-page.html")
 
+@app.route('/api/beperkingen-ophalen', methods=["GET"])
+def get_disabilities():
+    sign_up_model = SignUp()
+    disabilities = sign_up_model.get_all_disabilities()
+    return jsonify(disabilities)
 
+# @app.route('/api/beperkingen-opslaan', methods=["POST"])
+# def save_disabilities():
+#     sign_up_model = SignUp()
+#     disabilities = sign_up_model.save_disabilities()
+#     return jsonify(disabilities)
 @app.route("/api/save-signup", methods=["POST"])
 def save_sign_up():
-    fname = request.json["fname"]
-    infix = request.json["infix"]
-    lname = request.json["lname"]
-    password = request.json["password"]
-    zipcode = request.json["zipcode"]
-    gender = request.json["gender"]
-    email = request.json["email"]
-    phonenum = request.json["phonenum"]
-    birthdate = request.json["birthdate"]
-    tools = request.json["tools"]
-    introduction = request.json["introduction"]
-    details = request.json["details"]
-    agreement_terms = request.json["agreement_terms"]
-    supervisor = request.json["supervisor"]
-    name_supervisor = request.json["name_supervisor"]
-    phonenum_supervisor = request.json["phonenum_supervisor"]
-    email_supervisor= request.json["email_parent"]
-    preferred_approach = request.json["preferred_approach"]
-    research_type = request.json["research_type"]
-    availability = request.json["availability"]
 
+    new_expert = request.get_json()
 
     signup_model = SignUp()
-    save_sign_up = signup_model.save_signup(fname, infix, lname, password, zipcode, gender, email, phonenum, birthdate, tools, introduction, details, agreement_terms, supervisor, name_supervisor, phonenum_supervisor, email_supervisor, preferred_approach, research_type, availability)
+    save_sign_up = signup_model.save_signup(new_expert)
     return save_sign_up
 
 
