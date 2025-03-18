@@ -19,9 +19,10 @@ function set_modal() {
 
     onderzoekRijen.forEach(row => {
         row.addEventListener("click", function() {
+            stopInterval()
             popup.style.display = "block";
             popup.setAttribute("aria-hidden", "false");
-            stopInterval()
+            
             document.getElementById("popupTitel").innerText = this.getAttribute("data-titel");
             if (popupId) popupId.innerText = this.getAttribute("data-id");
             popupStatus.innerText = this.getAttribute("data-status");
@@ -55,6 +56,10 @@ function set_modal() {
 
 
 function getOnderzoeken() {
+
+    let zoekTitels = document.getElementById("zoekTitel").value.toUpperCase();
+    let statusFilter = document.getElementById("statusOnderzoek").value.toUpperCase();
+
 fetch('/api/ingeschreven_onderzoeken', {  
     method: 'GET',
     headers: {
@@ -70,6 +75,11 @@ fetch('/api/ingeschreven_onderzoeken', {
 .then(onderzoeken => {
     console.log("Ontvangen onderzoeken:", onderzoeken);
     getSignedUpResearch(onderzoeken);
+
+    document.getElementById("zoekTitel").value = zoekTitels;
+    document.getElementById("statusOnderzoek").value = statusFilter;
+    zoekTitels();
+    zoekTitels();
 })
 .catch(error => console.error("Fout bij ophalen onderzoeken:", error));
 
@@ -121,4 +131,43 @@ function startInterval() {
 document.getElementById('afmeldenButton').onclick = function () {
 alert('Je hebt je nu uitgeschreven voor dit onderzoek.');
 document.getElementById('set_modal').style.display = 'none';
+}
+
+function zoekTitels() {
+    var input_titel, filter, table, tr, td, i, txtValue;
+    input_titel = document.getElementById("zoekTitel");
+    filter = input_titel.value.toUpperCase();
+    table = document.getElementById("tabelOnderzoeken");
+    tr = table.getElementsByTagName("tr");
+
+    for (var i = 0; i < tr.length; i++) {
+        var td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+            var txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) { tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+function filterStatus() {
+    var select, selectedStatus, table, tr, td, i;
+    select = document.getElementById("statusOnderzoek");
+    selectedStatus = select.value.toUpperCase();
+    table = document.getElementById("tabelOnderzoeken");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 1; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[4]; //Deze nog aanpassen naar status en niet datum
+        if (td) {
+            let statusValue = td.textContent || td.innerText;
+            if (selectedStatus === "" || statusValue.toUpperCase() === selectedStatus) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
 }
