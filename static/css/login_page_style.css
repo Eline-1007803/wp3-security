@@ -60,6 +60,7 @@ form a
 .buttons{
     margin-left: 480px;
 }
+
 button{
     margin-top: 50px;
     margin-left: 20px;
@@ -79,3 +80,58 @@ button:hover{
     cursor: pointer;
 
 }
+
+.dark-mode {
+    background-color: rgb(46, 46, 46);
+    color: white;
+}
+
+.dark-mode .popup-content {
+    background-color: #030303;
+    color: white;
+}
+
+.dark-mode .column {
+    background-color: #222;
+    color: white;
+}
+
+.dark-mode .table-clickable tbody tr:nth-child(even) {
+    background-color: #444;
+}
+
+.dark-mode .table-clickable tbody tr:hover {
+    background-color: #666;
+}
+.button {
+    background-color: blue;
+    color: white;
+    padding: 10px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+    margin-bottom: 15px;
+    text-align: center;
+    }
+    
+    .dark-mode-toggle {
+        position: absolute;
+        top: 80px;  
+        right: 20px; 
+        background-color: blue;
+        color: white;
+        padding: 10px 20px;
+        font-size: 14px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    .dark-mode-toggle:hover {
+        background-color: darkblue;
+    }
+
+    .dark-mode .form-container {
+        background-color: #030303;
+    }
