@@ -398,6 +398,9 @@ def onderzoek_aanvragen_organisatie():
     if met_beloning == "1" or met_beloning == 1:
         if hoeveel_beloning == "":
             return jsonify("U heeft geen beloning getypt."), 400
+    if met_beloning == "0" or met_beloning == 0:
+        if len(hoeveel_beloning)>0:
+            return jsonify("u heeft vergoeding niet geselecteerd"),400
     type_disability = request.json["disability-type-input"]
     if not isinstance(type_disability, list):
         return (
