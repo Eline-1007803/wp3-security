@@ -266,5 +266,5 @@ add-img{
 }
 
 .dark-mode .cross-image {
-    content: url("../static/images/whitecross.png");
+    content: url("/static/images/whitecross.png");
 }
