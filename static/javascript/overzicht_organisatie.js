@@ -15,7 +15,7 @@ function showOrganisaties (organisaties) {
            let row =
             `
             <tr>
-                  <td>${organisatie.organisatie_id}</td>
+                  <th scope="row">${organisatie.organisatie_id}</th>
                   <td>${organisatie.naam}</td>
                   <td>${organisatie.type}</td>
                   <td>${organisatie.website}</td>
