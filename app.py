@@ -70,6 +70,14 @@ def logout():
 def my_profile():
     return render_template('beheerders_profile.html')
 
+@app.route('/get_user_id')
+def get_user_id():
+    if session.get('expert'):
+        return session.get('expert')
+
+    if session.get('admin'):
+        return session.get('admin')
+
 @app.route("/api/administrators", methods=["GET"])
 def get_all_administrators():
     administrator_model = Administrator()
