@@ -52,7 +52,6 @@ function set_modal() {
             popup.setAttribute("aria-hidden", "true");
         }
     });
-    filterStatus()
     zoekTitels()
 }
 
@@ -130,7 +129,7 @@ document.getElementById('set_modal').style.display = 'none';
 function zoekTitels() {
     let input_titel, input_status, filter_titel, filter_status, table, tr, td_titel, td_status, i, txtValue_titel, txtValue_status;
     input_titel = document.getElementById("zoekTitel");
-    input_status = document.getElementById("statusonderzoek")
+    input_status = document.getElementById("statusOnderzoek")
     filter_titel = input_titel.value.toUpperCase();
     filter_status = input_status.value.toUpperCase();
     table = document.getElementById("tabelOnderzoeken");
@@ -142,8 +141,8 @@ function zoekTitels() {
         if (td_status || td_titel) {
              txtValue_titel = td_titel.textContent || td_titel.innerText;
              txtValue_status = td_status.textContent || td_status.innerText
-            if (txtValue_titel.toUpperCase().indexOf(filter) > -1 &&
-                input_status === "" || txtValue_status.toUpperCase() === input_status > -1) {
+            if (txtValue_titel.toUpperCase().indexOf(filter_titel) > -1 &&
+                filter_status === "" || txtValue_status.toUpperCase() === filter_status) {
                     tr[i].style.display = "";
             } else {
                 tr[i].style.display = "none";
