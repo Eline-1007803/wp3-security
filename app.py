@@ -66,6 +66,10 @@ def logout():
     session.clear()
     return redirect(url_for('login_page'))
 
+@app.route('/myprofile')
+def my_profile():
+    pass
+
 @app.route("/api/administrators", methods=["GET"])
 def get_all_administrators():
     administrator_model = Administrator()
