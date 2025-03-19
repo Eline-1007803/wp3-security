@@ -86,6 +86,7 @@ class WP3DatabaseGenerator:
         CREATE TABLE IF NOT EXISTS "organisaties" (
             "organisatie_id"	INTEGER,
             "naam"	TEXT NOT NULL,
+            "wachtwoord"	TEXT,
             "type"	TEXT NOT NULL,
             "website"	TEXT,
             "beschrijving"	TEXT,
@@ -247,10 +248,10 @@ class WP3DatabaseGenerator:
         print("✅ Default onderzoeken created")
     def insert_organisaties(self):
         users = [
-            ("gfx", "non-profit", "https://www.gfx.com", "organisatie", "Angela Koe", "gfx@info.com", "0654826582", "leeg", "goedgekeurd", "A1B2", 2, "2025-02-03"),
-            ("plams", "commercieel", "https://www.plams.nl", "ook een organisatie", "Lenn van Dam", "plams@info.com", "0665835683", "het is een organisatie", "nieuw", "C3D4", None, None),
+            ("gfx",None, "non-profit", "https://www.gfx.com", "organisatie", "Angela Koe", "gfx@info.com", "0654826582", "leeg", "goedgekeurd", "A1B2", 2, "2025-02-03"),
+            ("plams",None, "commercieel", "https://www.plams.nl", "ook een organisatie", "Lenn van Dam", "plams@info.com", "0665835683", "het is een organisatie", "nieuw", "C3D4", None, None),
         ]
-        insert_statement = "INSERT INTO organisaties (naam, type, website, beschrijving, contactpersoon, email, telefoonnummer, overige_details, status, api_key, beheerder_id, datum_goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?);"
+        insert_statement = "INSERT INTO organisaties (naam,wachtwoord, type, website, beschrijving, contactpersoon, email, telefoonnummer, overige_details, status, api_key, beheerder_id, datum_goedgekeurd) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?);"
         self.__execute_many_transaction_statement(insert_statement, users)
         print("✅ Default organisaties created")
     def insert_onderzoek_beperkingen(self):

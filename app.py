@@ -19,6 +19,22 @@ app.secret_key = "wp3"
 app.jinja_env.autoescape = True
 
 
+open_routes = ['login_page', 'login']
+admin_routes = ['dashboard', 'administrator_page']
+expert_routes = ['openstaande_onderzoeken', 'lijst_ingeschreven_onderzoeken']
+
+@app.before_request
+def before_request():
+    if request.endpoint in open_routes:
+        return
+
+    if request.endpoint in admin_routes and not session.get('admin'):
+        return redirect(url_for('index'))
+
+    if request.endpoint in expert_routes and not session.get('expert'):
+        return redirect(url_for('index'))
+
+
 @app.route('/', methods=['GET'])
 def index():
     if session.get('expert'):
@@ -40,15 +56,12 @@ def login():
     email = request.json['email']
     password = request.json['password']
     print(request.json)
-
     expert_model = Ervaringsdeskundigen()
     expert = expert_model.authentication_expert(email, password)
-
     if expert:
         print("yess")
         session['expert'] = expert
         return {"message": "Login successful", "success": True}
-
 
     admin_model = Administrator()
     admin = admin_model.get_administrator_login(email, password)
@@ -56,6 +69,7 @@ def login():
     if admin:
         session['admin'] = admin
         return {"message": "Login successful", "success": True}
+
     else:
         print("no")
         return {"message": "Login failed", "success": False}
@@ -137,7 +151,7 @@ def get_disabilities():
 def save_sign_up():
 
     new_expert = request.get_json()
-
+    print(new_expert)
     signup_model = SignUp()
     save_sign_up = signup_model.save_signup(new_expert)
     return save_sign_up
@@ -154,7 +168,18 @@ def get_deskundigen():
     result = edm.get_all_pending()
     dictresult = []
     for row in result:
-        dictresult.append(dict(row))
+        corresponding_beperkingen = edm.get_corresponding_beperkingen(row["ervaringsdeskundige_id"])
+        row_dict = dict(row)
+        beperkingen_str = ''
+        first = 0
+        for rows in corresponding_beperkingen:
+            if first == 0:
+                beperkingen_str += rows["naam"]
+                first = 1
+            else:
+                beperkingen_str += ', ' + rows["naam"]
+        row_dict["naam"] = beperkingen_str
+        dictresult.append(row_dict)
     return {"deskundigen": dictresult}
 
 
@@ -172,7 +197,27 @@ def get_inschrijvingen():
     result = ism.get_all_pending()
     dictresult = []
     for row in result:
-        dictresult.append(dict(row))
+        ev_corresponding_beperkingen, on_corresponding_beperkingen = ism.get_corresponding_beperkingen(row["ervaringsdeskundige_id"], row["onderzoek_id"])
+        row_dict = dict(row)
+        beperkingen_str = ''
+        first = 0
+        for rows in ev_corresponding_beperkingen:
+            if first == 0:
+                beperkingen_str += rows["ev_bep_naam"]
+                first = 1
+            else:
+                beperkingen_str += ', ' + rows["ev_bep_naam"]
+        row_dict["ev_bep_naam"] = beperkingen_str
+        beperkingen_str = ''
+        first = 0
+        for rows in on_corresponding_beperkingen:
+            if first == 0:
+                beperkingen_str += rows["on_bep_naam"]
+                first = 1
+            else:
+                beperkingen_str += ', ' + rows["on_bep_naam"]
+        row_dict["on_bep_naam"] = beperkingen_str
+        dictresult.append(row_dict)
     return {"inschrijvingen": dictresult}
 
 
@@ -190,7 +235,18 @@ def get_onderzoeken():
     result = ozm.get_all_pending()
     dictresult = []
     for row in result:
-        dictresult.append(dict(row))
+        corresponding_beperkingen = ozm.get_corresponding_beperkingen(row["onderzoek_id"])
+        row_dict = dict(row)
+        beperkingen_str = ''
+        first = 0
+        for rows in corresponding_beperkingen:
+            if first == 0:
+                beperkingen_str += rows["bep_naam"]
+                first = 1
+            else:
+                beperkingen_str += ', ' + rows["bep_naam"]
+        row_dict["bep_naam"] = beperkingen_str
+        dictresult.append(row_dict)
     return {"onderzoeken": dictresult}
 
 
@@ -202,10 +258,24 @@ def beperkingen():
         beperkingen.append(dict(row))
     return jsonify(beperkingen)
 
+@app.route("/api/overzicht_organisaties", methods=["GET"])
+def overzicht_organisaties():
+    return render_template("all_organisaties.html")
 
 @app.route("/api/organisatie_aanmaken", methods=["GET"])
 def organisatie_aanmaken():
     return render_template("organisatie_aanmaken.html")
+
+@app.route("/api/alle_organisaties", methods=["GET"])
+def organisaties():
+    result = organisatie.get_all_organisaties()
+    return jsonify(result)
+
+@app.route("/api/alle_organisaties/delete=<organisatie_id>", methods=["DELETE"])
+def delete_organisatie(organisatie_id):
+    result = organisatie.delete_organisatie(organisatie_id)
+    return jsonify(result)
+
 
 # dit regex variable is om te checken of het email is.
 regex_email = r"^\S+@\S+\.\S+$"
@@ -296,7 +366,7 @@ def update_onderzoek_gegevens(onderzoek_id):
 
     datum_vanaf = request.json["datumvanaf"]
     date_vanaf = datetime.strptime(datum_vanaf, "%Y-%m-%d")
-    if datum_vanaf == "" or date_vanaf < datetime.now():
+    if datum_vanaf == "" or date_vanaf < datetime.now()- timedelta(days=1):
         return jsonify("You have not chosen a date from or chosen a past date."), 400
 
     datum_tot = request.json["datumtot"]
@@ -384,6 +454,9 @@ def onderzoek_aanvragen_organisatie():
     if met_beloning == "1" or met_beloning == 1:
         if hoeveel_beloning == "":
             return jsonify("U heeft geen beloning getypt."), 400
+    if met_beloning == "0" or met_beloning == 0:
+        if len(hoeveel_beloning)>0:
+            return jsonify("u heeft vergoeding niet geselecteerd"),400
     type_disability = request.json["disability-type-input"]
     if not isinstance(type_disability, list):
         return (

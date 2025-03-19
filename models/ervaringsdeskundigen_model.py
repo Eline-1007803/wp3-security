@@ -7,13 +7,20 @@ class Ervaringsdeskundigen:
 
     def get_all_pending(self):
         result = self.cursor.execute(
-            """ SELECT ervaringsdeskundigen.*, alle_beperkingen.naam, ervaringsdeskundigen.voornaam || ' ' || coalesce(ervaringsdeskundigen.tussenvoegsel || ' ' || ervaringsdeskundigen.achternaam, ervaringsdeskundigen.achternaam) as volle_naam,
+            """ SELECT ervaringsdeskundigen.*, ervaringsdeskundigen.voornaam || ' ' || coalesce(ervaringsdeskundigen.tussenvoegsel || ' ' || ervaringsdeskundigen.achternaam, ervaringsdeskundigen.achternaam) as volle_naam,
                 (strftime('%Y', 'now') - strftime('%Y', ervaringsdeskundigen.geboortedatum) - (strftime('%m-%d', 'now') < strftime('%m-%d', ervaringsdeskundigen.geboortedatum))) AS leeftijd
                 FROM ervaringsdeskundigen 
-                full join geregistreerde_beperkingen on (ervaringsdeskundigen.ervaringsdeskundige_id=geregistreerde_beperkingen.ervaringsdeskundige_id)
-                full join alle_beperkingen on (geregistreerde_beperkingen.beperking_id = alle_beperkingen.beperking_id)
                 WHERE status = 'nieuw'""").fetchall()
         return result
+
+    def get_corresponding_beperkingen(self, ervaringsdeskundige_id):
+        result = self.cursor.execute(
+            """ SELECT alle_beperkingen.naam
+                FROM geregistreerde_beperkingen
+                join alle_beperkingen on (geregistreerde_beperkingen.beperking_id = alle_beperkingen.beperking_id)
+                WHERE geregistreerde_beperkingen.ervaringsdeskundige_id = ?""", (ervaringsdeskundige_id,)).fetchall()
+        return result
+
     def update_status(self, deskundige_id, status):
         self.cursor.execute("UPDATE ervaringsdeskundigen SET status = ? WHERE ervaringsdeskundige_id = ?", (status, deskundige_id))
         self.con.commit()

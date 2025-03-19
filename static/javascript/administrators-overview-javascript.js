@@ -1,3 +1,25 @@
+let administratorsList = [];
+let interval;
+
+document.querySelector('.js-searchbar').addEventListener('input', e => {
+        clearInterval(interval);
+
+        const value = e.target.value.toLowerCase();
+
+        if (value === '') {
+                interval = setInterval(getAllAdminstrators, 5000);
+        }
+
+        console.log(value);
+        const filteredAdministrators = administratorsList.filter((administrator) => {
+                if (administrator.email.includes(value)) {
+                        return true;
+                }
+                return false;
+        })
+
+        showAdministrator(filteredAdministrators);
+});
 
 // get all administrators
 function getAllAdminstrators()
@@ -9,10 +31,13 @@ function getAllAdminstrators()
                 }
         })
             .then(response => response.json())
-            .then(administrators => showAdministrator(administrators))
+            .then(administrators => {
+                    administratorsList = administrators;
+                    showAdministrator(administrators)
+            })
 }
 getAllAdminstrators();
-setInterval(getAllAdminstrators, 5000);
+interval = setInterval(getAllAdminstrators, 5000);
 
 // showing each administrator on page
 function showAdministrator (administrators) {
@@ -21,7 +46,7 @@ function showAdministrator (administrators) {
                 console.log(administrator)
                 let fullName = administrator.tussenvoegsel ? `${administrator.voornaam} ${administrator.tussenvoegsel} ${administrator.achternaam}` : `${administrator.voornaam} ${administrator.achternaam}`;
                 let row =
-                `
+                    `
                 <tr>
                     <td>${fullName}</td>
                     <td>${administrator.email}</td>
@@ -46,6 +71,8 @@ function showAdministrator (administrators) {
         }
 
         });
+
+
 
         // Add button pop up
         document.querySelectorAll(".add-administrator-button")
@@ -303,14 +330,14 @@ function showAdminDeletePopup (administrator) {
                         console.log("yuh");
                 })
 
-         function closePopUp () {
+        function closePopUp () {
                 document.querySelector(".js-background").classList.add("hide");
                 document.querySelector(".js-add").classList.add("hide");
                 document.querySelector(".js-details").classList.add("hide");
                 document.querySelector(".js-edit").classList.add("hide");
                 document.querySelector(".js-delete").classList.add("hide");
         }
-}
+
 
  document.querySelectorAll(".js-cross-image").forEach(crossImage => {
                 crossImage.addEventListener("click", closePopUp)
@@ -321,3 +348,6 @@ function showAdminDeletePopup (administrator) {
                 document.querySelector(".js-background").classList.add("hide");
                 document.querySelector(".js-add").classList.add("hide");
         }
+
+}
+
