@@ -3,7 +3,7 @@ body {
     font-size: 18px;
     background-color: rgb(250, 253, 253);
     margin-bottom: 160px;
-
+}
 h1 {
     text-align: center;
     margin-bottom: 70px;
@@ -60,6 +60,18 @@ textarea {
 
 .hide {
     display: none;
+}
+
+.gender-input {
+    display: flex;
+    gap: 10px;
+    margin: auto;
+    or
+}
+
+.gender-label {
+    display: flex;
+    margin: auto;
 }
 
 .submit-container {

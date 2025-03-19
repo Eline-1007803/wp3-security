@@ -1,6 +1,6 @@
 const checkbox = document.getElementById("supervisor-input");
 
-
+// if supervisor checkbox is checked, show input fields
 function showSupervisorForm () {
     if (checkbox.checked === true) {
         console.log("you go girlie")
@@ -15,8 +15,22 @@ function showSupervisorForm () {
 
 checkbox.addEventListener("change", showSupervisorForm);
 
-document.querySelector('.js-birthdate-input').addEventListener('change', () =>
+// supervisor questions automatically shows up when expert is under 18 and is required
+document.querySelector('.js-birthdate-input').addEventListener('change', ageCheck)
+
+function ageCheck ()
 {
+    const ageInYears = calculateAge();
+
+        if (ageInYears < 18) {
+            document.querySelector('.js-supervisor-info').classList.remove('hide');
+            supervisorCheckbox = document.querySelector('.js-supervisor-input').checked = true;
+
+        }
+
+}
+
+function calculateAge() {
     let birthdate = document.querySelector('.js-birthdate-input').value
     let dateParse = Date.parse(birthdate);
     let dateToday = Date.now();
@@ -29,20 +43,18 @@ document.querySelector('.js-birthdate-input').addEventListener('change', () =>
     const year = day * 365;
     let ageInYears = Math.round(ageInMilliseconds / year);
     console.log(ageInYears);
-        if (ageInYears < 18) {
-            document.querySelector('.js-supervisor-info').classList.remove('hide');
+
+    return ageInYears;
 }
-})
 
 
-
-function saveSignup () {
+function saveSignup() {
     const fname = document.querySelector('.js-first-name-input').value
     let infix = document.querySelector('.js-infix-input').value
     let lname = document.querySelector('.js-last-name-input').value
     let password = document.querySelector('.js-password-input').value
     let zipcode = document.querySelector('.js-zip-code-input').value
-    let gender = document.querySelector('.js-gender-input').value
+    let gender = document.querySelector('input[name="gender"]:checked').value;
     let email = document.querySelector('.js-email-input').value
     let phonenum = document.querySelector('.js-phonenum-input').value
     let birthdate = document.querySelector('.js-birthdate-input').value
@@ -69,6 +81,7 @@ function saveSignup () {
     const birthdateMessage = document.querySelector('.js-birthdate-message');
     const disabilitiesMessage = document.querySelector('.js-disabilities-message');
     const termsAgreementMessage = document.querySelector('.js-agreement-terms-message');
+    const nameSupervisorMessage = document.querySelector('.js-supervisor-name-message');
 
     let disabilityOptions = document.querySelector('.js-dropdown').selectedOptions;
     disabilityOptions = Array.from(disabilityOptions)
@@ -81,42 +94,77 @@ function saveSignup () {
     console.log(fname)
     if (fname === '') {
         errormessage.innerHTML = 'Vul uw voornaam in';
+        return;
     }
     if (lname === '') {
-        lnameMessage.innerHTML = 'Vul uw achternaam in'
+        lnameMessage.innerHTML = 'Vul uw achternaam in';
+        return;
     }
 
     if (password === '') {
-        passwordMessage.innerHTML = 'vul uw wachtwoord in'
+        passwordMessage.innerHTML = 'Vul uw wachtwoord in, deze moet minstens 8 karakters bevatten';
+        return;
     }
 
     if (zipcode === '') {
-        zipcodeMessage.innerHTML = 'vul uw postcode in'
+        zipcodeMessage.innerHTML = 'Vul uw postcode in, 1234AB';
+        return;
     }
 
     if (gender === '' || gender === null) {
-        genderMessage.innerHTML = 'kruis een geslacht aan'
+        genderMessage.innerHTML = 'Kruis een geslacht aan'
+        return;
     }
 
     if (email === '') {
-        emailMessage.innerHTML = 'vul uw emailadres in'
+        emailMessage.innerHTML = 'Vul uw emailadres in';
+        return;
     }
 
     if (phonenum === '') {
-        phonenumMessage.innerHTML = 'vul uw telefoonnummer in'
+        phonenumMessage.innerHTML = 'Vul uw telefoonnummer in';
+        return;
     }
 
     if (birthdate === '' || birthdate === null) {
-        birthdateMessage.innerHTML = 'vul uw geboortedatum in'
+        birthdateMessage.innerHTML = 'Vul een geldige geboortedatum in';
+        return;
+    }
+
     }
     if (selectedDisabilities < 1 || selectedDisabilities === null) {
-        disabilitiesMessage.innerHTML = 'klik uw type beperking aan'
+        disabilitiesMessage.innerHTML = 'Klik uw type beperking aan';
+        return;
     }
     if (agreementTerms === '' || agreementTerms === null) {
-        termsAgreementMessage.innerHTML = 'Kruis aan dat u akkoord gaat met de voorwaarden'
+        termsAgreementMessage.innerHTML = 'Kruis aan dat u akkoord gaat met de voorwaarden';
+        return;
+    }
+
+    const ageInYears = calculateAge();
+    if (ageInYears < 18) {
+        if (nameSupervisor === ''){
+            nameSupervisorMessage.innerHTML = 'Vul hier de naam in van uw toezichthouder/voogd';
+            return;
+
+        }
+        if (emailSupervisor === '') {
+            emailSupervisorMessage.innerHTML = 'Vul hier het emailadres in van uw toezichthouder/voogd'
+            return;
+        }
+
+        if (phonenumSupervisor === '') {
+            phonenumSupervisorMessage.innerHTML = 'Vul hier het telefoonnummer in van uw toezichthouder/voogd'
+            return;
+        }
+
     }
 
     console.log(selectedDisabilities)
+
+    let selectedGender = document.querySelector('input[name="gender"]:checked');
+    console.log(selectedGender ? selectedGender.value : "No gender selected");
+
 
 
     fetch('/api/save-signup', {
@@ -159,41 +207,42 @@ document.querySelector(".js-submit-button").addEventListener("click", saveSignup
 
 
 
-function getAllDisabilities(){
+function getAllDisabilities() {
     fetch('api/beperkingen-ophalen', {
         method: ['GET'],
         headers: {
             'Accept': 'application/json'
         }
-        })
-        .then (response => response.json())
-        .then (disabilities => showDisabilities(disabilities))
+    })
+        .then(response => response.json())
+        .then(disabilities => showDisabilities(disabilities))
 }
+
 getAllDisabilities()
 
 function showDisabilities(disabilities) {
     const dropdown = document.querySelector('.js-dropdown');
     disabilities.forEach((disability) => {
-        let dropdownElement =  `
+        let dropdownElement = `
         <option value="${disability['beperking_id']}">${disability['naam']}</option>`
         dropdown.innerHTML += dropdownElement;
     });
 }
 
 /*function save_disabilities() {
-    let disabilities = document.querySelector('.js-dropdown').value;
-    fetch('/api/beperkingen-opslaan', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            'disability': disabilities
-        })
-    })
-            .then(response => response)
-            .then(data => {console.log(data)})
-    }
+let disabilities = document.querySelector('.js-dropdown').value;
+fetch('/api/beperkingen-opslaan', {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json',
+},
+body: JSON.stringify({
+'disability': disabilities
+})
+})
+.then(response => response)
+.then(data => {console.log(data)})
+}
 
 document.querySelector('.js-submit-button').addEventListener('click', save_disabilities)
 */

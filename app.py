@@ -137,7 +137,7 @@ def get_disabilities():
 def save_sign_up():
 
     new_expert = request.get_json()
-
+    print(new_expert)
     signup_model = SignUp()
     save_sign_up = signup_model.save_signup(new_expert)
     return save_sign_up

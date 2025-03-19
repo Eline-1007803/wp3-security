@@ -5,12 +5,12 @@
 {% block nav_links %} <a class= "logo-image" href="/"><img class="logo-image" src="../static/images/logo.svg"></a> {% endblock %}
 {% block main %}
 <h1>Registreren</h1>
-<form class="sign-up-form">
+<form class="sign-up-form" onsubmit="return false">
 <div class ="js-sign-up">
     <div class="grid-container">
         <label>
             Voornaam:
-            <input class="js-first-name-input" id="first-name-input" name="first-name-input" type="text" aria-label="Vul hier uw voornaam in" required>
+            <input class="js-first-name-input" id="first-name-input" name="first-name-input" type="text" aria-label="Vul hier uw voornaam in" aria-required="true">
             <p role="alert" class="js-error-message"></p>
         </label>
 
@@ -18,37 +18,42 @@
             <input class="js-infix-input" id="infix-input" type="text">
         </label>
         <label for="last-name-input">Achternaam:
-            <input class="js-last-name-input" id="last-name-input" name="last-name-input" type="text" required>
+            <input class="js-last-name-input" id="last-name-input" name="last-name-input" type="text" >
             <p role="alert" class="js-lname-message"></p>
         </label>
         <label for="password-input">Wachtwoord:
-            <input class="js-password-input" id="password-input" name="password-input" type="password" required>
+            <input class="js-password-input" id="password-input" name="password-input" type="password" minlength="8">
             <p role="alert" class="js-password-message"></p>
         </label>
         <label for="zip-code-input">Postcode:
-            <input class="js-zip-code-input" id="zip-code-input" name="zip-code-input" type="text" required>
+            <input class="js-zip-code-input" id="zip-code-input" name="zip-code-input" type="text" pattern="[0-9]{4}[a-zA-Z]{2}">
             <p role="alert" class="js-zipcode-message"></p>
         </label>
-        <label for="gender-input">Geslacht:
-            <input class="js-gender-input" id="gender-input" name="gender-input" type="text">
-            <p role="alert" class="js-gender-message"></p>
-        </label>
+        <div class="js-gender-input">
+            <p>Geslacht:</p>
+                <input class='gender-input-woman js-gender-input' checked type="radio" id="vrouw" name="gender" value="vrouw">
+                <label class='gender-label' for="vrouw">Vrouw</label><br>
+                <input class="gender-input-man js-gender-input" type="radio" id="man" name="gender" value="man">
+                <label class="gender-label" for="man">Man</label>
+                <input class="gender-input-other js-gender-input" type="radio" id="anders" name="gender" value="anders">
+                <label class="gender-label" for="anders">Anders</label>
+        </div>
         <label for="email-input">E-mailadres:
-            <input class="js-email-input" id="email-input" name="email-input" type="email" required>
+            <input class="js-email-input" id="email-input" name="email-input" type="email">
             <p role="alert" class="js-email-message"></p>
         </label>
         <label for="phone-number-input">Telefoonnummer:
-            <input class="js-phonenum-input" id="phone-number-input" name="phone-number-input" type="tel" required>
+            <input class="js-phonenum-input" id="phone-number-input" name="phone-number-input" type="tel">
             <p role="alert" class="js-phonenum-message"></p>
         </label>
         <label for="date-of-birth-input">Geboortedatum:
-            <input class="js-birthdate-input" id="date-of-birth-input" name="date-of-birth-input" type="date" required>
+            <input class="js-birthdate-input" id="date-of-birth-input" name="date-of-birth-input" type="date">
             <p role="alert" class="js-birthdate-message"></p>
         </label>
 
         <label>Type beperking:<button class="button-disabilities">Beperkingen<i class="arrow down"></i></button>
                 <!--<div> class="dropdown-content"> -->
-            <select class="js-dropdown dropdown" id="disability-type-input" name="disability-type-input" multiple required>
+            <select class="js-dropdown dropdown" id="disability-type-input" name="disability-type-input" multiple>
             </select>
             <p role="alert" class="js-disabilities-message"></p>
 <!--         </div>-->
@@ -72,6 +77,7 @@
 <!--only show if supervisor checkbox is checked -->
             <label for="supervisor-name-input">Naam van voogd of toezichthouder:</label>
             <input class="js-supervisor-name-input" id="supervisor-name-input" name="supervisor-name-input">
+            <p class='js-supervisor-name-message'></p>
             <label for="supervisor-email-input">E-mailadres van voogd of toezichthouder:</label>
             <input class="js-supervisor-email-input" id="supervisor-email-input" name="supervisor-email-input" type="email">
             <label for="supervisor-phone-number-input">Telefoonnummer van voogd of toezichthouder:</label>
