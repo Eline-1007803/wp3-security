@@ -1,15 +1,29 @@
+let administratorsList = [];
+let interval;
+
+document.querySelector('.js-searchbar').addEventListener('input', e => {
+        clearInterval(interval);
+
+        const value = e.target.value.toLowerCase();
+
+        if (value === '') {
+                interval = setInterval(getAllAdminstrators, 5000);
+        }
+
+        console.log(value);
+        const filteredAdministrators = administratorsList.filter((administrator) => {
+                if (administrator.email.includes(value)) {
+                        return true;
+                }
+                return false;
+        })
+
+        showAdministrator(filteredAdministrators);
+});
 
 // get all administrators
 function getAllAdminstrators()
 {
-        administrators = []
-        document.querySelector('.js-searchbar').addEventListener('onkeyup', e => {
-                const value = e.target.value.toLowerCase()
-                administrators.forEach(administrator => {
-                        const isVisibile = fullName.includes(value).toLowerCase() || `${administrator.email}`.includes(value)
-                        administrator.element.classList.toggle('hide', !isVisibile)
-                })})
-
         fetch('/api/administrators', {
                 method: 'GET',
                 headers: {
@@ -17,10 +31,13 @@ function getAllAdminstrators()
                 }
         })
             .then(response => response.json())
-            .then(administrators => showAdministrator(administrators))
+            .then(administrators => {
+                    administratorsList = administrators;
+                    showAdministrator(administrators)
+            })
 }
 getAllAdminstrators();
-setInterval(getAllAdminstrators, 5000);
+interval = setInterval(getAllAdminstrators, 5000);
 
 // showing each administrator on page
 function showAdministrator (administrators) {
@@ -28,8 +45,8 @@ function showAdministrator (administrators) {
         administrators.forEach((administrator) => {
                 console.log(administrator)
                 let fullName = administrator.tussenvoegsel ? `${administrator.voornaam} ${administrator.tussenvoegsel} ${administrator.achternaam}` : `${administrator.voornaam} ${administrator.achternaam}`;
-                let rows =
-                `
+                let row =
+                    `
                 <tr>
                     <td>${fullName}</td>
                     <td>${administrator.email}</td>
@@ -46,10 +63,10 @@ function showAdministrator (administrators) {
                     </td>
                 </tr>
                 `
-                document.querySelector(".js-administrator-table").innerHTML += rows;
-
-
+                document.querySelector(".js-administrator-table").innerHTML += row;
         });
+
+
 
         // Add button pop up
         document.querySelectorAll(".add-administrator-button")
