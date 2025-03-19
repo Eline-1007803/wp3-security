@@ -13,6 +13,8 @@ from models import (
     organisatie_model,
 )
 
+from models.organisatie_model import Organisatie
+
 app = Flask(__name__)
 app.secret_key = "wp3"
 
@@ -20,8 +22,9 @@ app.jinja_env.autoescape = True
 
 
 open_routes = ['login_page', 'login']
-admin_routes = ['dashboard', 'administrator_page']
-expert_routes = ['openstaande_onderzoeken', 'lijst_ingeschreven_onderzoeken']
+admin_routes = ['dashboard', 'administrator_page', 'overzicht_organisaties']
+expert_routes = ['onderzoeken_pagina', 'lijst_ingeschreven_onderzoeken']
+organisation_routes = ['overzicht_onderzoeken', 'onderzoek_pagina']
 
 @app.before_request
 def before_request():
@@ -34,7 +37,6 @@ def before_request():
     if request.endpoint in expert_routes and not session.get('expert'):
         return redirect(url_for('index'))
 
-
 @app.route('/', methods=['GET'])
 def index():
     if session.get('expert'):
@@ -45,8 +47,6 @@ def index():
 
     return redirect(url_for('login_page'))
 
-
-
 @app.route('/login', methods=['GET'])
 def login_page():
     return render_template('login.html')
@@ -56,8 +56,10 @@ def login():
     email = request.json['email']
     password = request.json['password']
     print(request.json)
+
     expert_model = Ervaringsdeskundigen()
     expert = expert_model.authentication_expert(email, password)
+
     if expert:
         print("yess")
         session['expert'] = expert
@@ -70,10 +72,16 @@ def login():
         session['admin'] = admin
         return {"message": "Login successful", "success": True}
 
+    organisation_model = Organisatie()
+    organisation = organisation_model.get_organisation_login(email, password)
+
+
+    if organisation:
+        session['organisation'] = organisation
+
     else:
         print("no")
         return {"message": "Login failed", "success": False}
-
 
 @app.route('/logout')
 def logout():
