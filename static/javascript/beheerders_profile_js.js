@@ -12,7 +12,7 @@ function get_user_info(id){
 }
 
 function fill_html(beheerder_info){
-    let name = document.getElementById('naam');
+    let name = document.getElementById('info');
     name.innerHTML = '';
 
     name.innerHTML = `
