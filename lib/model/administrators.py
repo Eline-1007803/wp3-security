@@ -14,7 +14,7 @@ class Database(object):
 
 
 
-class Administrator():
+class Administrator:
     def __init__(self):
         database = Database("./databases/database.db")
         self.cursor, self.con = database.connect_db()
