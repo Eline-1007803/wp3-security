@@ -49,8 +49,9 @@ function set_modal() {
         if (event.target === popup) {
             popup.style.display = "none";
             popup.setAttribute("aria-hidden", "true");
-        };
+        }
     });
+    zoekTitels()
 }
 
 function getOnderzoeken() {
@@ -133,7 +134,7 @@ document.getElementById('aanmeldenButton').addEventListener('click', function ()
 });
 
 function zoekTitels() {
-    let input_titel, filter_titel, table, tr, td_titel, i, txtValue_titel, input_type, filter_type;
+    let input_titel, filter_titel, table, tr, td_titel, td_type, i, txtValue_titel, input_type, filter_type, txtValue_type;
     input_titel = document.getElementById("zoekTitel");
     input_type = document.getElementById("typeOnderzoek");
     filter_titel = input_titel.value.toUpperCase();
