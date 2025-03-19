@@ -7,12 +7,18 @@ class Onderzoeken:
 
     def get_all_pending(self):
         result = self.cursor.execute(
-            """ SELECT onderzoeken.*, organisaties.naam as orga_naam, alle_beperkingen.naam as bep_naam
+            """ SELECT onderzoeken.*, organisaties.naam as orga_naam
                 FROM onderzoeken 
-                FULL JOIN organisaties ON (onderzoeken.organisatie_id = organisaties.organisatie_id)
-                FULL JOIN onderzoek_beperkingen on (onderzoeken.onderzoek_id = onderzoek_beperkingen.onderzoek_id)
-                FULL JOIN alle_beperkingen on (onderzoek_beperkingen.beperking_id = alle_beperkingen.beperking_id)
+                JOIN organisaties ON (onderzoeken.organisatie_id = organisaties.organisatie_id)
                 WHERE onderzoeken.status = 'nieuw'""").fetchall()
+        return result
+
+    def get_corresponding_beperkingen(self, onderzoeken_id):
+        result = self.cursor.execute(
+            """ SELECT alle_beperkingen.naam as bep_naam
+                FROM onderzoek_beperkingen
+                JOIN alle_beperkingen on (onderzoek_beperkingen.beperking_id = alle_beperkingen.beperking_id)
+                WHERE onderzoek_beperkingen.onderzoek_id = ?""", (onderzoeken_id,)).fetchall()
         return result
     
     def get_open_research(self):
