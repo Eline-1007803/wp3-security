@@ -128,17 +128,23 @@ document.getElementById('set_modal').style.display = 'none';
 }
 
 function zoekTitels() {
-    let input_titel, filter, table, tr, td, i, txtValue;
+    let input_titel, input_status, filter_titel, filter_status, table, tr, td_titel, td_status, i, txtValue_titel, txtValue_status;
     input_titel = document.getElementById("zoekTitel");
-    filter = input_titel.value.toUpperCase();
+    input_status = document.getElementById("statusonderzoek")
+    filter_titel = input_titel.value.toUpperCase();
+    filter_status = input_status.value.toUpperCase();
     table = document.getElementById("tabelOnderzoeken");
     tr = table.getElementsByTagName("tr");
 
     for ( i = 0; i < tr.length; i++) {
-         td = tr[i].getElementsByTagName("td")[1];
-        if (td) {
-             txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) { tr[i].style.display = "";
+         td_titel = tr[i].getElementsByTagName("td")[1];
+         td_status = tr[i].getElementsByTagName("td")[0]; // nog aanpassen!!
+        if (td_status || td_titel) {
+             txtValue_titel = td_titel.textContent || td_titel.innerText;
+             txtValue_status = td_status.textContent || td_status.innerText
+            if (txtValue_titel.toUpperCase().indexOf(filter) > -1 &&
+                input_status === "" || txtValue_status.toUpperCase() === input_status > -1) {
+                    tr[i].style.display = "";
             } else {
                 tr[i].style.display = "none";
             }
@@ -146,7 +152,7 @@ function zoekTitels() {
     }
 }
 
-function filterStatus() {
+/*function filterStatus() {
     let select, selectedStatus, table, tr, td, i;
     select = document.getElementById("statusOnderzoek");
     selectedStatus = select.value.toUpperCase();
@@ -164,4 +170,4 @@ function filterStatus() {
             }
         }
     }
-}
+}*/
