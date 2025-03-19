@@ -154,7 +154,18 @@ def get_deskundigen():
     result = edm.get_all_pending()
     dictresult = []
     for row in result:
-        dictresult.append(dict(row))
+        corresponding_beperkingen = edm.get_corresponding_beperkingen(row["ervaringsdeskundige_id"])
+        row_dict = dict(row)
+        beperkingen_str = ''
+        first = 0
+        for rows in corresponding_beperkingen:
+            if first == 0:
+                beperkingen_str += rows["naam"]
+                first = 1
+            else:
+                beperkingen_str += ', ' + rows["naam"]
+        row_dict["naam"] = beperkingen_str
+        dictresult.append(row_dict)
     return {"deskundigen": dictresult}
 
 
@@ -172,7 +183,27 @@ def get_inschrijvingen():
     result = ism.get_all_pending()
     dictresult = []
     for row in result:
-        dictresult.append(dict(row))
+        ev_corresponding_beperkingen, on_corresponding_beperkingen = ism.get_corresponding_beperkingen(row["ervaringsdeskundige_id"], row["onderzoek_id"])
+        row_dict = dict(row)
+        beperkingen_str = ''
+        first = 0
+        for rows in ev_corresponding_beperkingen:
+            if first == 0:
+                beperkingen_str += rows["ev_bep_naam"]
+                first = 1
+            else:
+                beperkingen_str += ', ' + rows["ev_bep_naam"]
+        row_dict["ev_bep_naam"] = beperkingen_str
+        beperkingen_str = ''
+        first = 0
+        for rows in on_corresponding_beperkingen:
+            if first == 0:
+                beperkingen_str += rows["on_bep_naam"]
+                first = 1
+            else:
+                beperkingen_str += ', ' + rows["on_bep_naam"]
+        row_dict["on_bep_naam"] = beperkingen_str
+        dictresult.append(row_dict)
     return {"inschrijvingen": dictresult}
 
 
@@ -190,7 +221,18 @@ def get_onderzoeken():
     result = ozm.get_all_pending()
     dictresult = []
     for row in result:
-        dictresult.append(dict(row))
+        corresponding_beperkingen = ozm.get_corresponding_beperkingen(row["onderzoek_id"])
+        row_dict = dict(row)
+        beperkingen_str = ''
+        first = 0
+        for rows in corresponding_beperkingen:
+            if first == 0:
+                beperkingen_str += rows["bep_naam"]
+                first = 1
+            else:
+                beperkingen_str += ', ' + rows["bep_naam"]
+        row_dict["bep_naam"] = beperkingen_str
+        dictresult.append(row_dict)
     return {"onderzoeken": dictresult}
 
 
