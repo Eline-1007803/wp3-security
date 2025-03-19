@@ -47,6 +47,11 @@ class Administrator:
         print(result)
         return dict(result)
 
+    def update_own_administrator(self, voornaam, tussenvoegsel, achternaam, wachtwoord, email, telefoonnummer, administrator_id):
+        result = self.cursor.execute('''UPDATE beheerders SET voornaam = ?,tussenvoegsel = ?, achternaam = ?, wachtwoord = ?, email = ?, telefoonnummer = ? WHERE beheerder_id = ? ''', (voornaam, tussenvoegsel, achternaam, wachtwoord, email, telefoonnummer, administrator_id))
+        self.con.commit()
+        return dict(result)
+
     def delete_administrator(self, administrator_id):
         self.cursor.execute('''DELETE FROM beheerders WHERE beheerder_id = ? ''', (administrator_id,))
         self.con.commit()
