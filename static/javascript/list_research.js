@@ -88,7 +88,7 @@ function getSignedUpResearch(onderzoeken) {
         let row = `
             <tr class="onderzoek-row"
                 data-titel="${onderzoek.titel}"
-                data-status="${onderzoek.status}"
+                data-status="${onderzoek.inschrijving_status}"
                 data-datum-vanaf="${onderzoek.datum_vanaf}"
                 data-datum-tot="${onderzoek.datum_tot}"
                 data-type="${onderzoek.type}"
@@ -102,7 +102,7 @@ function getSignedUpResearch(onderzoeken) {
                 <td>${onderzoek.datum_vanaf}</td>
                 <td>${onderzoek.datum_tot}</td>
                 <td>${onderzoek.type}</td>
-                <td>${onderzoek.status}</td>
+                <td>${onderzoek.inschrijving_status}</td>
             </tr>`;
         tableBody.innerHTML += row;
     });
@@ -138,12 +138,12 @@ function zoekTitels() {
 
     for ( i = 0; i < tr.length; i++) {
          td_titel = tr[i].getElementsByTagName("td")[1];
-         td_status = tr[i].getElementsByTagName("td")[1]; // nog aanpassen!!
+         td_status = tr[i].getElementsByTagName("td")[5]; // nog aanpassen!!
         if (td_status || td_titel) {
              txtValue_titel = td_titel.textContent || td_titel.innerText;
              txtValue_status = td_status.textContent || td_status.innerText
             if (txtValue_titel.toUpperCase().indexOf(filter_titel) > -1 &&
-                filter_status === "" || txtValue_status.toUpperCase() === filter_status) {
+                (filter_status === "" || txtValue_status.toUpperCase() === filter_status)) {
                     tr[i].style.display = "";
             } else {
                 tr[i].style.display = "none";
