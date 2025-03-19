@@ -14,7 +14,7 @@ class Database(object):
 
 
 
-class Administrator():
+class Administrator:
     def __init__(self):
         database = Database("./databases/database.db")
         self.cursor, self.con = database.connect_db()
@@ -27,7 +27,7 @@ class Administrator():
         return administrators
 
     def get_administrator_by_id(self, administrator_id):
-        result = self.cursor.execute('''SELECT beheerder_id, voornaam, tussenvoegsel, achternaam, email FROM beheerders WHERE beheerder_id = ?''', (administrator_id,)).fetchone()
+        result = self.cursor.execute('''SELECT *, voornaam || ' ' || coalesce(tussenvoegsel || ' ' || achternaam, achternaam) as volle_naam FROM beheerders WHERE beheerder_id = ?''', (administrator_id,)).fetchone()
         return dict(result)
 
     def get_administrator_login(self, email, password):
@@ -45,6 +45,11 @@ class Administrator():
         self.con.commit()
         print(voornaam, achternaam)
         print(result)
+        return dict(result)
+
+    def update_own_administrator(self, voornaam, tussenvoegsel, achternaam, wachtwoord, email, telefoonnummer, administrator_id):
+        result = self.cursor.execute('''UPDATE beheerders SET voornaam = ?,tussenvoegsel = ?, achternaam = ?, wachtwoord = ?, email = ?, telefoonnummer = ? WHERE beheerder_id = ? ''', (voornaam, tussenvoegsel, achternaam, wachtwoord, email, telefoonnummer, administrator_id))
+        self.con.commit()
         return dict(result)
 
     def delete_administrator(self, administrator_id):
