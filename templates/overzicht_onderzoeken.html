@@ -7,10 +7,9 @@
 {% block nav_links %}
 <a class= "logo-image" href="/"><img class="logo-image" src="../static/images/logo.svg" alt="Accessibility Hub Logo"></a>
 <a href="/onderzoekaanvragen">Aanvraag</a>
+<a href="#" class="button dark-mode-toggle" onclick="darkLightMode(); return false;">Donkere of lichte modus</a>
 {% endblock %}
 {% block main %}
-<button class="button dark-mode-toggle" onclick="darkLightMode()">Verander kleur van de pagina</button>
-    <main>
         <h1>Overzicht Onderzoeken</h1>
         <div class="filters">
             <input type="text" id="idinput" onkeyup="filter()" placeholder="Zoek onderzoek id.." aria-label="Zoek onderzoek ID">

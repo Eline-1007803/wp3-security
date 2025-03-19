@@ -5,10 +5,10 @@
 {% block nav_links %}
 <a class= "logo-image" href="/"><img class="logo-image" src="../static/images/logo.svg"></a>
 <a href="/administrator-overview">Beheerders</a>
+<a href="#" class="button dark-mode-toggle" onclick="darkLightMode(); return false;">Donkere of lichte modus</a>
 {% endblock %}
 
 {% block main %}
-<button class="button dark-mode-toggle" onclick="darkLightMode()">Verander kleur van de pagina</button>
 <!--the three tables-->
     <main class="row">
         <section aria-labelledby="table-heading1" class="column">

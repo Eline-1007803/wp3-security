@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% block title %}Login{% endblock %}
 {% block styles %}<link rel="stylesheet" href="/static/css/login_page_style.css"> {% endblock %}
-{% block nav_links %} <img class="logo-image" src="../static/images/logo.svg">{% endblock %}
+{% block nav_links %} 
+<img class="logo-image" src="../static/images/logo.svg">
+<a href="#" class="button dark-mode-toggle" onclick="darkLightMode(); return false;">Donkere of lichte modus</a>
+{% endblock %}
 {% block main %}
-<button class="button dark-mode-toggle" onclick="darkLightMode()">Verander kleur van de pagina</button>
     <h1>Inloggen</h1>
     <div class="form-container">
         <label for="email">Email:</label>

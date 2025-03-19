@@ -171,7 +171,6 @@ section p {
 
 /* dark mode */
 .button {
-  background-color: blue;
   color: white;
   padding: 10px 10px;
   font-size: 16px;
@@ -207,14 +206,6 @@ section p {
 .dark-mode .modal-content {
     background-color: #333;
     color: white;
-}
-
-.dark-mode-toggle {
-    background-color: darkblue;
-}
-
-.dark-mode-toggle:hover {
-    background-color: navy;
 }
 
 .dark-mode h2 {

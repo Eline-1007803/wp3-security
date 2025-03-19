@@ -190,7 +190,7 @@ add-img{
 }
 
 .button {
-    background-color: blue;
+    background-color: none;
     color: white;
     padding: 10px 10px;
     font-size: 16px;
@@ -202,21 +202,17 @@ add-img{
     
  .dark-mode-toggle {
         position: absolute;
-        top: 80px;  
+        top: 60px;  
         right: 20px; 
-        background-color: blue;
+        background-color: none;
         color: white;
         padding: 10px 20px;
         font-size: 14px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
     }
     
-.dark-mode-toggle:hover {
-        background-color: darkblue;
-    }
 
 .dark-mode {
         background-color: rgb(46, 46, 46);

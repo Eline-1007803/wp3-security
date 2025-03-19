@@ -2,9 +2,11 @@
 {% extends 'base.html' %}
 {% block title %}Registreren{% endblock %}
 {% block styles %}<link rel="stylesheet" href="../static/css/sign-up-page-style.css">{% endblock %}
-{% block nav_links %} <a class= "logo-image" href="/"><img class="logo-image" src="../static/images/logo.svg"></a> {% endblock %}
+{% block nav_links %} 
+<a class= "logo-image" href="/"><img class="logo-image" src="../static/images/logo.svg"></a> 
+<a href="#" class="button dark-mode-toggle" onclick="darkLightMode(); return false;">Donkere of lichte modus</a>
+{% endblock %}
 {% block main %}
-<button class="button dark-mode-toggle" onclick="darkLightMode()">Verander kleur van de pagina</button>
 <h1>Registreren</h1>
 <form class="sign-up-form">
 <div class ="js-sign-up">

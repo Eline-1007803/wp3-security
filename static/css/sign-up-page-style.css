@@ -144,7 +144,6 @@ textarea {
 }
 
 .button {
-    background-color: blue;
     color: white;
     padding: 10px 10px;
     font-size: 16px;
@@ -156,20 +155,14 @@ textarea {
     
     .dark-mode-toggle {
         position: absolute;
-        top: 80px;  
+        top: 60px;  
         right: 20px; 
-        background-color: blue;
         color: white;
         padding: 10px 20px;
         font-size: 14px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    }
-    
-    .dark-mode-toggle:hover {
-        background-color: darkblue;
     }
 
     .dark-mode form {
