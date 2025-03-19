@@ -102,6 +102,7 @@ function getSignedUpResearch(onderzoeken) {
                 <td>${onderzoek.datum_vanaf}</td>
                 <td>${onderzoek.datum_tot}</td>
                 <td>${onderzoek.type}</td>
+                <td>${onderzoek.status}</td>
             </tr>`;
         tableBody.innerHTML += row;
     });
@@ -137,7 +138,7 @@ function zoekTitels() {
 
     for ( i = 0; i < tr.length; i++) {
          td_titel = tr[i].getElementsByTagName("td")[1];
-         td_status = tr[i].getElementsByTagName("td")[0]; // nog aanpassen!!
+         td_status = tr[i].getElementsByTagName("td")[1]; // nog aanpassen!!
         if (td_status || td_titel) {
              txtValue_titel = td_titel.textContent || td_titel.innerText;
              txtValue_status = td_status.textContent || td_status.innerText

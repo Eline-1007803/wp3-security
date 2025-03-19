@@ -131,3 +131,28 @@ document.getElementById('aanmeldenButton').addEventListener('click', function ()
     } else {alert("Er ging iets fout bij het inschrijven, probeer het zo opnieuw.")
     }})
 });
+
+function zoekTitels() {
+    let input_titel, filter_titel, table, tr, td_titel, i, txtValue_titel, input_type, filter_type;
+    input_titel = document.getElementById("zoekTitel");
+    input_type = document.getElementById("typeOnderzoek");
+    filter_titel = input_titel.value.toUpperCase();
+    filter_type = input_type.value.toUpperCase();
+    table = document.getElementById("tabelOnderzoeken");
+    tr = table.getElementsByTagName("tr");
+
+    for ( i = 0; i < tr.length; i++) {
+         td_titel = tr[i].getElementsByTagName("td")[1];
+         td_type = tr[i].getElementsByTagName("td")[4]; //nog aanpassen
+        if (td_type || td_titel) {
+             txtValue_titel = td_titel.textContent || td_titel.innerText;
+             txtValue_type = td_type.textContent || td_type.innerText;
+            if (txtValue_titel.toUpperCase().indexOf(filter_titel) > -1 &&
+                txtValue_type.toUpperCase().indexOf(filter_type) > -1) {
+                    tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
