@@ -32,7 +32,7 @@ class Onderzoeken:
     
     def get_signedup_research(self, ervaringsdeskundige_id):
         result = self.cursor.execute(
-            """ SELECT onderzoeken.*, inschrijvingen.*
+            """ SELECT onderzoeken.*, inschrijvingen.*, inschrijvingen.status as inschrijving_status
                 FROM inschrijvingen
                 JOIN onderzoeken ON (onderzoeken.onderzoek_id = inschrijvingen.onderzoek_id)
                 WHERE inschrijvingen.ervaringsdeskundige_id = ?
