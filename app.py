@@ -68,7 +68,7 @@ def logout():
 
 @app.route('/myprofile')
 def my_profile():
-    pass
+    return render_template('beheerders_profile.html')
 
 @app.route("/api/administrators", methods=["GET"])
 def get_all_administrators():
