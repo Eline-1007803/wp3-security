@@ -131,7 +131,7 @@ function saveSignup() {
         return;
     }
 
-    }
+
     if (selectedDisabilities < 1 || selectedDisabilities === null) {
         disabilitiesMessage.innerHTML = 'Klik uw type beperking aan';
         return;

@@ -2,6 +2,14 @@
 // get all administrators
 function getAllAdminstrators()
 {
+        administrators = []
+        document.querySelector('.js-searchbar').addEventListener('onkeyup', e => {
+                const value = e.target.value.toLowerCase()
+                administrators.forEach(administrator => {
+                        const isVisibile = fullName.includes(value).toLowerCase() || `${administrator.email}`.includes(value)
+                        administrator.element.classList.toggle('hide', !isVisibile)
+                })})
+
         fetch('/api/administrators', {
                 method: 'GET',
                 headers: {
@@ -20,7 +28,7 @@ function showAdministrator (administrators) {
         administrators.forEach((administrator) => {
                 console.log(administrator)
                 let fullName = administrator.tussenvoegsel ? `${administrator.voornaam} ${administrator.tussenvoegsel} ${administrator.achternaam}` : `${administrator.voornaam} ${administrator.achternaam}`;
-                let row =
+                let rows =
                 `
                 <tr>
                     <td>${fullName}</td>
@@ -38,7 +46,7 @@ function showAdministrator (administrators) {
                     </td>
                 </tr>
                 `
-                document.querySelector(".js-administrator-table").innerHTML += row;
+                document.querySelector(".js-administrator-table").innerHTML += rows;
 
 
         });
@@ -299,14 +307,14 @@ function showAdminDeletePopup (administrator) {
                         console.log("yuh");
                 })
 
-         function closePopUp () {
+        function closePopUp () {
                 document.querySelector(".js-background").classList.add("hide");
                 document.querySelector(".js-add").classList.add("hide");
                 document.querySelector(".js-details").classList.add("hide");
                 document.querySelector(".js-edit").classList.add("hide");
                 document.querySelector(".js-delete").classList.add("hide");
         }
-}
+
 
  document.querySelectorAll(".js-cross-image").forEach(crossImage => {
                 crossImage.addEventListener("click", closePopUp)
@@ -317,3 +325,6 @@ function showAdminDeletePopup (administrator) {
                 document.querySelector(".js-background").classList.add("hide");
                 document.querySelector(".js-add").classList.add("hide");
         }
+
+}
+

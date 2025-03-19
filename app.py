@@ -24,8 +24,14 @@ def index():
     if session.get('expert'):
         return redirect(url_for('onderzoeken_pagina'))
 
+    if session.get('expert') is None:
+        return redirect(url_for('login_page')), 302
+
     if session.get('admin'):
         return redirect(url_for('dashboard'))
+
+    if session.get('admin') is None:
+        return redirect(url_for('login_page')), 302
 
     return redirect(url_for('login_page'))
 
@@ -40,15 +46,16 @@ def login():
     email = request.json['email']
     password = request.json['password']
     print(request.json)
-
     expert_model = Ervaringsdeskundigen()
     expert = expert_model.authentication_expert(email, password)
-
     if expert:
         print("yess")
         session['expert'] = expert
         return {"message": "Login successful", "success": True}
 
+    if expert is None:
+        session.pop('expert', None)
+        return redirect(url_for('login_page'))
 
     admin_model = Administrator()
     admin = admin_model.get_administrator_login(email, password)
