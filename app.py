@@ -109,10 +109,10 @@ def mijn_profiel():
 @app.route('/get_user_id')
 def get_user_id():
     if session.get('expert'):
-        return dict(session.get('expert'))
+        return {"ervaringsdeskundige_id": session.get('expert')}
 
     if session.get('admin'):
-        return dict(session.get('admin'))
+        return {"beheerder_id":session.get('admin')}
 
 @app.route("/api/administrators", methods=["GET"])
 def get_all_administrators():
