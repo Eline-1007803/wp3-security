@@ -14,6 +14,7 @@ from models import (
 )
 
 from models.organisatie_model import Organisatie
+from models.inschrijvingen_model import Inschrijvingen
 
 app = Flask(__name__)
 app.secret_key = "wp3"
@@ -703,18 +704,27 @@ def lijst_ingeschreven_onderzoeken():
 
 @app.route("/api/inschrijven_onderzoek", methods=["POST"])
 def inschrijven_onderzoek():
-    onderzoeken_model = Onderzoeken()
+    if "ervaringsdeskundige_id" not in session:
+        return jsonify({"success": False, "error": "U moet ingelogd zijn om in te schrijven"}), 403
+    
     data = request.get_json()
-    ervaringsdeskundige_id = 1 #moet nog aanpassen
+    ervaringsdeskundige_id = session["ervaringsdeskundige_id"]
     onderzoek_id = data.get("onderzoek_id")
-    ervaringsdeskundigen_model = Ervaringsdeskundigen()
-    ervaringsdeskundigen = ervaringsdeskundigen_model.get_expert(ervaringsdeskundige_id)
+
 
     if not onderzoek_id:
-        return jsonify({"succes": False, "error": "Geen onderzoek ID gevonden."})
+        return jsonify({"succes": False, "error": "Geen onderzoek ID gevonden."}), 400
+    
+    inschrijvingen_model = Inschrijvingen()
+
+    bestaande_inschrijving = inschrijvingen_model.check_inschrijving(ervaringsdeskundige_id, onderzoek_id)
+    if bestaande_inschrijving:
+        return jsonify({"success": False, "error": "U bent al ingeschreven voor dit onderzoek."})
+    
+
     try:
-        onderzoeken_model.inschrijving(ervaringsdeskundige_id, onderzoek_id)
-        return jsonify({"success": True, "onderzoek_id": onderzoek_id}), 201
+        inschrijvingen_model.inschrijving_onderzoek(ervaringsdeskundige_id, onderzoek_id)
+        return jsonify({"success": True, "message": "Succesvol ingeschreven."}), 201
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 
