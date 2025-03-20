@@ -150,3 +150,76 @@ textarea
     position: absolute;
     left: 420px;
 }
+
+.button {
+    background-color: #032A1D;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+
+  .dark-mode {
+    background-color: rgb(46, 46, 46);
+    color: white;
+}
+
+.dark-mode .popup-content {
+    background-color: #333;
+    color: white;
+}
+
+.dark-mode .column {
+    background-color: #222;
+    color: white;
+}
+
+.button {
+    color: white;
+    padding: 10px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+    margin-bottom: 15px;
+    text-align: center;
+    }
+    
+    .dark-mode-toggle {
+        position: absolute;
+        top: 55px;  
+        right: 20px; 
+        color: white;
+        padding: 10px 20px;
+        font-size: 14px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+.dark-mode th,
+.dark-mode td {
+    border: 1px solid white;
+}
+
+.dark-mode .research-table-container {
+    background-color: black;
+    box-shadow: none;
+}
+
+.dark-mode .users,
+.dark-mode .update {
+    color: white;
+}
+
+.dark-mode .wijzigbutton {
+    color: white;
+    background-color: blue;
+}
+
+.dark-mode .modal-content {
+    background-color: black;
+    color: white;
+}

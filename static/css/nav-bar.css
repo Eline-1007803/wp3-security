@@ -39,3 +39,12 @@ a:hover {
 body {
     margin: 0;
 }
+
+button {
+    background-color: none;
+    color: white;
+}
+
+button:hover {
+    text-decoration: underline;
+}

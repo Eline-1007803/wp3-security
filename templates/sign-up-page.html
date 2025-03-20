@@ -2,7 +2,10 @@
 {% extends 'base.html' %}
 {% block title %}Registreren{% endblock %}
 {% block styles %}<link rel="stylesheet" href="../static/css/sign-up-page-style.css">{% endblock %}
-{% block nav_links %} <a class= "logo-image" href="/"><img class="logo-image" src="../static/images/logo.svg"></a> {% endblock %}
+{% block nav_links %} 
+<a class= "logo-image" href="/"><img class="logo-image" src="../static/images/logo.svg"></a> 
+<a href="#" class="button dark-mode-toggle" onclick="darkLightMode(); return false;">Donkere of lichte modus</a>
+{% endblock %}
 {% block main %}
 <h1>Registreren</h1>
 <form class="sign-up-form" onsubmit="return false">
@@ -112,4 +115,5 @@
 
 {% endblock %}
 
-{% block scripts %}<script src="/static/javascript/sign-up-page-javascript.js"></script>{% endblock %}
+{% block scripts %}<script src="/static/javascript/sign-up-page-javascript.js"></script>
+<script src="{{ url_for('static', filename='javascript/dark_mode.js')}}"></script>{% endblock %}
