@@ -17,6 +17,7 @@ from models import (
 )
 
 from models.organisatie_model import Organisatie
+from models.inschrijvingen_model import Inschrijvingen
 
 app = Flask(__name__)
 app.secret_key = "wp3"
@@ -100,6 +101,10 @@ def logout():
 @app.route('/myprofile')
 def my_profile():
     return render_template('beheerders_profile.html')
+
+@app.route('/myprofile_expert')
+def mijn_profiel():
+    return render_template('ervaringsdeskundige_profiel.html')
 
 @app.route('/get_user_id')
 def get_user_id():
@@ -587,8 +592,102 @@ def onderzoeken_pagina():
     return render_template("ervaringsdeskundige_onderzoeken.html")
 
 
-#@app.route('/openstaande_onderzoeken', methods=['POST'])
-#def
+@app.route("/api/expert/<ervaringsdeskundige_id>", methods=["GET"])
+def get_expert_by_id(ervaringsdeskundige_id):
+    expert_model = Ervaringsdeskundigen()
+    expert = expert_model.get_expert(ervaringsdeskundige_id)
+
+    if not expert: 
+        return jsonify({"error": "Expert niet gevonden"}), 404
+    return jsonify(expert)
+
+@app.route("/api/expert/<ervaringsdeskundige_id>", methods=["PUT"])
+def update_own_profile(ervaringsdeskundige_id):
+    expert_model = Ervaringsdeskundigen()
+    or_voornaam = request.json['or_voornaam']
+    or_tussenvoegsel = request.json['or_tussenvoegsel']
+    or_achternaam = request.json['or_achternaam']
+    or_wachtwoord = request.json['or_wachtwoord']
+    or_email = request.json['or_email']
+    or_telnr = request.json['or_telnr']
+    or_postcode = request.json['or_postcode']
+    or_geslacht = request.json['or_geslacht']
+    or_hulpmiddelen = request.json['or_hulpmiddelen']
+    or_introductie = request.json['or_introductie']
+    or_bijzonderheden = request.json['or_bijzonderheden']
+    or_voorkeur_benadering = request.json['or_voorkeur_benadering']
+    voornaam = request.json['voornaam']
+    tussenvoegsel = request.json['tussenvoegsel']
+    achternaam = request.json['achternaam']
+    wachtwoord = request.json['wachtwoord']
+    email = request.json['email']
+    telnr = request.json['telnr']
+    postcode = request.json['postcode']
+    geslacht = request.json['geslacht']
+    hulpmiddelen = request.json['hulpmiddelen']
+    introductie = request.json['introductie']
+    bijzonderheden = request.json['bijzonderheden']
+    voorkeur_benadering = request.json['voorkeur_benadering']
+    print(voornaam, 'test', or_voornaam)
+    if voornaam:
+        print("voornaam", voornaam)
+        nw_voornaam = voornaam
+    else:
+        nw_voornaam = or_voornaam
+    if tussenvoegsel:
+        if tussenvoegsel == 'null':
+            nw_tussenvoegsel = or_tussenvoegsel
+        else:
+            nw_tussenvoegsel = tussenvoegsel
+    else:
+        nw_tussenvoegsel = or_tussenvoegsel
+    if achternaam:
+        nw_achternaam = achternaam
+    else:
+        nw_achternaam = or_achternaam
+    if wachtwoord:
+        nw_wachtwoord = wachtwoord
+    else:
+        nw_wachtwoord = or_wachtwoord
+    if email:
+        nw_email = email
+    else:
+        nw_email = or_email
+    if telnr:
+        if telnr == 'null':
+            nw_telnr = or_telnr
+        else:
+            nw_telnr = telnr
+    else:
+        nw_telnr = or_telnr
+    if postcode:
+        nw_postcode = postcode
+    else:
+        nw_postcode = or_postcode
+    if geslacht:
+        nw_geslacht = geslacht
+    else:
+        nw_geslacht = or_geslacht
+    if hulpmiddelen:
+        nw_hulpmiddelen = hulpmiddelen
+    else:
+        nw_hulpmiddelen = or_hulpmiddelen
+    if introductie:
+        nw_introductie = introductie
+    else:
+        nw_introductie = or_introductie
+    if bijzonderheden:
+        nw_bijzonderheden = bijzonderheden
+    else: 
+        nw_bijzonderheden = or_bijzonderheden
+    if voorkeur_benadering:
+        nw_voorkeur_benadering = voorkeur_benadering
+    else:
+        nw_voorkeur_benadering = or_voorkeur_benadering
+
+    result = expert_model.update_expert(nw_voornaam, nw_tussenvoegsel, nw_achternaam, nw_wachtwoord, nw_email, nw_telnr, nw_postcode, nw_geslacht,
+                                         nw_hulpmiddelen, nw_introductie, nw_bijzonderheden, nw_voorkeur_benadering, ervaringsdeskundige_id)
+    return result
 
 
 @app.route("/api/ingeschreven_onderzoeken", methods=["GET"])
@@ -608,18 +707,27 @@ def lijst_ingeschreven_onderzoeken():
 
 @app.route("/api/inschrijven_onderzoek", methods=["POST"])
 def inschrijven_onderzoek():
-    onderzoeken_model = Onderzoeken()
+    if "ervaringsdeskundige_id" not in session:
+        return jsonify({"success": False, "error": "U moet ingelogd zijn om in te schrijven"}), 403
+    
     data = request.get_json()
-    ervaringsdeskundige_id = 1 #moet nog aanpassen
+    ervaringsdeskundige_id = session["ervaringsdeskundige_id"]
     onderzoek_id = data.get("onderzoek_id")
-    ervaringsdeskundigen_model = Ervaringsdeskundigen()
-    ervaringsdeskundigen = ervaringsdeskundigen_model.get_expert(ervaringsdeskundige_id)
+
 
     if not onderzoek_id:
-        return jsonify({"succes": False, "error": "Geen onderzoek ID gevonden."})
+        return jsonify({"succes": False, "error": "Geen onderzoek ID gevonden."}), 400
+    
+    inschrijvingen_model = Inschrijvingen()
+
+    bestaande_inschrijving = inschrijvingen_model.check_inschrijving(ervaringsdeskundige_id, onderzoek_id)
+    if bestaande_inschrijving:
+        return jsonify({"success": False, "error": "U bent al ingeschreven voor dit onderzoek."})
+    
+
     try:
-        onderzoeken_model.inschrijving(ervaringsdeskundige_id, onderzoek_id)
-        return jsonify({"success": True, "onderzoek_id": onderzoek_id}), 201
+        inschrijvingen_model.inschrijving_onderzoek(ervaringsdeskundige_id, onderzoek_id)
+        return jsonify({"success": True, "message": "Succesvol ingeschreven."}), 201
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 

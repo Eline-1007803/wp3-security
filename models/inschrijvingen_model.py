@@ -32,3 +32,18 @@ class Inschrijvingen:
     def update_status(self, inschrijving_id, status):
         self.cursor.execute("UPDATE inschrijvingen SET status = ? WHERE inschrijving_id = ?", (status, inschrijving_id))
         self.con.commit()
+
+    def check_inschrijving(self, ervaringsdeskundige_id, onderzoek_id):
+        result = self.cursor.execute(
+            """ SELECT inschrijving_id FROM inschrijvingen
+                WHERE ervaringsdeskundige_id = ? AND onderzoek_id = ?""",
+                (ervaringsdeskundige_id, onderzoek_id)
+        ).fetchone
+        return result is not None
+    
+    def inschrijving_onderzoek(self, ervaringsdeskundige_id, onderzoek_id):
+        self.cursor.execute(
+            """ INSERT INTO inschrijvingen(ervaringsdeskundige_id, onderzoek_id)
+                VALUES (?, ?)""",
+                (ervaringsdeskundige_id, onderzoek_id))
+        self.con.commit()

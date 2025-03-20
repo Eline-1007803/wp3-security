@@ -194,3 +194,8 @@ text-align: center;
 #aanmeldenButton {
     background-color: blue;
 }
+
+.dark-mode #save {
+    background-color: yellow;
+    color: black;
+}
