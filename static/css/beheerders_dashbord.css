@@ -2,6 +2,7 @@
   --white: #fff;
   --darkblue: #1b4965;
   --blue: #3b91c3;
+  --gray: #363636;
 }
 
 * {
@@ -228,11 +229,14 @@ section p {
 
 .dark-mode .table-clickable,
 .dark-mode .table-clickable tbody tr {
-  border-color: white;
-  border-top: white;
-  border-bottom: white;
+  border-color: var(--gray);
 }
-
+.dark-mode .table-clickable tbody tr:not(:first-child) td{
+    border-top: 1px solid var(--gray);
+}
+.dark-mode .table-clickable tbody tr:last-child td {
+    border-bottom: 1px solid var(--gray);
+}
 .dark-mode p,
 .dark-mode label {
   color: white;
