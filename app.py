@@ -111,6 +111,8 @@ def mijn_profiel():
 def get_user_id():
     if session.get('admin'):
         return {'id': session.get('admin')}
+    if session.get('expert'):
+        return {'ervaringsdeskundige_id': session.get('expert')}
 
 @app.route('/get_id_for_profile')
 def get_id_for_profile():
@@ -601,7 +603,7 @@ def get_expert_by_id(ervaringsdeskundige_id):
 
     if not expert: 
         return jsonify({"error": "Expert niet gevonden"}), 404
-    return jsonify(expert)
+    return jsonify(dict(expert))
 
 @app.route("/api/expert/<ervaringsdeskundige_id>", methods=["PUT"])
 def update_own_profile(ervaringsdeskundige_id):
@@ -625,11 +627,9 @@ def update_own_profile(ervaringsdeskundige_id):
     email = request.json['email']
     telnr = request.json['telnr']
     postcode = request.json['postcode']
-    geslacht = request.json['geslacht']
     hulpmiddelen = request.json['hulpmiddelen']
     introductie = request.json['introductie']
     bijzonderheden = request.json['bijzonderheden']
-    voorkeur_benadering = request.json['voorkeur_benadering']
     print(voornaam, 'test', or_voornaam)
     if voornaam:
         print("voornaam", voornaam)
@@ -666,10 +666,7 @@ def update_own_profile(ervaringsdeskundige_id):
         nw_postcode = postcode
     else:
         nw_postcode = or_postcode
-    if geslacht:
-        nw_geslacht = geslacht
-    else:
-        nw_geslacht = or_geslacht
+    nw_geslacht = or_geslacht
     if hulpmiddelen:
         nw_hulpmiddelen = hulpmiddelen
     else:
@@ -682,13 +679,10 @@ def update_own_profile(ervaringsdeskundige_id):
         nw_bijzonderheden = bijzonderheden
     else: 
         nw_bijzonderheden = or_bijzonderheden
-    if voorkeur_benadering:
-        nw_voorkeur_benadering = voorkeur_benadering
-    else:
-        nw_voorkeur_benadering = or_voorkeur_benadering
+    nw_voorkeur_benadering = or_voorkeur_benadering
 
     result = expert_model.update_expert(nw_voornaam, nw_tussenvoegsel, nw_achternaam, nw_wachtwoord, nw_email, nw_telnr, nw_postcode, nw_geslacht,
-                                         nw_hulpmiddelen, nw_introductie, nw_bijzonderheden, nw_voorkeur_benadering, expert_id)
+                                         nw_hulpmiddelen, nw_introductie, nw_bijzonderheden, nw_voorkeur_benadering, ervaringsdeskundige_id)
     return result
 
 

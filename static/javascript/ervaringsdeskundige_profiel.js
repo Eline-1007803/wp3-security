@@ -42,14 +42,6 @@ function maak_html(expert_info){
     <label for="postcode">Postcode:</label>
     <input placeholder="${expert_info.postcode}" id="postcode">
     <br>
-    <label for="geslacht">Geslacht:</label>
-                <input class='gender-input-woman js-gender-input' checked type="radio" id="vrouw" name="gender" value="vrouw">
-                <label class='gender-label' for="vrouw">Vrouw</label><br>
-                <input class="gender-input-man js-gender-input" type="radio" id="man" name="gender" value="man">
-                <label class="gender-label" for="man">Man</label>
-                <input class="gender-input-other js-gender-input" type="radio" id="anders" name="gender" value="anders">
-                <label class="gender-label" for="anders">Anders</label>
-    <br>
     <label for="hulpmiddelen">Hulpmiddelen:</label>
     <input placeholder="${expert_info.hulpmiddelen}" id="hulpmiddelen">
     <br>
@@ -58,10 +50,6 @@ function maak_html(expert_info){
     <br>
     <label for="bijzonderheden">Bijzonderheden:</label>
     <input placeholder="${expert_info.bijzonderheden}" id="bijzonderheden">
-    <br>
-    <label for="voorkeur_benadering">Voorkeur benadering:</label>
-        <option value="email">Email</option>
-        <option value="telephone">Telefonisch</option>
     <br>
     <button id="save">Save</button>
     `;
@@ -80,7 +68,7 @@ function maak_html(expert_info){
             let or_tussenvoegsel = expert_info.tussenvoegsel
             let or_achternaam = expert_info.achternaam
             let or_wachtwoord = expert_info.wachtwoord
-            let or_email = expert_info.email
+            let or_email = expert_info.emailadres
             let or_telnr = expert_info.telefoonnummer
             let or_postcode = expert_info.postcode
             let or_geslacht = expert_info.geslacht
@@ -95,11 +83,9 @@ function maak_html(expert_info){
             let email = document.getElementById('email').value
             let telnr = document.getElementById('telefoonnummer').value
             let postcode = document.getElementById('postcode').value
-            let geslacht = document.getElementById('geslacht').value
             let hulpmiddelen = document.getElementById('hulpmiddelen').value
             let introductie = document.getElementById('introductie').value
             let bijzonderheden = document.getElementById('bijzonderheden').value
-            let voorkeur_benadering = document.getElementById('voorkeur_benadering').value
             removelistener()
             fetch(`/api/expert/${expert_info.ervaringsdeskundige_id}`, {
             method: 'PUT',
@@ -126,11 +112,9 @@ function maak_html(expert_info){
                 email: email,
                 telnr: telnr,
                 postcode: postcode,
-                geslacht: geslacht,
                 hulpmiddelen: hulpmiddelen,
                 introductie: introductie,
                 bijzonderheden: bijzonderheden,
-                voorkeur_benadering: voorkeur_benadering
                 })
             })
                 .then(response => response)
