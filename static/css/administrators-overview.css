@@ -215,7 +215,7 @@ add-img{
     
 
 .dark-mode {
-        background-color: rgb(46, 46, 46);
+        background-color: rgb(0, 0, 0);
         color: white;
     }
     
@@ -247,7 +247,7 @@ add-img{
 .dark-mode .administrator-delete,
 .dark-mode .administrator-details,
 .dark-mode .administrator-edit {
-    background-color: black;
+    background-color: rgb(46, 46, 46);
     color: white;
     box-shadow: none;
 }
