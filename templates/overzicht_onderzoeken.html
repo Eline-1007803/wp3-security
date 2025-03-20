@@ -14,7 +14,7 @@
         <div class="filters">
             <input type="text" id="idinput" onkeyup="filter()" placeholder="Zoek onderzoek id.." aria-label="Zoek onderzoek ID">
             <input type="text" id="titleinput" onkeyup="filter()" placeholder="Zoek onderzoek.." aria-label="Zoek onderzoek">
-            <select name="select" id="select" onchange="filter()">
+            <select name="select" id="select" aria-label="kies status" onchange="filter()">
                 <option value="">Kies status</option>
                 <option value="nieuw">Nieuw</option>
             </select>
@@ -24,15 +24,16 @@
         </div>
         <div class="research-table-container">
             <table class="js-onderzoektabel">
+                <caption>Overzicht Onderzoeken</caption>
                 <tr>
-                    <th>#</th>
-                    <th>Title</th>
-                    <th>Status</th>
-                    <th>Beschikbaarheid</th>
-                    <th>Leeftijd van</th>
-                    <th>Leeftijd tot</th>
-                    <th>Beperking(en)</th>
-                    <th style="width:auto;">Acties</th>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Beschikbaarheid</th>
+                    <th scope="col">Leeftijd van</th>
+                    <th scope="col">Leeftijd tot</th>
+                    <th scope="col">Beperking(en)</th>
+                    <th scope="col" style="width:auto;">Acties</th>
                 </tr>
             </table>
             <div class="updatemodal" id="update_modal">

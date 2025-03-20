@@ -36,8 +36,22 @@ function getAllAdminstrators()
                     showAdministrator(administrators)
             })
 }
+
 getAllAdminstrators();
 interval = setInterval(getAllAdminstrators, 5000);
+
+
+// Add button pop up
+document.querySelectorAll(".add-administrator-button")
+    .forEach(addButton => {
+                addButton.addEventListener("click", ()=> {
+                        console.log('yaas');
+                        document.querySelector(".js-background").classList.remove("hide");
+                        document.querySelector(".js-add").classList.remove("hide");
+
+
+        });
+    })
 
 // showing each administrator on page
 function showAdministrator (administrators) {
@@ -71,18 +85,6 @@ function showAdministrator (administrators) {
         }
 
         });
-
-
-
-        // Add button pop up
-        document.querySelectorAll(".add-administrator-button")
-            .forEach(addButton => {
-                addButton.addEventListener("click", ()=> {
-                        console.log('yaas');
-                        document.querySelector(".js-background").classList.remove("hide");
-                        document.querySelector(".js-add").classList.remove("hide");
-                });
-            })
 
         // Details button pop up
         document.querySelectorAll(".details-button").forEach(detailsButton => {
@@ -154,8 +156,9 @@ function showSingleAdministrator(administrator) {
         `;
 
         // closing pop up
-        document.querySelectorAll(".js-cross-image").forEach(crossImage => {
-                crossImage.addEventListener("click", closePopUp)
+        document.querySelectorAll(".js-cross-image")
+            .forEach(crossImage => {
+                        crossImage.addEventListener("click", closePopUp);
                         console.log("yuh");
                 })
 
@@ -264,20 +267,12 @@ function showAdminEditPopup(administrator) {
         getAllAdminstrators();
         closePopUp()
 })
-         // closing pop up
-        document.querySelectorAll(".js-cross-image").forEach(crossImage => {
-                crossImage.addEventListener("click", closePopUp)
-                        console.log("yuh");
-                })
-
-        function closePopUp () {
-                document.querySelector(".js-background").classList.add("hide");
-                document.querySelector(".js-add").classList.add("hide");
-                document.querySelector(".js-details").classList.add("hide");
-                document.querySelector(".js-edit").classList.add("hide");
-                document.querySelector(".js-delete").classList.add("hide");
-        }
-        }
+ // closing pop up
+document.querySelectorAll(".js-cross-image").forEach(crossImage => {
+        crossImage.addEventListener("click", closePopUp)
+                console.log("yuh");
+        })
+}
 
 // delete administrator
 function deleteAdministrator(administratorId) {
@@ -330,24 +325,17 @@ function showAdminDeletePopup (administrator) {
                         console.log("yuh");
                 })
 
-        function closePopUp () {
-                document.querySelector(".js-background").classList.add("hide");
-                document.querySelector(".js-add").classList.add("hide");
-                document.querySelector(".js-details").classList.add("hide");
-                document.querySelector(".js-edit").classList.add("hide");
-                document.querySelector(".js-delete").classList.add("hide");
-        }
 
-
- document.querySelectorAll(".js-cross-image").forEach(crossImage => {
-                crossImage.addEventListener("click", closePopUp)
-                        console.log("yuh");
-                })
-
-        function closePopUp() {
-                document.querySelector(".js-background").classList.add("hide");
-                document.querySelector(".js-add").classList.add("hide");
-        }
-
+         document.querySelectorAll(".js-cross-image").forEach(crossImage => {
+                        crossImage.addEventListener("click", closePopUp)
+                                console.log("yuh");
+                        })
 }
 
+function closePopUp () {
+        document.querySelector(".js-background").classList.add("hide");
+        document.querySelector(".js-add").classList.add("hide");
+        document.querySelector(".js-details").classList.add("hide");
+        document.querySelector(".js-edit").classList.add("hide");
+        document.querySelector(".js-delete").classList.add("hide");
+}

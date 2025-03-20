@@ -13,6 +13,8 @@ from models import (
     organisatie_model,
 )
 
+from models.organisatie_model import Organisatie
+
 app = Flask(__name__)
 app.secret_key = "wp3"
 
@@ -20,8 +22,9 @@ app.jinja_env.autoescape = True
 
 
 open_routes = ['login_page', 'login']
-admin_routes = ['dashboard', 'administrator_page']
-expert_routes = ['openstaande_onderzoeken', 'lijst_ingeschreven_onderzoeken']
+admin_routes = ['dashboard', 'administrator_page', 'overzicht_organisaties']
+expert_routes = ['onderzoeken_pagina', 'lijst_ingeschreven_onderzoeken']
+organisation_routes = ['overzicht_onderzoeken', 'onderzoek_pagina']
 
 @app.before_request
 def before_request():
@@ -34,7 +37,6 @@ def before_request():
     if request.endpoint in expert_routes and not session.get('expert'):
         return redirect(url_for('index'))
 
-
 @app.route('/', methods=['GET'])
 def index():
     if session.get('expert'):
@@ -45,8 +47,6 @@ def index():
 
     return redirect(url_for('login_page'))
 
-
-
 @app.route('/login', methods=['GET'])
 def login_page():
     return render_template('login.html')
@@ -56,8 +56,10 @@ def login():
     email = request.json['email']
     password = request.json['password']
     print(request.json)
+
     expert_model = Ervaringsdeskundigen()
     expert = expert_model.authentication_expert(email, password)
+
     if expert:
         print("yess")
         session['expert'] = expert
@@ -70,15 +72,33 @@ def login():
         session['admin'] = admin
         return {"message": "Login successful", "success": True}
 
+    organisation_model = Organisatie()
+    organisation = organisation_model.get_organisation_login(email, password)
+
+
+    if organisation:
+        session['organisation'] = organisation
+
     else:
         print("no")
         return {"message": "Login failed", "success": False}
-
 
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect(url_for('login_page'))
+
+@app.route('/myprofile')
+def my_profile():
+    return render_template('beheerders_profile.html')
+
+@app.route('/get_user_id')
+def get_user_id():
+    if session.get('expert'):
+        return dict(session.get('expert'))
+
+    if session.get('admin'):
+        return dict(session.get('admin'))
 
 @app.route("/api/administrators", methods=["GET"])
 def get_all_administrators():
@@ -91,8 +111,58 @@ def get_all_administrators():
 def get_administrator_by_id(administrator_id):
     administrator_model = Administrator()
     administrator = administrator_model.get_administrator_by_id(administrator_id)
-    print(administrator)
     return jsonify(administrator)
+
+@app.route("/api/administrator/<administrator_id>", methods=["PUT"])
+def update_own_administrator(administrator_id):
+    administrator_model = Administrator()
+    or_voornaam = request.json['or_voornaam']
+    or_tussenvoegsel = request.json['or_tussenvoegsel']
+    or_achternaam = request.json['or_achternaam']
+    or_wachtwoord = request.json['or_wachtwoord']
+    or_email = request.json['or_email']
+    or_telnum = request.json['or_telnum']
+    voornaam = request.json['voornaam']
+    tussenvoegsel = request.json['tussenvoegsel']
+    achternaam = request.json['achternaam']
+    wachtwoord = request.json['wachtwoord']
+    email = request.json['email']
+    telnum = request.json['telnum']
+    print(voornaam, 'test', or_voornaam)
+    if voornaam:
+        print("voornaam", voornaam)
+        nw_voornaam = voornaam
+    else:
+        nw_voornaam = or_voornaam
+    if tussenvoegsel:
+        if tussenvoegsel == 'null':
+            nw_tussenvoegsel = or_tussenvoegsel
+        else:
+            nw_tussenvoegsel = tussenvoegsel
+    else:
+        nw_tussenvoegsel = or_tussenvoegsel
+    if achternaam:
+        nw_achternaam = achternaam
+    else:
+        nw_achternaam = or_achternaam
+    if wachtwoord:
+        nw_wachtwoord = wachtwoord
+    else:
+        nw_wachtwoord = or_wachtwoord
+    if email:
+        nw_email = email
+    else:
+        nw_email = or_email
+    if telnum:
+        if telnum == 'null':
+            nw_telnum = or_telnum
+        else:
+            nw_telnum = telnum
+    else:
+        nw_telnum = or_telnum
+    result = administrator_model.update_own_administrator(nw_voornaam, nw_tussenvoegsel, nw_achternaam, nw_wachtwoord, nw_email,
+                                                 nw_telnum, administrator_id)
+    return result
 
 
 @app.route("/api/new-administrator", methods=["POST"])

@@ -1,21 +1,26 @@
-fetch('/api/overzicht_onderzoeken_organisatie', {
-  method: 'GET',
-  headers: {
-          'Accept': 'application/json'
-  }
-})
-.then(response => response.json())
-.then(onderzoeken => showOnderzoeken(onderzoeken))
+function fetchResearch() {
+  fetch('/api/overzicht_onderzoeken_organisatie', {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+      .then(response => response.json())
+      .then(onderzoeken => showOnderzoeken(onderzoeken))
+}
 
+fetchResearch();
+setInterval(fetchResearch, 5000);
 
 function showOnderzoeken (onderzoeken) {
+  document.querySelector(".js-onderzoektabel").innerHTML = '';
+
   onderzoeken.forEach((onderzoek) => {
-          console.log(onderzoek)
 
          let row =
           `
           <tr>
-                <td>${onderzoek.onderzoek_id}</td>
+                <th scope="row">${onderzoek.onderzoek_id}</td>
                 <td>${onderzoek.titel}</td>
                 <td>${onderzoek.status}</td>
                 <td>Ja</td>
