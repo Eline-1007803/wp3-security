@@ -33,3 +33,11 @@ class Ervaringsdeskundigen:
         result =  self.cursor.execute("""SELECT ervaringsdeskundige_id FROM ervaringsdeskundigen WHERE emailadres = ? AND wachtwoord = ? AND status = 'goedgekeurd'""", (email, password)).fetchone()
         if result:
             return dict(result)
+        
+    def update_expert(self, voornaam, tussenvoegsel, achternaam, wachtwoord, emailadres, telefoonnummer, postcode, geslacht, hulpmiddelen, introductie, bijzonderheden, voorkeur_benadering, status, onderzoek_id, ervaringsdeskundige_id):
+        result = self.cursor.execute(
+            """ UPDATE ervaringsdeskundigen 
+                SET voornaam = ?, tussenvoegsel = ?, achternaam = ?, wachtwoord = ?, emailadres = ?, telefoonnummer = ?, postcode = ?, geslacht = ?, hulpmiddelen = ?, introductie = ?, bijzonderheden = ?, voorkeur_benadering = ?
+                WHERE ervaringsdeskundige_id = ? """, (voornaam, tussenvoegsel, achternaam, wachtwoord, emailadres, telefoonnummer, postcode, geslacht, hulpmiddelen, introductie, bijzonderheden, voorkeur_benadering, status, onderzoek_id, ervaringsdeskundige_id))
+        self.con.commit()
+        return result
