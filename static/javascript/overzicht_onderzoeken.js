@@ -8,22 +8,29 @@ function fetchResearch() {
       .then(response => response.json())
       .then(onderzoeken => showOnderzoeken(onderzoeken))
 }
-
-fetchResearch();
-setInterval(fetchResearch, 5000);
+fetchResearch()
+let fetchinterval = setInterval(fetchResearch, 5000);
 
 function showOnderzoeken (onderzoeken) {
-  document.querySelector(".js-onderzoektabel").innerHTML = '';
+  document.querySelector(".js-tabel").innerHTML = '';
 
   onderzoeken.forEach((onderzoek) => {
-
+        let beschikbaar;
+        if (onderzoek.beschikbaar === 0)
+        {
+          beschikbaar = "Nee"
+        }
+        else
+        {
+          beschikbaar = "Ja" 
+        }
          let row =
           `
           <tr>
                 <th scope="row">${onderzoek.onderzoek_id}</td>
                 <td>${onderzoek.titel}</td>
                 <td>${onderzoek.status}</td>
-                <td>Ja</td>
+                <td>${beschikbaar}</td>
                 <td>${onderzoek.leeftijd_van}</td>
                 <td>${onderzoek.leeftijd_tot}</td>
                 <td>${onderzoek.beperking}</td>
@@ -36,7 +43,7 @@ function showOnderzoeken (onderzoeken) {
                 </td>
             </tr>
           `
-  document.querySelector(".js-onderzoektabel").innerHTML += row;
+  document.querySelector(".js-tabel").innerHTML += row;
   });
   document.querySelectorAll('.update').forEach(button => {
     button.addEventListener('click', () => {
@@ -69,7 +76,7 @@ function get_onderzoek(onderzoek_id) {
       .then(onderzoek => showOnderzoek(onderzoek))
 }
 function filter() {
-  clearInterval(fetchResearch)
+  clearInterval(fetchinterval)
   var id_input,input_title, input_status, input_beschikbaarheid, input_leeftijdvan, input_leeftijdtot, filter_title, filter_status, filter_beschikbaar, filter_leeftijdvan, filter_leeftijdtot, table, tr, td, i;
   id_input = document.getElementById("idinput")
   input_title = document.getElementById("titleinput");
@@ -118,7 +125,6 @@ function filter() {
     }
   }
 }
-
 
 function showOnderzoek(onderzoek)
 {
