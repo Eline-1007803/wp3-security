@@ -18,7 +18,7 @@ checkbox.addEventListener("change", showSupervisorForm);
 // supervisor questions automatically shows up when expert is under 18 and is required
 document.querySelector('.js-birthdate-input').addEventListener('change', ageCheck)
 
-function ageCheck ()
+function ageCheck()
 {
     const ageInYears = calculateAge();
 
@@ -199,11 +199,16 @@ function saveSignup() {
     })
         .then(response => response)
         .then(data => {
-            console.log(data);
+            if (data['success'] === true) {
+                window.location.href = '/login';
+            }
         });
 }
 
-document.querySelector(".js-submit-button").addEventListener("click", saveSignup);
+document.querySelector(".js-submit-button").addEventListener("click", () =>
+{
+    saveSignup();
+});
 
 
 

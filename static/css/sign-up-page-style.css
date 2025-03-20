@@ -3,11 +3,16 @@ body {
     font-size: 18px;
     background-color: rgb(250, 253, 253);
     margin-bottom: 160px;
+    color: black;
 }
 
 h1 {
     text-align: center;
     margin-bottom: 70px;
+}
+
+.js-error-message{
+    color: black;
 }
 
 .js-sign-up {
@@ -154,7 +159,7 @@ textarea {
 }
 
 .button {
-    color: white;
+    color: black;
     padding: 10px 10px;
     font-size: 16px;
     cursor: pointer;
@@ -162,11 +167,11 @@ textarea {
     margin-bottom: 15px;
     text-align: center;
     }
-    
+
     .dark-mode-toggle {
         position: absolute;
-        top: 60px;  
-        right: 20px; 
+        top: 60px;
+        right: 20px;
         color: white;
         padding: 10px 20px;
         font-size: 14px;

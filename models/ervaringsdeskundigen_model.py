@@ -28,8 +28,8 @@ class Ervaringsdeskundigen:
         self.con.commit()
 
     def get_expert(self, expert_id,):
-        result = self.cursor.execute('''SELECT ervaringsdeskundige_id, emailadres, wachtwoord FROM ervaringsdeskundigen WHERE ervaringsdeskundige_id =?''', (expert_id,)).fetchone()
-        return dict(result)
+        result = self.cursor.execute('''SELECT * FROM ervaringsdeskundigen WHERE ervaringsdeskundige_id =?''', (expert_id,)).fetchone()
+        return result
 
     def authentication_expert(self, email, password):
         result =  self.cursor.execute("""SELECT ervaringsdeskundige_id, wachtwoord FROM ervaringsdeskundigen 
@@ -40,10 +40,10 @@ class Ervaringsdeskundigen:
                 return result['ervaringsdeskundige_id']
         return None
         
-    def update_expert(self, voornaam, tussenvoegsel, achternaam, wachtwoord, emailadres, telefoonnummer, postcode, geslacht, hulpmiddelen, introductie, bijzonderheden, voorkeur_benadering, status, onderzoek_id, ervaringsdeskundige_id):
+    def update_expert(self, voornaam, tussenvoegsel, achternaam, wachtwoord, emailadres, telefoonnummer, postcode, geslacht, hulpmiddelen, introductie, bijzonderheden, voorkeur_benadering, status, onderzoek_id, expert_id):
         result = self.cursor.execute(
             """ UPDATE ervaringsdeskundigen 
                 SET voornaam = ?, tussenvoegsel = ?, achternaam = ?, wachtwoord = ?, emailadres = ?, telefoonnummer = ?, postcode = ?, geslacht = ?, hulpmiddelen = ?, introductie = ?, bijzonderheden = ?, voorkeur_benadering = ?
-                WHERE ervaringsdeskundige_id = ? """, (voornaam, tussenvoegsel, achternaam, wachtwoord, emailadres, telefoonnummer, postcode, geslacht, hulpmiddelen, introductie, bijzonderheden, voorkeur_benadering, status, onderzoek_id, ervaringsdeskundige_id))
+                WHERE ervaringsdeskundige_id = ? """, (voornaam, tussenvoegsel, achternaam, wachtwoord, emailadres, telefoonnummer, postcode, geslacht, hulpmiddelen, introductie, bijzonderheden, voorkeur_benadering, status, onderzoek_id, expert_id))
         self.con.commit()
         return dict(result)
