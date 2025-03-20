@@ -125,13 +125,13 @@ function showOnderzoek(onderzoek)
   const onderzoekPOPUP = document.querySelector(".updatemodal");
   onderzoekPOPUP.innerHTML =
   `
-    <div class="modal-content">
-      <span id="close" class="close_updatemodal">&times;</span>
-      <h2>Wijzig onderzoek gegevens</h2>
+    <div class="modalupdate-content">
+      <span id="close" class="close_updatemodal">&times;</span><br>
+      <h2>Wijzig onderzoek gegevens</h2><br>
       <label for="titel">Title:</label>
       <input type="text" name="title" id="titel" value="${onderzoek.titel}" required><br>
       <label for="beschrijving">Beschrijving</label>
-      <textarea name="beschrijving" id="beschrijving" required>${onderzoek.beschrijving}</textarea><br>
+      <textarea name="beschrijving" id="beschrijving" required>${onderzoek.beschrijving}</textarea>
       <label for="datumvanaf">Datum vanaf:</label>
       <input type="date" name="datevanaf" id="datumvanaf" value="${onderzoek.datum_vanaf}" required><br>
       <label for="datumtot">Datum tot:</label>
@@ -215,7 +215,7 @@ function showUsers(users)
   });
   usersPOPUP.innerHTML =
   `
-    <div class="modal-content">
+    <div class="modalusers-content">
         <span class="close_usersmodal">&times;</span>
         <h2>ingeschreven mensen</h2>
         <input type="text" id="naaminput" onkeyup="filter_users()" placeholder="Zoek ervaringdeskundige op naam.." aria-label="Zoek ervaringdeskundige op naam">

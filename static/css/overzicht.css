@@ -96,13 +96,37 @@ th, td {
     background-color: rgba(0,0,0,0.4);
 }
   
-.modal-content {
+.modalupdate-content {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 60%;
+    height: 80%;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     
+}
+.modalupdate-content input,textarea,.wijzigbutton
+{
+    margin-top: 5px;
+}
+.modalupdate-content .label
+{
+    position: absolute;
+}
+.modalusers-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+}
+.modalupdate-content textarea
+{
+    width: 100%;
 }
 input {
     height: 26px;
@@ -136,16 +160,15 @@ textarea
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-  }
-
-.close {
+}
+.close_updatemodal {
     color: #aaaaaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
   
-.close:hover,.close:focus {
+.close_updatemodal,.close:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
