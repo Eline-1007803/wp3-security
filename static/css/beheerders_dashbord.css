@@ -232,3 +232,13 @@ section p {
   border-top: white;
   border-bottom: white;
 }
+
+.dark-mode p,
+.dark-mode label {
+  color: white;
+}
+
+.dark-mode #save {
+  color: black;
+  background-color: pink;
+}
