@@ -141,3 +141,10 @@ class Organisatie:
         )
         self.con.commit()
         return True
+    def api_check(self, api_key):
+        result = self.cursor.execute(
+            "SELECT organisatie_id FROM organisaties WHERE api_key = ?",
+            (api_key),
+        )
+        self.con.commit()
+        return result
