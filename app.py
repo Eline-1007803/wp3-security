@@ -26,9 +26,9 @@ app.jinja_env.autoescape = True
 
 
 open_routes = ['login_page', 'login']
-admin_routes = ['dashboard', 'administrator_page', 'overzicht_organisaties']
-expert_routes = ['onderzoeken_pagina', 'lijst_ingeschreven_onderzoeken']
-organisation_routes = ['overzicht_onderzoeken', 'onderzoek_pagina', 'overzicht_organisaties']
+admin_routes = ['dashboard', 'administrator_page', 'overzicht_organisaties', 'mijn_profiel']
+expert_routes = ['onderzoeken_pagina', 'lijst_ingeschreven_onderzoeken', 'my_profile']
+organisation_routes = ['overzicht_onderzoeken', 'onderzoek_pagina', 'overzicht_organisaties', 'organisatie_aanmaken']
 
 @app.before_request
 def before_request():
@@ -91,6 +91,7 @@ def login():
 
     else:
         print("no")
+        flash('login mislukt')
         return {"message": "Login failed", "success": False}
 
 @app.route('/logout')
@@ -108,12 +109,13 @@ def mijn_profiel():
 
 @app.route('/get_user_id')
 def get_user_id():
-    if session.get('expert'):
-        return dict(session.get('expert'))
-
     if session.get('admin'):
-        return dict(session.get('admin'))
+        return {'id': session.get('admin')}
 
+@app.route('/get_id_for_profile')
+def get_id_for_profile():
+    if session.get('expert'):
+        return {"id": session.get('expert')}
 @app.route("/api/administrators", methods=["GET"])
 def get_all_administrators():
     administrator_model = Administrator()
@@ -238,7 +240,7 @@ def save_sign_up():
     print(new_expert)
     signup_model = SignUp()
     save_sign_up = signup_model.save_signup(new_expert)
-    return save_sign_up
+    return {'message': 'sign-up successful', 'success': True}
 
 
 @app.route("/dashboard")
@@ -686,7 +688,7 @@ def update_own_profile(ervaringsdeskundige_id):
         nw_voorkeur_benadering = or_voorkeur_benadering
 
     result = expert_model.update_expert(nw_voornaam, nw_tussenvoegsel, nw_achternaam, nw_wachtwoord, nw_email, nw_telnr, nw_postcode, nw_geslacht,
-                                         nw_hulpmiddelen, nw_introductie, nw_bijzonderheden, nw_voorkeur_benadering, ervaringsdeskundige_id)
+                                         nw_hulpmiddelen, nw_introductie, nw_bijzonderheden, nw_voorkeur_benadering, expert_id)
     return result
 
 
