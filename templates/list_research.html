@@ -4,13 +4,21 @@
 {% block styles %}<link rel="stylesheet" href="../static/css/list_research.css"> {% endblock %}
 {% block nav_links %}
 <a href="/openstaande_onderzoeken">Onderzoeken</a>
+<a href="#" class="button dark-mode-toggle" onclick="darkLightMode(); return false;">Donkere of lichte modus</a>
 {% endblock %}
 {% block main %}
 
     <main class="row">
         <section aria-labelledby="table-heading1" class="column">
         <h1 id="table-heading1">Overzicht van ingeschreven onderzoeken</h1>
-        <table class="table-clickable">
+        <select id="statusOnderzoek" onchange="zoekTitels()">
+            <option value="">Alle statussen</option>
+            <option value="goedgekeurd">goedgekeurd</option>
+            <option value="nieuw">in behandeling</option>
+            <option value="afgekeurd">afgewezen</option>
+        </select>
+        <input type="text" id="zoekTitel" onkeyup="zoekTitels()" placeholder="Zoek op naam van onderzoek" title="Type om te zoeken op titel">
+        <table class="table-clickable" id="tabelOnderzoeken">
             <thead>
                 <tr>
                     <th>ID nummer</th>
@@ -18,6 +26,7 @@
                     <th>Datum vanaf</th>
                     <th>Datum tot</th>
                     <th>Type onderzoek</th>
+                    <th>Status van het onderzoek</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,11 +53,12 @@
             <p><strong>Beloning: </strong><span id="popupBeloning"></span></p>
             <p><strong>Leeftijd vanaf: </strong><span id="popupLeeftijdVan"></span></p>
             <p><strong>Leeftijd tot: </strong><span id="popupLeeftijdTot"></span></p>
+            <button class='button' id='afmeldenButton'>Uitschrijven voor onderzoek</button>
         </article>
     </section>
     <script src="{{ url_for('static', filename='javascript/list_research.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/dark_mode.js')}}"></script>
 </body>
 </html>
 
 {% endblock %}
-

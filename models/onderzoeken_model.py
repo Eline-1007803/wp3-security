@@ -32,7 +32,7 @@ class Onderzoeken:
     
     def get_signedup_research(self, ervaringsdeskundige_id):
         result = self.cursor.execute(
-            """ SELECT onderzoeken.*, inschrijvingen.*
+            """ SELECT onderzoeken.*, inschrijvingen.*, inschrijvingen.status as inschrijving_status
                 FROM inschrijvingen
                 JOIN onderzoeken ON (onderzoeken.onderzoek_id = inschrijvingen.onderzoek_id)
                 WHERE inschrijvingen.ervaringsdeskundige_id = ?
@@ -45,3 +45,13 @@ class Onderzoeken:
     def update_status(self, onderzoek_id, status):
         self.cursor.execute("UPDATE onderzoeken SET status = ? WHERE onderzoek_id = ?", (status, onderzoek_id))
         self.con.commit()
+
+    def inschrijving(self, ervaringsdeskundige_id, onderzoek_id):
+        result = self.cursor.execute(
+        """INSERT INTO inschrijvingen (ervaringsdeskundige_id, onderzoek_id) 
+           VALUES (?, ?)""",
+        (ervaringsdeskundige_id, onderzoek_id),
+        )
+        self.con.commit()
+
+        return result

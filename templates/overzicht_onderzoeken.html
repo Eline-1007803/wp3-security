@@ -6,9 +6,9 @@
 {% block title %}Overzicht - Accessibility Hub{% endblock %}
 {% block nav_links %}
 <a href="/onderzoekaanvragen">Aanvraag</a>
+<a href="#" class="button dark-mode-toggle" onclick="darkLightMode(); return false;">Donkere of lichte modus</a>
 {% endblock %}
 {% block main %}
-    <main>
         <h1>Overzicht Onderzoeken</h1>
         <div class="filters">
             <input type="text" id="idinput" onkeyup="filter()" placeholder="Zoek onderzoek id.." aria-label="Zoek onderzoek ID">
@@ -24,16 +24,18 @@
         <div class="research-table-container">
             <table class="js-onderzoektabel">
                 <caption>Overzicht Onderzoeken</caption>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Beschikbaarheid</th>
-                    <th scope="col">Leeftijd van</th>
-                    <th scope="col">Leeftijd tot</th>
-                    <th scope="col">Beperking(en)</th>
-                    <th scope="col" style="width:auto;">Acties</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Beschikbaarheid</th>
+                        <th scope="col">Leeftijd van</th>
+                        <th scope="col">Leeftijd tot</th>
+                        <th scope="col">Beperking(en)</th>
+                        <th scope="col" style="width:auto;">Acties</th>
+                    </tr>
+                </thead>
             </table>
             <div class="updatemodal" id="update_modal">
             </div>
@@ -42,4 +44,5 @@
         </div>
     </main>
 {% endblock %}
-{% block scripts %}  <script src="/static/javascript/overzicht_onderzoeken.js"></script> {% endblock %}
+{% block scripts %}  <script src="/static/javascript/overzicht_onderzoeken.js"></script> 
+<script src="{{ url_for('static', filename='javascript/dark_mode.js')}}"></script>{% endblock %}

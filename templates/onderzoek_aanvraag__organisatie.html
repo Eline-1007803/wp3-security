@@ -4,6 +4,7 @@
 
 {% block nav_links %}
 <a href="/api/overzicht_onderzoeken">Onderzoeken</a>
+<a href="#" class="button dark-mode-toggle" onclick="darkLightMode(); return false;">Donkere of lichte modus</a>
 {% endblock %}
 
 {% block main %}
@@ -86,4 +87,5 @@
     </form>
 </div>
 {% endblock %}
-{% block scripts %}<script src="/static/javascript/onderzoek_aanvraag_organisatie.js"></script>{% endblock %}
+{% block scripts %}<script src="/static/javascript/onderzoek_aanvraag_organisatie.js"></script>
+<script src="{{ url_for('static', filename='javascript/dark_mode.js')}}"></script>{% endblock %}

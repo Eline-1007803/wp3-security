@@ -6,6 +6,29 @@ body {
     margin: 0;
 }
 
+.dark-mode {
+    background-color: rgb(46, 46, 46);
+    color: white;
+}
+
+.dark-mode .popup-content {
+    background-color: #000000;
+    color: white;
+}
+
+.dark-mode .column {
+    background-color: #000000;
+    color: white;
+}
+
+.dark-mode .table-clickable tbody tr:nth-child(even) {
+    background-color: #000000;
+}
+
+.dark-mode .table-clickable tbody tr:hover {
+    background-color: #222;
+}
+
 .row {
     display: flex;
     justify-content: center;
@@ -93,10 +116,18 @@ th {
 
 .popup-content {
     background-color: white;
-    padding: 20px;
+    padding: 30px;
     border-radius: 10px;
     width: 50%;
-    text-align: center;
+    max-width: fit-content;
+    text-align: left;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .close-popup {
@@ -123,4 +154,43 @@ th {
 
 .hide{
     display: none;
+}
+
+.button {
+color: white;
+padding: 10px 10px;
+font-size: 16px;
+cursor: pointer;
+display: inline-block;
+margin-bottom: 15px;
+text-align: center;
+}
+
+.dark-mode-toggle {
+    position: absolute;
+    top: 80px;  
+    right: 20px; 
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dark-mode h1 {
+    background-color: black;
+    color: white;
+}
+
+.dark-mode tbody {
+    background-color: black;
+}
+
+.dark-mode tbody tr:hover  {
+    background-color: #222;
+}
+
+#aanmeldenButton {
+    background-color: blue;
 }

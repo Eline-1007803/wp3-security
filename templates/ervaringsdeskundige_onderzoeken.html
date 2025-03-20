@@ -3,6 +3,7 @@
 {% block styles %}<link rel="stylesheet" href="../static/css/ervaringsdeskundige_onderzoeken.css">{% endblock%}
 {% block nav_links %}
 <a href="/ingeschreven_onderzoeken">Mijn Onderzoeken</a>
+<a href="#" class="button dark-mode-toggle" onclick="darkLightMode(); return false;">Donkere of lichte modus</a>
 {% endblock %}
 
 {% block main %}
@@ -10,7 +11,9 @@
         <section aria-labelledby="table-heading1" class="column">
         <h1 id="table-heading1">Openstaande onderzoeken</h1>
         <h3>Onderzoeken voor u, klik voor meer informatie op het onderzoek wat u wilt bekijken</h3>
-        <table class="table-clickable" >
+        <input type="text" id="zoekTitel" onkeyup="zoekTitels()" placeholder="Zoek op naam van onderzoek">
+        <input type="text" id="typeOnderzoek" onkeyup="zoekTitels()" placeholder="Zoek op soort onderzoek">
+        <table id="tabelOnderzoeken" class="table-clickable" >
             <thead>
                 <tr>
                     <th>ID nummer</th>
@@ -43,9 +46,11 @@
             <p><strong>Beloning:</strong><span id="popupBeloning"></span></p>
             <p><strong>Leeftijd vanaf: </strong><span id="popupLeeftijdVan"></span></p>
             <p><strong>Leeftijd tot: </strong><span id="popupLeeftijdTot"></span></p>
+
+            <span id="popupId" style="display:none;"></span>
+            <button id="aanmeldenButton" class="button">Inschrijven voor onderzoek</button>
         </article>
     </section>
 {% endblock %}
-{% block scripts %}<script src="{{ url_for('static', filename='javascript/ervaringsdeskundige_onderzoeken.js') }}"></script>{% endblock %}
-
-
+{% block scripts %}<script src="{{ url_for('static', filename='javascript/ervaringsdeskundige_onderzoeken.js') }}"></script>
+<script src="{{ url_for('static', filename='javascript/dark_mode.js')}}"></script>{% endblock %}
