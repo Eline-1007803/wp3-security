@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %} Overzicht ervaringsdeskundige {%endblock%}
-{% block styles %}<link rel="stylesheet" href="../static/css/list_research.css">{% endblock %}
+{% block styles %}<link rel="stylesheet" href="../static/css/ervaringsdeskundige_onderzoeken.css">{% endblock %}
 
 {% block nav_links %}
 <a class="logo-image" href="/"><img class="logo-image" src="../static/images/logo.svg"></a>
@@ -13,10 +13,15 @@
 <main class="row">
     <section id="info" class="column">
     </section>
+   <table class="table-clickable">
+    <tbody>
+
+    </tbody>
+</table>
 </main>
 {% endblock %}
 
 {% block scripts %}
-    <script src="/static/javascript/ervaringsdeskundige_onderzoeken.js"></script>
+    <script src="/static/javascript/ervaringsdeskundige_profiel.js"></script>
     <script src="{{ url_for('static', filename='javascript/dark_mode.js')}}"></script>
 {% endblock %}
