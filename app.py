@@ -688,7 +688,7 @@ def update_own_profile(ervaringsdeskundige_id):
         nw_voorkeur_benadering = or_voorkeur_benadering
 
     result = expert_model.update_expert(nw_voornaam, nw_tussenvoegsel, nw_achternaam, nw_wachtwoord, nw_email, nw_telnr, nw_postcode, nw_geslacht,
-                                         nw_hulpmiddelen, nw_introductie, nw_bijzonderheden, nw_voorkeur_benadering, expert_id)
+                                         nw_hulpmiddelen, nw_introductie, nw_bijzonderheden, nw_voorkeur_benadering, ervaringsdeskundige_id)
     return result
 
 
