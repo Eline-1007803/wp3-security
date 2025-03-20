@@ -12,6 +12,7 @@ styling optgroup en option: https://stackoverflow.com/questions/6415747/styling-
 *required for locatie if selected: https://stackoverflow.com/questions/18770369/how-to-set-html5-required-attribute-in-javascrip
 age calculation for if younger than 18 function: https://www.youtube.com/watch?v=Q3oiSwdGAq8,
 https://www.w3schools.com/jsref/jsref_parse.asp
+search-bar: https://www.youtube.com/watch?v=TlP5WIxVirU
 
 
 afbeelding: https://pixabay.com/images/search/bin%20icon/

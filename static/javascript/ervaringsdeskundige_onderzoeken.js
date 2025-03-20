@@ -129,7 +129,7 @@ document.getElementById('aanmeldenButton').addEventListener('click', function ()
     })
     .then(response => response.json())
     .then(data => {if (data.succes) {alert("U heeft zich succesvol voor dit onderzoek ingeschreven.");
-    } else {alert("Er ging iets fout bij het inschrijven, probeer het zo opnieuw.")
+    } else { alert(data.error || "Er ging iets fout bij het inschrijven, probeer het zo opnieuw.")
     }})
 });
 

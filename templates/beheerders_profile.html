@@ -3,10 +3,10 @@
 {% block styles %}<link rel="stylesheet" href="../static/css/beheerders_dashbord.css">{% endblock %}
 
 {% block nav_links %}
-<a class="logo-image" href="/"><img class="logo-image" src="../static/images/logo.svg"></a>
 <a href="/dashboard">Dashboard</a>
 <a href="/administrator-overview">Beheerders</a>
 <a href="/logout">Uitloggen</a>
+<a href="#" class="button dark-mode-toggle" onclick="darkLightMode(); return false;">Donkere of lichte modus</a>
 {% endblock %}
 {% block main %}
 <main class="row">
@@ -17,4 +17,5 @@
 
 {% block scripts %}
     <script src="/static/javascript/beheerders_profile_js.js"></script>
+    <script src="{{ url_for('static', filename='javascript/dark_mode.js')}}"></script>
 {% endblock %}

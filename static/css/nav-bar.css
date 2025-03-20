@@ -11,7 +11,10 @@ header nav {
     height: 100px;
     background-color: #2b50ec;
     display: flex;
-    align-items: center;}
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
 
 
 .logo-image {
@@ -20,9 +23,9 @@ header nav {
 }
 
 header nav a {
-    margin-left: 300px;
     color: white;
     font-size: 18px;
+    margin-right: 50px;
 }
 
 a {

@@ -1,6 +1,9 @@
 from datetime import datetime, timedelta
 from flask import *
 import re,random,string
+
+from werkzeug.security import generate_password_hash
+
 from lib.model.administrators import Administrator
 from lib.model.sign_up import SignUp
 from models.ervaringsdeskundigen_model import Ervaringsdeskundigen
@@ -14,6 +17,7 @@ from models import (
 )
 
 from models.organisatie_model import Organisatie
+from models.inschrijvingen_model import Inschrijvingen
 
 app = Flask(__name__)
 app.secret_key = "wp3"
@@ -22,9 +26,9 @@ app.jinja_env.autoescape = True
 
 
 open_routes = ['login_page', 'login']
-admin_routes = ['dashboard', 'administrator_page', 'overzicht_organisaties']
-expert_routes = ['onderzoeken_pagina', 'lijst_ingeschreven_onderzoeken']
-organisation_routes = ['overzicht_onderzoeken', 'onderzoek_pagina']
+admin_routes = ['dashboard', 'administrator_page', 'overzicht_organisaties', 'my_profile']
+expert_routes = ['onderzoeken_pagina', 'lijst_ingeschreven_onderzoeken', 'mijn_profiel']
+organisation_routes = ['overzicht_onderzoeken', 'onderzoek_pagina', 'overzicht_organisaties', 'organisatie_aanmaken']
 
 @app.before_request
 def before_request():
@@ -37,6 +41,8 @@ def before_request():
     if request.endpoint in expert_routes and not session.get('expert'):
         return redirect(url_for('index'))
 
+    if request.endpoint in organisation_routes and not session.get('organisation'):
+        return redirect(url_for('index'))
 @app.route('/', methods=['GET'])
 def index():
     if session.get('expert'):
@@ -44,6 +50,9 @@ def index():
 
     if session.get('admin'):
         return redirect(url_for('dashboard'))
+
+    if session.get('organisation'):
+        return redirect(url_for('overzicht_onderzoeken'))
 
     return redirect(url_for('login_page'))
 
@@ -58,6 +67,7 @@ def login():
     print(request.json)
 
     expert_model = Ervaringsdeskundigen()
+
     expert = expert_model.authentication_expert(email, password)
 
     if expert:
@@ -75,12 +85,13 @@ def login():
     organisation_model = Organisatie()
     organisation = organisation_model.get_organisation_login(email, password)
 
-
     if organisation:
         session['organisation'] = organisation
+        return {'message': 'Login successful', 'success': True}
 
     else:
         print("no")
+        flash('login mislukt')
         return {"message": "Login failed", "success": False}
 
 @app.route('/logout')
@@ -92,14 +103,21 @@ def logout():
 def my_profile():
     return render_template('beheerders_profile.html')
 
+@app.route('/myprofile_expert')
+def mijn_profiel():
+    return render_template('ervaringsdeskundige_profiel.html')
+
 @app.route('/get_user_id')
 def get_user_id():
-    if session.get('expert'):
-        return dict(session.get('expert'))
-
     if session.get('admin'):
-        return dict(session.get('admin'))
+        return {'id': session.get('admin')}
+    if session.get('expert'):
+        return {'ervaringsdeskundige_id': session.get('expert')}
 
+@app.route('/get_id_for_profile')
+def get_id_for_profile():
+    if session.get('expert'):
+        return {"id": session.get('expert')}
 @app.route("/api/administrators", methods=["GET"])
 def get_all_administrators():
     administrator_model = Administrator()
@@ -224,7 +242,7 @@ def save_sign_up():
     print(new_expert)
     signup_model = SignUp()
     save_sign_up = signup_model.save_signup(new_expert)
-    return save_sign_up
+    return {'message': 'sign-up successful', 'success': True}
 
 
 @app.route("/dashboard")
@@ -347,16 +365,13 @@ def delete_organisatie(organisatie_id):
     return jsonify(result)
 
 
-# dit regex variable is om te checken of het email is.
-regex_email = r"^\S+@\S+\.\S+$"
-# dit regex variable is om te checken of het website is.
-regex_website = "^[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$"
 
 @app.route("/api/organisatie_aanmaken/new", methods=["POST"])
 def nieuwe_organisatie():
     naam = request.json["naam"]
     if naam == "":
         return jsonify("Typ organisatie naam in!"), 400
+    password = request.json["password"]
     option = request.json["option"]
     if option != "non-profit" and option != "commercieel":
         return (
@@ -366,8 +381,6 @@ def nieuwe_organisatie():
             400,
         )
     website = request.json["website"]
-    if not re.match(regex_website, website):
-        return jsonify("Voer een goede website adres in!"), 400
     beschrijving = request.json["beschrijving"]
     if beschrijving == "":
         return jsonify("Voer beschrijving in"), 400
@@ -375,16 +388,15 @@ def nieuwe_organisatie():
     if contactpersoon == "":
         return jsonify("Voer naam van de contact persoon in in"), 400
     email = request.json["email"]
-    if not re.match(regex_email, email):
-        return jsonify("Voer een goede email adres in!"), 400
     number = request.json["number"]
     check_number_10_digit = str(number)
-    if not isinstance(number, int) or len(check_number_10_digit) != 10:
+    if not isinstance(number, int) or len(check_number_10_digit) != 9:
         return jsonify("U heeft geen nummer ingevuld of het heeft geen 10 cijfers"), 400
     overige_details = request.json["overige_details"]
     api_key = ''.join(random.choices(string.ascii_letters + string.digits + string.punctuation, k=32))
     new_organisatie = organisatie.organisatie_aanmaaken(
         naam,
+        password,
         option,
         website,
         beschrijving,
@@ -584,8 +596,94 @@ def onderzoeken_pagina():
     return render_template("ervaringsdeskundige_onderzoeken.html")
 
 
-#@app.route('/openstaande_onderzoeken', methods=['POST'])
-#def
+@app.route("/api/expert/<ervaringsdeskundige_id>", methods=["GET"])
+def get_expert_by_id(ervaringsdeskundige_id):
+    expert_model = Ervaringsdeskundigen()
+    expert = expert_model.get_expert(ervaringsdeskundige_id)
+
+    if not expert: 
+        return jsonify({"error": "Expert niet gevonden"}), 404
+    return jsonify(dict(expert))
+
+@app.route("/api/expert/<ervaringsdeskundige_id>", methods=["PUT"])
+def update_own_profile(ervaringsdeskundige_id):
+    expert_model = Ervaringsdeskundigen()
+    or_voornaam = request.json['or_voornaam']
+    or_tussenvoegsel = request.json['or_tussenvoegsel']
+    or_achternaam = request.json['or_achternaam']
+    or_wachtwoord = request.json['or_wachtwoord']
+    or_email = request.json['or_email']
+    or_telnr = request.json['or_telnr']
+    or_postcode = request.json['or_postcode']
+    or_geslacht = request.json['or_geslacht']
+    or_hulpmiddelen = request.json['or_hulpmiddelen']
+    or_introductie = request.json['or_introductie']
+    or_bijzonderheden = request.json['or_bijzonderheden']
+    or_voorkeur_benadering = request.json['or_voorkeur_benadering']
+    voornaam = request.json['voornaam']
+    tussenvoegsel = request.json['tussenvoegsel']
+    achternaam = request.json['achternaam']
+    wachtwoord = request.json['wachtwoord']
+    email = request.json['email']
+    telnr = request.json['telnr']
+    postcode = request.json['postcode']
+    hulpmiddelen = request.json['hulpmiddelen']
+    introductie = request.json['introductie']
+    bijzonderheden = request.json['bijzonderheden']
+    print(voornaam, 'test', or_voornaam)
+    if voornaam:
+        print("voornaam", voornaam)
+        nw_voornaam = voornaam
+    else:
+        nw_voornaam = or_voornaam
+    if tussenvoegsel:
+        if tussenvoegsel == 'null':
+            nw_tussenvoegsel = or_tussenvoegsel
+        else:
+            nw_tussenvoegsel = tussenvoegsel
+    else:
+        nw_tussenvoegsel = or_tussenvoegsel
+    if achternaam:
+        nw_achternaam = achternaam
+    else:
+        nw_achternaam = or_achternaam
+    if wachtwoord:
+        nw_wachtwoord = wachtwoord
+    else:
+        nw_wachtwoord = or_wachtwoord
+    if email:
+        nw_email = email
+    else:
+        nw_email = or_email
+    if telnr:
+        if telnr == 'null':
+            nw_telnr = or_telnr
+        else:
+            nw_telnr = telnr
+    else:
+        nw_telnr = or_telnr
+    if postcode:
+        nw_postcode = postcode
+    else:
+        nw_postcode = or_postcode
+    nw_geslacht = or_geslacht
+    if hulpmiddelen:
+        nw_hulpmiddelen = hulpmiddelen
+    else:
+        nw_hulpmiddelen = or_hulpmiddelen
+    if introductie:
+        nw_introductie = introductie
+    else:
+        nw_introductie = or_introductie
+    if bijzonderheden:
+        nw_bijzonderheden = bijzonderheden
+    else: 
+        nw_bijzonderheden = or_bijzonderheden
+    nw_voorkeur_benadering = or_voorkeur_benadering
+
+    result = expert_model.update_expert(nw_voornaam, nw_tussenvoegsel, nw_achternaam, nw_wachtwoord, nw_email, nw_telnr, nw_postcode, nw_geslacht,
+                                         nw_hulpmiddelen, nw_introductie, nw_bijzonderheden, nw_voorkeur_benadering, ervaringsdeskundige_id)
+    return result
 
 
 @app.route("/api/ingeschreven_onderzoeken", methods=["GET"])
@@ -605,18 +703,27 @@ def lijst_ingeschreven_onderzoeken():
 
 @app.route("/api/inschrijven_onderzoek", methods=["POST"])
 def inschrijven_onderzoek():
-    onderzoeken_model = Onderzoeken()
+    if "ervaringsdeskundige_id" not in session:
+        return jsonify({"success": False, "error": "U moet ingelogd zijn om in te schrijven"}), 403
+    
     data = request.get_json()
-    ervaringsdeskundige_id = 1 #moet nog aanpassen
+    ervaringsdeskundige_id = session["ervaringsdeskundige_id"]
     onderzoek_id = data.get("onderzoek_id")
-    ervaringsdeskundigen_model = Ervaringsdeskundigen()
-    ervaringsdeskundigen = ervaringsdeskundigen_model.get_expert(ervaringsdeskundige_id)
+
 
     if not onderzoek_id:
-        return jsonify({"succes": False, "error": "Geen onderzoek ID gevonden."})
+        return jsonify({"succes": False, "error": "Geen onderzoek ID gevonden."}), 400
+    
+    inschrijvingen_model = Inschrijvingen()
+
+    bestaande_inschrijving = inschrijvingen_model.check_inschrijving(ervaringsdeskundige_id, onderzoek_id)
+    if bestaande_inschrijving:
+        return jsonify({"success": False, "error": "U bent al ingeschreven voor dit onderzoek."})
+    
+
     try:
-        onderzoeken_model.inschrijving(ervaringsdeskundige_id, onderzoek_id)
-        return jsonify({"success": True, "onderzoek_id": onderzoek_id}), 201
+        inschrijvingen_model.inschrijving_onderzoek(ervaringsdeskundige_id, onderzoek_id)
+        return jsonify({"success": True, "message": "Succesvol ingeschreven."}), 201
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 

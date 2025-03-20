@@ -1,3 +1,5 @@
+from werkzeug.security import generate_password_hash, check_password_hash
+
 from models.database import Database
 
 
@@ -101,6 +103,7 @@ class Organisatie:
     def organisatie_aanmaaken(
         self,
         naam,
+        password,
         option,
         website,
         beschrijving,
@@ -111,9 +114,10 @@ class Organisatie:
         api_key,
     ):
         self.cursor.execute(
-            "INSERT into organisaties (naam,type,website,beschrijving,contactpersoon,email,telefoonnummer,overige_details,api_key) VALUES (?,?,?,?,?,?,?,?,?)",
+            "INSERT into organisaties (naam, wachtwoord, type,website,beschrijving,contactpersoon,email,telefoonnummer,overige_details,api_key) VALUES (?,?,?,?,?,?,?,?,?, ?)",
             (
                 naam,
+                generate_password_hash(password),
                 option,
                 website,
                 beschrijving,
@@ -148,3 +152,11 @@ class Organisatie:
         )
         self.con.commit()
         return result
+
+    def get_organisation_login(self, email, password):
+        result = self.cursor.execute('''SELECT organisatie_id, wachtwoord FROM organisaties WHERE email = ?''',
+                                     (email,)).fetchone()
+        if result:
+            if check_password_hash(result['wachtwoord'], password):
+                return result['organisatie_id']
+        return None

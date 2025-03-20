@@ -9,7 +9,12 @@
 <body>
     <header class="nav-bar">
         <nav class="nav-bar">
-            {% block nav_links %}{% endblock %}
+            <a class= "logo-image" href="/"><img class="logo-image" src="../static/images/logo.svg"></a>
+            <div>
+            {% block nav_links %}
+                <button class="button">
+                {% endblock %}
+            </div>
         </nav>
     </header>
     {% block main %}{% endblock %}
