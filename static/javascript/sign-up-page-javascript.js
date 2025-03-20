@@ -11,6 +11,8 @@ function showSupervisorForm () {
         document.querySelector(".js-supervisor-info").classList.add("hide");
         document.querySelector(".js-space").classList.add("hide");
     }
+
+
 }
 
 checkbox.addEventListener("change", showSupervisorForm);
