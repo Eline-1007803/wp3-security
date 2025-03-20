@@ -46,9 +46,14 @@ table
     margin-top: 40px;
     width: 40%;
     height: 17%;
+    font-size: 16px;
     
 }
-
+thead
+{
+    background-color: #2b50ec;
+    color: wheat;
+}
 table, th, td 
 {
     border: 1px solid black;

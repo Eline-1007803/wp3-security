@@ -69,6 +69,7 @@ function get_onderzoek(onderzoek_id) {
       .then(onderzoek => showOnderzoek(onderzoek))
 }
 function filter() {
+  clearInterval(fetchResearch)
   var id_input,input_title, input_status, input_beschikbaarheid, input_leeftijdvan, input_leeftijdtot, filter_title, filter_status, filter_beschikbaar, filter_leeftijdvan, filter_leeftijdtot, table, tr, td, i;
   id_input = document.getElementById("idinput")
   input_title = document.getElementById("titleinput");
@@ -117,45 +118,7 @@ function filter() {
     }
   }
 }
-function filter_users() {
-  var naaminput,postcodeinput, geslachtinput, emailinput, filter_naam, filter_postcode, filter_geslacht,filter_email, table, tr, td, i;
-  naaminput = document.getElementById("idinput")
-  postcodeinput = document.getElementById("titleinput");
-  geslachtinput = document.getElementById("statusinput");
-  emailinput = document.getElementById("beschikbaarinput");
 
-  filter_naam = naaminput.value.toUpperCase();
-  filter_postcode = postcodeinput.value.toUpperCase();
-  filter_geslacht = geslachtinput.value.toUpperCase();
-  filter_email = emailinput.value.toUpperCase();
-
-  table = document.getElementById("users_modal");
-  tr = table.getElementsByTagName("tr");
-
-  for (i = 0; i < tr.length; i++) {
-    td_naam = tr[i].getElementsByTagName("td")[0];
-    td_postcode = tr[i].getElementsByTagName("td")[1];
-    td_geslacht = tr[i].getElementsByTagName("td")[2];
-    td_email = tr[i].getElementsByTagName("td")[3];
-
-
-    if (td_naam || td_postcode || td_geslacht || td_email) {
-      naamvalue = td_naam.textContent || td_naam.textContent;
-      postcodevalue = td_postcode.textContent || td_postcode.textContent;
-      geslachtvalue = td_geslacht.textContent || td_geslacht.textContent;
-      emailvalue = td_email.textContent || td_email.textContent;
-
-      if (naamvalue.toUpperCase().indexOf(filter_naam) > -1 &&
-          postcodevalue.toUpperCase().indexOf(filter_postcode) > -1 &&
-          geslachtvalue.toUpperCase().indexOf(filter_geslacht) > -1 &&
-          emailvalue.toUpperCase().indexOf(filter_email) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
-}
 
 function showOnderzoek(onderzoek)
 {
@@ -258,7 +221,11 @@ function showUsers(users)
         <input type="text" id="naaminput" onkeyup="filter_users()" placeholder="Zoek ervaringdeskundige op naam.." aria-label="Zoek ervaringdeskundige op naam">
         <input type="text" id="postcodeinput" onkeyup="filter_users()" placeholder="Zoek poscode van ervaringdeskundige.." aria-label="Zoek poscode van ervaringdeskundige">
         <input type="text" id="geslachtinput" onkeyup="filter_users()" placeholder="Zoek status.." aria-label="Zoek status van onderzoek">
-        <input type="text" id="emailinput" onkeyup="filter_users()" placeholder="Zoek op beschikbaarheid.." aria-label="Zoek beschikbaarheid van onderzoek">
+        <select name="select" id="select" onchange="filter_users()">
+          <option>Kies..</option>
+          <option value="man">Man</option>
+        </select>
+        <input type="text" id="emailinput" onkeyup="filter_users()" placeholder="Zoek email.." aria-label="Zoek op email van gebruiker">
         <table>
             <tr>
                 <th>Naam</th>
@@ -280,6 +247,45 @@ function showUsers(users)
     if (event.target == usersPOPUP) {
         usersPOPUP.style.display = "none";
     }}
+}
+function filter_users() {
+  var naaminput,postcodeinput, geslachtinput, emailinput, filter_naam, filter_postcode, filter_geslacht,filter_email, table, tr, td, i;
+  naaminput = document.getElementById("naaminput")
+  postcodeinput = document.getElementById("postcodeinput");
+  geslachtinput = document.getElementById("select");
+  emailinput = document.getElementById("emailinput");
+
+  filter_naam = naaminput.value.toUpperCase();
+  filter_postcode = postcodeinput.value.toUpperCase();
+  filter_geslacht = geslachtinput.value.toUpperCase();
+  filter_email = emailinput.value.toUpperCase();
+
+  table = document.getElementById("users_modal");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 0; i < tr.length; i++) {
+    td_naam = tr[i].getElementsByTagName("td")[0];
+    td_postcode = tr[i].getElementsByTagName("td")[1];
+    td_geslacht = tr[i].getElementsByTagName("td")[2];
+    td_email = tr[i].getElementsByTagName("td")[3];
+
+
+    if (td_naam || td_postcode || td_geslacht || td_email) {
+      naamvalue = td_naam.textContent || td_naam.textContent;
+      postcodevalue = td_postcode.textContent || td_postcode.textContent;
+      geslachtvalue = td_geslacht.textContent || td_geslacht.textContent;
+      emailvalue = td_email.textContent || td_email.textContent;
+
+      if (naamvalue.toUpperCase().indexOf(filter_naam) > -1 &&
+          postcodevalue.toUpperCase().indexOf(filter_postcode) > -1 &&
+          geslachtvalue.toUpperCase().indexOf(filter_geslacht) > -1 &&
+          emailvalue.toUpperCase().indexOf(filter_email) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
 }
 function change_status(onderzoek_id)
 {
