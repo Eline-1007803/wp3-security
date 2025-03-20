@@ -181,26 +181,27 @@ section p {
   }
   
   .dark-mode {
-    background-color: black;
+    background-color: rgb(46, 46, 46);
     color: white;
 }
 
 .dark-mode section {
-    background-color: #222;
+    background-color: #000000;
     color: white;
 }
 
 .dark-mode .table-clickable th {
-    background-color: #333;
+    background-color: #363636;
     color: white;
 }
 
 .dark-mode .table-clickable tbody tr {
-    background-color: #444;
+    background-color: #000000;
+    border: white;
 }
 
 .dark-mode .table-clickable tbody tr:hover {
-    background-color: #666;
+    background-color: #404040;
 }
 
 .dark-mode .modal-content {
@@ -223,4 +224,11 @@ section p {
 .dark-mode .modal-content p,
 .dark-mode .modal-content label {
   color: white;
+}
+
+.dark-mode .table-clickable,
+.dark-mode .table-clickable tbody tr {
+  border-color: white;
+  border-top: white;
+  border-bottom: white;
 }
