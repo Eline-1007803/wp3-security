@@ -26,8 +26,8 @@ app.jinja_env.autoescape = True
 
 
 open_routes = ['login_page', 'login']
-admin_routes = ['dashboard', 'administrator_page', 'overzicht_organisaties', 'mijn_profiel']
-expert_routes = ['onderzoeken_pagina', 'lijst_ingeschreven_onderzoeken', 'my_profile']
+admin_routes = ['dashboard', 'administrator_page', 'overzicht_organisaties', 'my_profile']
+expert_routes = ['onderzoeken_pagina', 'lijst_ingeschreven_onderzoeken', 'mijn_profiel']
 organisation_routes = ['overzicht_onderzoeken', 'onderzoek_pagina', 'overzicht_organisaties', 'organisatie_aanmaken']
 
 @app.before_request
