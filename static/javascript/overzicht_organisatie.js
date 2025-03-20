@@ -24,13 +24,13 @@ function showOrganisaties (organisaties) {
                   <td>${organisatie.email}</td>
                   <td>${organisatie.telefoonnummer}</td>
                   <td>
-                  <button data-organisatie-id="${organisatie["organisatie_id"]}" class="delete" id="delete_button" aria-label="delete organisatie">Delete Organisatie</button>
+                  <button data-organisatie-id="${organisatie["organisatie_id"]}" class="delete-button" id="delete_button" aria-label="delete organisatie">Delete Organisatie</button>
                   </td>
               </tr>
             `
     document.querySelector(".js-organisatietabel").innerHTML += row;
     });
-    document.querySelectorAll('.delete').forEach(button => {
+    document.querySelectorAll('.delete-button').forEach(button => {
         button.addEventListener('click', () => {
           const organisatie_id = button.dataset.organisatieId;
           delete_organisatie(organisatie_id);
@@ -57,7 +57,7 @@ function filter() {
         tr = table.getElementsByTagName("tr");
       
         for (i = 0; i < tr.length; i++) {
-          td = tr[i].getElementsByTagName("td")[1];
+          td = tr[i].getElementsByTagName("td")[0];
           if (td) {
             txtValue = td.textContent || td.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -76,7 +76,7 @@ function filter_type() {
         tr = table.getElementsByTagName("tr");
       
         for (i = 0; i < tr.length; i++) {
-          td = tr[i].getElementsByTagName("td")[2];
+          td = tr[i].getElementsByTagName("td")[1];
           if (td) {
             txtValue = td.textContent || td.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
