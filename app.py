@@ -588,14 +588,17 @@ def onderzoeken_pagina():
     return render_template("ervaringsdeskundige_onderzoeken.html")
 
 
-@app.route("/api/expert/<expert_id>", methods=["GET"])
-def get_expert_by_id(expert_id):
+@app.route("/api/expert/<ervaringsdeskundige_id>", methods=["GET"])
+def get_expert_by_id(ervaringsdeskundige_id):
     expert_model = Ervaringsdeskundigen()
-    expert = expert_model.get_expert(expert_id)
+    expert = expert_model.get_expert(ervaringsdeskundige_id)
+
+    if not expert: 
+        return jsonify({"error": "Expert niet gevonden"}), 404
     return jsonify(expert)
 
-@app.route("/api/expert/<expert_id>", methods=["PUT"])
-def update_own_profile(expert_id):
+@app.route("/api/expert/<ervaringsdeskundige_id>", methods=["PUT"])
+def update_own_profile(ervaringsdeskundige_id):
     expert_model = Ervaringsdeskundigen()
     or_voornaam = request.json['or_voornaam']
     or_tussenvoegsel = request.json['or_tussenvoegsel']
@@ -679,7 +682,7 @@ def update_own_profile(expert_id):
         nw_voorkeur_benadering = or_voorkeur_benadering
 
     result = expert_model.update_expert(nw_voornaam, nw_tussenvoegsel, nw_achternaam, nw_wachtwoord, nw_email, nw_telnr, nw_postcode, nw_geslacht,
-                                         nw_hulpmiddelen, nw_introductie, nw_bijzonderheden, nw_voorkeur_benadering, expert_id)
+                                         nw_hulpmiddelen, nw_introductie, nw_bijzonderheden, nw_voorkeur_benadering, ervaringsdeskundige_id)
     return result
 
 
