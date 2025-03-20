@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 {% block title %}Login{% endblock %}
 {% block styles %}<link rel="stylesheet" href="/static/css/login_page_style.css"> {% endblock %}
-{% block nav_links %} <img class="logo-image" src="../static/images/logo.svg">{% endblock %}
+{% block nav_links %} 
+<img class="logo-image" src="../static/images/logo.svg">
+<a href="#" class="button dark-mode-toggle" onclick="darkLightMode(); return false;">Donkere of lichte modus</a>
+{% endblock %}
 {% block main %}
     <h1>Inloggen</h1>
     <div class="form-container">
@@ -20,4 +23,5 @@
 </div>
 {% endblock %}
 
-{% block scripts%}<script src="../static/javascript/login.js"></script>{% endblock %}
+{% block scripts%}<script src="../static/javascript/login.js"></script>
+<script src="{{ url_for('static', filename='javascript/dark_mode.js')}}"></script>{% endblock %}

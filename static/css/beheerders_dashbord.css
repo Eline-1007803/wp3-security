@@ -168,3 +168,59 @@ section p {
   text-decoration: none;
   cursor: pointer;
 }
+
+/* dark mode */
+.button {
+  color: white;
+  padding: 10px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 15px;
+  text-align: center;
+  }
+  
+  .dark-mode {
+    background-color: black;
+    color: white;
+}
+
+.dark-mode section {
+    background-color: #222;
+    color: white;
+}
+
+.dark-mode .table-clickable th {
+    background-color: #333;
+    color: white;
+}
+
+.dark-mode .table-clickable tbody tr {
+    background-color: #444;
+}
+
+.dark-mode .table-clickable tbody tr:hover {
+    background-color: #666;
+}
+
+.dark-mode .modal-content {
+    background-color: #333;
+    color: white;
+}
+
+.dark-mode h2 {
+  color: white;
+}
+
+.dark-mode .modal-content {
+  background-color: #333;
+  color: white;
+}
+
+.dark-mode .modal-content h2,
+.dark-mode .modal-content h3,
+.dark-mode .modal-content h4,
+.dark-mode .modal-content p,
+.dark-mode .modal-content label {
+  color: white;
+}

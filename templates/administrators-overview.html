@@ -5,8 +5,9 @@
 {% block nav_links %}
 <a class="logo-image" href="/"><img class="logo-image" src="../static/images/logo.svg"></a>
 <a href="/dashboard">Dashboard</a>
-<a href="/myprofile">Profiel</a>
-<a href="/logout">Uitloggen</a>
+<a>Profiel</a>
+<a>Uitloggen</a>
+<a href="#" class="button dark-mode-toggle" onclick="darkLightMode(); return false;">Donkere of lichte modus</a>
 {% endblock %}
 {% block main %}
  <!-- pop up after clicking button to add administrators-->
@@ -22,7 +23,7 @@
             <input class="js-lname-input" id="lname-input">
             <label for="email-input">E-mailadres:</label>
             <input class="js-email-input" id="email-input">
-            <label for="password-input"></label>
+            <label for="password-input">Wachtwoord:</label>
             <input class="js-password-input" id="password-input">
             <button class="div-add-button action-button js-add-button" type="submit">Toevoegen<img class="action-img add-img" src="../static/images/add-icon.svg"></button>
         </div>
@@ -86,4 +87,5 @@
 
 {% block scripts %}
     <script src="/static/javascript/administrators-overview-javascript.js"></script>
+    <script src="{{ url_for('static', filename='javascript/dark_mode.js')}}"></script>
 {% endblock %}

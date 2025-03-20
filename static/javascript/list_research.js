@@ -19,9 +19,10 @@ function set_modal() {
 
     onderzoekRijen.forEach(row => {
         row.addEventListener("click", function() {
+            stopInterval()
             popup.style.display = "block";
             popup.setAttribute("aria-hidden", "false");
-            stopInterval()
+            
             document.getElementById("popupTitel").innerText = this.getAttribute("data-titel");
             if (popupId) popupId.innerText = this.getAttribute("data-id");
             popupStatus.innerText = this.getAttribute("data-status");
@@ -49,12 +50,14 @@ function set_modal() {
         if (event.target === popup) {
             popup.style.display = "none";
             popup.setAttribute("aria-hidden", "true");
-        };
+        }
     });
+    zoekTitels()
 }
 
 
 function getOnderzoeken() {
+
 fetch('/api/ingeschreven_onderzoeken', {  
     method: 'GET',
     headers: {
@@ -85,7 +88,7 @@ function getSignedUpResearch(onderzoeken) {
         let row = `
             <tr class="onderzoek-row"
                 data-titel="${onderzoek.titel}"
-                data-status="${onderzoek.status}"
+                data-status="${onderzoek.inschrijving_status}"
                 data-datum-vanaf="${onderzoek.datum_vanaf}"
                 data-datum-tot="${onderzoek.datum_tot}"
                 data-type="${onderzoek.type}"
@@ -99,6 +102,7 @@ function getSignedUpResearch(onderzoeken) {
                 <td>${onderzoek.datum_vanaf}</td>
                 <td>${onderzoek.datum_tot}</td>
                 <td>${onderzoek.type}</td>
+                <td>${onderzoek.inschrijving_status}</td>
             </tr>`;
         tableBody.innerHTML += row;
     });
@@ -117,3 +121,53 @@ function startInterval() {
     getOnderzoeken()
     interval = setInterval(getOnderzoeken, 3000);
 }
+
+document.getElementById('afmeldenButton').onclick = function () {
+alert('Je hebt je nu uitgeschreven voor dit onderzoek.');
+document.getElementById('set_modal').style.display = 'none';
+}
+
+function zoekTitels() {
+    let input_titel, input_status, filter_titel, filter_status, table, tr, td_titel, td_status, i, txtValue_titel, txtValue_status;
+    input_titel = document.getElementById("zoekTitel");
+    input_status = document.getElementById("statusOnderzoek")
+    filter_titel = input_titel.value.toUpperCase();
+    filter_status = input_status.value.toUpperCase();
+    table = document.getElementById("tabelOnderzoeken");
+    tr = table.getElementsByTagName("tr");
+
+    for ( i = 0; i < tr.length; i++) {
+         td_titel = tr[i].getElementsByTagName("td")[1];
+         td_status = tr[i].getElementsByTagName("td")[5]; // nog aanpassen!!
+        if (td_status || td_titel) {
+             txtValue_titel = td_titel.textContent || td_titel.innerText;
+             txtValue_status = td_status.textContent || td_status.innerText
+            if (txtValue_titel.toUpperCase().indexOf(filter_titel) > -1 &&
+                (filter_status === "" || txtValue_status.toUpperCase() === filter_status)) {
+                    tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+/*function filterStatus() {
+    let select, selectedStatus, table, tr, td, i;
+    select = document.getElementById("statusOnderzoek");
+    selectedStatus = select.value.toUpperCase();
+    table = document.getElementById("tabelOnderzoeken");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 1; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[4]; //Deze nog aanpassen naar status en niet datum
+        if (td) {
+            let statusValue = td.textContent || td.innerText;
+            if (selectedStatus === "" || statusValue.toUpperCase() === selectedStatus) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}*/
