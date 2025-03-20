@@ -1,5 +1,8 @@
 import sqlite3
 
+from werkzeug.security import generate_password_hash, check_password_hash
+
+
 class Database(object):
     def __init__(self, path):
         self.path = path  # Ask for the database file path whenever Database() is called
@@ -31,11 +34,14 @@ class Administrator:
         return dict(result)
 
     def get_administrator_login(self, email, password):
-        result = self.cursor.execute('''SELECT beheerder_id FROM beheerders WHERE email = ? AND wachtwoord = ?''', (email, password)).fetchone()
-        return dict(result)
+        result = self.cursor.execute('''SELECT beheerder_id, wachtwoord FROM beheerders WHERE email = ?''', (email,)).fetchone()
+        if result:
+            if check_password_hash(result['wachtwoord'], password):
+                return result['beheerder_id']
+        return None
 
     def add_administrator(self, fname, lname, email, password):
-        result = self.cursor.execute('''INSERT INTO beheerders (voornaam, achternaam, email, wachtwoord) VALUES (?, ?, ?, ?)''', (fname, lname, email, password))
+        result = self.cursor.execute('''INSERT INTO beheerders (voornaam, achternaam, email, wachtwoord) VALUES (?, ?, ?, ?)''', (fname, lname, email, generate_password_hash(password)))
         self.con.commit()
         print(result)
         return dict(result)

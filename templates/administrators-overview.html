@@ -3,7 +3,6 @@
 {% block styles %}<link rel="stylesheet" href="../static/css/administrators-overview.css">{% endblock %}
 
 {% block nav_links %}
-<a class="logo-image" href="/"><img class="logo-image" src="../static/images/logo.svg"></a>
 <a href="/dashboard">Dashboard</a>
 <a href="/myprofile">Profiel</a>
 <a href="/logout">Uitloggen</a>
@@ -36,25 +35,13 @@
 
  <!-- pop up to edit administrator info -->
      <div class="js-edit administrator-edit hide">
-        <!-- <h1>Bewerken</h1>
-        <label for="fname-update">Voornaam:</label>
-         <input class="js-fname-update" id="fname-update" type="text" value="michael">
-         <label for="lname-update">Achternaam:</label>
-         <input class="js-lname-update" type="text" value="van gerwen" id="lname-update">
-         <label for="email-update">Email:</label>
-         <input class="js-email-update" type="text" value="michael@vangerwen.nl" id="email-update">
-         <button class="div-edit-button action-button js-popup-edit-button" type="submit">Bewerken<img class="action-img" src="../static/images/edit-icon-2.png"></button>
-    -->
+
      </div>
 
     <!-- pop up to delete administrator -->
     <div class="js-delete administrator-delete hide">
         <img class="js-cross-image cross-image" src="../static/images/cross.svg">
-        <!-- <h1>Verwijderen</h1>
-        <p>Naam: Michael van Gerwen</p>
-        <p>E-mailadres:</p>
-        <button class="div-delete-button action-button" type="submit">Verwijderen<img class="action-img" src="../static/images/bin-icon.png"></button>
-        -->
+
     </div>
 
  <!-- administrator overview -->
@@ -72,12 +59,6 @@
         </tr>
         </thead>
         <tbody class="js-administrator-table">
-
-<!--        <tr>-->
-<!--            <td></td>-->
-<!--            <td></td>-->
-<!--            <td><button class="action-button details-button">Details<img class="action-img eye-img" src="../static/images/eye-icon.png"></button><button class="action-button edit-button">Bewerken<img class="action-img" src="../static/images/edit-icon-2.png"></button><button class="action-button delete-button">Verwijderen<img class="action-img" src="../static/images/bin-icon.png"></button></td>-->
-<!--        </tr>-->
 
         </tbody>
 

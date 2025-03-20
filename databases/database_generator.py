@@ -1,6 +1,8 @@
 import sqlite3
 from pathlib import Path
 
+from werkzeug.security import generate_password_hash
+
 
 class WP3DatabaseGenerator:
     def __init__(self, database_file, overwrite=False, initial_data=False):
@@ -209,7 +211,7 @@ class WP3DatabaseGenerator:
     def insert_beheerders(self):
         users = [
             ( "Kevin", "van", "Dam", "abc", "kevinvandam@gmail.com", "0643396274"),
-            ( "Peter", None, "Selie", "123", "peterselie@gmail.com", "0603587210"),
+            ( "Peter", None, "Selie", generate_password_hash("123"), "peterselie@gmail.com", "0603587210"),
         ]
         insert_statement = "INSERT INTO beheerders (voornaam, tussenvoegsel, achternaam, wachtwoord, email, telefoonnummer) VALUES (?, ?, ?, ?, ?, ?);"
         self.__execute_many_transaction_statement(insert_statement, users)

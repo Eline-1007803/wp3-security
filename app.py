@@ -1,6 +1,9 @@
 from datetime import datetime, timedelta
 from flask import *
 import re,random,string
+
+from werkzeug.security import generate_password_hash
+
 from lib.model.administrators import Administrator
 from lib.model.sign_up import SignUp
 from models.ervaringsdeskundigen_model import Ervaringsdeskundigen
@@ -24,7 +27,7 @@ app.jinja_env.autoescape = True
 open_routes = ['login_page', 'login']
 admin_routes = ['dashboard', 'administrator_page', 'overzicht_organisaties']
 expert_routes = ['onderzoeken_pagina', 'lijst_ingeschreven_onderzoeken']
-organisation_routes = ['overzicht_onderzoeken', 'onderzoek_pagina']
+organisation_routes = ['overzicht_onderzoeken', 'onderzoek_pagina', 'overzicht_organisaties']
 
 @app.before_request
 def before_request():
@@ -37,6 +40,8 @@ def before_request():
     if request.endpoint in expert_routes and not session.get('expert'):
         return redirect(url_for('index'))
 
+    if request.endpoint in organisation_routes and not session.get('organisation'):
+        return redirect(url_for('index'))
 @app.route('/', methods=['GET'])
 def index():
     if session.get('expert'):
@@ -44,6 +49,9 @@ def index():
 
     if session.get('admin'):
         return redirect(url_for('dashboard'))
+
+    if session.get('organisation'):
+        return redirect(url_for('overzicht_onderzoeken'))
 
     return redirect(url_for('login_page'))
 
@@ -58,6 +66,7 @@ def login():
     print(request.json)
 
     expert_model = Ervaringsdeskundigen()
+
     expert = expert_model.authentication_expert(email, password)
 
     if expert:
@@ -75,9 +84,9 @@ def login():
     organisation_model = Organisatie()
     organisation = organisation_model.get_organisation_login(email, password)
 
-
     if organisation:
         session['organisation'] = organisation
+        return {'message': 'Login successful', 'success': True}
 
     else:
         print("no")
@@ -347,16 +356,13 @@ def delete_organisatie(organisatie_id):
     return jsonify(result)
 
 
-# dit regex variable is om te checken of het email is.
-regex_email = r"^\S+@\S+\.\S+$"
-# dit regex variable is om te checken of het website is.
-regex_website = "^[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$"
 
 @app.route("/api/organisatie_aanmaken/new", methods=["POST"])
 def nieuwe_organisatie():
     naam = request.json["naam"]
     if naam == "":
         return jsonify("Typ organisatie naam in!"), 400
+    password = request.json["password"]
     option = request.json["option"]
     if option != "non-profit" and option != "commercieel":
         return (
@@ -366,8 +372,6 @@ def nieuwe_organisatie():
             400,
         )
     website = request.json["website"]
-    if not re.match(regex_website, website):
-        return jsonify("Voer een goede website adres in!"), 400
     beschrijving = request.json["beschrijving"]
     if beschrijving == "":
         return jsonify("Voer beschrijving in"), 400
@@ -375,16 +379,15 @@ def nieuwe_organisatie():
     if contactpersoon == "":
         return jsonify("Voer naam van de contact persoon in in"), 400
     email = request.json["email"]
-    if not re.match(regex_email, email):
-        return jsonify("Voer een goede email adres in!"), 400
     number = request.json["number"]
     check_number_10_digit = str(number)
-    if not isinstance(number, int) or len(check_number_10_digit) != 10:
+    if not isinstance(number, int) or len(check_number_10_digit) != 9:
         return jsonify("U heeft geen nummer ingevuld of het heeft geen 10 cijfers"), 400
     overige_details = request.json["overige_details"]
     api_key = ''.join(random.choices(string.ascii_letters + string.digits + string.punctuation, k=32))
     new_organisatie = organisatie.organisatie_aanmaaken(
         naam,
+        password,
         option,
         website,
         beschrijving,

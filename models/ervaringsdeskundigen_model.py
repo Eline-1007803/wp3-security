@@ -1,3 +1,5 @@
+from werkzeug.security import generate_password_hash, check_password_hash
+
 from models.database_conection import Database
 
 class Ervaringsdeskundigen:
@@ -25,11 +27,15 @@ class Ervaringsdeskundigen:
         self.cursor.execute("UPDATE ervaringsdeskundigen SET status = ? WHERE ervaringsdeskundige_id = ?", (status, deskundige_id))
         self.con.commit()
 
-    def get_expert(self, expert_id, email, password, ):
-        result = self.cursor.execute('''SELECT ervaringsdeskundige_id, emailadres, wachtwoord FROM ervaringsdeskundigen WHERE ervaringsdeskundige_id =?''', (expert_id, email, password)).fetchone()
-        return result
-
     def authentication_expert(self, email, password):
-        result =  self.cursor.execute("""SELECT ervaringsdeskundige_id FROM ervaringsdeskundigen WHERE emailadres = ? AND wachtwoord = ? AND status = 'goedgekeurd'""", (email, password)).fetchone()
+        result =  self.cursor.execute("""SELECT ervaringsdeskundige_id, wachtwoord FROM ervaringsdeskundigen 
+                                        WHERE emailadres = ? AND status = 'goedgekeurd'""",
+                                      (email,)).fetchone()
         if result:
-            return dict(result)
+            if check_password_hash(result['wachtwoord'], password):
+                return result['ervaringsdeskundige_id']
+        return None
+
+
+
+

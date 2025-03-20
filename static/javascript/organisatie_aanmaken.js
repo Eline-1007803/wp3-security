@@ -3,6 +3,7 @@ document.getElementById("submit_button").addEventListener("click",organisatie_aa
 function organisatie_aanmaken()
 {
     let naam = document.getElementById("naam").value
+    let password = document.querySelector('.js-password-input').value
     let option = document.getElementById("option").value
     let website = document.getElementById("website").value
     let beschrijving = document.getElementById("beschrijving").value
@@ -19,6 +20,7 @@ function organisatie_aanmaken()
         },
         body: JSON.stringify({
             "naam": naam,
+            'password': password,
             "option":option,
             "website":website,
             "beschrijving":beschrijving,
