@@ -92,6 +92,10 @@ def logout():
 def my_profile():
     return render_template('beheerders_profile.html')
 
+@app.route('/myprofile_expert')
+def mijn_profiel():
+    return render_template('ervaringsdeskundige_profiel.html')
+
 @app.route('/get_user_id')
 def get_user_id():
     if session.get('expert'):
