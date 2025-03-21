@@ -56,7 +56,10 @@ document.querySelectorAll(".add-administrator-button")
 
         });
     })
-
+document.querySelectorAll(".js-cross-image").forEach(crossImage => {
+        crossImage.addEventListener("click", closePopUp)
+                console.log("yuh");
+        })
 // showing each administrator on page
 function showAdministrator (administrators) {
         document.querySelector(".js-administrator-table").innerHTML = '';
