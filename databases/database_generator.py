@@ -51,8 +51,11 @@ class WP3DatabaseGenerator:
             "status"	TEXT NOT NULL DEFAULT 'nieuw',
             "datum"	DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
             "afgerond"	BOOLEAN DEFAULT 0,
+            "beheerder_id"	INTEGER,
+            "datum_goedgekeurd"	DATETIME,
             PRIMARY KEY("inschrijving_id" AUTOINCREMENT),
             CONSTRAINT "user_id_foreign_key" FOREIGN KEY("ervaringsdeskundige_id") REFERENCES "ervaringsdeskundigen"("ervaringsdeskundige_id"),
+            CONSTRAINT "beheerder_id_foreign_key" FOREIGN KEY("beheerder_id") REFERENCES "beheerders"("beheerder_id"),
             CONSTRAINT "onderzoek_id_foreign_key" FOREIGN KEY("onderzoek_id") REFERENCES "onderzoeken"("onderzoek_id"));
         """
         self.__execute_transaction_statement(create_statement)

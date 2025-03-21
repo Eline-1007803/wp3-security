@@ -95,7 +95,7 @@ table th {
 .div-add-button {
     background-color: darkgreen;
     width: 220px;
-    height: 44px;
+    height: 40px;
     border-radius: 20px;
     color: white;
     border: none;
@@ -111,6 +111,7 @@ table th {
     background-color: #FFB343;
     color: black;
     margin-left: 30px;
+    width: 220px;
 }
 
 .div-edit-button:hover {
@@ -118,6 +119,7 @@ table th {
 }
 
 .div-delete-button {
+    margin-top: 200px;
     background-color: darkred;
     width: 145px;
 }
@@ -150,10 +152,40 @@ add-img {
     height: 600px;
     transform: translate(-50%, -50%);
     width: 50%;
-    text-align: center;
-    display: grid;
 }
 
+.administrator-delete {
+    position: fixed;
+    background-color: white;
+    box-shadow: 10px 10px 10px 10px;
+    top: 50%;
+    left: 50%;
+    height: 600px;
+    transform: translate(-50%, -50%);
+    width: 50%;
+
+}
+
+
+.details-class p{
+    width: 300px;
+}
+
+.details-class .details{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.delete-class p {
+    width: 300px;
+}
+
+.delete-class .delete {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
 .cross-image {
     margin-left: 650px;
     margin-top: 25px;
@@ -190,8 +222,7 @@ add-img {
     height: 25px;
 }
 
-
-.administrator-delete {
+.administrator-add {
     position: fixed;
     background-color: white;
     box-shadow: 10px 10px 10px 10px;
@@ -203,21 +234,33 @@ add-img {
     text-align: center;
 }
 
-.administrator-add {
+.add-popup-container {
     position: fixed;
     background-color: white;
-    box-shadow: 10px 10px 10px 10px;
-    top: 50%;
-    left: 50%;
-    height: 600px;
-    transform: translate(-50%, -50%);
-    width: 50%;
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    grid-template-columns: 300px 200px;
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.searchbar {
+    width: 400px;
+    height: 30px;
+    border-radius: 10px;
+    margin-left: 80px;
+    border-color: black;
+}
 
 
+.add-popup-container input {
+    width: 300px;
+    height: 25px;
 }
 
 .button {
-    background-color: none;
+    background-color: transparent;
     color: white;
     padding: 10px 10px;
     font-size: 16px;
@@ -231,7 +274,7 @@ add-img {
         position: absolute;
         top: 60px;  
         right: 20px; 
-        background-color: none;
+        background-color: inherit;
         color: white;
         padding: 10px 20px;
         font-size: 14px;
