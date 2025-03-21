@@ -68,6 +68,8 @@ function showAdministrator (administrators) {
                 <tr>
                     <td>${fullName}</td>
                     <td>${administrator.email}</td>
+                  
+             
                     <td>
                         <button data-admin-id="${administrator['beheerder_id']}" class="action-button details-button">Details
 
@@ -147,15 +149,19 @@ function showSingleAdministrator(administrator) {
 
         administratorDetails.innerHTML =
         `
+        <div class="details-class">
                 <img class="js-cross-image cross-image" src="../static/images/cross.svg">
                 <h1 class="details-header">Details</h1>
-                    
-                <d1>
-                        <dt>Naam:</dt>
-                        <dd>${administrator.voornaam}</dd>
-                        <dt>Email:</dt>
-                        <dd>${administrator.email}</dd>
-                </d1>
+                <div class="details">
+                        <p>Naam:${administrator.voornaam}</p>
+                        <p>Email: ${administrator.email}</p>
+                        <p>Telefoonnummer: ${administrator.telefoonnummer}</p>
+                </div>
+               
+        </div>
+        
+       
+                
         `;
 
         // closing pop up
@@ -309,11 +315,16 @@ function showAdminDeletePopup (administrator) {
         const deleteAdministratorPopup = document.querySelector(".js-delete")
         deleteAdministratorPopup.innerHTML =
             `
-        <img class="js-cross-image cross-image" src="../static/images/cross.svg"> 
-        <h1>Verwijderen</h1>
-        <p>Naam: ${administrator.voornaam}</p>
-        <p>E-mailadres: ${administrator.email}</p>
-        <button data-admin-id="${administrator['beheerder_id']}" class="js-delete-button div-delete-button action-button" type="submit">Verwijderen<img class="action-img" src="../static/images/bin-icon.png"></button>
+        <div class="delete-class">
+                <img class="js-cross-image cross-image" src="../static/images/cross.svg"> 
+                <h1>Verwijderen</h1>
+                <div class="delete">
+                        <p>Naam: ${administrator.voornaam}</p>
+                        <p>E-mailadres: ${administrator.email}</p>
+                        <p>Telefoonnummer: ${administrator.telefoonnummer}</p>
+                <div>
+                <button data-admin-id="${administrator['beheerder_id']}" class="js-delete-button div-delete-button action-button" type="submit">Verwijderen</button>
+        </div>
             `;
 
         document.querySelector(".js-delete-button").addEventListener("click", () =>
