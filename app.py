@@ -502,26 +502,26 @@ def onderzoek_aanvragen_organisatie():
 
     beschrijving = request.json["beschrijving"]
     if beschrijving == "":
-        return jsonify("Beschrijving can't be empty!"), 400
+        return jsonify("Beschrijving is verplicht"), 400
 
     datum_vanaf = request.json["datumvanaf"]
     if datum_vanaf == "":
-        return jsonify("You must select a date from"), 400
+        return jsonify("Kies datum vanaf"), 400
 
     date_vanaf = datetime.strptime(datum_vanaf, "%Y-%m-%d")
     if date_vanaf < datetime.now()- timedelta(days=1):
-        return jsonify("You have chosen a past date."), 400
+        return jsonify("U heeft datum in verleden gekozen"), 400
 
     datum_tot = request.json["datumtot"]
     if datum_tot == "":
-        return jsonify("You must select a date till"), 400
+        return jsonify("Kies datum tot"), 400
 
     date_tot = datetime.strptime(datum_tot, "%Y-%m-%d")
     if date_tot < date_vanaf:
-        return jsonify("You have chosen a date before date from"), 400
+        return jsonify("U heeft datum gekozen die in verleden is dan datum vanaf"), 400
     time_slot = request.json["tijd"]
     if time_slot == "":
-        return jsonify('Time slot cant be empty!\nTip: voeg het tijd in als string bijv ("13:00")'), 400
+        return jsonify('Tijd slot mag niet leeg zijn.\nTip: voeg het tijd in als string bijv ("13:00")'), 400
 
     type_onderzoek = request.json["typeonderzoek"]
     if type_onderzoek == "":
@@ -577,9 +577,10 @@ def onderzoek_aanvragen_organisatie():
     )
     onderzoek_id_opvragen = organisatie.get_last_onderzoek_id()
     onderzoek_id = int(onderzoek_id_opvragen[0])
+    onderzoek_id_str = str(onderzoek_id)
     for disability in type_disability:
         organisatie.insert_onderzoek_disability(onderzoek_id, disability)
-    return jsonify(onderzoek), 201
+    return jsonify({f"message":"uw onderzoek id is: "+onderzoek_id_str}), 201
 
 
 @app.route("/api/openstaande_onderzoeken", methods=["GET"])
