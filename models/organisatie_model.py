@@ -150,7 +150,7 @@ class Organisatie:
             "SELECT * FROM organisaties WHERE organisatie_id = ?",
             (organisatie_id,),
         ).fetchone()
-        return result
+        return dict(result)
     def api_check(self, api_key):
         result = self.cursor.execute(
             "SELECT organisatie_id FROM organisaties WHERE api_key = ?",

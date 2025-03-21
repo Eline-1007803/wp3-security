@@ -5,8 +5,8 @@ function get_organisatie_id(){
 }
 
 function get_user_info(id){
-    let organisatie_id = id.id
-    fetch(`/api/organisatie/${organisatie_id}`)
+    let organisatie = id.organisatie_id
+    fetch(`/api/organisatie/${organisatie}`)
         .then(response => response.json())
         .then(fill_html)
 }
@@ -47,4 +47,4 @@ function removelistener(){
     save_button.removeEventListener('click', () => {})
 }
 
-get_user_id()
+get_organisatie_id()
