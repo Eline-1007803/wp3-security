@@ -5,8 +5,13 @@
 {% endblock %}
 {% block title %}Overzicht Organisaties - Accessibility Hub{% endblock %}
 {% block nav_links %}
-<a class= "logo-image" href="/"><img class="logo-image" src="../static/images/logo.svg" alt="Accessibility Hub Logo"></a>
+<a href="/dashboard">Dashboard</a>
+<a href="/administrator-overview">Beheerders</a>
+<a href="/api/organisatie_aanmaken">Organisatie aanmaken</a>
+<a href="/api/overzicht_organisaties">Organisaties</a>
 <a href="/onderzoekaanvragen">Aanvraag</a>
+<a href="/myprofile">Profiel</a>
+<a href="#" class="button dark-mode-toggle" onclick="darkLightMode(); return false;">Donkere/lichte modus</a>
 <a href="/logout">Uitloggen</a>
 {% endblock %}
 {% block main %}

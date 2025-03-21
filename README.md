@@ -59,6 +59,9 @@ Klik op de link die verschijnt in de terminal om de webapplicatie te openen.
 - E-mail = kevinvandam@gmail.com
 - Wachtwoord = abc
 
+- e-mail = peterselie@gmail.com
+- wachtwoord = 123
+
 ### Organisatie:
 - E-mail = gfx@info.com
 - Wachtwoord = gfx
