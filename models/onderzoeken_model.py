@@ -42,8 +42,8 @@ class Onderzoeken:
         return onderzoek_lijst
 
 
-    def update_status(self, onderzoek_id, status):
-        self.cursor.execute("UPDATE onderzoeken SET status = ? WHERE onderzoek_id = ?", (status, onderzoek_id))
+    def update_status(self, onderzoek_id, status, admin_id, date):
+        self.cursor.execute("UPDATE onderzoeken SET status = ?, beheerder_id = ?, datum_goedgekeurd = ? WHERE onderzoek_id = ?", (status, admin_id, date, onderzoek_id))
         self.con.commit()
 
     def inschrijving(self, ervaringsdeskundige_id, onderzoek_id):

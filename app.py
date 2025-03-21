@@ -534,7 +534,9 @@ def update_onderzoeken():
     ozm = onderzoeken_model.Onderzoeken()
     status = request.json.get("status")
     onderzoek_id = request.json.get("id")
-    ozm.update_status(onderzoek_id, status)
+    admin_id = request.json.get("beheerder_id")
+    date = request.json.get("date")
+    ozm.update_status(onderzoek_id, status, admin_id, date)
     return "200"
 
 

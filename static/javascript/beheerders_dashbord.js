@@ -325,16 +325,16 @@ function refresh_onderzoeken(data) {
   onderzoeken_collection.innerHTML = onderzoeken_html;
   refresh_modals_onderzoeken(data);
 }
-function refresh_modals_onderzoeken(data) {
-  let onderzoeken_modals = document.getElementById('onderzoeken_modal');
-  onderzoeken_modals.innerHTML = '';
+async function refresh_modals_onderzoeken(data) {
+    let onderzoeken_modals = document.getElementById('onderzoeken_modal');
+    onderzoeken_modals.innerHTML = '';
 
-  let onderzoeken = data.onderzoeken;
-  let onderzoeken_modal_html = '';
+    let onderzoeken = data.onderzoeken;
+    let onderzoeken_modal_html = '';
 
-  for (let i = 0; i < onderzoeken.length; i++) {
-      let onderzoekenElement = onderzoeken[i];
-      onderzoeken_modal_html += `
+    for (let i = 0; i < onderzoeken.length; i++) {
+        let onderzoekenElement = onderzoeken[i];
+        onderzoeken_modal_html += `
                 <div id="myModal${i}" class="modal">
                   <div class="modal-content">
                       <button class="close" id="close${i}" >&times;</button>
@@ -369,77 +369,80 @@ function refresh_modals_onderzoeken(data) {
                   </div>
                 </div>
       `;
-  }
+    }
 
-  onderzoeken_modals.innerHTML = onderzoeken_modal_html;
+    onderzoeken_modals.innerHTML = onderzoeken_modal_html;
 
-  // Attach event listeners for modals
-  const onderzoek_modals = onderzoeken_modals.querySelectorAll('.modal');
-  const onderzoeken_btns = document.querySelectorAll('.onderzoeken_btn');
-  const onderzoeken_spans = onderzoeken_modals.querySelectorAll('.close');
-  const onderzoeken_gb = onderzoeken_modals.querySelectorAll('.goedkeur_button');
-  const onderzoeken_ab = onderzoeken_modals.querySelectorAll('.afkeur_button');
-  const onderzoeken_ids = onderzoeken_modals.querySelectorAll('.id')
+    // Attach event listeners for modals
+    const onderzoek_modals = onderzoeken_modals.querySelectorAll('.modal');
+    const onderzoeken_btns = document.querySelectorAll('.onderzoeken_btn');
+    const onderzoeken_spans = onderzoeken_modals.querySelectorAll('.close');
+    const onderzoeken_gb = onderzoeken_modals.querySelectorAll('.goedkeur_button');
+    const onderzoeken_ab = onderzoeken_modals.querySelectorAll('.afkeur_button');
+    const onderzoeken_ids = onderzoeken_modals.querySelectorAll('.id')
+    let date = getDate()
+    let admin_id_dict = await getId()
+    let admin_id = admin_id_dict.id
 
-  onderzoeken_ids.forEach((id) => {
-    id.style.display = 'none';
-  });
+    onderzoeken_ids.forEach((id) => {
+        id.style.display = 'none';
+    });
 
 
-  onderzoeken_btns.forEach((btn, index) => {
-      btn.addEventListener('click', () => {
-          onderzoek_modals[index].style.display = 'block';
-          kill_interval()
-      });
-  });
+    onderzoeken_btns.forEach((btn, index) => {
+        btn.addEventListener('click', () => {
+            onderzoek_modals[index].style.display = 'block';
+            kill_interval()
+        });
+    });
 
-  onderzoeken_gb.forEach((gb, index) => {
-      gb.addEventListener('click', () => {
-          onderzoek_modals[index].style.display = 'none';
-          let id = onderzoek_modals[index].getElementsByClassName('id')[0].innerHTML
-          console.log(id)
-          fetch('/api/onderzoeken', {
-              method: 'PUT',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({"status": "goedgekeurd", "id":id})
-          }).then(r => r.json())
-          revive_interval()
-      });
-  });
+    onderzoeken_gb.forEach((gb, index) => {
+        gb.addEventListener('click', () => {
+            onderzoek_modals[index].style.display = 'none';
+            let id = onderzoek_modals[index].getElementsByClassName('id')[0].innerHTML
+            console.log(id)
+            fetch('/api/onderzoeken', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({"status": "goedgekeurd", "id": id, beheerder_id: admin_id, date: date})
+            }).then(r => r.json())
+            revive_interval()
+        });
+    });
 
-  onderzoeken_ab.forEach((ab, index) => {
-      ab.addEventListener('click', () => {
-          onderzoek_modals[index].style.display = 'none';
-          let id = onderzoek_modals[index].getElementsByClassName('id')[0].innerHTML
-          console.log(id)
-          fetch('/api/onderzoeken', {
-              method: 'PUT',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({"status": "afgekeurd", "id":id})
-          }).then(r => r.json())
-          revive_interval()
-      });
-  });
+    onderzoeken_ab.forEach((ab, index) => {
+        ab.addEventListener('click', () => {
+            onderzoek_modals[index].style.display = 'none';
+            let id = onderzoek_modals[index].getElementsByClassName('id')[0].innerHTML
+            console.log(id)
+            fetch('/api/onderzoeken', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({"status": "afgekeurd", "id": id, beheerder_id: admin_id, date: date})
+            }).then(r => r.json())
+            revive_interval()
+        });
+    });
 
-  onderzoeken_spans.forEach((span, index) => {
-      span.addEventListener('click', () => {
-          onderzoek_modals[index].style.display = 'none';
-          revive_interval()
-      });
-  });
+    onderzoeken_spans.forEach((span, index) => {
+        span.addEventListener('click', () => {
+            onderzoek_modals[index].style.display = 'none';
+            revive_interval()
+        });
+    });
 
-  window.addEventListener('click', (event) => {
-      onderzoeken_modals.forEach((modal, index) => {
-          if (event.target === modal[index]) {
-              modal[index].style.display = 'none';
-          }
-      });
-  });
-  onderzoeken_filter()
+    window.addEventListener('click', (event) => {
+        onderzoeken_modals.forEach((modal, index) => {
+            if (event.target === modal[index]) {
+                modal[index].style.display = 'none';
+            }
+        });
+    });
+    onderzoeken_filter()
 }
 
 function get_all() {
