@@ -63,6 +63,7 @@ function showOnderzoeken (onderzoeken) {
       change_status(onderzoek_id);
     });
   });
+  filter()
 }
 
 function get_onderzoek(onderzoek_id) {
@@ -76,7 +77,6 @@ function get_onderzoek(onderzoek_id) {
       .then(onderzoek => showOnderzoek(onderzoek))
 }
 function filter() {
-  clearInterval(fetchinterval)
   var id_input,input_title, input_status, input_beschikbaarheid, input_leeftijdvan, input_leeftijdtot, filter_title, filter_status, filter_beschikbaar, filter_leeftijdvan, filter_leeftijdtot, table, tr, td, i;
   id_input = document.getElementById("idinput")
   input_title = document.getElementById("titleinput");
