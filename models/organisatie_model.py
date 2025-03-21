@@ -140,11 +140,10 @@ class Organisatie:
         email,
         telefoonnummer,
         overige_details,
-        api_key,
         organisatie_id
     ):
         self.cursor.execute(
-            "UPDATE  organisaties SET naam = ?,wachtwoord =?,type = ?,website =?,beschrijving =?,contactpersoon =?,email =?, telefoonnummer =? overige_details=?,api_key =? WHERE organisatie_id = ?",
+            "UPDATE  organisaties SET naam = ?,wachtwoord =?,type = ?,website =?,beschrijving =?,contactpersoon =?,email =?, telefoonnummer =?, overige_details=? WHERE organisatie_id = ?",
             (
                 naam,
                 generate_password_hash(password),
@@ -155,13 +154,18 @@ class Organisatie:
                 email,
                 telefoonnummer,
                 overige_details,
-                api_key,
                 organisatie_id
             ),
         )
         self.con.commit()
         return True
-
+    def update_api_key(self, api_key,organisatie_id):
+        self.cursor.execute(
+            "UPDATE organisaties SET api_key =? WHERE organisatie_id = ?",
+            (api_key,organisatie_id),
+        )
+        self.con.commit()
+        return True
     def get_all_organisaties(self):
         result = self.cursor.execute("SELECT * FROM organisaties").fetchall()
         organisaties = []
