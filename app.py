@@ -283,7 +283,9 @@ def update_deskundigen():
     edm = ervaringsdeskundigen_model.Ervaringsdeskundigen()
     status = request.json.get("status")
     deskundige_id = request.json.get("id")
-    edm.update_status(deskundige_id, status)
+    admin_id = request.json.get("beheerder_id")
+    date = request.json.get("date")
+    edm.update_status(deskundige_id, status, admin_id, date)
     return "200"
 
 @app.route("/api/inschrijvingen", methods=["GET"])

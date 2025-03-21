@@ -23,8 +23,8 @@ class Ervaringsdeskundigen:
                 WHERE geregistreerde_beperkingen.ervaringsdeskundige_id = ?""", (ervaringsdeskundige_id,)).fetchall()
         return result
 
-    def update_status(self, deskundige_id, status):
-        self.cursor.execute("UPDATE ervaringsdeskundigen SET status = ? WHERE ervaringsdeskundige_id = ?", (status, deskundige_id))
+    def update_status(self, deskundige_id, status, admin_id, date):
+        self.cursor.execute("UPDATE ervaringsdeskundigen SET status = ?, beheerder_id = ?, datum_goedgekeurd = ? WHERE ervaringsdeskundige_id = ?", (status, admin_id, date, deskundige_id))
         self.con.commit()
 
     def get_expert(self, expert_id,):

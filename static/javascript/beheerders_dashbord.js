@@ -19,16 +19,16 @@ function refresh_deskundigen(data) {
   deskundigen_collection.innerHTML = deskundigen_html;
   refresh_modals_deskundigen(data);
 }
-function refresh_modals_deskundigen(data) {
-  let deskundigen_modals = document.getElementById('deskundigen_modal');
-  deskundigen_modals.innerHTML = '';
+async function refresh_modals_deskundigen(data) {
+    let deskundigen_modals = document.getElementById('deskundigen_modal');
+    deskundigen_modals.innerHTML = '';
 
-  let deskundigen = data.deskundigen;
-  let deskundigen_modal_html = '';
+    let deskundigen = data.deskundigen;
+    let deskundigen_modal_html = '';
 
-  for (let i = 0; i < deskundigen.length; i++) {
-      let deskundigenElement = deskundigen[i];
-      deskundigen_modal_html += `
+    for (let i = 0; i < deskundigen.length; i++) {
+        let deskundigenElement = deskundigen[i];
+        deskundigen_modal_html += `
                 <div id="myModal${i}" class="modal">
                   <div class="modal-content">
                       <button class="close" id="close${i}" >&times;</button>
@@ -74,76 +74,79 @@ function refresh_modals_deskundigen(data) {
                   </div>
                 </div>
       `;
-  }
+    }
 
-  deskundigen_modals.innerHTML = deskundigen_modal_html;
+    deskundigen_modals.innerHTML = deskundigen_modal_html;
 
-  // Attach event listeners for modals
-  const modals = deskundigen_modals.querySelectorAll('.modal');
-  const btns = document.querySelectorAll('.deskundige_btn');
-  const spans = deskundigen_modals.querySelectorAll('.close');
-  const deskundigen_gb = deskundigen_modals.querySelectorAll('.goedkeur_button');
-  const deskundigen_ab = deskundigen_modals.querySelectorAll('.afkeur_button');
-  const ids = deskundigen_modals.querySelectorAll('.id')
+    // Attach event listeners for modals
+    const modals = deskundigen_modals.querySelectorAll('.modal');
+    const btns = document.querySelectorAll('.deskundige_btn');
+    const spans = deskundigen_modals.querySelectorAll('.close');
+    const deskundigen_gb = deskundigen_modals.querySelectorAll('.goedkeur_button');
+    const deskundigen_ab = deskundigen_modals.querySelectorAll('.afkeur_button');
+    const ids = deskundigen_modals.querySelectorAll('.id')
+    let date = getDate()
+    let admin_id_dict = await getId()
+    let admin_id = admin_id_dict.id
 
-  ids.forEach((id) => {
-      id.style.display = 'none';
-  });
+    ids.forEach((id) => {
+        id.style.display = 'none';
+    });
 
-  btns.forEach((btn, index) => {
-      btn.addEventListener('click', () => {
-          modals[index].style.display = 'block';
-          kill_interval()
-      });
-  });
+    btns.forEach((btn, index) => {
+        btn.addEventListener('click', () => {
+            modals[index].style.display = 'block';
+            kill_interval()
+        });
+    });
 
-  deskundigen_gb.forEach((gb, index) => {
-      gb.addEventListener('click', () => {
-          modals[index].style.display = 'none';
-          let id = modals[index].getElementsByClassName('id')[0].innerHTML
-          console.log(id)
-          fetch('/api/deskundigen', {
-              method: 'PUT',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({"status": "goedgekeurd", "id":id})
-          }).then(r => r.json())
-          revive_interval()
-      });
-  });
+    deskundigen_gb.forEach((gb, index) => {
+        gb.addEventListener('click', () => {
+            modals[index].style.display = 'none';
+            let id = modals[index].getElementsByClassName('id')[0].innerHTML
+            console.log(id)
+            fetch('/api/deskundigen', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({"status": "goedgekeurd", "id": id, beheerder_id: admin_id, date: date})
+            }).then(r => r.json())
+            revive_interval()
+        });
+    });
 
-  deskundigen_ab.forEach((ab, index) => {
-      ab.addEventListener('click', () => {
-          modals[index].style.display = 'none';
-          let id = modals[index].getElementsByClassName('id')[0].innerHTML
-          console.log(id)
-          fetch('/api/deskundigen', {
-              method: 'PUT',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({"status": "afgekeurd", "id":id})
-          }).then(r => r.json())
-          revive_interval()
-      });
-  });
+    deskundigen_ab.forEach((ab, index) => {
+        ab.addEventListener('click', () => {
+            modals[index].style.display = 'none';
+            let id = modals[index].getElementsByClassName('id')[0].innerHTML
+            console.log(id)
+            fetch('/api/deskundigen', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({"status": "afgekeurd", "id": id, beheerder_id: admin_id, date: date})
+            }).then(r => r.json())
+            revive_interval()
+        });
+    });
 
-  spans.forEach((span, index) => {
-      span.addEventListener('click', () => {
-          modals[index].style.display = 'none';
-          revive_interval()
-      });
-  });
+    spans.forEach((span, index) => {
+        span.addEventListener('click', () => {
+            modals[index].style.display = 'none';
+            revive_interval()
+        });
+    });
 
-  window.addEventListener('click', (event) => {
-      modals.forEach((modal, index) => {
-          if (event.target === modal[index]) {
-              modal[index].style.display = 'none';
-          }
-      });
-  });
-  ervaringsdeskundige_filter()
+    window.addEventListener('click', (event) => {
+        modals.forEach((modal, index) => {
+            if (event.target === modal[index]) {
+                modal[index].style.display = 'none';
+            }
+        });
+    });
+    ervaringsdeskundige_filter()
 }
 
 function refresh_inschrijvingen(data) {
@@ -547,4 +550,31 @@ function ervaringsdeskundige_filter() {
       }
     }
   }
+}
+
+function getDate() {
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    return today
+}
+function fetchId() {
+    return fetch('/get_user_id')
+        .then((response) => {
+            return response.json().then((data) => {
+                console.log(data);
+                return data;
+            })
+        });
+}
+async function getId() {
+    let dictdata;
+    await fetchId().then(data => {
+        console.log(data)
+        dictdata = data
+    })
+    return dictdata
 }
