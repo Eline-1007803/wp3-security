@@ -403,7 +403,7 @@ def nieuwe_organisatie():
         return jsonify("Voer beschrijving in"), 400
     contactpersoon = request.json["contactpersoon"]
     if contactpersoon == "":
-        return jsonify("Voer naam van de contact persoon in in"), 400
+        return jsonify("Voer naam van de contact persoon in"), 400
     email = request.json["email"]
     number = request.json["number"]
     check_number_10_digit = str(number)
@@ -429,7 +429,9 @@ def update_organisatie(organisatie_id):
     naam = request.json["naam"]
     if naam == "":
         return jsonify("Typ organisatie naam in!"), 400
-    password = request.json["password"]
+    password = request.json["wachtwoord"]
+    if password == "":
+        return jsonify("Wachtwoord mag niet leeg zijn, als u niet wilt veranderen typ huidige wachtwoord in"),400
     option = request.json["option"]
     website = request.json["website"]
     beschrijving = request.json["beschrijving"]

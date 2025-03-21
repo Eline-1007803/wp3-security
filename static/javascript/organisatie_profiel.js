@@ -74,7 +74,7 @@ function fill_html(organisatie_info){
             },
             body: JSON.stringify({
                 naam: voornaam,
-                password:wachtwoord,
+                wachtwoord:wachtwoord,
                 option:select,
                 website:website,
                 beschrijving:beschrijving,
@@ -84,8 +84,10 @@ function fill_html(organisatie_info){
                 number:telnum,
             })
         })
-        .then(response => response)
-        .then(get_organisatie_id);
+        .then(response => response.json())
+        .then(data=>{
+            alert(data)
+            get_organisatie_id});
     });
     let generate_key_button = document.getElementById('generate_key');
     let generatedApiKey = '';
@@ -104,7 +106,8 @@ function fill_html(organisatie_info){
             })
         })
         .then(response => response)
-        .then(get_organisatie_id);
+        .then(
+            get_organisatie_id);
     });
 
 }
