@@ -86,3 +86,7 @@ th, td {
     left: 420px;
 }
 
+button .data-organisatie {
+    background-color: black;
+    color: white;
+}
