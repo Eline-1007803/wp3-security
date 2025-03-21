@@ -39,7 +39,11 @@ class Inschrijvingen:
                 WHERE ervaringsdeskundige_id = ? AND onderzoek_id = ?""",
                 (ervaringsdeskundige_id, onderzoek_id)
         ).fetchone
-        return result is not None
+        try:
+            dict(result)
+            return result
+        except:
+            return False
     
     def inschrijving_onderzoek(self, ervaringsdeskundige_id, onderzoek_id):
         self.cursor.execute(

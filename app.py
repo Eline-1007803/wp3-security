@@ -107,12 +107,20 @@ def my_profile():
 def mijn_profiel():
     return render_template('ervaringsdeskundige_profiel.html')
 
+@app.route("/myprofile_organisatie")
+def my_profile_organisatie():
+    return render_template("organisatie_profile.html")
+
 @app.route('/get_user_id')
 def get_user_id():
     if session.get('admin'):
         return {'id': session.get('admin')}
     if session.get('expert'):
         return {'ervaringsdeskundige_id': session.get('expert')}
+@app.route("/get_organisatie_id")
+def get_organisatie_id():
+    if session.get("organisation"):
+        return {'organisatie_id': session.get('organisation')}
 
 @app.route('/get_id_for_profile')
 def get_id_for_profile():
@@ -359,6 +367,10 @@ def organisaties():
     result = organisatie.get_all_organisaties()
     return jsonify(result)
 
+@app.route("/api/organisatie/<organisatie_id>", methods=["GET"])
+def get_organisatie(organisatie_id):
+    result = organisatie.get_organisatie(organisatie_id)
+    return jsonify(result)
 @app.route("/api/alle_organisaties/delete=<organisatie_id>", methods=["DELETE"])
 def delete_organisatie(organisatie_id):
     result = organisatie.delete_organisatie(organisatie_id)
@@ -407,6 +419,42 @@ def nieuwe_organisatie():
         api_key,
     )
     return jsonify(new_organisatie), 201
+@app.route("/api/updateorganisatie/<organisatie_id>")
+def update_organisatie(organisatie_id):
+    naam = request.json["naam"]
+    if naam == "":
+        return jsonify("Typ organisatie naam in!"), 400
+    password = request.json["password"]
+    option = request.json["option"]
+    website = request.json["website"]
+    beschrijving = request.json["beschrijving"]
+    if beschrijving == "":
+        return jsonify("Voer beschrijving in"), 400
+    contactpersoon = request.json["contactpersoon"]
+    if contactpersoon == "":
+        return jsonify("Voer naam van de contact persoon in in"), 400
+    email = request.json["email"]
+    number = request.json["number"]
+    check_number_10_digit = str(number)
+    if not isinstance(number, int) or len(check_number_10_digit) != 9:
+        return jsonify("U heeft geen nummer ingevuld of het heeft geen 10 cijfers"), 400
+    overige_details = request.json["overige_details"]
+    api_key = ''.join(random.choices(string.ascii_letters + string.digits + string.punctuation, k=32))
+    organisatie_id = session.get('organisation')
+    updated = organisatie.update_own_organisatie(
+        naam,
+        password,
+        option,
+        website,
+        beschrijving,
+        contactpersoon,
+        email,
+        number,
+        overige_details,
+        api_key,
+        organisatie_id
+    )
+    return jsonify(updated), 201
 
 
 @app.route("/api/overzicht_onderzoeken", methods=["GET"])
@@ -415,7 +463,7 @@ def overzicht_onderzoeken():
 
 @app.route("/api/overzicht_onderzoeken_organisatie", methods=["GET"])
 def overzicht_onderzoeken_organisatie():
-    organisatie_id = 1  # for now
+    organisatie_id = session.get('organisation')
     onderzoek = organisatie.get_all_onderzoeken(organisatie_id)
     onderzoeken = []
     for row in onderzoek:
@@ -461,9 +509,8 @@ def update_onderzoek_gegevens(onderzoek_id):
             400,
         )
 
-    organisatie_id = 1  # for now
     updated_onderzoek_gegevens = organisatie.update_onderzoek(
-        title, beschrijving, datum_vanaf, datum_tot, onderzoek_id, organisatie_id
+        title, beschrijving, datum_vanaf, datum_tot, onderzoek_id
     )
     return jsonify(updated_onderzoek_gegevens), 200
 
@@ -502,26 +549,26 @@ def onderzoek_aanvragen_organisatie():
 
     beschrijving = request.json["beschrijving"]
     if beschrijving == "":
-        return jsonify("Beschrijving can't be empty!"), 400
+        return jsonify("Beschrijving is verplicht"), 400
 
     datum_vanaf = request.json["datumvanaf"]
     if datum_vanaf == "":
-        return jsonify("You must select a date from"), 400
+        return jsonify("Kies datum vanaf"), 400
 
     date_vanaf = datetime.strptime(datum_vanaf, "%Y-%m-%d")
     if date_vanaf < datetime.now()- timedelta(days=1):
-        return jsonify("You have chosen a past date."), 400
+        return jsonify("U heeft datum in verleden gekozen"), 400
 
     datum_tot = request.json["datumtot"]
     if datum_tot == "":
-        return jsonify("You must select a date till"), 400
+        return jsonify("Kies datum tot"), 400
 
     date_tot = datetime.strptime(datum_tot, "%Y-%m-%d")
     if date_tot < date_vanaf:
-        return jsonify("You have chosen a date before date from"), 400
+        return jsonify("U heeft datum gekozen die in verleden is dan datum vanaf"), 400
     time_slot = request.json["tijd"]
     if time_slot == "":
-        return jsonify('Time slot cant be empty!\nTip: voeg het tijd in als string bijv ("13:00")'), 400
+        return jsonify('Tijd slot mag niet leeg zijn.\nTip: voeg het tijd in als string bijv ("13:00")'), 400
 
     type_onderzoek = request.json["typeonderzoek"]
     if type_onderzoek == "":
@@ -577,9 +624,10 @@ def onderzoek_aanvragen_organisatie():
     )
     onderzoek_id_opvragen = organisatie.get_last_onderzoek_id()
     onderzoek_id = int(onderzoek_id_opvragen[0])
+    onderzoek_id_str = str(onderzoek_id)
     for disability in type_disability:
         organisatie.insert_onderzoek_disability(onderzoek_id, disability)
-    return jsonify(onderzoek), 201
+    return jsonify({f"message":"uw onderzoek id is: "+onderzoek_id_str}), 201
 
 
 @app.route("/api/openstaande_onderzoeken", methods=["GET"])
@@ -703,11 +751,11 @@ def lijst_ingeschreven_onderzoeken():
 
 @app.route("/api/inschrijven_onderzoek", methods=["POST"])
 def inschrijven_onderzoek():
-    if "ervaringsdeskundige_id" not in session:
+    if not session.get('expert'):
         return jsonify({"success": False, "error": "U moet ingelogd zijn om in te schrijven"}), 403
     
     data = request.get_json()
-    ervaringsdeskundige_id = session["ervaringsdeskundige_id"]
+    ervaringsdeskundige_id = session.get('expert')
     onderzoek_id = data.get("onderzoek_id")
 
 

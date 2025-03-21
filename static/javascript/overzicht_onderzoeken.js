@@ -8,22 +8,29 @@ function fetchResearch() {
       .then(response => response.json())
       .then(onderzoeken => showOnderzoeken(onderzoeken))
 }
-
-fetchResearch();
-setInterval(fetchResearch, 5000);
+fetchResearch()
+let fetchinterval = setInterval(fetchResearch, 5000);
 
 function showOnderzoeken (onderzoeken) {
-  document.querySelector(".js-onderzoektabel").innerHTML = '';
+  document.querySelector(".js-tabel").innerHTML = '';
 
   onderzoeken.forEach((onderzoek) => {
-
+        let beschikbaar;
+        if (onderzoek.beschikbaar === 0)
+        {
+          beschikbaar = "Nee"
+        }
+        else
+        {
+          beschikbaar = "Ja" 
+        }
          let row =
           `
           <tr>
                 <th scope="row">${onderzoek.onderzoek_id}</td>
                 <td>${onderzoek.titel}</td>
                 <td>${onderzoek.status}</td>
-                <td>Ja</td>
+                <td>${beschikbaar}</td>
                 <td>${onderzoek.leeftijd_van}</td>
                 <td>${onderzoek.leeftijd_tot}</td>
                 <td>${onderzoek.beperking}</td>
@@ -36,7 +43,7 @@ function showOnderzoeken (onderzoeken) {
                 </td>
             </tr>
           `
-  document.querySelector(".js-onderzoektabel").innerHTML += row;
+  document.querySelector(".js-tabel").innerHTML += row;
   });
   document.querySelectorAll('.update').forEach(button => {
     button.addEventListener('click', () => {
@@ -56,6 +63,7 @@ function showOnderzoeken (onderzoeken) {
       change_status(onderzoek_id);
     });
   });
+  filter()
 }
 
 function get_onderzoek(onderzoek_id) {
@@ -69,7 +77,6 @@ function get_onderzoek(onderzoek_id) {
       .then(onderzoek => showOnderzoek(onderzoek))
 }
 function filter() {
-  clearInterval(fetchResearch)
   var id_input,input_title, input_status, input_beschikbaarheid, input_leeftijdvan, input_leeftijdtot, filter_title, filter_status, filter_beschikbaar, filter_leeftijdvan, filter_leeftijdtot, table, tr, td, i;
   id_input = document.getElementById("idinput")
   input_title = document.getElementById("titleinput");
@@ -119,19 +126,18 @@ function filter() {
   }
 }
 
-
 function showOnderzoek(onderzoek)
 {
   const onderzoekPOPUP = document.querySelector(".updatemodal");
   onderzoekPOPUP.innerHTML =
   `
-    <div class="modal-content">
-      <span id="close" class="close_updatemodal">&times;</span>
-      <h2>Wijzig onderzoek gegevens</h2>
+    <div class="modalupdate-content">
+      <span id="close" class="close_updatemodal">&times;</span><br>
+      <h2>Wijzig onderzoek gegevens</h2><br>
       <label for="titel">Title:</label>
       <input type="text" name="title" id="titel" value="${onderzoek.titel}" required><br>
       <label for="beschrijving">Beschrijving</label>
-      <textarea name="beschrijving" id="beschrijving" required>${onderzoek.beschrijving}</textarea><br>
+      <textarea name="beschrijving" id="beschrijving" required>${onderzoek.beschrijving}</textarea>
       <label for="datumvanaf">Datum vanaf:</label>
       <input type="date" name="datevanaf" id="datumvanaf" value="${onderzoek.datum_vanaf}" required><br>
       <label for="datumtot">Datum tot:</label>
@@ -215,7 +221,7 @@ function showUsers(users)
   });
   usersPOPUP.innerHTML =
   `
-    <div class="modal-content">
+    <div class="modalusers-content">
         <span class="close_usersmodal">&times;</span>
         <h2>ingeschreven mensen</h2>
         <input type="text" id="naaminput" onkeyup="filter_users()" placeholder="Zoek ervaringdeskundige op naam.." aria-label="Zoek ervaringdeskundige op naam">
