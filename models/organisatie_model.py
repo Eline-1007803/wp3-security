@@ -65,11 +65,11 @@ class Organisatie:
         return True
 
     def update_onderzoek(
-        self, title, beschrijving, datumvanaf, datumtot, onderzoek_id, organisatie_id
+        self, title, beschrijving, datumvanaf, datumtot, onderzoek_id
     ):
         self.cursor.execute(
-            " UPDATE onderzoeken SET titel = ?, beschrijving = ?, datum_vanaf = ?,datum_tot = ? WHERE onderzoek_id = ? AND organisatie_id = ?",
-            (title, beschrijving, datumvanaf, datumtot, onderzoek_id, organisatie_id),
+            " UPDATE onderzoeken SET titel = ?, beschrijving = ?, datum_vanaf = ?,datum_tot = ? WHERE onderzoek_id = ?",
+            (title, beschrijving, datumvanaf, datumtot, onderzoek_id),
         )
         self.con.commit()
         return True

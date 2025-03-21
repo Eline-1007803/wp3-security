@@ -415,7 +415,7 @@ def overzicht_onderzoeken():
 
 @app.route("/api/overzicht_onderzoeken_organisatie", methods=["GET"])
 def overzicht_onderzoeken_organisatie():
-    organisatie_id = 1  # for now
+    organisatie_id = session.get('organisation')
     onderzoek = organisatie.get_all_onderzoeken(organisatie_id)
     onderzoeken = []
     for row in onderzoek:
@@ -461,9 +461,8 @@ def update_onderzoek_gegevens(onderzoek_id):
             400,
         )
 
-    organisatie_id = 1  # for now
     updated_onderzoek_gegevens = organisatie.update_onderzoek(
-        title, beschrijving, datum_vanaf, datum_tot, onderzoek_id, organisatie_id
+        title, beschrijving, datum_vanaf, datum_tot, onderzoek_id
     )
     return jsonify(updated_onderzoek_gegevens), 200
 
