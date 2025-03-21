@@ -201,8 +201,8 @@ function saveSignup() {
     })
         .then(response => response)
         .then(data => {
-            if (data['success'] === true) {
-                window.location.href = '/login';
+            if (data['success']) {
+                alert('succesvol verstuurt')
             }
         });
 }
