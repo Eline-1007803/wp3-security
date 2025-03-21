@@ -5,7 +5,7 @@ function get_user_id(){
 }
 
 function get_user_info(id){
-    let user_id = id.beheerder_id
+    let user_id = id.id
     fetch(`/api/administrator/${user_id}`)
         .then(response => response.json())
         .then(fill_html)
