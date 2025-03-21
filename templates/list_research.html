@@ -13,12 +13,14 @@
     <main class="row">
         <section aria-labelledby="table-heading1" class="column">
         <h1 id="table-heading1">Overzicht van ingeschreven onderzoeken</h1>
+        <label id="statusOnderzoek" for="statusOnderzoek">Zoek op status van onderzoek:</label>
         <select id="statusOnderzoek" onchange="zoekTitels()">
             <option value="">Alle statussen</option>
             <option value="goedgekeurd">goedgekeurd</option>
             <option value="nieuw">in behandeling</option>
             <option value="afgekeurd">afgewezen</option>
         </select>
+        <label id="zoekTitel" for="zoekTitel">Zoek op naam van onderzoek:</label>
         <input type="text" id="zoekTitel" onkeyup="zoekTitels()" placeholder="Zoek op naam van onderzoek" title="Type om te zoeken op titel">
         <table class="table-clickable" id="tabelOnderzoeken">
             <thead>

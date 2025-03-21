@@ -35,7 +35,7 @@ body {
 }
 
 .column {
-    max-width: 800px;
+    max-width: 900px;
     width: 100%;
     background-color: #fff;
     padding: 20px;
@@ -50,7 +50,7 @@ body {
 
 .table-clickable th, 
 .table-clickable td {
-    border: 1px solid #ddd;
+    border: 1px solid #000000;
     padding: 12px;
     text-align: left;
 }
@@ -163,6 +163,7 @@ cursor: pointer;
 display: inline-block;
 margin-bottom: 15px;
 text-align: center;
+position: fixed;
 }
 
 .dark-mode-toggle {
@@ -192,4 +193,70 @@ text-align: center;
 
 #aanmeldenButton {
     background-color: blue;
+}
+
+.dark-mode .table-clickable th, 
+.dark-mode .table-clickable td {
+    border: 1px solid white;
+}
+
+.dark-mode .popup header {
+    background-color: black;
+}
+
+.popup header {
+    background-color: white;
+}
+
+button.close-popup {
+    color: black;
+    background-color: none;
+    font-size: 2rem;
+}
+
+.dark-mode button.close-popup {
+    color: white;
+}
+
+label, input {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px;
+}
+
+input {
+    width: 180px;
+    padding: 8px;
+    font-size: 14px;
+    border: 2px solid #2b50ec;
+    border-radius: 6px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+input:last-of-type {
+    margin-right: 30px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #1e3bbd;
+    box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.3);
+}
+
+.input #statusOnderzoek {
+    width: 180px;
+    padding: 8px;
+    font-size: 14px;
+    border: 2px solid #2b50ec;
+    border-radius: 6px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+select {
+    width: 180px; 
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #2b50ec;
+    border-radius: 6px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
