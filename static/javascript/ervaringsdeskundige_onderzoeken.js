@@ -128,7 +128,7 @@ document.getElementById('aanmeldenButton').addEventListener('click', function ()
         body: JSON.stringify({onderzoek_id: onderzoekId})
     })
     .then(response => response.json())
-    .then(data => {if (data.succes) {alert("U heeft zich succesvol voor dit onderzoek ingeschreven.");
+    .then(data => {if (data.success) {alert("U heeft zich succesvol voor dit onderzoek ingeschreven.");
     } else { alert(data.error || "Er ging iets fout bij het inschrijven, probeer het zo opnieuw.")
     }})
 });
