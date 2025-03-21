@@ -23,18 +23,19 @@ class Onderzoeken:
     
     def get_open_research(self):
         result = self.cursor.execute(
-            """ SELECT onderzoeken.*
-                FROM onderzoeken
-                WHERE onderzoeken.status = 'goedgekeurd'""").fetchall()
+            """ SELECT onderzoeken.*,GROUP_CONCAT(alle_beperkingen.naam,',') AS beperking
+                FROM onderzoeken JOIN onderzoek_beperkingen ON onderzoeken.onderzoek_id = onderzoek_beperkingen.onderzoek_id JOIN alle_beperkingen ON onderzoek_beperkingen.beperking_id = alle_beperkingen.beperking_id
+                WHERE onderzoeken.status = 'goedgekeurd'
+                GROUP BY onderzoeken.onderzoek_id""").fetchall()
         
         onderzoek_lijst = [dict(row) for row in result]
         return onderzoek_lijst
     
     def get_signedup_research(self, ervaringsdeskundige_id):
         result = self.cursor.execute(
-            """ SELECT onderzoeken.*, inschrijvingen.*, inschrijvingen.status as inschrijving_status
+            """ SELECT onderzoeken.*, inschrijvingen.*, inschrijvingen.status as inschrijving_status,GROUP_CONCAT(alle_beperkingen.naam,',') AS beperking
                 FROM inschrijvingen
-                JOIN onderzoeken ON (onderzoeken.onderzoek_id = inschrijvingen.onderzoek_id)
+                JOIN onderzoeken ON (onderzoeken.onderzoek_id = inschrijvingen.onderzoek_id) JOIN onderzoek_beperkingen ON onderzoeken.onderzoek_id = onderzoek_beperkingen.onderzoek_id JOIN alle_beperkingen ON onderzoek_beperkingen.beperking_id = alle_beperkingen.beperking_id
                 WHERE inschrijvingen.ervaringsdeskundige_id = ?
             """,(ervaringsdeskundige_id,)).fetchall()
 
