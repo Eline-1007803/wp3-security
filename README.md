@@ -50,11 +50,6 @@ flask run
 ```
 Klik op de link die verschijnt in de terminal om de webapplicatie te openen.
 
-# Ontwerpdocumentatie
-## Visuele ontwerpdocumentatie:
-
-## Technische ontwerpdocumentatie:
-
 # Inlog/test gegevens:
 ### Ervaringsdeskundige:
 - E-mail = beauterham@gmail.com
