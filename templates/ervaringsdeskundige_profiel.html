@@ -5,13 +5,16 @@
 {% block nav_links %}
 <a href="/ingeschreven_onderzoeken">Mijn onderzoeken</a>
 <a href="/openstaande_onderzoeken">Onderzoeken</a>
-<a href="/logout">Uitloggen</a>
 <a href="#" class="button dark-mode-toggle" onclick="darkLightMode(); return false;">Donkere of lichte modus</a>
+<a href="/logout">Uitloggen</a>
+
 {% endblock %}
 {% block main %}
-<main class="row">
-    <section id="info" class="column">
-    </section>
+<main class="form-container">
+    <div class="form">
+        <section id="info" class="profile-info">
+        </section>
+    </div>
 </main>
 {% endblock %}
 

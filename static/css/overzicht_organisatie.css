@@ -13,7 +13,6 @@ body{
 
 
 .organisatie-table-container {
-    height: auto;
     display: flex;
     justify-content: center;
     margin: auto;
@@ -56,6 +55,8 @@ thead
 {
     background-color: #2b50ec;
     color: white;
+    border: none;
+    height: 60px;
 }
 
 table, th, td 
@@ -68,6 +69,10 @@ table, th, td
 
 th, td {
     border: 1px solid black;
+}
+
+td {
+    height: 100px;
 }
 
 .update .users
