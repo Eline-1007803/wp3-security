@@ -126,6 +126,7 @@ Als je in de navigatiebalk op 'uitloggen' klikt, word je weer terug gestuurd naa
 - (URL Regex Python, z.d.)
 - (Martsoukos, 2023)
 - (W3Schools.com, z.d.-d)
+- docs.vultr
 
 # Bronnenlijst:
 - SuperSimpleDev. (2024, 9 mei). JavaScript Tutorial Full Course - Beginner to Pro [Video]. YouTube. https://www.youtube.com/watch?v=EerdGm-ehJQ
@@ -144,6 +145,7 @@ Als je in de navigatiebalk op 'uitloggen' klikt, word je weer terug gestuurd naa
 - URL regex Python. (z.d.). https://uibakery.io/regex-library/url-regex-python
 - Martsoukos, G. (2023, 25 juli). 2 Ways to Make HTML Table Rows Clickable. Web Design Envato Tuts+. https://webdesign.tutsplus.com/how-to-make-html-table-rows-clickable--cms-93552t
 - W3Schools.com. (z.d.-d). https://www.w3schools.com/howto/howto_js_filter_table.asp
+- docs.vultr https://docs.vultr.com/javascript/examples/generate-random-string#generating-a-basic-random-string
 
 ## Afbeeldingen bronnenlijst:
 - https://pixabay.com/images/search/bin%20icon/
