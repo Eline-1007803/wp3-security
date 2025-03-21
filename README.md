@@ -42,7 +42,7 @@ pip install -r requirements.txt
 
 ### Stap 7:
 Genereer een database.
-Open het bestand ```shell database_generator.py``` en druk op 'run' om een database te laten genereren.
+Open het bestand ```database_generator.py``` en druk op 'run' om een database te laten genereren.
 
 # Applicatie opstarten
 Als je in de vituele omgeving zit, kan je applicatie starten met het volgende commando:
