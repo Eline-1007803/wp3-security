@@ -755,11 +755,25 @@ def update_own_profile(ervaringsdeskundige_id):
 def get_signedup_research():
     onderzoeken_model = Onderzoeken()
     ervaringsdeskundige_id = session.get('expert')
-    ingeschreven_onderzoeken = onderzoeken_model.get_signedup_research(
+    result = onderzoeken_model.get_signedup_research(
         ervaringsdeskundige_id
     )
-
-    return jsonify(ingeschreven_onderzoeken)
+    dictresult = []
+    for row in result:
+        corresponding_beperkingen = onderzoeken_model.get_corresponding_beperkingen(row["onderzoek_id"])
+        row_dict = dict(row)
+        beperkingen_str = ''
+        first = 0
+        for rows in corresponding_beperkingen:
+            if first == 0:
+                beperkingen_str += rows["bep_naam"]
+                first = 1
+            else:
+                beperkingen_str += ', ' + rows["bep_naam"]
+        row_dict["bep_naam"] = beperkingen_str
+        dictresult.append(row_dict)
+    print(dictresult)
+    return jsonify(dictresult)
 
 
 @app.route("/ingeschreven_onderzoeken")

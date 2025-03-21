@@ -103,7 +103,7 @@ function getSignedUpResearch(onderzoeken) {
                 <td>${onderzoek.datum_tot}</td>
                 <td>${onderzoek.type}</td>
                 <td>${onderzoek.inschrijving_status}</td>
-                <td>${onderzoek.beperking}</td>
+                <td>${onderzoek.bep_naam}</td>
 
             </tr>`;
         tableBody.innerHTML += row;
