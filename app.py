@@ -26,8 +26,8 @@ app.jinja_env.autoescape = True
 
 
 open_routes = ['login_page', 'login']
-admin_routes = ['dashboard', 'administrator_page', 'overzicht_organisaties', 'my_profile']
-expert_routes = ['onderzoeken_pagina', 'lijst_ingeschreven_onderzoeken', 'mijn_profiel', 'overzicht_organisaties', 'organisatie_aanmaken']
+admin_routes = ['dashboard', 'administrator_page', 'overzicht_organisaties', 'my_profile', 'organisatie_aanmaken']
+expert_routes = ['onderzoeken_pagina', 'lijst_ingeschreven_onderzoeken', 'mijn_profiel']
 organisation_routes = ['overzicht_onderzoeken', 'onderzoek_aanvragen_organisatie', 'my_profile_organisatie' ]
 
 @app.before_request
@@ -195,9 +195,10 @@ def add_administrator():
     fname = request.json["fname"]
     lname = request.json["lname"]
     email = request.json["email"]
+    password = request.json["password"]
     print(request.json)
     administrator_model = Administrator()
-    new_administrator = administrator_model.add_administrator(fname, lname, email)
+    new_administrator = administrator_model.add_administrator(fname, lname, email, password)
     return new_administrator, 201
 
 
@@ -423,7 +424,7 @@ def nieuwe_organisatie():
         api_key,
     )
     return jsonify(new_organisatie), 201
-@app.route("/api/updateorganisatie/<organisatie_id>")
+@app.route("/api/updateorganisatie/<organisatie_id>",methods=["PUT"])
 def update_organisatie(organisatie_id):
     naam = request.json["naam"]
     if naam == "":
@@ -443,7 +444,6 @@ def update_organisatie(organisatie_id):
     if not isinstance(number, int) or len(check_number_10_digit) != 9:
         return jsonify("U heeft geen nummer ingevuld of het heeft geen 10 cijfers"), 400
     overige_details = request.json["overige_details"]
-    api_key = ''.join(random.choices(string.ascii_letters + string.digits + string.punctuation, k=32))
     organisatie_id = session.get('organisation')
     updated = organisatie.update_own_organisatie(
         naam,
@@ -455,7 +455,6 @@ def update_organisatie(organisatie_id):
         email,
         number,
         overige_details,
-        api_key,
         organisatie_id
     )
     return jsonify(updated), 201

@@ -33,7 +33,7 @@ function fill_html(organisatie_info){
     <label for="website">Website:</label><br>
     <input type="url" placeholder="website" id="url" value="${organisatie_info.website}">
     <label for="beschrijving">Beschrijving:</label>
-    <textarea style="resize:none;">${organisatie_info.beschrijving}</textarea>
+    <textarea id="beschrijving" style="resize:none;">${organisatie_info.beschrijving}</textarea>
     <label for="contactpersoon">Contact Persoon:</label>
     <input type="text" placeholder="contactpersoon" id="contactpersoon" value="${organisatie_info.contactpersoon}">
     <label for="email">Email:</label>
@@ -42,14 +42,49 @@ function fill_html(organisatie_info){
     <label for="telefoonnummer">Telefoonnummer:</label>
     <input placeholder="telefoonnummer" value="${organisatie_info.telefoonnummer}" id="telefoonnummer">
     <label for="overigedetails">Overige Details:</label>
-    <textarea style="resize:none;">${organisatie_info.overige_details}</textarea>
+    <textarea name="overigedetails" id="overigedetails" style="resize:none;">${organisatie_info.overige_details}</textarea>
     <button id="save">Save</button>
     `;
+    let save_button = document.getElementById('save')
+
+    save_button.addEventListener('click', () => {
+            let voornaam = document.getElementById('naam').value
+            let wachtwoord = document.getElementById('wachtwoord').value
+            let select = document.getElementById('select').value
+            let website = document.getElementById('url').value
+            let beschrijving = document.getElementById('beschrijving').value
+            let contactpersoon = document.getElementById('contactpersoon').value
+            let overigedetails = document.getElementById('overigedetails').value
+            let email = document.getElementById('email').value
+            let telnum = document.getElementById('telefoonnummer').value
+            removelistener()
+            fetch(`/api/updateorganisatie/${organisatie_info.organisatie_id}`, {
+            method: 'PUT',
+            headers:{
+            'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                naam: voornaam,
+                password:wachtwoord,
+                option:select,
+                website:website,
+                beschrijving:beschrijving,
+                contactpersoon:contactpersoon,
+                overige_details:overigedetails,
+                email:email,
+                number:telnum
+                })
+            })
+                .then(response => response)
+                .then(get_organisatie_id)
+        }
+
+
+    )
 }
 
 function removelistener(){
     let save_button = document.getElementById('save')
     save_button.removeEventListener('click', () => {})
 }
-
 get_organisatie_id()
