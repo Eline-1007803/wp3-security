@@ -1,6 +1,52 @@
 # wp3-2025-starter
 Template voor WP3 opdracht "Accessibility Hub". Vul dit document aan zoals beschreven in eisen rondom opleveren (zie ook de [opdracht](CASUS.md)) 
 
+# Installatie requirements
+
+### Stap 1:
+Installeer Python 3.12 (indien deze nog niet geïnstalleerd is).
+Ga naar de officiële Python-website en download de installer voor Python 3.12:
+https://www.python.org/downloads/release/python-3120/
+
+Zorg ervoor dat je de optie 'Add Python to PATH' aanvinkt tijdens de installatie, zodat je Python vanuit de commandoregel kunt gebruiken.
+
+### Stap 2:
+Maak een lokale kloon van de repository aan.
+```shell
+git@github.com:Rac-Software-Development/wp3-2025-rest-1b4-insertteamnamehere.git
+```
+
+### Stap 3:
+Navigeer naar de map van de gekloonde repository.
+```shell
+
+```
+
+### Stap 4:
+Maak een virtuele omgeving aan om de benodigde Python-pakketten geïsoleerd te installeren.
+```shell
+python -m venv .venv
+```
+
+### Stap 5:
+
+### Stap 6:
+
+# Applicatie opstarten
+
+
+# Ontwerpdocumentatie
+## Visuele ontwerpdocumentatie:
+
+## Technische ontwerpdocumentatie:
+
+# Inlog/test gegevens:
+### Ervaringsdeskundige:
+
+### Beheerder:
+
+### Organisatie:
+
 Bronnenlijst:
 https://www.youtube.com/watch?v=EerdGm-ehJQ&t=27729s
 checkbox event: https://www.youtube.com/watch?v=fzNl52bEGIQ
