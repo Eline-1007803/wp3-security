@@ -25,7 +25,8 @@ class Onderzoeken:
         result = self.cursor.execute(
             """ SELECT onderzoeken.*
                 FROM onderzoeken
-                WHERE onderzoeken.status = 'goedgekeurd'""").fetchall()
+                WHERE onderzoeken.status = 'goedgekeurd'
+                GROUP BY onderzoeken.onderzoek_id""").fetchall()
         
         onderzoek_lijst = [dict(row) for row in result]
         return onderzoek_lijst
