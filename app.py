@@ -26,9 +26,9 @@ app.jinja_env.autoescape = True
 
 
 open_routes = ['login_page', 'login']
-admin_routes = ['dashboard', 'administrator_page', 'overzicht_organisaties', 'my_profile', 'overzicht_onderzoeken']
-expert_routes = ['onderzoeken_pagina', 'lijst_ingeschreven_onderzoeken', 'mijn_profiel']
-organisation_routes = ['onderzoek_pagina', 'overzicht_organisaties', 'organisatie_aanmaken']
+admin_routes = ['dashboard', 'administrator_page', 'overzicht_organisaties', 'my_profile']
+expert_routes = ['onderzoeken_pagina', 'lijst_ingeschreven_onderzoeken', 'mijn_profiel', 'overzicht_organisaties']
+organisation_routes = ['overzicht_onderzoeken', 'organisatie_aanmaken', 'onderzoek_aanvragen_organisatie', 'my_profile_organisatie' ]
 
 @app.before_request
 def before_request():
@@ -91,8 +91,7 @@ def login():
 
     else:
         print("no")
-        flash('login mislukt')
-        return {"message": "Login failed", "success": False}
+    return {"message": "Login successful", "success": False}
 
 @app.route('/logout')
 def logout():
