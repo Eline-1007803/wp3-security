@@ -419,6 +419,42 @@ def nieuwe_organisatie():
         api_key,
     )
     return jsonify(new_organisatie), 201
+@app.route("/api/updateorganisatie/<organisatie_id>")
+def update_organisatie(organisatie_id):
+    naam = request.json["naam"]
+    if naam == "":
+        return jsonify("Typ organisatie naam in!"), 400
+    password = request.json["password"]
+    option = request.json["option"]
+    website = request.json["website"]
+    beschrijving = request.json["beschrijving"]
+    if beschrijving == "":
+        return jsonify("Voer beschrijving in"), 400
+    contactpersoon = request.json["contactpersoon"]
+    if contactpersoon == "":
+        return jsonify("Voer naam van de contact persoon in in"), 400
+    email = request.json["email"]
+    number = request.json["number"]
+    check_number_10_digit = str(number)
+    if not isinstance(number, int) or len(check_number_10_digit) != 9:
+        return jsonify("U heeft geen nummer ingevuld of het heeft geen 10 cijfers"), 400
+    overige_details = request.json["overige_details"]
+    api_key = ''.join(random.choices(string.ascii_letters + string.digits + string.punctuation, k=32))
+    organisatie_id = session.get('organisation')
+    updated = organisatie.update_own_organisatie(
+        naam,
+        password,
+        option,
+        website,
+        beschrijving,
+        contactpersoon,
+        email,
+        number,
+        overige_details,
+        api_key,
+        organisatie_id
+    )
+    return jsonify(updated), 201
 
 
 @app.route("/api/overzicht_onderzoeken", methods=["GET"])

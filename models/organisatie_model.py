@@ -64,9 +64,7 @@ class Organisatie:
         self.con.commit()
         return True
 
-    def update_onderzoek(
-        self, title, beschrijving, datumvanaf, datumtot, onderzoek_id
-    ):
+    def update_onderzoek(self, title, beschrijving, datumvanaf, datumtot, onderzoek_id):
         self.cursor.execute(
             " UPDATE onderzoeken SET titel = ?, beschrijving = ?, datum_vanaf = ?,datum_tot = ? WHERE onderzoek_id = ?",
             (title, beschrijving, datumvanaf, datumtot, onderzoek_id),
@@ -131,6 +129,39 @@ class Organisatie:
         self.con.commit()
         return True
 
+    def update_own_organisatie(
+        self,
+        naam,
+        password,
+        option,
+        website,
+        beschrijving,
+        contactpersoon,
+        email,
+        telefoonnummer,
+        overige_details,
+        api_key,
+        organisatie_id
+    ):
+        self.cursor.execute(
+            "UPDATE  organisaties SET naam = ?,wachtwoord =?,type = ?,website =?,beschrijving =?,contactpersoon =?,email =?, telefoonnummer =? overige_details=?,api_key =? WHERE organisatie_id = ?",
+            (
+                naam,
+                generate_password_hash(password),
+                option,
+                website,
+                beschrijving,
+                contactpersoon,
+                email,
+                telefoonnummer,
+                overige_details,
+                api_key,
+                organisatie_id
+            ),
+        )
+        self.con.commit()
+        return True
+
     def get_all_organisaties(self):
         result = self.cursor.execute("SELECT * FROM organisaties").fetchall()
         organisaties = []
@@ -145,12 +176,14 @@ class Organisatie:
         )
         self.con.commit()
         return True
+
     def get_organisatie(self, organisatie_id):
         result = self.cursor.execute(
             "SELECT * FROM organisaties WHERE organisatie_id = ?",
             (organisatie_id,),
         ).fetchone()
         return dict(result)
+
     def api_check(self, api_key):
         result = self.cursor.execute(
             "SELECT organisatie_id FROM organisaties WHERE api_key = ?",
@@ -160,9 +193,11 @@ class Organisatie:
         return result
 
     def get_organisation_login(self, email, password):
-        result = self.cursor.execute('''SELECT organisatie_id, wachtwoord FROM organisaties WHERE email = ?''',
-                                     (email,)).fetchone()
+        result = self.cursor.execute(
+            """SELECT organisatie_id, wachtwoord FROM organisaties WHERE email = ?""",
+            (email,),
+        ).fetchone()
         if result:
-            if check_password_hash(result['wachtwoord'], password):
-                return result['organisatie_id']
+            if check_password_hash(result["wachtwoord"], password):
+                return result["organisatie_id"]
         return None
