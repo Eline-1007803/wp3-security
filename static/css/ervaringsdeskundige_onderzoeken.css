@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     font-size: 16px;
-    background-color: #c0c0c0;
+    background-color: #cecece;
     color: #222;
     margin: 0;
 }
@@ -183,6 +183,11 @@ text-align: center;
 .dark-mode h1 {
     background-color: black;
     color: white;
+}
+
+h1 {
+    color: black;
+    background-color: white;
 }
 
 .dark-mode tbody {
