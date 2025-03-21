@@ -245,7 +245,7 @@ class WP3DatabaseGenerator:
         print("✅ Default geregistreerde beperkingen created")
     def insert_inschrijvingen(self):
         users = [
-            ( 1, 1, "nieuw", 0),
+            ( 2, 1, "nieuw", 0),
         ]
         insert_statement = "INSERT INTO inschrijvingen (ervaringsdeskundige_id, onderzoek_id, status, afgerond) VALUES (?, ?, ?, ?);"
         self.__execute_many_transaction_statement(insert_statement, users)
