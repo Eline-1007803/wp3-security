@@ -96,13 +96,16 @@ function getSignedUpResearch(onderzoeken) {
                 data-plaatsen="${onderzoek.beschikbaar}"
                 data-locatie="${onderzoek.locatie}"
                 data-leeftijd-van="${onderzoek.leeftijd_van}"
-                data-leeftijd-tot="${onderzoek.leeftijd_tot}">
+                data-leeftijd-tot="${onderzoek.leeftijd_tot}"
+                data-beperking="${onderzoek.beperking}">
                 <td>${onderzoek.onderzoek_id}</td>
                 <td>${onderzoek.titel}</td>
                 <td>${onderzoek.datum_vanaf}</td>
                 <td>${onderzoek.datum_tot}</td>
                 <td>${onderzoek.type}</td>
                 <td>${onderzoek.inschrijving_status}</td>
+                <td>${onderzoek.beperking}</td>
+
             </tr>`;
         tableBody.innerHTML += row;
     });
@@ -122,10 +125,6 @@ function startInterval() {
     interval = setInterval(getOnderzoeken, 3000);
 }
 
-document.getElementById('afmeldenButton').onclick = function () {
-alert('Je hebt je nu uitgeschreven voor dit onderzoek.');
-document.getElementById('set_modal').style.display = 'none';
-}
 
 function zoekTitels() {
     let input_titel, input_status, filter_titel, filter_status, table, tr, td_titel, td_status, i, txtValue_titel, txtValue_status;

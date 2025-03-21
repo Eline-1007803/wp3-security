@@ -33,9 +33,9 @@ class Onderzoeken:
     
     def get_signedup_research(self, ervaringsdeskundige_id):
         result = self.cursor.execute(
-            """ SELECT onderzoeken.*, inschrijvingen.*, inschrijvingen.status as inschrijving_status
+            """ SELECT onderzoeken.*, inschrijvingen.*, inschrijvingen.status as inschrijving_status,GROUP_CONCAT(alle_beperkingen.naam,',') AS beperking
                 FROM inschrijvingen
-                JOIN onderzoeken ON (onderzoeken.onderzoek_id = inschrijvingen.onderzoek_id)
+                JOIN onderzoeken ON (onderzoeken.onderzoek_id = inschrijvingen.onderzoek_id) JOIN onderzoek_beperkingen ON onderzoeken.onderzoek_id = onderzoek_beperkingen.onderzoek_id JOIN alle_beperkingen ON onderzoek_beperkingen.beperking_id = alle_beperkingen.beperking_id
                 WHERE inschrijvingen.ervaringsdeskundige_id = ?
             """,(ervaringsdeskundige_id,)).fetchall()
 
