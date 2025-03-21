@@ -230,6 +230,8 @@ function showUsers(users)
         <select name="select" id="select" onchange="filter_users()">
           <option>Kies..</option>
           <option value="man">Man</option>
+          <option value="vrouw">Vrouw</option>
+          <option value="anders">Anders</option>
         </select>
         <input type="text" id="emailinput" onkeyup="filter_users()" placeholder="Zoek email.." aria-label="Zoek op email van gebruiker">
         <table>
