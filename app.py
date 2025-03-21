@@ -542,7 +542,7 @@ def onderzoek_pagina():
 
 @app.route("/api/onderzoekaanvragen", methods=["POST"],endpoint="onderzoek_aanvragen")
 @require_api_key
-def onderzoek_aanvragen_organisatie():
+def onderzoek_aanvragen_organisatie(organisatie_id):
     title = request.json["titel"]
     if title == "":
         return jsonify("Titel can't be empty!"), 400
@@ -607,7 +607,6 @@ def onderzoek_aanvragen_organisatie():
         met_beloning = 1
     else:
         met_beloning = 0
-    organisatie_id = 1  # for now
     onderzoek = organisatie.insert_onderzoek(
         title,
         beschrijving,

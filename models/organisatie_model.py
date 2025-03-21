@@ -189,7 +189,9 @@ class Organisatie:
             "SELECT organisatie_id FROM organisaties WHERE api_key = ?",
             (api_key,),
         ).fetchone()
-        return result
+        if result:
+            return result["organisatie_id"]
+        return None
 
     def get_organisation_login(self, email, password):
         result = self.cursor.execute(
