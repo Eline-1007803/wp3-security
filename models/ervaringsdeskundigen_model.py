@@ -40,10 +40,10 @@ class Ervaringsdeskundigen:
                 return result['ervaringsdeskundige_id']
         return None
         
-    def update_expert(self, voornaam, tussenvoegsel, achternaam, wachtwoord, emailadres, telefoonnummer, postcode, geslacht, hulpmiddelen, introductie, bijzonderheden, voorkeur_benadering, status, onderzoek_id, expert_id):
+    def update_expert(self, voornaam, tussenvoegsel, achternaam, wachtwoord, emailadres, telefoonnummer, postcode, geslacht, hulpmiddelen, introductie, bijzonderheden, voorkeur_benadering, expert_id):
         result = self.cursor.execute(
             """ UPDATE ervaringsdeskundigen 
                 SET voornaam = ?, tussenvoegsel = ?, achternaam = ?, wachtwoord = ?, emailadres = ?, telefoonnummer = ?, postcode = ?, geslacht = ?, hulpmiddelen = ?, introductie = ?, bijzonderheden = ?, voorkeur_benadering = ?
-                WHERE ervaringsdeskundige_id = ? """, (voornaam, tussenvoegsel, achternaam, wachtwoord, emailadres, telefoonnummer, postcode, geslacht, hulpmiddelen, introductie, bijzonderheden, voorkeur_benadering, status, onderzoek_id, expert_id))
+                WHERE ervaringsdeskundige_id = ? """, (voornaam, tussenvoegsel, achternaam, wachtwoord, emailadres, telefoonnummer, postcode, geslacht, hulpmiddelen, introductie, bijzonderheden, voorkeur_benadering, expert_id))
         self.con.commit()
         return dict(result)

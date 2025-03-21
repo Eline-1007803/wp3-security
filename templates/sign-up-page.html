@@ -32,14 +32,18 @@
             <input class="js-zip-code-input" id="zip-code-input" name="zip-code-input" type="text" pattern="[0-9]{4}[a-zA-Z]{2}">
             <p class="js-zipcode-message"></p>
         </label>
+
         <div class="js-gender-input">
-            <p>Geslacht:</p>
+                <p>Geslacht:</p>
+                <label class='gender-label' for="vrouw">Vrouw
                 <input class='gender-input-woman js-gender-input' checked type="radio" id="vrouw" name="gender" value="vrouw">
-                <label class='gender-label' for="vrouw">Vrouw</label><br>
+                </label> <br>
+                <label class="gender-label" for="man">Man
                 <input class="gender-input-man js-gender-input" type="radio" id="man" name="gender" value="man">
-                <label class="gender-label" for="man">Man</label>
-                <input class="gender-input-other js-gender-input" type="radio" id="anders" name="gender" value="anders">
-                <label class="gender-label" for="anders">Anders</label>
+                </label><br>
+                <label class="gender-label" for="anders">Anders
+                 <input class="gender-input-other js-gender-input" type="radio" id="anders" name="gender" value="anders">
+                </label>
         </div>
         <label for="email-input">E-mailadres:
             <input class="js-email-input" id="email-input" name="email-input" type="email">
@@ -54,7 +58,7 @@
             <p class="js-birthdate-message"></p>
         </label>
 
-        <label>Type beperking:<button class="button-disabilities">Beperkingen<i class="arrow down"></i></button>
+        <label><button class="button-disabilities">Beperkingen<i class="arrow down"></i></button>
                 <!--<div> class="dropdown-content"> -->
             <select class="js-dropdown dropdown" id="disability-type-input" name="disability-type-input" multiple>
             </select>
@@ -78,30 +82,41 @@
         <label for="supervisor-input">Toezichthouder/voogd: <input class="js-supervisor-input" id="supervisor-input" name="supervisor-input" type="checkbox"></label>
         <div class="hide js-supervisor-info supervisor-info">
 <!--only show if supervisor checkbox is checked -->
-            <label for="supervisor-name-input">Naam van voogd of toezichthouder:</label>
-            <input class="js-supervisor-name-input" id="supervisor-name-input" name="supervisor-name-input">
-            <p class='js-supervisor-name-message'></p>
-            <label for="supervisor-email-input">E-mailadres van voogd of toezichthouder:</label>
-            <input class="js-supervisor-email-input" id="supervisor-email-input" name="supervisor-email-input" type="email">
-            <label for="supervisor-phone-number-input">Telefoonnummer van voogd of toezichthouder:</label>
-            <input class="js-supervisor-phonenum-input" id="supervisor-phone-number-input" name="supervisor-phone-number-input" type="tel">
             <br>
+            <label for="supervisor-name-input">Naam van voogd of toezichthouder:
+                <input class="js-supervisor-name-input" id="supervisor-name-input" name="supervisor-name-input">
+                <p class='js-supervisor-name-message'></p>
+            </label>
+
+
+            <label for="supervisor-email-input">E-mailadres van voogd of toezichthouder:
+                <input class="js-supervisor-email-input" id="supervisor-email-input" name="supervisor-email-input" type="email">
+                <p class='js-supervisor-email-message'></p>
+            </label>
+
+            <label for="supervisor-phone-number-input">Telefoonnummer van voogd of toezichthouder:
+                <input class="js-supervisor-phonenum-input" id="supervisor-phone-number-input" name="supervisor-phone-number-input" type="tel">
+            </label>
+
         </div>
 
         <span class="js-space hide"></span>
 
-        <label for="preference-approach-input">Voorkeur benadering:</label>
+        <label for="preference-approach-input">Voorkeur benadering:
         <select class="js-preferred-approach-input" id="preference-approach-input">
-            <option value="email">Email</option>
-            <option value="telephone">Telefonisch</option>
-        </select>
+                <option value="email">Email</option>
+                <option value="telephone">Telefonisch</option>
+            </select>
+        </label>
 
-        <label for="type-research-input">Type onderzoek:</label>
-        <select class="js-researchtype-input" id="type-research-input">
-            <option value="telephone">Telefonisch</option>
-            <option value="internet">Internet</option>
-            <option value="location">Op locatie</option>
-        </select>
+        <br>
+        <label for="type-research-input">Type onderzoek:
+            <select class="js-researchtype-input" id="type-research-input">
+                <option value="telephone">Telefonisch</option>
+                <option value="internet">Internet</option>
+                <option value="location">Op locatie</option>
+            </select>
+        </label>
         <label for="availability-input">Bijzonderheden beschikbaarheid:</label>
         <textarea class="js-availability-input" id="availability-input" name="details-availability-input"></textarea>
 
