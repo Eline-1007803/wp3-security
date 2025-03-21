@@ -228,13 +228,7 @@ function showUsers(users)
         <h2>ingeschreven mensen</h2>
         <input type="text" id="naaminput" onkeyup="filter_users()" placeholder="Zoek ervaringdeskundige op naam.." aria-label="Zoek ervaringdeskundige op naam">
         <input type="text" id="postcodeinput" onkeyup="filter_users()" placeholder="Zoek poscode van ervaringdeskundige.." aria-label="Zoek poscode van ervaringdeskundige">
-        <input type="text" id="geslachtinput" onkeyup="filter_users()" placeholder="Zoek status.." aria-label="Zoek status van onderzoek">
-        <select name="select" id="select" onchange="filter_users()">
-          <option>Kies..</option>
-          <option value="man">Man</option>
-          <option value="vrouw">Vrouw</option>
-          <option value="anders">Anders</option>
-        </select>
+        <input type="text" id="geslachtinput" onkeyup="filter_users()" placeholder="Zoek op geslacht.." aria-label="Zoek status van onderzoek">
         <input type="text" id="emailinput" onkeyup="filter_users()" placeholder="Zoek email.." aria-label="Zoek op email van gebruiker">
         <table>
             <tr>
@@ -263,7 +257,7 @@ function filter_users() {
   var naaminput,postcodeinput, geslachtinput, emailinput, filter_naam, filter_postcode, filter_geslacht,filter_email, table, tr, td, i;
   naaminput = document.getElementById("naaminput")
   postcodeinput = document.getElementById("postcodeinput");
-  geslachtinput = document.getElementById("select");
+  geslachtinput = document.getElementById("geslachtinput");
   emailinput = document.getElementById("emailinput");
 
   filter_naam = naaminput.value.toUpperCase();
