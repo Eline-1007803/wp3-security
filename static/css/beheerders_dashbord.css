@@ -150,10 +150,10 @@ section {
   position: relative;
 }
 
-section label,
-section input {
-  display: flex; 
-  flex-direction: row;
+section.column label,
+section.column input {
+  display: absolute; 
+  /*flex-direction: row;*/
   align-items: center;
   margin: 5px 0;
 }
