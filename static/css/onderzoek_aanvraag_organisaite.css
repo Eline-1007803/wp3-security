@@ -21,7 +21,7 @@ h1
     font-weight: 700;
     font-style: normal;
     font-size: x-large;
-    color: #3b3b3b;
+    color: #000000;
     margin: 0 0 30px 0;
 }
 
@@ -105,7 +105,7 @@ form textarea
 }
 
 .button {
-    background-color: #032A1D;
+    background-color: #000000;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -162,6 +162,12 @@ button .dark-mode-toggle{
         background-color: none;
     }
 
-    .dark-mode form {
+    .dark-mode form,
+    .dark-mode h1 {
         background-color: black;
+    }
+
+    .dark-mode .button {
+        background-color: white;
+        color: black;
     }
