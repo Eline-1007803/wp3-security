@@ -187,9 +187,8 @@ class Organisatie:
     def api_check(self, api_key):
         result = self.cursor.execute(
             "SELECT organisatie_id FROM organisaties WHERE api_key = ?",
-            (api_key),
-        )
-        self.con.commit()
+            (api_key,),
+        ).fetchone()
         return result
 
     def get_organisation_login(self, email, password):

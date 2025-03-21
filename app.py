@@ -540,7 +540,7 @@ def update_onderzoeken():
 def onderzoek_pagina():
     return render_template("onderzoek_aanvraag__organisatie.html")
 
-@app.route("/api/onderzoekaanvragen", methods=["POST"])
+@app.route("/api/onderzoekaanvragen", methods=["POST"],endpoint="onderzoek_aanvragen")
 @require_api_key
 def onderzoek_aanvragen_organisatie():
     title = request.json["titel"]
