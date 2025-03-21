@@ -151,23 +151,3 @@ function zoekTitels() {
         }
     }
 }
-
-/*function filterStatus() {
-    let select, selectedStatus, table, tr, td, i;
-    select = document.getElementById("statusOnderzoek");
-    selectedStatus = select.value.toUpperCase();
-    table = document.getElementById("tabelOnderzoeken");
-    tr = table.getElementsByTagName("tr");
-
-    for (i = 1; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[4]; //Deze nog aanpassen naar status en niet datum
-        if (td) {
-            let statusValue = td.textContent || td.innerText;
-            if (selectedStatus === "" || statusValue.toUpperCase() === selectedStatus) {
-                tr[i].style.display = "";
-            } else {
-                tr[i].style.display = "none";
-            }
-        }
-    }
-}*/
