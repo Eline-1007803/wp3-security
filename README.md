@@ -19,7 +19,7 @@ git@github.com:Rac-Software-Development/wp3-2025-rest-1b4-insertteamnamehere.git
 ### Stap 3:
 Navigeer naar de map van de gekloonde repository.
 ```shell
-
+cd wp3-2025-rest-1b4-insertteamnamehere
 ```
 
 ### Stap 4:
@@ -40,11 +40,16 @@ Installeer de requirements
 pip install -r requirements.txt
 ```
 
+### Stap 7:
+Genereer een database.
+Open het bestand ```shell database_generator.py``` en druk op 'run' om een database te laten genereren.
+
 # Applicatie opstarten
 Als je in de vituele omgeving zit, kan je applicatie starten met het volgende commando:
 ```shell
 flask run
 ```
+Klik op de link die verschijnt in de terminal om de webapplicatie te openen.
 
 # Ontwerpdocumentatie
 ## Visuele ontwerpdocumentatie:
@@ -53,10 +58,17 @@ flask run
 
 # Inlog/test gegevens:
 ### Ervaringsdeskundige:
+- E-mail = beauterham@gmail.com
+- Wachtwoord = MetJam
 
 ### Beheerder:
+- E-mail = kevinvandam@gmail.com
+- Wachtwoord = abc
 
 ### Organisatie:
+- E-mail = gfx@info.com
+- Wachtwoord = gfx
+- API-key = A1B2
 
 Bronnenlijst:
 https://www.youtube.com/watch?v=EerdGm-ehJQ&t=27729s
