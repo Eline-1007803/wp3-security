@@ -95,8 +95,7 @@ function getOpenResearch(onderzoeken) {
                 data-plaatsen="${onderzoek.beschikbaar}"
                 data-locatie="${onderzoek.locatie}"
                 data-leeftijd-van="${onderzoek.leeftijd_van}"
-                data-leeftijd-tot="${onderzoek.leeftijd_tot}"
-                data-beperking="${onderzoek.beperking}">
+                data-leeftijd-tot="${onderzoek.leeftijd_tot}">
                 <td>${onderzoek.onderzoek_id}</td>
                 <td>${onderzoek.titel}</td>
                 <td>${onderzoek.datum_vanaf}</td>
@@ -147,7 +146,7 @@ function zoekTitels() {
 
     for ( i = 0; i < tr.length; i++) {
          td_titel = tr[i].getElementsByTagName("td")[1];
-         td_type = tr[i].getElementsByTagName("td")[4]; //nog aanpassen
+         td_type = tr[i].getElementsByTagName("td")[4];
         if (td_type || td_titel) {
              txtValue_titel = td_titel.textContent || td_titel.innerText;
              txtValue_type = td_type.textContent || td_type.innerText;

@@ -96,8 +96,7 @@ function getSignedUpResearch(onderzoeken) {
                 data-plaatsen="${onderzoek.beschikbaar}"
                 data-locatie="${onderzoek.locatie}"
                 data-leeftijd-van="${onderzoek.leeftijd_van}"
-                data-leeftijd-tot="${onderzoek.leeftijd_tot}"
-                data-beperking="${onderzoek.beperking}">
+                data-leeftijd-tot="${onderzoek.leeftijd_tot}">
                 <td>${onderzoek.onderzoek_id}</td>
                 <td>${onderzoek.titel}</td>
                 <td>${onderzoek.datum_vanaf}</td>
@@ -137,7 +136,7 @@ function zoekTitels() {
 
     for ( i = 0; i < tr.length; i++) {
          td_titel = tr[i].getElementsByTagName("td")[1];
-         td_status = tr[i].getElementsByTagName("td")[5]; // nog aanpassen!!
+         td_status = tr[i].getElementsByTagName("td")[5];
         if (td_status || td_titel) {
              txtValue_titel = td_titel.textContent || td_titel.innerText;
              txtValue_status = td_status.textContent || td_status.innerText
