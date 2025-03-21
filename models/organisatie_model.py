@@ -145,6 +145,12 @@ class Organisatie:
         )
         self.con.commit()
         return True
+    def get_organisatie(self, organisatie_id):
+        result = self.cursor.execute(
+            "SELECT * FROM organisaties WHERE organisatie_id = ?",
+            (organisatie_id,),
+        ).fetchone()
+        return result
     def api_check(self, api_key):
         result = self.cursor.execute(
             "SELECT organisatie_id FROM organisaties WHERE api_key = ?",

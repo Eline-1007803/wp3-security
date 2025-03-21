@@ -117,6 +117,10 @@ def get_user_id():
         return {'id': session.get('admin')}
     if session.get('expert'):
         return {'ervaringsdeskundige_id': session.get('expert')}
+@app.route("/get_organisatie_id")
+def get_organisatie_id():
+    if session.get("organisation"):
+        return {'organisatie_id': session.get('organisation')}
 
 @app.route('/get_id_for_profile')
 def get_id_for_profile():
@@ -363,6 +367,10 @@ def organisaties():
     result = organisatie.get_all_organisaties()
     return jsonify(result)
 
+@app.route("/api/organisatie/<organisatie_id>", methods=["GET"])
+def get_organisatie(organisatie_id):
+    result = organisatie.get_organisatie(organisatie_id)
+    return jsonify(result)
 @app.route("/api/alle_organisaties/delete=<organisatie_id>", methods=["DELETE"])
 def delete_organisatie(organisatie_id):
     result = organisatie.delete_organisatie(organisatie_id)
