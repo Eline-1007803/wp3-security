@@ -215,6 +215,8 @@ function showUsers(users)
       <td>${user.postcode}</td>
       <td>${user.geslacht}</td>
       <td>${user.emailadres}</td>
+      <td>${user.beheerder}</td>
+
       </tr>
     `;
     gegevens +=row;
@@ -240,6 +242,7 @@ function showUsers(users)
                 <th>Postcode</th>
                 <th>Geslacht</th>
                 <th>Email</th>
+                <th>Goedgekeurd door</th>
 
             </tr>
             ${gegevens}

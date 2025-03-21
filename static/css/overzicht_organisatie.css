@@ -19,9 +19,6 @@ main {
     height: auto;
     display: flex;
     justify-content: center;
-    background-color: white;
-    box-shadow: 5px 5px 10px 10px lightgray;
-    width: 56%;
     margin: auto;
     border-radius: 20px;
 }

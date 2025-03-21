@@ -6,41 +6,66 @@
   font-weight: 200;
   font-style: normal;
 }
+
 body {
   display: flex;
   flex-direction: column;
   margin-top: 50px;
   padding: 0;
-  font-family: Arial, sans-serif;
   align-items: center;
+  font-size: 16px;
+  background-color: rgb(250, 253, 253);
+  margin-bottom: 160px;
+  color: black;
+}
+
+h1 {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.header-container {
+  dislay: flex;
+  margin-top: 50px;
 }
 
 form {
   margin-top: 50px;
+  background-color: white;
+  padding: 50px;
+  justify-content: center;
+  border-radius: 20px;
+  box-shadow: 5px 5px 10px 10px lightgray;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px;
-  width: 500px;
-  border-radius: 5px;
-  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  width: 800px;
+  margin-bottom: 100px;
 }
-form textarea
-{
-  resize: none;
-  height: 100px;
 
+.form-container {
+  display: grid;
+  grid-template-columns: 200px 300px;
+  row-gap: 30px;
 }
+
 .button {
-  background-color: #032A1D;
+  background-color: black;
+  width: 220px;
+  height: 40px;
+  border-radius: 4px;
   margin-top: 10px;
   border: none;
   color: white;
-  padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+}
+
+.button:hover {
+  background-color: #383838;
 }
 
 .dark-mode {
@@ -56,6 +81,11 @@ form textarea
 .dark-mode .column {
   background-color: #222;
   color: white;
+}
+
+.dark-mode .button {
+  background-color: white;
+  color: black;
 }
 
 .dark-mode .table-clickable tbody tr:nth-child(even) {
