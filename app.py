@@ -107,6 +107,10 @@ def my_profile():
 def mijn_profiel():
     return render_template('ervaringsdeskundige_profiel.html')
 
+@app.route("/myprofile_organisatie")
+def my_profile_organisatie():
+    return render_template("organisatie_profile.html")
+
 @app.route('/get_user_id')
 def get_user_id():
     if session.get('admin'):
