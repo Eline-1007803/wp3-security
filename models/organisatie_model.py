@@ -85,7 +85,7 @@ class Organisatie:
 
     def get_users_by_onderzoek(self, onderzoek_id):
         result = self.cursor.execute(
-            """SELECT ervaringsdeskundigen.* FROM inschrijvingen JOIN ervaringsdeskundigen ON inschrijvingen.ervaringsdeskundige_id = ervaringsdeskundigen.ervaringsdeskundige_id WHERE inschrijvingen.onderzoek_id = ? AND inschrijvingen.status = 'goedgekeurd'  """,
+            """SELECT ervaringsdeskundigen.*,CONCAT(beheerders.voornaam," ",beheerders.tussenvoegsel," ",beheerders.achternaam) AS beheerder FROM inschrijvingen JOIN ervaringsdeskundigen ON inschrijvingen.ervaringsdeskundige_id = ervaringsdeskundigen.ervaringsdeskundige_id JOIN beheerders ON inschrijvingen.beheerder_id = beheerders.beheerder_id WHERE inschrijvingen.onderzoek_id = ? AND inschrijvingen.status = 'goedgekeurd'  """,
             (onderzoek_id,),
         ).fetchall()
         return result
