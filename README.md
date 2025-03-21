@@ -29,11 +29,22 @@ python -m venv .venv
 ```
 
 ### Stap 5:
+Activeer de virtuele omgeving.
+```shell
+.\.venv\Scripts\activate
+```
 
 ### Stap 6:
+Installeer de requirements
+```shell
+pip install -r requirements.txt
+```
 
 # Applicatie opstarten
-
+Als je in de vituele omgeving zit, kan je applicatie starten met het volgende commando:
+```shell
+flask run
+```
 
 # Ontwerpdocumentatie
 ## Visuele ontwerpdocumentatie:
