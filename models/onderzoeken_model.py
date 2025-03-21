@@ -23,8 +23,8 @@ class Onderzoeken:
     
     def get_open_research(self):
         result = self.cursor.execute(
-            """ SELECT onderzoeken.*
-                FROM onderzoeken
+            """ SELECT onderzoeken.*,GROUP_CONCAT(alle_beperkingen.naam,',') AS beperking
+                FROM onderzoeken JOIN onderzoek_beperkingen ON onderzoeken.onderzoek_id = onderzoek_beperkingen.onderzoek_id JOIN alle_beperkingen ON onderzoek_beperkingen.beperking_id = alle_beperkingen.beperking_id
                 WHERE onderzoeken.status = 'goedgekeurd'
                 GROUP BY onderzoeken.onderzoek_id""").fetchall()
         
