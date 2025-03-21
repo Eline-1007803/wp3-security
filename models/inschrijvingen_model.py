@@ -29,8 +29,8 @@ class Inschrijvingen:
                 JOIN alle_beperkingen on (onderzoek_beperkingen.beperking_id = alle_beperkingen.beperking_id)
                 WHERE onderzoek_beperkingen.onderzoek_id = ?""", (onderzoeken_id,)).fetchall()
         return ev_result, on_result
-    def update_status(self, inschrijving_id, status):
-        self.cursor.execute("UPDATE inschrijvingen SET status = ? WHERE inschrijving_id = ?", (status, inschrijving_id))
+    def update_status(self, inschrijving_id, status, admin_id, date):
+        self.cursor.execute("UPDATE inschrijvingen SET status = ?, beheerder_id = ?, datum_goedgekeurd = ? WHERE inschrijving_id = ?", (status, admin_id, date, inschrijving_id))
         self.con.commit()
 
     def check_inschrijving(self, ervaringsdeskundige_id, onderzoek_id):

@@ -23,18 +23,18 @@ class Administrator:
         self.cursor, self.con = database.connect_db()
 
     def get_all_administrators(self):
-        result = self.cursor.execute('''SELECT beheerder_id, voornaam, tussenvoegsel, achternaam, email FROM beheerders''').fetchall()
+        result = self.cursor.execute('''SELECT beheerder_id, voornaam, tussenvoegsel, achternaam, email FROM beheerders WHERE not status =  'deleted' ''').fetchall()
         administrators = []
         for row in result:
             administrators.append(dict(row))
         return administrators
 
     def get_administrator_by_id(self, administrator_id):
-        result = self.cursor.execute('''SELECT *, voornaam || ' ' || coalesce(tussenvoegsel || ' ' || achternaam, achternaam) as volle_naam FROM beheerders WHERE beheerder_id = ?''', (administrator_id,)).fetchone()
+        result = self.cursor.execute('''SELECT *, voornaam || ' ' || coalesce(tussenvoegsel || ' ' || achternaam, achternaam) as volle_naam FROM beheerders WHERE beheerder_id = ? AND not status = 'deleted' ''', (administrator_id,)).fetchone()
         return dict(result)
 
     def get_administrator_login(self, email, password):
-        result = self.cursor.execute('''SELECT beheerder_id, wachtwoord FROM beheerders WHERE email = ?''', (email,)).fetchone()
+        result = self.cursor.execute('''SELECT beheerder_id, wachtwoord FROM beheerders WHERE email = ? AND not status = 'deleted' ''', (email,)).fetchone()
         if result:
             if check_password_hash(result['wachtwoord'], password):
                 return result['beheerder_id']
@@ -59,7 +59,7 @@ class Administrator:
         return dict(result)
 
     def delete_administrator(self, administrator_id):
-        self.cursor.execute('''DELETE FROM beheerders WHERE beheerder_id = ? ''', (administrator_id,))
+        self.cursor.execute('''UPDATE beheerders SET wachtwoord = NULL, status = 'deleted' WHERE beheerder_id = ? ''', (administrator_id,))
         self.con.commit()
 
 

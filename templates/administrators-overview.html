@@ -15,7 +15,7 @@
       <div class="js-add administrator-add hide">
         <img class="js-cross-image cross-image" src="../static/images/cross.svg">
         <h1>Toevoegen</h1>
-        <div>
+        <div class="add-popup-container">
             <label for="fname-input">Voornaam:</label>
             <input class="js-fname-input" id="fname-input">
             <label for="lname-input">Achternaam:</label>
@@ -24,7 +24,7 @@
             <input class="js-email-input" id="email-input">
             <label for="password-input">Wachtwoord:</label>
             <input class="js-password-input" id="password-input">
-            <button class="div-add-button action-button js-add-button" type="submit">Toevoegen<img class="action-img add-img" src="../static/images/add-icon.svg"></button>
+            <button class="div-add-button action-button js-add-button" type="submit">Toevoegen</button>
         </div>
     </div>
 
@@ -41,14 +41,17 @@
 
     <!-- pop up to delete administrator -->
     <div class="js-delete administrator-delete hide">
-        <img class="js-cross-image cross-image" src="../static/images/cross.svg">
+
 
     </div>
 
  <!-- administrator overview -->
     <h1> Beheerdersoverzicht</h1>
-    <button class="add-administrator-button">Beheerder toevoegen<img class="action-img add-img" src="../static/images/add-icon.svg"></button>
-    <input class="js-searchbar" type="text" placeholder="Zoeken">
+    <button class="add-administrator-button">Beheerder toevoegen</button>
+
+    <label for="searchbar">
+        <input id="searchbar" class="js-searchbar searchbar" type="text" placeholder="Zoeken">
+    </label>
 
     <table class="administrator-table">
         <thead class="table-th">

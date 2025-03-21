@@ -1,3 +1,4 @@
+//filter searchbar
 let administratorsList = [];
 let interval;
 
@@ -15,7 +16,10 @@ document.querySelector('.js-searchbar').addEventListener('input', e => {
                 if (administrator.email.includes(value)) {
                         return true;
                 }
-                return false;
+
+                const name = `${administrator.voornaam} ${administrator.tussenvoegsel} ${administrator.achternaam}`;
+                console.log('naam: ', name);
+                return name.toLowerCase().includes(value.toLowerCase());
         })
 
         showAdministrator(filteredAdministrators);
@@ -64,15 +68,16 @@ function showAdministrator (administrators) {
                 <tr>
                     <td>${fullName}</td>
                     <td>${administrator.email}</td>
+                  
+             
                     <td>
                         <button data-admin-id="${administrator['beheerder_id']}" class="action-button details-button">Details
-                            <img class="action-img eye-img" src="../static/images/eye-icon.png">
+
                         </button>
                         <button data-admin-id="${administrator['beheerder_id']}" class="action-button edit-button">Bewerken
-                            <img class="action-img" src="../static/images/edit-icon-2.png">
+                     
                         </button>
                         <button data-admin-id="${administrator['beheerder_id']}" class="action-button delete-button">Verwijderen
-                            <img class="action-img" src="../static/images/bin-icon.png">
                         </button>
                     </td>
                 </tr>
@@ -144,15 +149,19 @@ function showSingleAdministrator(administrator) {
 
         administratorDetails.innerHTML =
         `
+        <div class="details-class">
                 <img class="js-cross-image cross-image" src="../static/images/cross.svg">
                 <h1 class="details-header">Details</h1>
-                    
-                <d1>
-                        <dt>Naam:</dt>
-                        <dd>${administrator.voornaam}</dd>
-                        <dt>Email:</dt>
-                        <dd>${administrator.email}</dd>
-                </d1>
+                <div class="details">
+                        <p>Naam:${administrator.voornaam}</p>
+                        <p>Email: ${administrator.email}</p>
+                        <p>Telefoonnummer: ${administrator.telefoonnummer}</p>
+                </div>
+               
+        </div>
+        
+       
+                
         `;
 
         // closing pop up
@@ -256,7 +265,9 @@ function showAdminEditPopup(administrator) {
          <input class="js-lname-update" type="text" value=${administrator.achternaam} id="lname-update">
          <label for="email-update">Email:</label>
          <input class="js-email-update" type="text" value=${administrator.email} id="email-update">
-         <button data-admin-id="${administrator['beheerder_id']}"class="div-edit-button action-button js-popup-edit-button" type="submit">Bewerken<img class="action-img" src="../static/images/edit-icon-2.png"></button>
+         <div class="button-container">
+            <button data-admin-id="${administrator['beheerder_id']}"class="div-edit-button action-button js-popup-edit-button" type="submit">Bewerken</button>
+         </div>
             `;
 
         document.querySelector(".js-popup-edit-button").addEventListener("click", () =>
@@ -304,11 +315,16 @@ function showAdminDeletePopup (administrator) {
         const deleteAdministratorPopup = document.querySelector(".js-delete")
         deleteAdministratorPopup.innerHTML =
             `
-        <img class="js-cross-image cross-image" src="../static/images/cross.svg"> 
-        <h1>Verwijderen</h1>
-        <p>Naam: ${administrator.voornaam}</p>
-        <p>E-mailadres: ${administrator.email}</p>
-        <button data-admin-id="${administrator['beheerder_id']}" class="js-delete-button div-delete-button action-button" type="submit">Verwijderen<img class="action-img" src="../static/images/bin-icon.png"></button>
+        <div class="delete-class">
+                <img class="js-cross-image cross-image" src="../static/images/cross.svg"> 
+                <h1>Verwijderen</h1>
+                <div class="delete">
+                        <p>Naam: ${administrator.voornaam}</p>
+                        <p>E-mailadres: ${administrator.email}</p>
+                        <p>Telefoonnummer: ${administrator.telefoonnummer}</p>
+                <div>
+                <button data-admin-id="${administrator['beheerder_id']}" class="js-delete-button div-delete-button action-button" type="submit">Verwijderen</button>
+        </div>
             `;
 
         document.querySelector(".js-delete-button").addEventListener("click", () =>
