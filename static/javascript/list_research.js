@@ -14,8 +14,8 @@ function set_modal() {
     let popupLeeftijdVan = document.getElementById("popupLeeftijdVan");
     let popupLeeftijdTot = document.getElementById("popupLeeftijdTot");
 
-    popup.setAttribute("aria-hidden", "true");
-    popup.style.display = 'none';
+    //popup.setAttribute("aria-hidden", "true");
+    //popup.style.display = 'none';
 
     onderzoekRijen.forEach(row => {
         row.addEventListener("click", function() {
