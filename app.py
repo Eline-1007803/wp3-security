@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from flask import *
 import re,random,string
-
+from auth import require_api_key
 from werkzeug.security import generate_password_hash
 
 from lib.model.administrators import Administrator
@@ -346,6 +346,7 @@ def get_onderzoeken():
 
 
 @app.route("/api/alle_beperkingen", methods=["GET"])
+@require_api_key
 def beperkingen():
     result = organisatie.get_all_disabilities()
     beperkingen = []
@@ -539,8 +540,8 @@ def update_onderzoeken():
 def onderzoek_pagina():
     return render_template("onderzoek_aanvraag__organisatie.html")
 
-
 @app.route("/api/onderzoekaanvragen", methods=["POST"])
+@require_api_key
 def onderzoek_aanvragen_organisatie():
     title = request.json["titel"]
     if title == "":
