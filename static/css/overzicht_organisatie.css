@@ -48,6 +48,11 @@ table
     height: 17%;
     
 }
+thead
+{
+    background-color: #2b50ec;
+    color: wheat;
+}
 
 table, th, td 
 {
@@ -69,16 +74,18 @@ th, td {
     margin-left: 10px;
     color: black;
 }
-.button
+
+.delete-button
 {
-    border: none;
-    background: transparent;
     margin-left: 10px;
-    color: black;
+    background-color: #2b50ec;
+
     font-size: large;
+    border-radius: 2px;
 }
 .filters
 {
     position: absolute;
     left: 420px;
 }
+
