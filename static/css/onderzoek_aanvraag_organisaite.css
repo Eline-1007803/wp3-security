@@ -31,7 +31,6 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 form {
     display: grid;
@@ -93,6 +92,7 @@ form textarea
 }
 .custom_select
 {
+
     border-radius: 3px;
     border: 2px solid black;
     padding:2px;
