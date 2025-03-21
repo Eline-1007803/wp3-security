@@ -1,6 +1,7 @@
+
 body {
     font-family: Arial;
-    font-size: 18px;
+    font-size: 16px;
     background-color: rgb(250, 253, 253);
     margin-bottom: 160px;
     color: black;
@@ -12,12 +13,14 @@ h1 {
 }
 
 .js-error-message{
-    color: black;
+    color: #ff3333;
+    font-weight: bold;
+
 }
 
 .js-sign-up {
     width: 50%;
-    margin:auto;
+    margin: auto;
     background-color: white;
     padding: 50px;
     justify-content: center;
@@ -46,6 +49,7 @@ h1 {
 label {
     display: flex;
     flex-direction: column;
+    font-size: 16px;
 }
 
 input {
@@ -55,11 +59,15 @@ input {
     background-color: rgb(240, 243, 243);
 }
 
-label {
-    margin-bottom: 10px;
-    margin-top: 10px;
-    font-size: 18px;
+.button-disabilities{
+    color: white;
+    background-color: black;
+    border-radius: 6px;
+    height: 30px;
+    font-size: 16px;
+
 }
+
 
 textarea {
     width: 500px;
@@ -70,26 +78,39 @@ textarea {
 .supervisor-info {
     display: grid;
     font-size: 18px;
-    row-gap: 10px;
     margin-left: 20px;
     margin-right: 10px;
-    grid-template-columns: 200px 300px;
+    margin-bottom: 5px;
 }
 
+select {
+    border-radius: 4px;
+    width: 100px ;
+    height: 30px;
+    font-size: 14px;
+    margin-top: 14px;
+}
 .hide {
     display: none;
 }
 
-.gender-input {
+.js-gender-input {
     display: flex;
-    gap: 10px;
-    margin: auto;
+    align-items: center;
+
+}
+
+.js-gender-input p {
+    margin-bottom: 100px;
+    align-items: center;
 }
 
 .gender-label {
     display: flex;
-    margin: auto;
+    margin: 40px;
+    width: 25px;
 }
+
 
 .submit-container {
     width: 100%;
@@ -98,20 +119,24 @@ textarea {
 }
 
 .submit-button {
-    margin: 20px auto 0 auto;
-    border-radius: 25px;
-    background-color: #8b008b;
+    margin: 60px auto 0 auto;
+    border-radius: 4px;
+    background-color: black;
     color: white;
     border: none;
     width: 300px;
     height: 50px;
     text-align: center;
     cursor: pointer;
+    font-size: 16px;
+}
+.submit-button:hover {
+    background-color: #383838 ;
+    color: white;
+    cursor: pointer;
 }
 
-.submit-button:hover {
-    background-color: #d100d1 ;
-}
+
 
 .sign-up {
     display: grid;
@@ -125,28 +150,42 @@ textarea {
     flex-direction: column;
 }
 
+.normal label {
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+.normal input {
+    width: 500px;
+}
 
 .dropdown {
     display: inline-block;
     position: relative;
+    width: 500px;
+    height: 100px;
+    margin: 0;
 }
+
 .dropdown-content{
-    display: none;
     position: absolute;
     z-index: 1;
-
+    width: 500px;
 }
 
 .arrow {
-  border: solid black;
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 3px;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid white; /* This creates the downward arrow */
+    margin-left: 5px;
 }
 
 .down {
-  transform: rotate(45deg);
+    margin-left: 20px;
 }
+
 
   .dark-mode {
     background-color: rgb(0, 0, 0);

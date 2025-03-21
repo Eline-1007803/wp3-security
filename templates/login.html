@@ -1,28 +1,28 @@
 {% extends 'base.html' %}
 {% block title %}Login{% endblock %}
-{% block styles %}<link rel="stylesheet" href="/static/css/login_page_style.css"> {% endblock %}
+{% block styles %}<link rel="stylesheet" href="../static/css/login_page_style.css"> {% endblock %}
 {% block nav_links %}
-<a href="/login">Home</a>
 <a href="#" class="button dark-mode-toggle" onclick="darkLightMode(); return false;">Donkere of lichte modus</a>
 {% endblock %}
 
 {% block main %}
     <h1>Inloggen</h1>
     <div class="form-container">
-        <label for="email">Email:</label>
-        <input class="js-login-email-input" type="email" name="email" id="email" placeholder="Email" aria-label="Voer hier uw email in" required>
-        <label for="password">Password:</label>
-        <input class="js-login-password-input" type="password" name="password" id="password" placeholder="Password" required>
-        <button class="js-submit-button" type="submit" aria-label="Druk om in te loggen">Inloggen</button>
+        <label for="email">
+            Email:
+            <input class="js-login-email-input input" type="email" name="email" id="email" placeholder="Email" aria-label="Voer hier uw email in" required>
+        </label>
+        <label for="password">
+            Password:
+            <input class="js-login-password-input input" type="password" name="password" id="password" placeholder="Password" required>
+        </label>
+        <div class="login-btn-container">
+            <button class="js-submit-button login-button" type="submit" aria-label="Druk om in te loggen">Inloggen</button>
+        </div>
         <p>Heeft u geen account?<a href="{{ url_for('expert_sign_up') }}" aria-label="Druk op dit button om te registreren" > Sign up!</a></p>
     </div>
 
-<div class="buttons">
-   <a href="/openstaande_onderzoeken"><button>Ervaringsdeskundigen</button></a>
-    <a href="/dashboard"><button>Beheerders</button></a>
-    <a href="/api/overzicht_onderzoeken"><button>Organisaties</button></a>
-</div>
 {% endblock %}
 
 {% block scripts%}<script src="../static/javascript/login.js"></script>
-<script src='../static/javascript/dark_mode.js'></script>{% endblock %}
+<script src="../static/javascript/dark_mode.js"></script>{% endblock %}
