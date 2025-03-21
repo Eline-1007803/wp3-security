@@ -69,6 +69,48 @@ Klik op de link die verschijnt in de terminal om de webapplicatie te openen.
 - Wachtwoord = gfx
 - API-key = A1B2
 
+# Navigatie door de webapplicatie:
+### Login:
+Als je de app opent kom je bij het login scherm waar je kan inloggen met bovenstaande gegevens. Hier kan je ook op registreren 
+klikken voor als je nog geen account hebt als ervaringsdeskundige.
+### Ervaringsdeskundige:
+Als je ingelogd bent als ervaringsdeskundige zie je allereerst het scherm met alle onderzoeken. Als je op een van deze 
+onderzoeken klikt krijg je meer info over dat onderzoek en kan je je via daar inschrijven op dat onderzoek.
+
+Als je in de navigatiebalk op 'mijn onderzoeken' klikt kom je op de pagina waar je alle onderzoeken kan zien waarop je je 
+hebt ingeschreven. Als je op een van deze onderzoeken klikt kan je ook weer meer info krijgen over dit onderzoek.
+
+Als je in de navigatiebalk op 'profiel' klikt krijg je alle info over jou als gebruiker te zien en kan je die ook aanpassen
+door de gewenste veranderingen in te vullen en op 'save' te klikken.
+
+Als je in de navigatiebalk op 'onderzoeken' klikt kom je weer terug op het beginscherm van een ervaringsdeskundige.
+
+Als je in de navigatiebalk op 'uitloggen' klikt kom je weer terug op het begin scherm waar je moet inloggen.
+### Beheerder:
+Als je ingelogd bent als beheerder kom je allereerst op het dashboard waar alle onderzoeken, inschrijvingen en 
+ervaringsdeskundigen die nog goedgekeurd moeten worden te zien zijn. Als je op een item in de tabel klikt krijg je meer
+informatie te zien over het gekozen item. Hier kan de beheerder dat item dan ook goed of afkeuren.
+
+Als je in de navigatiebalk op 'beheerders' klikt kom je bij het overzicht van alle beheerders. Hier kan je beheerders
+toevoegen, (beperkt)bewerken, verwijderen en je kan (beperkt)details zien van andere beheerders.
+
+Als je in de navigatiebalk op 'profiel' klikt, zie je je eigen gegevens en kan je die daar ook weer aanpassen.
+
+Als je in de navigatiebalk op 'dashboard' klikt kom je weer uit bij het dashboard waar je aan het begin was.
+
+Als je in de navigatiebalk op 'uitloggen' klikt, word je weer teruggestuurd naar de inlog pagina.
+### Organisatie:
+Als je bent ingelogd als organisatie kom je uit op het scherm met alle onderzoeken van die organisatie. Hier kan je je
+onderzoek (beperkt)aanpassen en zien wie er allemaal op je onderzoek is ingeschreven.
+
+Als je in de navigatiebalk op 'aanvraag' klikt kom je uit bij een formulier waarmee je een nieuw onderzoek kan aanvragen.
+
+Als je in de navigatiebalk op 'profiel' kan je hier de gegevens van je organisatie zien en die aanpassen.
+
+Als je in de navigatiebalk op 'onderzoeken' klikt kom je weer uit bij het startscherm voor organisaties.
+
+Als je in de navigatiebalk op 'uitloggen' klikt, word je weer terug gestuurd naar de inlog pagina.
+
 # Bronvermelding:
 - (SuperSimpleDev, 2024)
 - (Dhairya Shah, 2021)
