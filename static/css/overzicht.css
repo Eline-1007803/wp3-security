@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: Arial;
     font-weight: 200;
     font-style: normal;
 }
@@ -13,7 +13,7 @@ body{
 main {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: Arial;
 }
 .research-table-container {
     height: auto;
@@ -33,11 +33,11 @@ h1
 {
     margin-top: 50px;
     text-align: center;
-    font-family: "Montserrat", serif;
+    font-family: Arial;
     font-weight: 700;
     font-style: normal;
     font-size: x-large;
-    color: #3b3b3b;
+    color: #000000;
     margin-bottom: 40px;
 }
 
@@ -62,9 +62,13 @@ table, th, td
     padding: 5px;
 }
 
-th, td {
+th {
     border: 1px solid black;
-    border-radius: 10px;
+    color: rgb(255, 255, 255);
+}
+
+td {
+    border: 1px solid black;
 }
 
 .update,.users
@@ -162,7 +166,7 @@ textarea
     font-size: 16px;
 }
 .close_updatemodal {
-    color: #aaaaaa;
+    color: #000000;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -180,7 +184,7 @@ textarea
 }
 
 .button {
-    background-color: #032A1D;
+    background-color: none;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -249,5 +253,26 @@ textarea
 
 .dark-mode .modal-content {
     background-color: black;
+    color: white;
+}
+
+table {
+    position: fixed;
+}
+
+section.test {
+    width: 70%;
+    background-color: blue;
+    box-shadow: #000;
+}
+
+.dark-mode th,
+.dark-mode tr {
+    background-color: black;
+    color: white;
+}
+
+.button .dark-mode-toggle {
+    background-color: none;
     color: white;
 }

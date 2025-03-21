@@ -12,6 +12,7 @@
 {% endblock %}
 {% block main %}
         <h1>Overzicht Onderzoeken</h1>
+        <section class="test">
         <div class="filters">
             <input type="text" id="idinput" onkeyup="filter()" placeholder="Zoek onderzoek id.." aria-label="Zoek onderzoek ID">
             <input type="text" id="titleinput" onkeyup="filter()" placeholder="Zoek onderzoek.." aria-label="Zoek onderzoek">
@@ -23,6 +24,7 @@
             <input type="text" id="leeftijdvaninput" onkeyup="filter()" placeholder="Leeftijd van.." aria-label="Zoek leeftijd van">
             <input type="text" id="leeftijdtotinput" onkeyup="filter()" placeholder="Leeftijd tot.." aria-label="Zoek leeftijd tot">
         </div>
+        </section>
         <div class="research-table-container">
             <table class="js-onderzoektabel">
                 <caption>Overzicht Onderzoeken</caption>
@@ -47,7 +49,6 @@
             <div class="usersmodal" id="users_modal">
             </div>
         </div>
-    </main>
 {% endblock %}
 {% block scripts %}  <script src="/static/javascript/overzicht_onderzoeken.js"></script> 
 <script src="{{ url_for('static', filename='javascript/dark_mode.js')}}"></script>{% endblock %}

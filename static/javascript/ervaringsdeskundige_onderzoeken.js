@@ -14,6 +14,7 @@ function set_modal() {
     let popupLeeftijdVan = document.getElementById("popupLeeftijdVan");
     let popupLeeftijdTot = document.getElementById("popupLeeftijdTot");
 
+
     //popup.setAttribute("aria-hidden", "true");
     //popup.style.display = 'none';
 
@@ -94,12 +95,14 @@ function getOpenResearch(onderzoeken) {
                 data-plaatsen="${onderzoek.beschikbaar}"
                 data-locatie="${onderzoek.locatie}"
                 data-leeftijd-van="${onderzoek.leeftijd_van}"
-                data-leeftijd-tot="${onderzoek.leeftijd_tot}">
+                data-leeftijd-tot="${onderzoek.leeftijd_tot}"
+                data-beperking="${onderzoek.beperking}">
                 <td>${onderzoek.onderzoek_id}</td>
                 <td>${onderzoek.titel}</td>
                 <td>${onderzoek.datum_vanaf}</td>
                 <td>${onderzoek.datum_tot}</td>
                 <td>${onderzoek.type}</td>
+                <td>${onderzoek.beperking}</td>
             </tr>`;
         tableBody.innerHTML += row;
     });

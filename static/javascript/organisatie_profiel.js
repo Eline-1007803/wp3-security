@@ -38,7 +38,7 @@ function fill_html(organisatie_info){
     <option value="non-profit">Non-Profit</option>
     <option value="commercieel">Commercieel</option>
     <br>
-    <label for="website">Website:</label><br>
+    <label for="url">Website:</label><br>
     <input type="url" placeholder="website" id="url" value="${organisatie_info.website}">
     <label for="beschrijving">Beschrijving:</label>
     <textarea id="beschrijving" style="resize:none;">${organisatie_info.beschrijving}</textarea>

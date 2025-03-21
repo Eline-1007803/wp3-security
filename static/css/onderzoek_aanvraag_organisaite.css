@@ -105,7 +105,7 @@ form textarea
 }
 
 .button {
-    background-color: #000000;
+    background-color: none;
     border: none;
     color: white;
     padding: 15px 32px;
