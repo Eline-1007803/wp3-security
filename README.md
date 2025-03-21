@@ -10,9 +10,9 @@ https://www.python.org/downloads/release/python-3120/
 Zorg ervoor dat je de optie 'Add Python to PATH' aanvinkt tijdens de installatie, zodat je Python vanuit de commandoregel kunt gebruiken.
 
 ### Stap 2:
-Maak een lokale kloon van de repository aan.
+Maak een lokale kloon van de repository aan. Doe dat door wat hieronder staat in de terminal te runnen.
 ```shell
-git@github.com:Rac-Software-Development/wp3-2025-rest-1b4-insertteamnamehere.git
+git clone git@github.com:Rac-Software-Development/wp3-2025-rest-1b4-insertteamnamehere.git
 ```
 
 ### Stap 3:
