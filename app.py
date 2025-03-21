@@ -441,7 +441,7 @@ def update_organisatie(organisatie_id):
     email = request.json["email"]
     number = request.json["number"]
     check_number_10_digit = str(number)
-    if not isinstance(number, int) or len(check_number_10_digit) != 9:
+    if len(check_number_10_digit) != 10:
         return jsonify("U heeft geen nummer ingevuld of het heeft geen 10 cijfers"), 400
     overige_details = request.json["overige_details"]
     organisatie_id = session.get('organisation')
