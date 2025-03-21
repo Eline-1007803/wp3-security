@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from flask import *
 import re,random,string
-
+from auth import require_api_key
 from werkzeug.security import generate_password_hash
 
 from lib.model.administrators import Administrator
@@ -351,6 +351,7 @@ def get_onderzoeken():
 
 
 @app.route("/api/alle_beperkingen", methods=["GET"])
+@require_api_key
 def beperkingen():
     result = organisatie.get_all_disabilities()
     beperkingen = []
@@ -423,7 +424,7 @@ def nieuwe_organisatie():
         api_key,
     )
     return jsonify(new_organisatie), 201
-@app.route("/api/updateorganisatie/<organisatie_id>")
+@app.route("/api/updateorganisatie/<organisatie_id>",methods=["PUT"])
 def update_organisatie(organisatie_id):
     naam = request.json["naam"]
     if naam == "":
@@ -443,7 +444,6 @@ def update_organisatie(organisatie_id):
     if not isinstance(number, int) or len(check_number_10_digit) != 9:
         return jsonify("U heeft geen nummer ingevuld of het heeft geen 10 cijfers"), 400
     overige_details = request.json["overige_details"]
-    api_key = ''.join(random.choices(string.ascii_letters + string.digits + string.punctuation, k=32))
     organisatie_id = session.get('organisation')
     updated = organisatie.update_own_organisatie(
         naam,
@@ -455,7 +455,6 @@ def update_organisatie(organisatie_id):
         email,
         number,
         overige_details,
-        api_key,
         organisatie_id
     )
     return jsonify(updated), 201
@@ -546,9 +545,9 @@ def update_onderzoeken():
 def onderzoek_pagina():
     return render_template("onderzoek_aanvraag__organisatie.html")
 
-
-@app.route("/api/onderzoekaanvragen", methods=["POST"])
-def onderzoek_aanvragen_organisatie():
+@app.route("/api/onderzoekaanvragen", methods=["POST"],endpoint="onderzoek_aanvragen")
+@require_api_key
+def onderzoek_aanvragen_organisatie(organisatie_id):
     title = request.json["titel"]
     if title == "":
         return jsonify("Titel can't be empty!"), 400
@@ -613,7 +612,6 @@ def onderzoek_aanvragen_organisatie():
         met_beloning = 1
     else:
         met_beloning = 0
-    organisatie_id = 1  # for now
     onderzoek = organisatie.insert_onderzoek(
         title,
         beschrijving,
@@ -743,7 +741,7 @@ def update_own_profile(ervaringsdeskundige_id):
 @app.route("/api/ingeschreven_onderzoeken", methods=["GET"])
 def get_signedup_research():
     onderzoeken_model = Onderzoeken()
-    ervaringsdeskundige_id = 1  # moet nog worden veranderd
+    ervaringsdeskundige_id = session.get('expert')
     ingeschreven_onderzoeken = onderzoeken_model.get_signedup_research(
         ervaringsdeskundige_id
     )

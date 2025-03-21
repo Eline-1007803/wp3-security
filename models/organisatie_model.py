@@ -187,10 +187,11 @@ class Organisatie:
     def api_check(self, api_key):
         result = self.cursor.execute(
             "SELECT organisatie_id FROM organisaties WHERE api_key = ?",
-            (api_key),
-        )
-        self.con.commit()
-        return result
+            (api_key,),
+        ).fetchone()
+        if result:
+            return result["organisatie_id"]
+        return None
 
     def get_organisation_login(self, email, password):
         result = self.cursor.execute(

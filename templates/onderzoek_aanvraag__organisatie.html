@@ -6,12 +6,15 @@
 <a href="/api/overzicht_onderzoeken">Onderzoeken</a>
 <a href="#" class="button dark-mode-toggle" onclick="darkLightMode(); return false;">Donkere of lichte modus</a>
 <a href="/myprofile_organisatie">Profiel</a>
+<a href="/logout">Uitloggen</a>
 {% endblock %}
 
 {% block main %}
 <div class="form-container">
     <form method="post">
         <h1>Onderzoek Aanvraag</h1>
+        <label for="apikey">Api key:</label>
+        <input type="text" name="apikey" id="apikey" aria-label="Voer api key in">
         <label for="titel">Titel:</label>
         <input type="text" name="titel" id="titel" placeholder="Titel.." aria-label="Voer het titel in" required>
         <label for="beschrijving">Beschrijving:</label>

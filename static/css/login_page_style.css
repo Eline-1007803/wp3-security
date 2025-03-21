@@ -51,6 +51,7 @@ h1 {
     border-width: 1px;
     border-radius: 8px;
     background-color: rgb(240, 243, 243);
+    font-size: 16px;
 }
 
 form a
@@ -132,4 +133,14 @@ form a
 
     .dark-mode .form-container {
         background-color: #4b4b4b;
+    }
+
+    .dark-mode a {
+        color: white;
+        text-decoration: underline;
+    }
+
+    a {
+        color: black;
+        text-decoration: underline;
     }

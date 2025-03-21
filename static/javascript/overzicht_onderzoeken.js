@@ -27,7 +27,7 @@ function showOnderzoeken (onderzoeken) {
          let row =
           `
           <tr>
-                <th scope="row">${onderzoek.onderzoek_id}</td>
+                <td>${onderzoek.onderzoek_id}</td>
                 <td>${onderzoek.titel}</td>
                 <td>${onderzoek.status}</td>
                 <td>${beschikbaar}</td>
