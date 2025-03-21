@@ -45,6 +45,7 @@ getAllAdminstrators();
 interval = setInterval(getAllAdminstrators, 5000);
 
 
+
 // Add button pop up
 document.querySelectorAll(".add-administrator-button")
     .forEach(addButton => {
@@ -153,7 +154,7 @@ function showSingleAdministrator(administrator) {
         administratorDetails.innerHTML =
         `
         <div class="details-class">
-                <img class="js-cross-image cross-image" src="../static/images/cross.svg">
+                <img class="js-cross-image cross-image" src="../static/images/cross.svg" alt="Kruisje">
                 <h1 class="details-header">Details</h1>
                 <div class="details">
                         <p>Naam:${administrator.voornaam}</p>
@@ -260,7 +261,7 @@ function showAdminEditPopup(administrator) {
         const editAdministratorPopup = document.querySelector(".js-edit");
         editAdministratorPopup.innerHTML =
             `
-         <img class="js-cross-image cross-image" src="../static/images/cross.svg">
+         <img class="js-cross-image cross-image" src="../static/images/cross.svg" alt="Kruisje">
          <h1>Bewerken</h1>
          <label for="fname-update">Voornaam:</label>
          <input class="js-fname-update" id="fname-update" type="text" value=${administrator.voornaam}>
@@ -319,7 +320,7 @@ function showAdminDeletePopup (administrator) {
         deleteAdministratorPopup.innerHTML =
             `
         <div class="delete-class">
-                <img class="js-cross-image cross-image" src="../static/images/cross.svg"> 
+                <img class="js-cross-image cross-image" src="../static/images/cross.svg" alt="Kruisje"> 
                 <h1>Verwijderen</h1>
                 <div class="delete">
                         <p>Naam: ${administrator.voornaam}</p>
