@@ -13,8 +13,8 @@
 <a href="/logout">Uitloggen</a>
 {% endblock %}
 {% block main %}
-    <main>
-        <h1>Overzicht Organisaties</h1>
+ <h1>Overzicht Organisaties</h1>
+
         <div class="filters">
             <input type="text" id="naaminput" onkeyup="filter()" placeholder="Zoek organisatie naam.." aria-label="Zoek organisatie naam">
             <select name="select" id="select" onchange="filter_type()">
@@ -24,6 +24,7 @@
 
             </select>
         </div>
+
         <div class="organisatie-table-container">
             <table>
                 <thead>
@@ -42,7 +43,6 @@
                 <tbody class="js-organisatietabel"></tbody>
             </table>
         </div>
-    </main>
 {% endblock %}
 {% block scripts %}  <script src="/static/javascript/overzicht_organisatie.js"></script>
 <script src="{{ url_for('static', filename='javascript/dark_mode.js')}}"></script> {% endblock %}
