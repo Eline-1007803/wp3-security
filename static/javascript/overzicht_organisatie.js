@@ -27,7 +27,7 @@ function showOrganisaties (organisaties) {
               <td>${organisatie.email}</td>
               <td>${organisatie.telefoonnummer}</td>
               <td>
-              <button data-organisatie-id="${organisatie["organisatie_id"]}" class="delete" id="delete_button" aria-label="delete organisatie">Delete Organisatie</button>
+              <button data-organisatie-id="${organisatie["organisatie_id"]}" class="delete" id="delete_button" aria-label="delete organisatie">Verwijderen</button>
               </td>
           </tr>
         `
