@@ -423,7 +423,7 @@ def nieuwe_organisatie():
         api_key,
     )
     return jsonify(new_organisatie), 201
-@app.route("/api/updateorganisatie/<organisatie_id>")
+@app.route("/api/updateorganisatie/<organisatie_id>",methods=["PUT"])
 def update_organisatie(organisatie_id):
     naam = request.json["naam"]
     if naam == "":
@@ -443,7 +443,6 @@ def update_organisatie(organisatie_id):
     if not isinstance(number, int) or len(check_number_10_digit) != 9:
         return jsonify("U heeft geen nummer ingevuld of het heeft geen 10 cijfers"), 400
     overige_details = request.json["overige_details"]
-    api_key = ''.join(random.choices(string.ascii_letters + string.digits + string.punctuation, k=32))
     organisatie_id = session.get('organisation')
     updated = organisatie.update_own_organisatie(
         naam,
@@ -455,7 +454,6 @@ def update_organisatie(organisatie_id):
         email,
         number,
         overige_details,
-        api_key,
         organisatie_id
     )
     return jsonify(updated), 201
