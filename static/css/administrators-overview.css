@@ -312,6 +312,19 @@ add-img {
 .dark-mode td  {
     border-color: white;
 }
+.dark-mode .details-button {
+    background-color: white;
+    color: black
+}
+.dark-mode .delete-button {
+    background-color: white;
+    color: black;
+}
+
+.dark-mode .div-delete-button{
+    background-color: white;
+    color: black;
+}
 
 .dark-mode .administrator-add,
 .dark-mode .administrator-delete,
