@@ -455,6 +455,16 @@ def update_organisatie(organisatie_id):
         email,
         number,
         overige_details,
+        organisatie_id,
+    )
+    return jsonify(updated), 201
+
+@app.route("/api/updateorganisatie/newapi_key/<organisatie_id>",methods=["PUT"])
+def update_organisatie_apikey(organisatie_id):
+    api_key = request.json["api_key"]
+    organisatie_id = session.get('organisation')
+    updated = organisatie.update_api_key(
+        api_key,
         organisatie_id
     )
     return jsonify(updated), 201

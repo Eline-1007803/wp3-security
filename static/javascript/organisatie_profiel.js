@@ -10,7 +10,15 @@ function get_user_info(id){
         .then(response => response.json())
         .then(fill_html)
 }
-
+function generateRandomString(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        result += characters.charAt(randomIndex);
+    }
+    return result;
+}
 function fill_html(organisatie_info){
     let name = document.getElementById('info');
     name.innerHTML = '';
@@ -44,24 +52,25 @@ function fill_html(organisatie_info){
     <label for="overigedetails">Overige Details:</label>
     <textarea name="overigedetails" id="overigedetails" style="resize:none;">${organisatie_info.overige_details}</textarea>
     <button id="save">Save</button>
+    <button id="generate_key">Generate api key</button>
     `;
     let save_button = document.getElementById('save')
-
+    
     save_button.addEventListener('click', () => {
-            let voornaam = document.getElementById('naam').value
-            let wachtwoord = document.getElementById('wachtwoord').value
-            let select = document.getElementById('select').value
-            let website = document.getElementById('url').value
-            let beschrijving = document.getElementById('beschrijving').value
-            let contactpersoon = document.getElementById('contactpersoon').value
-            let overigedetails = document.getElementById('overigedetails').value
-            let email = document.getElementById('email').value
-            let telnum = document.getElementById('telefoonnummer').value
-            removelistener()
-            fetch(`/api/updateorganisatie/${organisatie_info.organisatie_id}`, {
+        let voornaam = document.getElementById('naam').value
+        let wachtwoord = document.getElementById('wachtwoord').value
+        let select = document.getElementById('select').value
+        let website = document.getElementById('url').value
+        let beschrijving = document.getElementById('beschrijving').value
+        let contactpersoon = document.getElementById('contactpersoon').value
+        let overigedetails = document.getElementById('overigedetails').value
+        let email = document.getElementById('email').value
+        let telnum = document.getElementById('telefoonnummer').value
+        removelistener()
+        fetch(`/api/updateorganisatie/${organisatie_info.organisatie_id}`, {
             method: 'PUT',
             headers:{
-            'content-type': 'application/json'
+                'content-type': 'application/json'
             },
             body: JSON.stringify({
                 naam: voornaam,
@@ -72,19 +81,36 @@ function fill_html(organisatie_info){
                 contactpersoon:contactpersoon,
                 overige_details:overigedetails,
                 email:email,
-                number:telnum
-                })
+                number:telnum,
             })
-                .then(response => response)
-                .then(get_organisatie_id)
-        }
+        })
+        .then(response => response)
+        .then(get_organisatie_id);
+    });
+    let generate_key_button = document.getElementById('generate_key');
+    let generatedApiKey = '';
+    generate_key_button.addEventListener('click', () => {
+        generatedApiKey = generateRandomString(32);
+        alert(`Generated API Key: ${generatedApiKey}`);
+    });
+    document.getElementById("generate_key").addEventListener("click", function (){
+        fetch(`/api/updateorganisatie/newapi_key/${organisatie_info.organisatie_id}`,{
+            method: 'PUT',
+            headers:{
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                api_key:generatedApiKey
+            })
+        })
+        .then(response => response)
+        .then(get_organisatie_id);
+    });
 
-
-    )
 }
-
 function removelistener(){
     let save_button = document.getElementById('save')
     save_button.removeEventListener('click', () => {})
 }
+
 get_organisatie_id()
