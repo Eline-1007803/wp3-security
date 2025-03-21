@@ -1,3 +1,4 @@
+//filter searchbar
 let administratorsList = [];
 let interval;
 
@@ -15,7 +16,10 @@ document.querySelector('.js-searchbar').addEventListener('input', e => {
                 if (administrator.email.includes(value)) {
                         return true;
                 }
-                return false;
+
+                const name = `${administrator.voornaam} ${administrator.tussenvoegsel} ${administrator.achternaam}`;
+                console.log('naam: ', name);
+                return name.toLowerCase().includes(value.toLowerCase());
         })
 
         showAdministrator(filteredAdministrators);
@@ -66,13 +70,12 @@ function showAdministrator (administrators) {
                     <td>${administrator.email}</td>
                     <td>
                         <button data-admin-id="${administrator['beheerder_id']}" class="action-button details-button">Details
-                            <img class="action-img eye-img" src="../static/images/eye-icon.png">
+
                         </button>
                         <button data-admin-id="${administrator['beheerder_id']}" class="action-button edit-button">Bewerken
-                            <img class="action-img" src="../static/images/edit-icon-2.png">
+                     
                         </button>
                         <button data-admin-id="${administrator['beheerder_id']}" class="action-button delete-button">Verwijderen
-                            <img class="action-img" src="../static/images/bin-icon.png">
                         </button>
                     </td>
                 </tr>
@@ -256,7 +259,9 @@ function showAdminEditPopup(administrator) {
          <input class="js-lname-update" type="text" value=${administrator.achternaam} id="lname-update">
          <label for="email-update">Email:</label>
          <input class="js-email-update" type="text" value=${administrator.email} id="email-update">
-         <button data-admin-id="${administrator['beheerder_id']}"class="div-edit-button action-button js-popup-edit-button" type="submit">Bewerken<img class="action-img" src="../static/images/edit-icon-2.png"></button>
+         <div class="button-container">
+            <button data-admin-id="${administrator['beheerder_id']}"class="div-edit-button action-button js-popup-edit-button" type="submit">Bewerken</button>
+         </div>
             `;
 
         document.querySelector(".js-popup-edit-button").addEventListener("click", () =>
