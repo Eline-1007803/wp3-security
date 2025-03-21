@@ -470,6 +470,7 @@ def update_organisatie_apikey(organisatie_id):
     return jsonify(updated), 201
 
 
+
 @app.route("/api/overzicht_onderzoeken", methods=["GET"])
 def overzicht_onderzoeken():
     return render_template("overzicht_onderzoeken.html")
