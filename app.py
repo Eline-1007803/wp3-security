@@ -283,7 +283,9 @@ def update_deskundigen():
     edm = ervaringsdeskundigen_model.Ervaringsdeskundigen()
     status = request.json.get("status")
     deskundige_id = request.json.get("id")
-    edm.update_status(deskundige_id, status)
+    admin_id = request.json.get("beheerder_id")
+    date = request.json.get("date")
+    edm.update_status(deskundige_id, status, admin_id, date)
     return "200"
 
 @app.route("/api/inschrijvingen", methods=["GET"])
@@ -321,7 +323,9 @@ def update_inschrijvingen():
     ism = inschrijvingen_model.Inschrijvingen()
     status = request.json.get("status")
     inschrijving_id = request.json.get("id")
-    ism.update_status(inschrijving_id, status)
+    admin_id = request.json.get("beheerder_id")
+    date = request.json.get("date")
+    ism.update_status(inschrijving_id, status, admin_id, date)
     return "200"
 
 @app.route("/api/onderzoeken", methods=["GET"])
@@ -530,7 +534,9 @@ def update_onderzoeken():
     ozm = onderzoeken_model.Onderzoeken()
     status = request.json.get("status")
     onderzoek_id = request.json.get("id")
-    ozm.update_status(onderzoek_id, status)
+    admin_id = request.json.get("beheerder_id")
+    date = request.json.get("date")
+    ozm.update_status(onderzoek_id, status, admin_id, date)
     return "200"
 
 
