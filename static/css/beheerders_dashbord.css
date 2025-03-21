@@ -223,6 +223,17 @@ section input {
   text-align: center;
   }
   
+button {
+  background-color: black;
+  color: white;
+  padding: 10px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
   .dark-mode {
     background-color: rgb(46, 46, 46);
     color: white;
@@ -252,8 +263,10 @@ section input {
     color: white;
 }
 
-.dark-mode h2 {
+.dark-mode h2,
+.dark-mode h1 {
   color: white;
+  background-color: black
 }
 
 .dark-mode .modal-content {
@@ -284,7 +297,17 @@ section input {
   color: white;
 }
 
+.dark-mode #generate_key {
+  background-color: white;
+  color: black;
+}
+
 .dark-mode #save {
   color: black;
-  background-color: pink;
+  background-color: white;
+}
+
+h1 {
+  background-color: white;
+  color: black;
 }
