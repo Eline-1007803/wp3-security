@@ -121,3 +121,121 @@ button .data-organisatie {
     background-color: black;
     color: white;
 }
+
+.dark-mode {
+    background-color: rgb(46, 46, 46);
+    color: white;
+}
+
+.dark-mode h1 {
+    margin-top: 50px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 30px;
+    color: white;
+    margin-bottom: 40px;
+}
+
+.dark-mode .organisatie-table-container {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    border-radius: 20px;
+}
+
+.dark-mode table {
+    margin-top: 40px;
+    width: 1000px;
+    height: 140px;
+    color: white;
+    border: 1px solid white;
+    border-collapse: collapse;
+    background-color: black;
+    text-align: center;
+    font-size: 16px;
+}
+
+.dark-mode thead {
+    background-color: #2b50ec;
+    color: white;
+}
+
+.dark-mode th, 
+.dark-mode td {
+    background-color: black;
+    border: 1px solid white;
+    text-align: left;
+    padding: 5px;
+}
+
+.dark-mode tbody tr:nth-child(even) {
+    background-color: #000000;
+}
+
+.dark-mode .filters {
+    margin-left: 400px;
+    margin-bottom: 40px;
+    left: 420px;
+    border-radius: 4px;
+}
+
+.dark-mode .popup-content,
+.dark-mode .column {
+    background-color: #000;
+    color: white;
+}
+
+.dark-mode .popup header {
+    background-color: black;
+    padding: 10px;
+    text-align: center;
+}
+
+.dark-mode button.close-popup {
+    color: white;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.dark-mode-toggle {
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    color: white;
+    background-color: #000000;
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dark-mode #aanmeldenButton {
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.dark-mode #delete_button {
+    background-color: white;
+    color: black;
+}
+
+tr {
+    background-color: white;
+    color: black;
+}
+
+th {
+    background-color: #2b50ec;
+    color: white;
+}
