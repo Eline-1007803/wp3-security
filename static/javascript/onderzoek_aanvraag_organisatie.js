@@ -58,11 +58,13 @@ function add_onderzoek () {
     });
     let leeftijd_van = document.getElementById('leeftijdvan').value
     let leeftijd_tot = document.getElementById('leeftijdtot').value
+    let api_key = document.getElementById('apikey').value
     console.log(datum_vanaf)
     fetch('/api/onderzoekaanvragen', {
             method: 'POST',
             headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'x-api-key': api_key
             },
             body: JSON.stringify({"titel":titel,"beschrijving":beschrijving,"tijd":time_slot,"datumvanaf":datum_vanaf,"datumtot":datum_tot,"typeonderzoek":type_onderzoek,"locatie_text":locatie,
                 "metbeloning":met_beloning,"beloning":beloning,"disability-type-input":disabilities,"leeftijdvan":leeftijd_van,"leeftijdtot":leeftijd_tot})
