@@ -140,11 +140,10 @@ class Organisatie:
         email,
         telefoonnummer,
         overige_details,
-        api_key,
         organisatie_id
     ):
         self.cursor.execute(
-            "UPDATE  organisaties SET naam = ?,wachtwoord =?,type = ?,website =?,beschrijving =?,contactpersoon =?,email =?, telefoonnummer =?, overige_details=?,api_key =? WHERE organisatie_id = ?",
+            "UPDATE  organisaties SET naam = ?,wachtwoord =?,type = ?,website =?,beschrijving =?,contactpersoon =?,email =?, telefoonnummer =?, overige_details=? WHERE organisatie_id = ?",
             (
                 naam,
                 generate_password_hash(password),
@@ -155,7 +154,6 @@ class Organisatie:
                 email,
                 telefoonnummer,
                 overige_details,
-                api_key,
                 organisatie_id
             ),
         )
