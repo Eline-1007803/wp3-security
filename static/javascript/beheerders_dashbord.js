@@ -170,16 +170,16 @@ function refresh_inschrijvingen(data) {
   inschrijvingen_collection.innerHTML = inschrijvingen_html;
   refresh_modals_inschrijvingen(data);
 }
-function refresh_modals_inschrijvingen(data) {
-  let inschrijvingen_modals = document.getElementById('inschrijvingen_modal');
-  inschrijvingen_modals.innerHTML = '';
+async function refresh_modals_inschrijvingen(data) {
+    let inschrijvingen_modals = document.getElementById('inschrijvingen_modal');
+    inschrijvingen_modals.innerHTML = '';
 
-  let inschrijvingen = data.inschrijvingen;
-  let inschrijvingen_modal_html = '';
+    let inschrijvingen = data.inschrijvingen;
+    let inschrijvingen_modal_html = '';
 
-  for (let i = 0; i < inschrijvingen.length; i++) {
-      let inschrijvingenElement = inschrijvingen[i];
-      inschrijvingen_modal_html += `
+    for (let i = 0; i < inschrijvingen.length; i++) {
+        let inschrijvingenElement = inschrijvingen[i];
+        inschrijvingen_modal_html += `
                 <div id="myModal${i}" class="modal">
                   <div class="modal-content">
                       <button class="close" id="close${i}" >&times;</button>
@@ -228,77 +228,80 @@ function refresh_modals_inschrijvingen(data) {
                   </div>
                 </div>
       `;
-  }
+    }
 
-  inschrijvingen_modals.innerHTML = inschrijvingen_modal_html;
+    inschrijvingen_modals.innerHTML = inschrijvingen_modal_html;
 
-  // Attach event listeners for modals
-  const inschrijving_modals = inschrijvingen_modals.querySelectorAll('.modal');
-  const inschrijvingen_btns = document.querySelectorAll('.inschrijvingen_btn');
-  const inschrijvingen_spans = inschrijvingen_modals.querySelectorAll('.close');
-  const inschrijvingen_gb = inschrijvingen_modals.querySelectorAll('.goedkeur_button');
-  const inschrijvingen_ab = inschrijvingen_modals.querySelectorAll('.afkeur_button');
-  const inschrijvingen_ids = inschrijvingen_modals.querySelectorAll('.id')
+    // Attach event listeners for modals
+    const inschrijving_modals = inschrijvingen_modals.querySelectorAll('.modal');
+    const inschrijvingen_btns = document.querySelectorAll('.inschrijvingen_btn');
+    const inschrijvingen_spans = inschrijvingen_modals.querySelectorAll('.close');
+    const inschrijvingen_gb = inschrijvingen_modals.querySelectorAll('.goedkeur_button');
+    const inschrijvingen_ab = inschrijvingen_modals.querySelectorAll('.afkeur_button');
+    const inschrijvingen_ids = inschrijvingen_modals.querySelectorAll('.id')
+    let date = getDate()
+    let admin_id_dict = await getId()
+    let admin_id = admin_id_dict.id
 
-  inschrijvingen_ids.forEach((id) => {
-    id.style.display = 'none';
-  });
+    inschrijvingen_ids.forEach((id) => {
+        id.style.display = 'none';
+    });
 
 
-  inschrijvingen_btns.forEach((btn, index) => {
-      btn.addEventListener('click', () => {
-          inschrijving_modals[index].style.display = 'block';
-          kill_interval()
-      });
-  });
+    inschrijvingen_btns.forEach((btn, index) => {
+        btn.addEventListener('click', () => {
+            inschrijving_modals[index].style.display = 'block';
+            kill_interval()
+        });
+    });
 
-  inschrijvingen_gb.forEach((gb, index) => {
-      gb.addEventListener('click', () => {
-          inschrijving_modals[index].style.display = 'none';
-          let id = inschrijving_modals[index].getElementsByClassName('id')[0].innerHTML
-          console.log(id)
-          fetch('/api/inschrijvingen', {
-              method: 'PUT',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({"status": "goedgekeurd", "id":id})
-          }).then(r => r.json())
-          revive_interval()
-      });
-  });
+    inschrijvingen_gb.forEach((gb, index) => {
+        gb.addEventListener('click', () => {
+            inschrijving_modals[index].style.display = 'none';
+            let id = inschrijving_modals[index].getElementsByClassName('id')[0].innerHTML
+            console.log(id)
+            fetch('/api/inschrijvingen', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({"status": "goedgekeurd", "id": id, beheerder_id: admin_id, date: date})
+            }).then(r => r.json())
+            revive_interval()
+        });
+    });
 
-  inschrijvingen_ab.forEach((ab, index) => {
-      ab.addEventListener('click', () => {
-          inschrijving_modals[index].style.display = 'none';
-          let id = inschrijving_modals[index].getElementsByClassName('id')[0].innerHTML
-          console.log(id)
-          fetch('/api/inschrijvingen', {
-              method: 'PUT',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({"status": "afgekeurd", "id":id})
-          }).then(r => r.json())
-          revive_interval()
-      });
-  });
+    inschrijvingen_ab.forEach((ab, index) => {
+        ab.addEventListener('click', () => {
+            inschrijving_modals[index].style.display = 'none';
+            let id = inschrijving_modals[index].getElementsByClassName('id')[0].innerHTML
+            console.log(id)
+            fetch('/api/inschrijvingen', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({"status": "afgekeurd", "id": id, beheerder_id: admin_id, date: date})
+            }).then(r => r.json())
+            revive_interval()
+        });
+    });
 
-  inschrijvingen_spans.forEach((span, index) => {
-      span.addEventListener('click', () => {
-          inschrijving_modals[index].style.display = 'none';
-          revive_interval()
-      });
-  });
+    inschrijvingen_spans.forEach((span, index) => {
+        span.addEventListener('click', () => {
+            inschrijving_modals[index].style.display = 'none';
+            revive_interval()
+        });
+    });
 
-  window.addEventListener('click', (event) => {
-      inschrijving_modals.forEach((modal, index) => {
-          if (event.target === modal[index]) {
-              modal[index].style.display = 'none';
-          }
-      });
-  });
-  inschrijvingen_filter()
+    window.addEventListener('click', (event) => {
+        inschrijving_modals.forEach((modal, index) => {
+            if (event.target === modal[index]) {
+                modal[index].style.display = 'none';
+            }
+        });
+    });
+    inschrijvingen_filter()
 }
 
 function refresh_onderzoeken(data) {

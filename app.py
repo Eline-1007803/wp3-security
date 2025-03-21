@@ -323,7 +323,9 @@ def update_inschrijvingen():
     ism = inschrijvingen_model.Inschrijvingen()
     status = request.json.get("status")
     inschrijving_id = request.json.get("id")
-    ism.update_status(inschrijving_id, status)
+    admin_id = request.json.get("beheerder_id")
+    date = request.json.get("date")
+    ism.update_status(inschrijving_id, status, admin_id, date)
     return "200"
 
 @app.route("/api/onderzoeken", methods=["GET"])
