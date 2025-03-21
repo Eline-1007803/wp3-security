@@ -703,11 +703,11 @@ def lijst_ingeschreven_onderzoeken():
 
 @app.route("/api/inschrijven_onderzoek", methods=["POST"])
 def inschrijven_onderzoek():
-    if "ervaringsdeskundige_id" not in session:
+    if not session.get('expert'):
         return jsonify({"success": False, "error": "U moet ingelogd zijn om in te schrijven"}), 403
     
     data = request.get_json()
-    ervaringsdeskundige_id = session["ervaringsdeskundige_id"]
+    ervaringsdeskundige_id = session.get('expert')
     onderzoek_id = data.get("onderzoek_id")
 
 
