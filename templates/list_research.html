@@ -13,12 +13,14 @@
     <main class="row">
         <section aria-labelledby="table-heading1" class="column">
         <h1 id="table-heading1">Overzicht van ingeschreven onderzoeken</h1>
+        <label for="statusOnderzoek">Zoek op status van onderzoek:</label>
         <select id="statusOnderzoek" onchange="zoekTitels()">
             <option value="">Alle statussen</option>
             <option value="goedgekeurd">goedgekeurd</option>
             <option value="nieuw">in behandeling</option>
             <option value="afgekeurd">afgewezen</option>
         </select>
+        <label for="zoekTitel">Zoek op naam van onderzoek:</label>
         <input type="text" id="zoekTitel" onkeyup="zoekTitels()" placeholder="Zoek op naam van onderzoek" title="Type om te zoeken op titel">
         <table class="table-clickable" id="tabelOnderzoeken">
             <thead>
@@ -55,7 +57,6 @@
             <p><strong>Beloning: </strong><span id="popupBeloning"></span></p>
             <p><strong>Leeftijd vanaf: </strong><span id="popupLeeftijdVan"></span></p>
             <p><strong>Leeftijd tot: </strong><span id="popupLeeftijdTot"></span></p>
-            <button class='button' id='afmeldenButton'>Uitschrijven voor onderzoek</button>
         </article>
     </section>
     <script src="{{ url_for('static', filename='javascript/list_research.js') }}"></script>

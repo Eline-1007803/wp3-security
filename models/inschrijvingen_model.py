@@ -34,14 +34,10 @@ class Inschrijvingen:
         self.con.commit()
 
     def check_inschrijving(self, ervaringsdeskundige_id, onderzoek_id):
-        result = self.cursor.execute(
-            """ SELECT inschrijving_id FROM inschrijvingen
-                WHERE ervaringsdeskundige_id = ? AND onderzoek_id = ?""",
-                (ervaringsdeskundige_id, onderzoek_id)
-        ).fetchone
+        result = self.cursor.execute(""" SELECT * FROM inschrijvingen WHERE ervaringsdeskundige_id = ? AND onderzoek_id = ?""", (ervaringsdeskundige_id, onderzoek_id,)).fetchone()
+
         try:
-            dict(result)
-            return result
+            return dict(result)
         except:
             return False
     

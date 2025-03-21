@@ -742,7 +742,7 @@ def update_own_profile(ervaringsdeskundige_id):
 @app.route("/api/ingeschreven_onderzoeken", methods=["GET"])
 def get_signedup_research():
     onderzoeken_model = Onderzoeken()
-    ervaringsdeskundige_id = 1  # moet nog worden veranderd
+    ervaringsdeskundige_id = session.get('expert')
     ingeschreven_onderzoeken = onderzoeken_model.get_signedup_research(
         ervaringsdeskundige_id
     )

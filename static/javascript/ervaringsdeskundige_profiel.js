@@ -20,21 +20,24 @@ function maak_html(expert_info){
     <h2>Pas hier je persoonlijke gegevens aan:</h2>
     <br>
     <br>
-    <p>Telfoonnummer: ${expert_info.telefoonnummer}</p>
+    <p>Telefoonnummer: ${expert_info.telefoonnummer}</p>
+    <div class="form-container">
     <label for="voornaam">Voornaam:</label>
     <input placeholder="${expert_info.voornaam}" id="voornaam">
+    <br>
     <label for="tussenvoegsel">Tussenvoegsel:</label>
     <input placeholder="${expert_info.tussenvoegsel}" id="tussenvoegsel">
+    <br>
     <label for="achternaam">Achternaam:</label>
     <input placeholder="${expert_info.achternaam}" id="achternaam">
     <br>
     <label for="password">Wachtwoord:</label>
-    <input type="password" placeholder="password" id="password">
+    <input type="password" placeholder="wachtwoord" id="password">
     <label for="confirm_password">Bevestig wachtwoord:</label>
-    <input type="password" placeholder="confrim password" id="confirm_password">
+    <input type="password" placeholder="bevestig wachtwoord" id="confirm_password">
     <br>
     <label for="email">Email:</label>
-    <input type="email" placeholder="${expert_info.email}" id="email">
+    <input type="email" placeholder="${expert_info.emailadres}" id="email">
     <br>
     <label for="telefoonnummer">Telefoonnummer:</label>
     <input placeholder="${expert_info.telefoonnummer}" id="telefoonnummer">
@@ -51,7 +54,8 @@ function maak_html(expert_info){
     <label for="bijzonderheden">Bijzonderheden:</label>
     <input placeholder="${expert_info.bijzonderheden}" id="bijzonderheden">
     <br>
-    <button id="save">Save</button>
+    <button id="save">Opslaan</button>
+    </div>
     `;
 
     let save_button = document.getElementById('save')
